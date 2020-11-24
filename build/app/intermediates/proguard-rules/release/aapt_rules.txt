@@ -1,0 +1,6 @@
+# Referenced at /Users/farid.khafaji.zadeh/projects/my_app_cal/manda_calendar_v3/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:17
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at /Users/farid.khafaji.zadeh/projects/my_app_cal/manda_calendar_v3/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:22
+-keep class com.example.manda_calendar.MainActivity { <init>(); }
+# Referenced at /Users/farid.khafaji.zadeh/projects/my_app_cal/manda_calendar_v3/build/app/intermediates/merged_manifests/release/AndroidManifest.xml:17
+-keep class io.flutter.app.FlutterApplication { <init>(); }
