@@ -30,6 +30,7 @@ class MandaDisplayHolyDays extends StatelessWidget {
     return MaterialApp(
       title: 'Religious Occasion',
       home: DisplayEventsPage(localLang: localLang),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

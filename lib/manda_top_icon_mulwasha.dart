@@ -30,6 +30,7 @@ class MandaMulwashal extends StatelessWidget {
     return MaterialApp(
       title: 'Melvashe',
       home: MyMulwashalPage(localLang: localLang),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

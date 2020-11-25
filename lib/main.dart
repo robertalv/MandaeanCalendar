@@ -1,9 +1,8 @@
 //  Copyright (c) 2019 Aleksander Woźniak
 //  Licensed under Apache License v2.0
+
+/// // Farid Khafji Zadeh 2020 Mandean Calender
 import 'dart:core';
-
-/// Farid Khafji Zadeh 2020 Mandean Calender
-
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -46,6 +45,7 @@ class MandaeanCalendar extends StatelessWidget {
       // title: 'Mandean Calendar',
       title: MandaEqu.calendarTitle(_localLang),
       home: MyHomePage(title: MandaEqu.calendarTitle(_localLang)),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
