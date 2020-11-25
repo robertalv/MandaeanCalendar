@@ -162,6 +162,9 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     if (_divecWidth > 700) {
       _sizeRate = 2;
       _marginHor = 12 + (_divecWidth - 700) / 2;
+    } else {
+      _sizeRate = 1;
+      _marginHor = 4.0;
     }
 
     return Scaffold(

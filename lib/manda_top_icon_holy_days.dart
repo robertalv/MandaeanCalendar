@@ -71,6 +71,9 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
     if (_divecWidth > 700) {
       _sizeRate = 2;
       _marginHor = 12 + (_divecWidth - 700) / 2;
+    } else {
+      _sizeRate = 1;
+      _marginHor = 10.0;
     }
 
     return Scaffold(
