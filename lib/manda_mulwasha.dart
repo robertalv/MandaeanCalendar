@@ -106,10 +106,10 @@ class MulwashaLabel {
     var dataList;
     if (localLang == 'en_US') {
       dataList = MandaEqu.birthMonthNameEn();
-      // dataList.add("----");
-    } else {
+    } else if (localLang == 'fa_IR') {
       dataList = MandaEqu.birthMonthNameFa();
-      // dataList.add("----");
+    } else {
+      dataList = MandaEqu.birthMonthNameAr();
     }
     return dataList;
   }

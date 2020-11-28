@@ -359,27 +359,27 @@ class MandaEqu {
 
   static birthLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Month:   ',
-      'fa_IR': '      ماه تولد:',
-      'ar': '   شهر المیلاد: '
+      'en_US': ' Birth Month ',
+      'fa_IR': '     ماه تولد ',
+      'ar': '   شهر المیلاد '
     };
     return mulwashal[index];
   }
 
   static motherLabel(index) {
     Map mulwashal = {
-      'en_US': " Mother's \n Melvashe:       ",
-      'fa_IR': ' ملواشه مادر: ',
-      'ar': '    ملواشة الام: '
+      'en_US': " Mother's \n Melvashe      ",
+      'fa_IR': ' ملواشه مادر ',
+      'ar': '   ملواشة الام  '
     };
     return mulwashal[index];
   }
 
   static timeLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Time:     ',
-      'fa_IR': '   ساعت تولد: ',
-      'ar': 'الساعة المیلاد:'
+      'en_US': ' Birth Time    ',
+      'fa_IR': '   ساعت تولد ',
+      'ar': 'الساعة المیلاد '
     };
     return mulwashal[index];
   }
@@ -469,14 +469,6 @@ class MandaEqu {
       }
     };
 
-    // Map mulwashal = {
-    //   'en_US':
-    //       "Year format YYYY between 1920 to 2120.\n\nMonth formate MM between 1 to 12.\n\nDay formate DD between 1 to 31.",
-    //   'fa_IR':
-    //       ' سال بین ۱۲۹۹ تا ۱۴۹۹ انتخاب کنید \n\n ماه بین ۱ تا ۱۲ انتخاب کنید\n\n روز بین ۱ تا ۳۱ انتخاب کنید',
-    //   'ar':
-    //       'اختر السنة بين ۱۲۹۹ و ۱۴۹۹ \n\اختر الشهر بين ۱ و ۱۲ \n\n اختر اليوم بين ۱ و ۳۱'
-    // };
     return mulwashal[index];
   }
 
@@ -490,10 +482,15 @@ class MandaEqu {
   }
 
   static chooseYear(index) {
+    String dateF1 = " تاریخ" + "\n" + "شمسی";
+    String dateF2 = " تاریخ" + "\n" + "میلادی";
+    String dateA1 = " التاریخ" + "\n" + "شمسية";
+    String dateA2 = " التاریخ" + "\n" + "الجورجية";
+
     Map mulwashal = {
-      'en_US': ['Gregorian Year', 'Solar year'],
-      'fa_IR': ['سال میلادی', 'سال شمسی'],
-      'ar': ['السنة الجورجية', 'سنة شمسية']
+      'en_US': ['Gregorian\nDate', 'Solar\nDate'],
+      'fa_IR': [dateF2, dateF1],
+      'ar': [dateA2, dateA1]
     };
     return mulwashal[index];
   }
@@ -520,15 +517,15 @@ class MandaEqu {
     Map mulwashal = {
       'en_US': [
         'Convert to Mandaean Date',
-        'If you do not know your birth month in Mandaean please convert your birth date here.'
+        ' If you do not know your birth month in Mandaean  \n please convert your birth date here.'
       ],
       'fa_IR': [
-        'تبدیل به تاریخ مندایی',
+        ' تبدیل به تاریخ مندایی',
         '  اگر ماه تولد خود را در مندایی نمی دانید\n لطفا تاریخ تولد خود را اینجا تبدیل کنید  '
       ],
       'ar': [
-        'تحويل إلى التاريخ مندائي',
-        '  إذا كنت لا تعرف شهر ميلادك في المندائية\n فيرجى تغيير تاريخ ميلادك هنا  '
+        ' تحويل إلى التاريخ مندائي   ',
+        '  إذا كنت لا تعرف شهر ميلادك في المندائية  \n فيرجى تغيير تاريخ ميلادك هنا  '
       ]
     };
     return mulwashal[index];
@@ -545,7 +542,7 @@ class MandaEqu {
       'Mahnash',
       'Simet',
       'Hawa Simet',
-      'Sharat Simet',
+      'Sharat Simet    ',
       'Mamani',
       'Hawa Mamani',
       'Maliha',
@@ -557,19 +554,19 @@ class MandaEqu {
   static femaleMulwashaFa() {
     final List<String> mandaEnName = [
       // "----",
-      'هوا',
-      'شارت',
-      'یاسمن',
-      'مدلل',
-      'انهر',
-      'مهنش',
-      'سیمت',
-      'هوا سیمت',
-      'شارت سیمت',
-      'مامانی',
-      'هوا مامانی',
-      'ملیحه',
-      'نرگس',
+      '  هوا                          ',
+      '  شارت  ',
+      '  یاسمن  ',
+      '  مدلل  ',
+      '  انهر  ',
+      '  مهنش  ',
+      '  سیمت  ',
+      '  هوا سیمت  ',
+      '  شارت سیمت  ',
+      '  مامانی  ',
+      '  هوا مامانی  ',
+      '  ملیحه  ',
+      '  نرگس  ',
     ];
     return mandaEnName;
   }
@@ -653,9 +650,8 @@ class MandaEqu {
   static birthTimeSelectorEn() {
     final List data = [
       {
-        // 'atAfter': ['----', 'at', 'after'],
-        'atAfter': ['at', 'after'],
-        'before': '\n                           before            '
+        'atAfter': [' at', ' after'],
+        'before': '  before  '
       }
     ];
     return data;
@@ -664,9 +660,8 @@ class MandaEqu {
   static birthTimeSelectorFa() {
     final List data = [
       {
-        // 'atAfter': ['----', 'راس ساعت', 'بعداز ساعت'],
-        'atAfter': ['راس ساعت', 'بعداز ساعت'],
-        'before': '\n                        قبل از ساعت               '
+        'atAfter': ['راس ساعت   ', 'بعداز ساعت'],
+        'before': '  قبل از ساعت  '
       }
     ];
     return data;
@@ -675,94 +670,57 @@ class MandaEqu {
   static birthTimeSelectorAr() {
     final List data = [
       {
-        // 'atAfter': ['----', 'الساعة ', 'بعد الساعة '],
         'atAfter': ['الساعة ', 'بعد الساعة '],
-        'before': '\n                         قبل الساعة                 '
+        'before': '  قبل الساعة  '
       }
     ];
     return data;
   }
 
-  // static birthTime() {
-  //   final List data = [
-  //     [
-  //       '6:00',
-  //       '6:01 - 7:59',
-  //       '8:00',
-  //       '8:01 - 09:59',
-  //       '10:00',
-  //       '10:01 - 11:59',
-  //       '12:00',
-  //       '12:01 - 13:59',
-  //       '14:00',
-  //       '14:01 - 15:59',
-  //       '16:00',
-  //       '16:01 - 17:59',
-  //       '18:00',
-  //       '18:01 - 19:59',
-  //       '20:00',
-  //       '20:01 - 21:59',
-  //       '22:00',
-  //       '22:01 - 23:59',
-  //       '24:00',
-  //       '00:01 - 01:59',
-  //       '02:00',
-  //       '02:01 - 03:59',
-  //       '04:00',
-  //       '04:01 - 05:59'
-  //     ],
-  //     [
-  //       {
-  //         '6:00': 1,
-  //         '6:01 - 7:59': 1,
-  //         '8:00': 2,
-  //         '8:01 - 09:59': 2,
-  //         '10:00': 3,
-  //         '10:01 - 11:59': 3,
-  //         '12:00': 4,
-  //         '12:01 - 13:59': 4,
-  //         '14:00': 5,
-  //         '14:01 - 15:59': 5,
-  //         '16:00': 6,
-  //         '16:01 - 17:59': 6,
-  //         '18:00': 7,
-  //         '18:01 - 19:59': 7,
-  //         '20:00': 8,
-  //         '20:01 - 21:59': 8,
-  //         '22:00': 9,
-  //         '22:01 - 23:59': 9,
-  //         '24:00': 10,
-  //         '00:01 - 01:59': 10,
-  //         '02:00': 11,
-  //         '02:01 - 03:59': 11,
-  //         '04:00': 12,
-  //         '04:01 - 05:59': 12,
-  //       }
-  //     ]
-  //   ];
-  //   return data;
-  // }
-
   static birthMonthNameFa() {
     final List<String> data = [
       // "----",
-      'امبرا',
-      'تورا',
-      'صلمی',
-      'سرطانا',
-      'آریا',
-      'شمبلتا',
-      'پنجه ۱',
-      'پنجه ۲',
-      'پنجه ۳',
-      'پنجه ۴',
-      'پنجه ۵',
-      'قینا',
-      'ارقوا',
-      'هطیا',
-      'گدیا',
-      'دولا',
-      'نونا',
+      '  امبرا                       ',
+      '  تورا',
+      '  صلمی',
+      '  سرطانا',
+      '  آریا',
+      '  شمبلتا',
+      '  پنجه روز اول',
+      '  پنجه روز دوم',
+      '  پنجه روز سوم',
+      '  پنجه روز چهارم',
+      '  پنجه روز پنجم',
+      '  قینا',
+      '  ارقوا',
+      '  هطیا',
+      '  گدیا',
+      '  دولا',
+      '  نونا',
+    ];
+    return data;
+  }
+
+  static birthMonthNameAr() {
+    final List<String> data = [
+      // "----",
+      '  امبرا                      ',
+      '  تورا',
+      '  صلمی',
+      '  سرطانا',
+      '  آریا',
+      '  شمبلتا',
+      '  پنجه اليوم الأول',
+      '  پنجه اليوم الثاني ',
+      '  پنجه اليوم الثالث ',
+      '  پنجه اليوم الرابع',
+      '  پنجه اليوم الخامس',
+      '  قینا',
+      '  ارقوا',
+      '  هطیا',
+      '  گدیا',
+      '  دولا',
+      '  نونا',
     ];
     return data;
   }
@@ -772,17 +730,17 @@ class MandaEqu {
       // "----",
       'Embra',
       'Taura',
-      'Silmia',
+      'Ṣelmi',
       'Sartana',
       'Aria',
-      'Shombolta',
-      'Panja 1',
-      'Panja 2',
-      'Panja 3',
-      'Panja 4',
-      'Panja 5',
+      'Shombolta        ',
+      'Panja Day 1',
+      'Panja Day 2',
+      'Panja Day 3',
+      'Panja Day 4',
+      'Panja Day 5',
       'Qaina',
-      'Arqba',
+      'Arqawa',
       'Hatia',
       'Gadia',
       'Daula',
@@ -794,8 +752,8 @@ class MandaEqu {
   static findBut(index) {
     Map mulwashal = {
       'en_US': '  Find Melvashe  ',
-      'fa_IR': '  پیدا کردن ملواشه  ',
-      'ar': '  اكتشف ملواشه   '
+      'fa_IR': '   پیدا کردن ملواشه  ',
+      'ar': '   اكتشف ملواشه   '
     };
     return mulwashal[index];
   }
@@ -921,9 +879,9 @@ class MandaEqu {
   static donotUseMelvash(index) {
     Map mulwashal = {
       'en_US':
-          'If you are not familiar with the concepts of Melvashe, please do not use this section!',
+          ' If you are not familiar with the concepts of  \nMelvashe, please do not use this section!',
       'fa_IR':
-          '،اگر با مفاهیم ملواشه آشنا نمی باشید\n! لطفا از این قسمت استفاده نفرمایید',
+          '،اگر با مفاهیم ملواشه آشنا نمی باشید \n! لطفا از این قسمت استفاده نفرمایید',
       'ar':
           '،إذا لم تكن على دراية بمفاهيم الملوشة \n! فيرجى عدم استخدام هذا القسم '
     };
@@ -1039,7 +997,6 @@ class MandaEqu {
             "در غیر این صورت ، 'بعدازساعت' را انتخاب کنید که به شما بازده زمانی دو ساعت می دهد" +
             "\n" +
             " :برای مثال" +
-            "\n" +
             "\n\n اگر زمان تولد بعد از ساعت ۶:۰۰ اما قبل از ساعت ۸:۰۰ مانند ۶:۰۱ ، ۷:۰۰ ، ۷:۵۹ باشد" +
             "\n بعد از ساعت ۶:۰۰ را انتخاب کنید، برنامه قبل از ساعت ۸:۰۰ را نمایش خواهد داد" +
             "\n\n اگر زمان تولد بعد از ساعت ۸:۰۰ اما قبل از ساعت ۱۰:۰۰ مانند ۸:۰۱ ، ۹:۳۰ ، ۹:۵۹ باشد" +

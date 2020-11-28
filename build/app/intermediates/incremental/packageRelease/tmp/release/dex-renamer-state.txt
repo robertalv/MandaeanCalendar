@@ -1,4 +1,0 @@
-#Tue Nov 24 09:49:58 EST 2020
-base.0=/Users/farid.khafaji.zadeh/projects/my_app_cal/manda_calendar_v3/build/app/intermediates/dex/release/mergeDexRelease/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
