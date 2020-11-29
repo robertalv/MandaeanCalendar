@@ -42,7 +42,6 @@ class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: 'Mandean Calendar',
       title: MandaEqu.calendarTitle(_localLang),
       home: MyHomePage(title: MandaEqu.calendarTitle(_localLang)),
       debugShowCheckedModeBanner: false,

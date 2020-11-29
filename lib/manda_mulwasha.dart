@@ -14,7 +14,7 @@ class MulwashaLabel {
   Map alertMsg;
   String alertTtitle;
   List dateLabel;
-  List chooseYear;
+  // List chooseYear;
   List convertDate;
   String findBut;
   List yearMaxMin;
@@ -27,10 +27,10 @@ class MulwashaLabel {
   List childTalea;
   var maleMulwasha;
   var menuDrop;
-  var mandaYearEvents;
+  // var mandaYearEvents;
   var mandaYearEventsLable;
   var mandaFeastName;
-  var myAlignment;
+  // var myAlignment;
   // var birthTimeNew;
 
   MulwashaLabel(localLang) {
@@ -48,7 +48,7 @@ class MulwashaLabel {
     this.alertMsg = MandaEqu.alertConvertMsg(localLang);
     this.alertTtitle = MandaEqu.alertTtitle(localLang);
     this.dateLabel = MandaEqu.dateLabel(localLang);
-    this.chooseYear = MandaEqu.chooseYear(localLang);
+    // this.chooseYear = MandaEqu.chooseYear(localLang);
     this.convertDate = MandaEqu.convertDate(localLang);
     this.findBut = MandaEqu.findBut(localLang);
     this.yearMaxMin = MandaEqu.yearMaxMin(localLang);
@@ -62,9 +62,9 @@ class MulwashaLabel {
     this.childTalea = childTaleaName(localLang);
     this.maleMulwasha = maleMulwashaName(localLang);
     this.menuDrop = menuDropList(localLang);
-    this.mandaYearEvents = MandaEqu.mandaYearEvents(localLang);
+    // this.mandaYearEvents = MandaEqu.mandaYearEvents(localLang);
     this.mandaYearEventsLable = MandaEqu.mandaYearEventsLable(localLang);
-    this.myAlignment = MandaEqu.myAlignment(localLang);
+    // this.myAlignment = MandaEqu.myAlignment(localLang);
   }
 
   static birthTimeName(String localLang) {

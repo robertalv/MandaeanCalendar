@@ -289,7 +289,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new Radio(
             value: SingingCharacter.female,
@@ -1005,7 +1005,8 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   }
 
   Widget radioButDate(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    var chooseYear = MandaEqu.chooseYear(localLang);
 
     return Row(children: <Widget>[
       new Radio(
@@ -1017,7 +1018,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
             });
           }),
       new Text(
-        mulwashaLabel.chooseYear[0],
+        chooseYear[0],
         style: TextStyle(color: Colors.black, fontSize: _fontSize),
       ),
       Padding(padding: EdgeInsets.only(left: 180)),
@@ -1030,7 +1031,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
             });
           }),
       new Text(
-        mulwashaLabel.chooseYear[1],
+        chooseYear[1],
         style: TextStyle(color: Colors.black, fontSize: _fontSize),
       ),
     ]);

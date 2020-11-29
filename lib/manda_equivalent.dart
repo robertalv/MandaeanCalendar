@@ -82,9 +82,9 @@ class MandaEqu {
     Map data = {
       'en_US': [
         'Religious Occasion',
-        ' Display of religious occasions of the year '
+        ' Display the religious occasions of the year '
       ],
-      'fa_IR': ['مناسبت های دینی', '  نمایش مناسبت های دینی سال  '],
+      'fa_IR': ['مناسبت های دینی', '  نمایش  مناسبت های دینی سال       '],
       'ar': ['للمناسبات دینیه', 'عرض للمناسبات الدينية العام ']
     };
     return data[index];
@@ -101,7 +101,7 @@ class MandaEqu {
         '  Major Mbattal Day',
       ],
       'fa_IR': [
-        '  یک مناسبت دینی انتخاب کنید   ',
+        '  یک مناسبت دینی انتخاب کنید      ',
         '  اعیاد و مناسبت های مذهبی      ',
         '  اول ماه مندایی  ',
         '  روز أمبطل سبک  ',
