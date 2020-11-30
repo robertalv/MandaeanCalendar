@@ -62,6 +62,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
   double _iconDropSize = 50;
   double _displaySize;
   double _divecWidth;
+  String myYearValue = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var _listOfEventsForYear;
@@ -253,7 +254,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      // List<dynamic> eventsList;
+                      FocusScope.of(context).requestFocus(new FocusNode());
                       selectedEvent = value;
                       _dropdownListNum = dropdownList.indexOf(value);
                     });
@@ -361,7 +362,11 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       yearMax = 2121;
     }
     if (value.isNotEmpty) {
-      int newValue = int.parse(value);
+      myYearValue = value;
+    }
+
+    if (myYearValue.isNotEmpty) {
+      int newValue = int.parse(myYearValue);
 
       if ((newValue == null) || (newValue < yearMin) || (newValue > yearMax)) {
         return '$yearMin-$yearMax';

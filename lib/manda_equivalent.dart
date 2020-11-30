@@ -43,7 +43,7 @@ class MandaEqu {
 
   static mandaFirstMonth() {
     Map firstMonth = {
-      'en_US': ' First of Mandaic Month    ',
+      'en_US': ' First day of Mandaic Month    ',
       'fa_IR': '     اول ماه مندایی  ',
       'ar': '      رأس الشهر '
     };
@@ -71,7 +71,7 @@ class MandaEqu {
 
   static mandaFeastName() {
     Map heavytMbattal = {
-      'en_US': ' Religious Occasion           ',
+      'en_US': ' Religious Occasion                    ',
       'fa_IR': '        مناسبت دینی  ',
       'ar': '   مناسبه دینیه '
     };
@@ -96,7 +96,7 @@ class MandaEqu {
       'en_US': [
         '  Select an occasion',
         '  Religious Holy Days',
-        '  First of Mandaic Month',
+        '  First day of Mandaic Month',
         '  Minor Mbattal Day',
         '  Major Mbattal Day',
       ],
