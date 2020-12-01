@@ -575,30 +575,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-  // Widget _buildEventList() {
-  //   // return ListView(
-  //   var myAlignment = MyAlignment.countryLanguage(_localLang);
-  //   return Column(
-  //     children: _selectedEvents
-  //         .map((event) => Container(
-  //               height: 30.0 * _sizeRate,
-  //               alignment: myAlignment,
-  //               decoration: BoxDecoration(
-  //                   border: Border.all(width: 0),
-  //                   borderRadius: BorderRadius.circular(12.0),
-  //                   color: _myColorSelection['minor']),
-  //               margin:
-  //                   EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
-  //               child: FittedBox(
-  //                 fit: BoxFit.scaleDown,
-  //                 // alignment: myAlignment,
-  //                 child: _generateIconEvent(event),
-  //               ),
-  //             ))
-  //         .toList(),
-  //   );
-  // }
-
   Widget _buildEventList() {
     // return ListView(
     var myAlignment = MyAlignment.countryLanguage(_localLang);
@@ -666,7 +642,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: Text(
             event.toString(),
             textAlign: myTextAlignment,
-            style: TextStyle(fontSize: 16.0 * _sizeRate, color: Colors.black),
+            style: TextStyle(fontSize: 18.0 * _sizeRate, color: Colors.black),
           ),
         )),
         Text(" "),
