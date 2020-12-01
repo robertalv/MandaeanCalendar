@@ -387,7 +387,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       daysOfWeekStyle: DaysOfWeekStyle(
         // weekendStyle: TextStyle(
         //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
-        weekdayStyle: TextStyle(fontSize: _daysOfWeekFontSize),
+        weekdayStyle:
+            TextStyle(fontSize: _daysOfWeekFontSize, color: Colors.black),
         weekendStyle: TextStyle(
             color: Colors.deepOrange[600], fontSize: _daysOfWeekFontSize),
         dowTextBuilder: (date, locale) => _getDayHeader(date, locale),
@@ -574,25 +575,49 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
+  // Widget _buildEventList() {
+  //   // return ListView(
+  //   var myAlignment = MyAlignment.countryLanguage(_localLang);
+  //   return Column(
+  //     children: _selectedEvents
+  //         .map((event) => Container(
+  //               height: 30.0 * _sizeRate,
+  //               alignment: myAlignment,
+  //               decoration: BoxDecoration(
+  //                   border: Border.all(width: 0),
+  //                   borderRadius: BorderRadius.circular(12.0),
+  //                   color: _myColorSelection['minor']),
+  //               margin:
+  //                   EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
+  //               child: FittedBox(
+  //                 fit: BoxFit.scaleDown,
+  //                 // alignment: myAlignment,
+  //                 child: _generateIconEvent(event),
+  //               ),
+  //             ))
+  //         .toList(),
+  //   );
+  // }
+
   Widget _buildEventList() {
     // return ListView(
     var myAlignment = MyAlignment.countryLanguage(_localLang);
     return Column(
       children: _selectedEvents
           .map((event) => Container(
-                height: 30.0 * _sizeRate,
+                constraints: BoxConstraints(
+                  minHeight: 30,
+                ),
+                width: 700,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
                     border: Border.all(width: 0),
                     borderRadius: BorderRadius.circular(12.0),
                     color: _myColorSelection['minor']),
-                margin:
-                    EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  // alignment: myAlignment,
-                  child: _generateIconEvent(event),
-                ),
+                margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                child: Column(children: [
+                  _generateIconEvent(event),
+                ]),
               ))
           .toList(),
     );
@@ -600,6 +625,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   Widget _generateIconEvent(event) {
     MyIcon myIcon = MyIcon(_sizeRate);
+    var myAlignment = MyAlignment.countryLanguage(_localLang);
+    var myTextAlignment = MyAlignment.textAlig(_localLang);
     var eventIcon;
     var beforeEvent;
     var afterEvent;
@@ -633,10 +660,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Row(
       children: [
         beforeEvent,
-        Text(
-          event.toString(),
-          style: TextStyle(fontSize: 16.0 * _sizeRate, color: Colors.black),
-        ),
+        Flexible(
+            child: Container(
+          alignment: myAlignment,
+          child: Text(
+            event.toString(),
+            textAlign: myTextAlignment,
+            style: TextStyle(fontSize: 16.0 * _sizeRate, color: Colors.black),
+          ),
+        )),
         Text(" "),
         afterEvent
       ],

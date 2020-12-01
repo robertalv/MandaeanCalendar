@@ -178,18 +178,20 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         body: Center(
           child: Container(
             width: _displaySize,
+            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
             child: ListView(shrinkWrap: false, children: <Widget>[
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Column(
                   children: [
-                    Card(
-                        child: Text(
+                    // Card(child:
+                    Text(
                       MandaEqu.donotUseMelvash(localLang),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.red[900], fontSize: _cardFontSize),
-                    )),
+                      // )
+                    ),
                     Padding(padding: EdgeInsets.only(top: _paddingTop)),
                     radioButGender(context),
                     Padding(padding: EdgeInsets.only(top: _paddingTop)),
@@ -236,38 +238,48 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                     // Padding(padding: EdgeInsets.only(top: _paddingTop * 2)),
                     findMulwasha(context),
                     /////////############# Second Part start Here Convert Date to Manda Date
+
                     Padding(
                       padding: EdgeInsets.only(top: _paddingTop),
                       child: Container(
                         height: 1.0,
+                        width: _displaySize + 150,
                         color: Colors.black,
                       ),
                     ),
 
                     Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                    Card(
-                        child: Text(
+                    // Card(child:
+                    Text(
                       mulwashaLabel.convertDate[1],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.red[900], fontSize: _cardFontSize),
-                    )),
+                      // )
+                    ),
 
                     // //// ## Convert Date to Manda Date
                     convertToMandaDate(context),
-                    RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MandaeanCalendar()));
-                      },
-                      child: Text(
-                        mulwashaLabel.backBtn,
-                        style: TextStyle(fontSize: _fontSize),
-                      ),
-                    ),
                   ],
+                ),
+              ),
+
+              RaisedButton(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                    side: BorderSide(color: Colors.black)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MandaeanCalendar()));
+                },
+                child: Text(
+                  mulwashaLabel.backBtn,
+                  style: TextStyle(
+                    fontSize: _cardFontSize,
+                  ),
                 ),
               ),
               // ###########
@@ -655,6 +667,10 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     return Column(
       children: [
         RaisedButton(
+          color: Colors.brown[100],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+              side: BorderSide(color: Colors.black)),
           onPressed: defineMulwasha,
           child: Text(
             mulwashaLabel.findBut,
@@ -945,6 +961,10 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         radioButDate(context),
         Padding(padding: EdgeInsets.only(top: _paddingTop)),
         RaisedButton(
+            color: Colors.brown[100],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.0),
+                side: BorderSide(color: Colors.black)),
             child: Text(
               mulwashaLabel.convertDate[0],
               style: TextStyle(fontSize: _fontSize),

@@ -37,9 +37,11 @@ class HelpDoc extends StatelessWidget {
     // imageName = imageNameMap[localLang];
     imageName = imageNameMap[localLang];
     int _sizeRate = 1;
+    double _cardFontSize = 20.0;
     double _divecWidth = MediaQuery.of(context).size.width;
-    if (_divecWidth > 1000) {
+    if (_divecWidth > 700) {
       _sizeRate = 2;
+      _cardFontSize = 30.0;
     }
     return Scaffold(
         appBar: AppBar(
@@ -51,6 +53,8 @@ class HelpDoc extends StatelessWidget {
                       color: Colors.black, fontSize: 18.0 * _sizeRate)),
             )),
         body: Center(
+            child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           child: ListView(
             children: [
               Column(
@@ -86,22 +90,26 @@ class HelpDoc extends StatelessWidget {
                     ),
                   ),
                   Text("\n"),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MandaeanCalendar()));
-                    },
-                    child: Text(mulwashaLabel.backBtn,
-                        style: TextStyle(
-                            color: Colors.black, fontSize: 18.0 * _sizeRate)),
-                  )
                 ],
+              ),
+              RaisedButton(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                    side: BorderSide(color: Colors.black)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MandaeanCalendar()));
+                },
+                child: Text(mulwashaLabel.backBtn,
+                    style: TextStyle(
+                        color: Colors.black, fontSize: _cardFontSize)),
               ),
             ],
           ),
-        ));
+        )));
   }
 
   Widget backToMainPage(BuildContext context) {

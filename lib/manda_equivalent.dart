@@ -163,7 +163,7 @@ class MandaEqu {
         'ar': 'دهوا ربا - عید الکبیر '
       },
       'kersa': {
-        'en_US': 'End of Kersa',
+        'en_US': 'Dehva Raba - End of Kersa',
         'fa_IR': ' دهوا ربا - پایان کراصا ',
         'ar': 'دهوا ربا - یوم الطلعه '
       },
@@ -182,7 +182,7 @@ class MandaEqu {
         }
       ],
       'alfil': {
-        'en_US': 'The Fel featival',
+        'en_US': 'The Fel festival',
         'fa_IR': 'جشن فل  ',
         'ar': 'احتفال فل  '
       },

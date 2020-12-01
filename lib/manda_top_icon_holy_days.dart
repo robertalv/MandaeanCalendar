@@ -103,14 +103,15 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                 FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Column(children: [
-                      Card(
-                          child: Text(
+                      // Card(child:
+                      Text(
                         mulwashaLabel.mandaYearEventsLable[1],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: _cardFontSize),
-                      )),
+                        // )
+                      ),
                       SizedBox(
                           width: 550,
                           child: Form(
@@ -148,6 +149,10 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                     ? SizedBox(height: 138.0 * _sizeRate)
                     : SizedBox(height: 38.0),
                 RaisedButton(
+                  color: Colors.brown[100],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                      side: BorderSide(color: Colors.black)),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -293,20 +298,20 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
         afterIcon = myIcon.error;
         beforeIcon = myIcon.error;
       } else {
-        // selectedEvents = events[_dropdownListNum][localLang];
-        // myColor = myColorList[_dropdownListNum];
         selectedEvents = events[_dropdownListNum];
-        // myColor = myColorList[_dropdownListNum];
       }
     }
-    double widthBoxSize = 45;
-    if (_divecWidth < 321) {
-      widthBoxSize = 70;
-    }
+    // double widthBoxSize = 45;
+    // if (_divecWidth < 321) {
+    //   widthBoxSize = 70;
+    // }
     return Column(
       children: selectedEvents
           .map((event) => Container(
-                height: widthBoxSize * _sizeRate,
+                // height: widthBoxSize * _sizeRate,
+                constraints: BoxConstraints(
+                  minHeight: 30,
+                ),
                 width: 700,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
