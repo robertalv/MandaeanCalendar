@@ -360,15 +360,15 @@ class MandaEqu {
   static birthLabel(index) {
     Map mulwashal = {
       'en_US': ' Birth Month ',
-      'fa_IR': '     ماه تولد ',
-      'ar': '   شهر المیلاد '
+      'fa_IR': '      ماه تولد ',
+      'ar': ' شهر المیلاد '
     };
     return mulwashal[index];
   }
 
   static motherLabel(index) {
     Map mulwashal = {
-      'en_US': " Mother's \n Melvashe      ",
+      'en_US': " Mother's Melvashe ",
       'fa_IR': ' ملواشه مادر ',
       'ar': '   ملواشة الام  '
     };
@@ -377,9 +377,9 @@ class MandaEqu {
 
   static timeLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Time    ',
+      'en_US': ' Birth Time ',
       'fa_IR': '   ساعت تولد ',
-      'ar': 'الساعة المیلاد '
+      'ar': 'الساعة المیلاد'
     };
     return mulwashal[index];
   }
@@ -542,7 +542,7 @@ class MandaEqu {
       'Mahnash',
       'Simet',
       'Hawa Simet',
-      'Sharat Simet    ',
+      'Sharat Simet',
       'Mamani',
       'Hawa Mamani',
       'Maliha',
@@ -554,17 +554,17 @@ class MandaEqu {
   static femaleMulwashaFa() {
     final List<String> mandaEnName = [
       // "----",
-      '  هوا                          ',
+      '  هوا   ',
       '  شارت  ',
       '  یاسمن  ',
       '  مدلل  ',
       '  انهر  ',
       '  مهنش  ',
       '  سیمت  ',
-      '  هوا سیمت  ',
-      '  شارت سیمت  ',
+      '  هوا سیمت ',
+      '  شارت سیمت ',
       '  مامانی  ',
-      '  هوا مامانی  ',
+      '  هوا مامانی ',
       '  ملیحه  ',
       '  نرگس  ',
     ];
@@ -650,8 +650,8 @@ class MandaEqu {
   static birthTimeSelectorEn() {
     final List data = [
       {
-        'atAfter': [' at', ' after'],
-        'before': '  before  '
+        'atAfter': [' at', ' after  '],
+        'before': ' before  '
       }
     ];
     return data;
@@ -670,8 +670,8 @@ class MandaEqu {
   static birthTimeSelectorAr() {
     final List data = [
       {
-        'atAfter': ['الساعة ', 'بعد الساعة '],
-        'before': '  قبل الساعة  '
+        'atAfter': ['الساعة', 'بعد الساعة'],
+        'before': '  قبل الساعة   '
       }
     ];
     return data;
@@ -680,7 +680,7 @@ class MandaEqu {
   static birthMonthNameFa() {
     final List<String> data = [
       // "----",
-      '  امبرا                       ',
+      '  امبرا ',
       '  تورا',
       '  صلمی',
       '  سرطانا',
@@ -704,17 +704,17 @@ class MandaEqu {
   static birthMonthNameAr() {
     final List<String> data = [
       // "----",
-      '  امبرا                      ',
+      '  امبرا    ',
       '  تورا',
       '  صلمی',
       '  سرطانا',
       '  آریا',
       '  شمبلتا',
-      '  پنجه اليوم الأول',
-      '  پنجه اليوم الثاني ',
-      '  پنجه اليوم الثالث ',
-      '  پنجه اليوم الرابع',
-      '  پنجه اليوم الخامس',
+      'پنجه اليوم الأول',
+      'پنجه اليوم الثاني',
+      'پنجه اليوم الثالث',
+      'پنجه اليوم الرابع',
+      'پنجه اليوم الخامس',
       '  قینا',
       '  ارقوا',
       '  هطیا',
@@ -733,7 +733,7 @@ class MandaEqu {
       'Ṣelmi',
       'Sartana',
       'Aria',
-      'Shombolta        ',
+      'Shombolta',
       'Panja Day 1',
       'Panja Day 2',
       'Panja Day 3',

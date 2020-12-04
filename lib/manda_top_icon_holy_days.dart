@@ -100,78 +100,73 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       ),
       body: Center(
           child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+              // margin: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
               child: ListView(children: [
-                Text(
-                  mulwashaLabel.mandaYearEventsLable[1],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: _cardFontSize - 6),
-                ),
-                Container(
+        Text(
+          mulwashaLabel.mandaYearEventsLable[1],
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: _cardFontSize - 6),
+        ),
+        Container(
+          width: _displaySize,
+          child: Column(
+            children: [
+              SizedBox(
                   width: _displaySize,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          width: _displaySize,
-                          child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                maxLength: 4,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
-                                ],
-                                validator: (value) =>
-                                    validateYY(value, mulwashaLabel.yearMaxMin),
-                                style: TextStyle(
-                                    fontSize: _fontSize, color: Colors.black),
-                                decoration: InputDecoration(
-                                    labelText: mulwashaLabel.dateLabel[0],
-                                    labelStyle: TextStyle(
-                                      fontSize: _fontSize,
-                                    ),
-                                    hintText: mulwashaLabel.dateLabel[0],
-                                    icon: Icon(
-                                      Icons.date_range,
-                                      size: _fontSize,
-                                    )),
-                              ))),
-                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                      radioButDate(context),
-                      Padding(padding: EdgeInsets.only(top: 25.0 * _sizeRate)),
-                      yearEventsDrop(context),
-                    ],
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 30.0 * _sizeRate)),
-                _buildEventList(context, _listOfEventsForYear),
-                _listOfEventsForYear == null
-                    ? SizedBox(height: 138.0 * _sizeRate)
-                    : SizedBox(height: 38.0),
-                RaisedButton(
-                  color: Colors.brown[100],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      side: BorderSide(color: Colors.black)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MandaeanCalendar()));
-                  },
-                  child: Text(mulwashaLabel.backBtn,
-                      style: TextStyle(
-                          color: Colors.black, fontSize: _cardFontSize)),
-                ),
-              ]))),
+                  child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 4,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) =>
+                            validateYY(value, mulwashaLabel.yearMaxMin),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                            labelText: mulwashaLabel.dateLabel[0],
+                            labelStyle: TextStyle(
+                              fontSize: _fontSize,
+                            ),
+                            hintText: mulwashaLabel.dateLabel[0],
+                            icon: Icon(
+                              Icons.date_range,
+                              size: _fontSize,
+                            )),
+                      ))),
+              Padding(padding: EdgeInsets.only(top: _paddingTop)),
+              radioButDate(context),
+              Padding(padding: EdgeInsets.only(top: 25.0 * _sizeRate)),
+              yearEventsDrop(context),
+            ],
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: 30.0 * _sizeRate)),
+        _buildEventList(context, _listOfEventsForYear),
+        _listOfEventsForYear == null
+            ? SizedBox(height: 138.0 * _sizeRate)
+            : SizedBox(height: 38.0),
+        RaisedButton(
+          color: Colors.brown[100],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+              side: BorderSide(color: Colors.black)),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MandaeanCalendar()));
+          },
+          child: Text(mulwashaLabel.backBtn,
+              style: TextStyle(color: Colors.black, fontSize: _cardFontSize)),
+        ),
+      ]))),
     );
   }
 
   Widget radioButDate(BuildContext context) {
     var chooseYear = MandaEqu.chooseYear(localLang);
-    double radioSpace = _displaySize - 400;
     return Container(
         width: _displaySize,
         child: Stack(
