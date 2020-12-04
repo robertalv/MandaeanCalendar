@@ -182,11 +182,11 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
       _displaySize = _divecWidth - 8;
       _paddingTop = 6.0;
       _cardFontSize = 20.0;
-      _fontSize = 18.0;
+      _fontSize = 20.0;
       _iconDropSize = 20;
       _iconHelpSize = 20;
       // _timeWidthCon = _displaySize / 3 - 30;
-      _dropFontSize = 20;
+      _dropFontSize = 25;
       _margin = 0;
     }
     _helpWidgetSize = 10;
@@ -215,9 +215,11 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                         MandaEqu.donotUseMelvash(localLang),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.red[900], fontSize: _fontSize - 6),
+                            color: Colors.red[900],
+                            fontSize: _cardFontSize - 5),
                         // )
                       ),
+
                       radioButGender(context),
                       Padding(padding: EdgeInsets.only(top: _paddingTop)),
                       motherLine(context, mulwashaLabel),
@@ -227,6 +229,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                       timeLine(context, mulwashaLabel),
                       Padding(padding: EdgeInsets.only(top: _paddingTop)),
                       findMulwasha(context),
+
                       /////////############# Second Part start Here Convert Date to Manda Date
                       Padding(
                         padding: EdgeInsets.only(top: _paddingTop),
@@ -241,7 +244,8 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                         mulwashaLabel.convertDate[1],
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.red[900], fontSize: _fontSize - 6),
+                            color: Colors.red[900],
+                            fontSize: _cardFontSize - 7),
                       ),
                       //// ## Convert Date to Manda Date
                       convertToMandaDate(context),
@@ -288,10 +292,10 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               ),
             ),
             SizedBox(
-              width: _dropWidgetSize,
-              // height: boxHight,
-              child: motherMulwashaDrop(context),
-            ),
+                width: _dropWidgetSize,
+                child: FittedBox(
+                  child: motherMulwashaDrop(context),
+                )),
             SizedBox(
               width: _helpWidgetSize,
               // height: boxHight,
@@ -325,10 +329,10 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               ),
             ),
             SizedBox(
-              width: _dropWidgetSize,
-              // height: boxHight,
-              child: birthMonthDrop(context),
-            ),
+                width: _dropWidgetSize,
+                child: FittedBox(
+                  child: monthMulwashaDrop(context),
+                )),
             SizedBox(
               width: _helpWidgetSize,
               // height: boxHight,
@@ -387,14 +391,16 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               ),
             ),
             SizedBox(
-                width: _dropWidgetSize,
-                child: Row(
-                  children: [
-                    atAfterDropNew(context, dropListDataAtAfter),
-                    Padding(padding: EdgeInsets.only(left: 10)),
-                    birthTimeDropNew(context, dropListDataAtHours),
-                  ],
-                )),
+              width: _dropWidgetSize,
+              child: FittedBox(
+                  child: Row(
+                children: [
+                  birthAfterDrop(context, dropListDataAtAfter),
+                  Padding(padding: EdgeInsets.only(left: 5)),
+                  birthTimeDrop(context, dropListDataAtHours),
+                ],
+              )),
+            ),
             SizedBox(
               width: _helpWidgetSize,
               child: IconButton(
@@ -429,26 +435,28 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         SizedBox(
             width: _dropWidgetSize + _helpWidgetSize,
             // height: boxHight,
-            child: Row(
-              children: [
-                Card(
-                  color: Colors.grey[200],
-                  child: Text(
-                    textBeforeMsg,
-                    style:
-                        TextStyle(color: Colors.black, fontSize: _dropFontSize),
+            child: FittedBox(
+              child: Row(
+                children: [
+                  Card(
+                    color: Colors.grey[200],
+                    child: Text(
+                      textBeforeMsg,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: _dropFontSize),
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(left: 4)),
-                Card(
-                  color: Colors.grey[200],
-                  child: Text(
-                    textBeforeTime,
-                    style:
-                        TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  Padding(padding: EdgeInsets.only(left: 4)),
+                  Card(
+                    color: Colors.grey[200],
+                    child: Text(
+                      textBeforeTime,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: _dropFontSize),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )),
         SizedBox(
           width: 0,
@@ -504,44 +512,6 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   }
 
   // #################
-  String birthValue;
-  @override
-  Widget birthMonthDrop(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    var dropListData = mulwashaLabel.monthName;
-    return DropdownButtonHideUnderline(
-        child: Container(
-            // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton<String>(
-              // value: birthValue,
-              value: birthValue == null ? null : birthValue,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: _iconDropSize,
-              elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: _dropFontSize),
-              // underline: Container(
-              //   height: 2,
-              //   color: Colors.deepPurpleAccent,
-              // ),
-              onChanged: (String newValue) {
-                setState(() {
-                  birthValue = newValue;
-                  _monthM = dropListData.indexOf(newValue) + 1;
-                });
-              },
-              items: dropListData.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )));
-  }
-
-  // #################
   // String motherValue = "----";
   String motherValue;
   @override
@@ -549,8 +519,9 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     var dropListData = mulwashaLabel.mother;
     return DropdownButtonHideUnderline(
-        child: SizedBox(
-            width: _dropWidgetSize,
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            // width: _dropWidgetSize,
             child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -579,13 +550,160 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   }
 
   // #################
+  String birthValue;
+  // @override
+  // Widget birthMonthDrop(BuildContext context) {
+  //   MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+  //   var dropListData = mulwashaLabel.monthName;
+  //   return DropdownButtonHideUnderline(
+  //       child: Container(
+  //           // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+  //           decoration: BoxDecoration(
+  //               color: Colors.grey[200],
+  //               borderRadius: BorderRadius.circular(10)),
+  //           child: DropdownButton<String>(
+  //             // value: birthValue,
+  //             value: birthValue == null ? null : birthValue,
+  //             icon: Icon(Icons.arrow_drop_down),
+  //             iconSize: _iconDropSize,
+  //             elevation: 16,
+  //             style: TextStyle(color: Colors.black, fontSize: _dropFontSize),
+  //             // underline: Container(
+  //             //   height: 2,
+  //             //   color: Colors.deepPurpleAccent,
+  //             // ),
+  //             onChanged: (String newValue) {
+  //               setState(() {
+  //                 birthValue = newValue;
+  //                 _monthM = dropListData.indexOf(newValue) + 1;
+  //               });
+  //             },
+  //             items: dropListData.map<DropdownMenuItem<String>>((String value) {
+  //               return DropdownMenuItem<String>(
+  //                 value: value,
+  //                 child: Text(value),
+  //               );
+  //             }).toList(),
+  //           )));
+  // }
+
+  // // ################# New
+  @override
+  Widget monthMulwashaDrop(BuildContext context) {
+    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    var dropListData = mulwashaLabel.monthName;
+    return DropdownButtonHideUnderline(
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: birthValue == null ? null : birthValue,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      birthValue = newValue;
+                      _monthM = dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
+  }
+
+  String _atAfterName;
+  int _atAfterValue;
+  @override
+  // Widget atAfterDropNew(BuildContext context, var dropListData) {
+  //   return DropdownButtonHideUnderline(
+  //       child: FittedBox(
+  //           // width: (_dropWidgetSize + 60) / 2,
+  //           fit: BoxFit.scaleDown,
+  //           child: Container(
+  //               // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  //               decoration: BoxDecoration(
+  //                   color: Colors.grey[200],
+  //                   borderRadius: BorderRadius.circular(10)),
+  //               child: DropdownButton<String>(
+  //                 value: _atAfterName == null ? null : _atAfterName,
+  //                 icon: Icon(Icons.arrow_drop_down),
+  //                 iconSize: _iconDropSize,
+  //                 elevation: 16,
+  //                 style:
+  //                     TextStyle(color: Colors.black, fontSize: _dropFontSize),
+  //                 onChanged: (String newValue) {
+  //                   setState(() {
+  //                     _atAfterName = newValue;
+  //                     _atAfterValue = dropListData.indexOf(newValue) + 1;
+  //                   });
+  //                 },
+  //                 items: dropListData
+  //                     .map<DropdownMenuItem<String>>((String value) {
+  //                   return DropdownMenuItem<String>(
+  //                     value: value,
+  //                     child: Text(value),
+  //                   );
+  //                 }).toList(),
+  //               ))));
+  // }
+
+  // // ################# New
+  @override
+  Widget birthAfterDrop(BuildContext context, var dropListData) {
+    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    // var dropListData = mulwashaLabel.monthName;
+    return DropdownButtonHideUnderline(
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: _atAfterName == null ? null : _atAfterName,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      _atAfterName = newValue;
+                      _atAfterValue = dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
+  }
+
+  // #################
   String _birthTimeSelectedName;
   int _birthTimeSelectedValue;
   @override
-  Widget birthTimeDropNew(BuildContext context, var dropListData) {
+  Widget birthTimeDrop(BuildContext context, var dropListData) {
     return DropdownButtonHideUnderline(
-        child: SizedBox(
+        child: FittedBox(
             // width: (_dropWidgetSize - 80) / 2,
+            fit: BoxFit.scaleDown,
             child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -604,41 +722,6 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                       _birthTimeSelectedName = newValue;
                       _birthTimeSelectedValue =
                           dropListData.indexOf(newValue) + 1;
-                    });
-                  },
-                  items: dropListData
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ))));
-  }
-
-  String _atAfterName;
-  int _atAfterValue;
-  @override
-  Widget atAfterDropNew(BuildContext context, var dropListData) {
-    return DropdownButtonHideUnderline(
-        child: SizedBox(
-            // width: (_dropWidgetSize + 60) / 2,
-            child: Container(
-                // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10)),
-                child: DropdownButton<String>(
-                  value: _atAfterName == null ? null : _atAfterName,
-                  icon: Icon(Icons.arrow_drop_down),
-                  iconSize: _iconDropSize,
-                  elevation: 16,
-                  style:
-                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
-                  onChanged: (String newValue) {
-                    setState(() {
-                      _atAfterName = newValue;
-                      _atAfterValue = dropListData.indexOf(newValue) + 1;
                     });
                   },
                   items: dropListData
@@ -767,7 +850,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
           onPressed: defineMulwasha,
           child: Text(
             mulwashaLabel.findBut,
-            style: TextStyle(fontSize: _fontSize),
+            style: TextStyle(fontSize: _cardFontSize),
           ),
         )
       ],
@@ -1064,57 +1147,46 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                     side: BorderSide(color: Colors.black)),
                 child: Text(
                   mulwashaLabel.convertDate[0],
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(fontSize: _cardFontSize),
                 ),
                 onPressed: validateAndConvert),
             FittedBox(
                 child: Column(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "\n" + mulwashaLabel.convertDateLabel[0],
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                    // Text(_dateM),
-                    Text(
-                      "\n" + mandaDayMonth,
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                  ],
+                Text(
+                  "\n" + mulwashaLabel.convertDateLabel[0],
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      mandaYear,
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                  ],
+                Text(
+                  mandaDayMonth,
+                  style: TextStyle(fontSize: _fontSize),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "\n" + mulwashaLabel.convertDateLabel[1],
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                    Text(
-                      "\n" + _dateG,
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                  ],
+                Text(
+                  mandaYear,
+                  style: TextStyle(fontSize: _fontSize),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      ("\n" + mulwashaLabel.convertDateLabel[2] + "\n"),
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                    Text(
-                      LocalNum.convertEntoFa(_dateS, localLang),
-                      style: TextStyle(fontSize: _fontSize),
-                    ),
-                  ],
+
+                Text(
+                  "\n" + mulwashaLabel.convertDateLabel[1],
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
+                Text(
+                  _dateG,
+                  style: TextStyle(fontSize: _fontSize),
+                ),
+
+                Text(
+                  ("\n" + mulwashaLabel.convertDateLabel[2]),
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  LocalNum.convertEntoFa(_dateS, localLang),
+                  style: TextStyle(fontSize: _fontSize),
+                ),
+                // ############
               ],
             )),
           ],

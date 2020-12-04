@@ -360,8 +360,8 @@ class MandaEqu {
   static birthLabel(index) {
     Map mulwashal = {
       'en_US': ' Birth Month ',
-      'fa_IR': '      ماه تولد ',
-      'ar': ' شهر المیلاد '
+      'fa_IR': '    ماه تولد ',
+      'ar': 'شهر المیلاد '
     };
     return mulwashal[index];
   }
@@ -369,8 +369,8 @@ class MandaEqu {
   static motherLabel(index) {
     Map mulwashal = {
       'en_US': " Mother's Melvashe ",
-      'fa_IR': ' ملواشه مادر ',
-      'ar': '   ملواشة الام  '
+      'fa_IR': 'ملواشه مادر  ',
+      'ar': '  ملواشة الام  '
     };
     return mulwashal[index];
   }
@@ -378,7 +378,7 @@ class MandaEqu {
   static timeLabel(index) {
     Map mulwashal = {
       'en_US': ' Birth Time ',
-      'fa_IR': '   ساعت تولد ',
+      'fa_IR': '  ساعت تولد  ',
       'ar': 'الساعة المیلاد'
     };
     return mulwashal[index];
@@ -534,7 +534,7 @@ class MandaEqu {
   static femaleMulwashaEn() {
     final List<String> mandaEnName = [
       // "----",
-      'Hawa',
+      'Hawa ',
       'Sharat',
       'Yasman',
       'Modl-lal',
@@ -554,17 +554,17 @@ class MandaEqu {
   static femaleMulwashaFa() {
     final List<String> mandaEnName = [
       // "----",
-      '  هوا   ',
+      '  هوا                     ',
       '  شارت  ',
       '  یاسمن  ',
       '  مدلل  ',
       '  انهر  ',
       '  مهنش  ',
       '  سیمت  ',
-      '  هوا سیمت ',
-      '  شارت سیمت ',
+      ' هوا سیمت ',
+      '  شارت سیمت  ',
       '  مامانی  ',
-      '  هوا مامانی ',
+      ' هوا مامانی ',
       '  ملیحه  ',
       '  نرگس  ',
     ];
@@ -650,7 +650,7 @@ class MandaEqu {
   static birthTimeSelectorEn() {
     final List data = [
       {
-        'atAfter': [' at', ' after  '],
+        'atAfter': [' at', ' after '],
         'before': ' before  '
       }
     ];
@@ -689,7 +689,7 @@ class MandaEqu {
       '  پنجه روز اول',
       '  پنجه روز دوم',
       '  پنجه روز سوم',
-      '  پنجه روز چهارم',
+      '  پنجه روز چهارم    ',
       '  پنجه روز پنجم',
       '  قینا',
       '  ارقوا',
@@ -710,11 +710,11 @@ class MandaEqu {
       '  سرطانا',
       '  آریا',
       '  شمبلتا',
-      'پنجه اليوم الأول',
-      'پنجه اليوم الثاني',
-      'پنجه اليوم الثالث',
-      'پنجه اليوم الرابع',
-      'پنجه اليوم الخامس',
+      '  پنجه اليوم الأول',
+      '  پنجه اليوم الثاني',
+      '  پنجه اليوم الثالث',
+      '  پنجه اليوم الرابع',
+      '  پنجه اليوم الخامس',
       '  قینا',
       '  ارقوا',
       '  هطیا',
@@ -734,7 +734,7 @@ class MandaEqu {
       'Sartana',
       'Aria',
       'Shombolta',
-      'Panja Day 1',
+      'Panja Day 1    ',
       'Panja Day 2',
       'Panja Day 3',
       'Panja Day 4',
