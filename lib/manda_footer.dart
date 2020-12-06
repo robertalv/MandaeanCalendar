@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'manda_equivalent.dart';
@@ -14,8 +16,12 @@ Widget footerLine(
   if (_divecWidth > 500) {
     helpHight = 65.0;
   }
+
   return Container(
     height: helpHight * sizeRate,
+    constraints: BoxConstraints(
+      minHeight: helpHight * sizeRate,
+    ),
     alignment: Alignment.center,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.0),
@@ -62,7 +68,7 @@ Widget footerFirstLine(BuildContext context, String _localLang, sizeRate) {
     religBeforeIcon = myIcon.noon;
     minorAfterIcon = myIcon.minor;
     minorBeforeIcon = myIcon.noon;
-    myFontSize = 19.0 * sizeRate;
+    myFontSize = 17.0 * sizeRate;
   }
 
   if (_divecWidth > 700) {
@@ -135,7 +141,7 @@ Widget footerSecondLine(BuildContext context, String _localLang, sizeRate) {
     firstMonthBeforeIcon = myIcon.noon;
     majorAfterIcon = myIcon.major;
     majorBeforeIcon = myIcon.noon;
-    myFontSize = 19.0 * sizeRate;
+    myFontSize = 17.0 * sizeRate;
   }
 
   if (_divecWidth > 700) {
