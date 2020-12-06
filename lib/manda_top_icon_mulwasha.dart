@@ -56,6 +56,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   double _iconDropSize = 18;
   double _iconHelpSize = 25;
   double _cardFontSize = 20.0;
+  double _resetCardFontSize;
   double _timeWidthCon;
   double _helpWidgetSize;
   double _labelWidgetSize;
@@ -96,8 +97,13 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         convertMsg = mulwashaLabel.alertMsg['s'];
       }
 
-      showAlertDialog(
-          context, localLang, mulwashaLabel.alertTtitle, convertMsg);
+      // showAlertDialog(
+      //     context, localLang, mulwashaLabel.alertTtitle, convertMsg);
+
+      _resetCardFontSize = _cardFontSize;
+      _cardFontSize = _cardFontSize + 10;
+
+      _showMyDialog(context, localLang, mulwashaLabel.alertTtitle, convertMsg);
     }
   }
 
@@ -291,14 +297,14 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                 style: TextStyle(color: Colors.black, fontSize: _fontSize),
               ),
             ),
+
             SizedBox(
                 width: _dropWidgetSize,
                 child: FittedBox(
                   child: motherMulwashaDrop(context),
                 )),
             SizedBox(
-              width: _helpWidgetSize,
-              // height: boxHight,
+              width: _helpWidgetSize + 15,
               child: IconButton(
                 icon: Icon(
                   Icons.help,
@@ -309,6 +315,9 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                     mulwashaInLineHelp(context, InLineHelp.mother, localLang),
               ),
             ),
+            // SizedBox(
+            //   width: 18,
+            // ),
           ],
         )
       ],
@@ -334,8 +343,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                   child: monthMulwashaDrop(context),
                 )),
             SizedBox(
-              width: _helpWidgetSize,
-              // height: boxHight,
+              width: _helpWidgetSize + 15,
               child: IconButton(
                 icon: Icon(
                   Icons.help,
@@ -365,6 +373,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     if (dropListDataAtAfter.indexOf(_atAfterName) == 1 &&
         _birthTimeSelectedName != null) {
       timeText = mulwashaLabel.birthTimeLabel;
+      timeText = "\n" + timeText;
       var parts = _birthTimeSelectedName.split(':');
 
       // var newString = parts[0];
@@ -402,7 +411,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               )),
             ),
             SizedBox(
-              width: _helpWidgetSize,
+              width: _helpWidgetSize + 15,
               child: IconButton(
                 icon: Icon(
                   Icons.help,
@@ -551,43 +560,6 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
 
   // #################
   String birthValue;
-  // @override
-  // Widget birthMonthDrop(BuildContext context) {
-  //   MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-  //   var dropListData = mulwashaLabel.monthName;
-  //   return DropdownButtonHideUnderline(
-  //       child: Container(
-  //           // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-  //           decoration: BoxDecoration(
-  //               color: Colors.grey[200],
-  //               borderRadius: BorderRadius.circular(10)),
-  //           child: DropdownButton<String>(
-  //             // value: birthValue,
-  //             value: birthValue == null ? null : birthValue,
-  //             icon: Icon(Icons.arrow_drop_down),
-  //             iconSize: _iconDropSize,
-  //             elevation: 16,
-  //             style: TextStyle(color: Colors.black, fontSize: _dropFontSize),
-  //             // underline: Container(
-  //             //   height: 2,
-  //             //   color: Colors.deepPurpleAccent,
-  //             // ),
-  //             onChanged: (String newValue) {
-  //               setState(() {
-  //                 birthValue = newValue;
-  //                 _monthM = dropListData.indexOf(newValue) + 1;
-  //               });
-  //             },
-  //             items: dropListData.map<DropdownMenuItem<String>>((String value) {
-  //               return DropdownMenuItem<String>(
-  //                 value: value,
-  //                 child: Text(value),
-  //               );
-  //             }).toList(),
-  //           )));
-  // }
-
-  // // ################# New
   @override
   Widget monthMulwashaDrop(BuildContext context) {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
@@ -623,43 +595,9 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                 ))));
   }
 
+  // // ################# New
   String _atAfterName;
   int _atAfterValue;
-  @override
-  // Widget atAfterDropNew(BuildContext context, var dropListData) {
-  //   return DropdownButtonHideUnderline(
-  //       child: FittedBox(
-  //           // width: (_dropWidgetSize + 60) / 2,
-  //           fit: BoxFit.scaleDown,
-  //           child: Container(
-  //               // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-  //               decoration: BoxDecoration(
-  //                   color: Colors.grey[200],
-  //                   borderRadius: BorderRadius.circular(10)),
-  //               child: DropdownButton<String>(
-  //                 value: _atAfterName == null ? null : _atAfterName,
-  //                 icon: Icon(Icons.arrow_drop_down),
-  //                 iconSize: _iconDropSize,
-  //                 elevation: 16,
-  //                 style:
-  //                     TextStyle(color: Colors.black, fontSize: _dropFontSize),
-  //                 onChanged: (String newValue) {
-  //                   setState(() {
-  //                     _atAfterName = newValue;
-  //                     _atAfterValue = dropListData.indexOf(newValue) + 1;
-  //                   });
-  //                 },
-  //                 items: dropListData
-  //                     .map<DropdownMenuItem<String>>((String value) {
-  //                   return DropdownMenuItem<String>(
-  //                     value: value,
-  //                     child: Text(value),
-  //                   );
-  //                 }).toList(),
-  //               ))));
-  // }
-
-  // // ################# New
   @override
   Widget birthAfterDrop(BuildContext context, var dropListData) {
     // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
@@ -735,50 +673,6 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   }
 
 // #################
-
-  showAlertDialog(
-      BuildContext context, String localLang, String title, String msg) {
-    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-
-    Widget okButton = FlatButton(
-      child: Text(
-        MandaEqu.alertOk(localLang),
-        style: TextStyle(color: Colors.blue[800], fontSize: _cardFontSize),
-      ),
-      onPressed: () {
-        // Navigator.of(context).pop('dialog');
-        Navigator.of(context, rootNavigator: true).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: _cardFontSize,
-            fontWeight: FontWeight.bold),
-      ),
-      content: Text(
-        msg,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.black, fontSize: _cardFontSize),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   String validateYY(String value, List yearMaxMin) {
     int yearMin = 1300;
@@ -913,8 +807,11 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     // print("_character $_character");
     // print("_motherM $_motherM");
     // print('_monthM $_monthM');
+    _resetCardFontSize = _cardFontSize;
+    _cardFontSize = _cardFontSize + 10;
+    // showAlertDialog(context, localLang, title, msg);
+    _showMyDialog(context, localLang, title, msg);
 
-    showAlertDialog(context, localLang, title, msg);
     // findMulwashaTest(context);
   }
 
@@ -1309,6 +1206,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               ),
               onPressed: () {
                 // Navigator.of(context).pop('dialog');
+                _cardFontSize = _resetCardFontSize;
                 Navigator.of(context, rootNavigator: true).pop();
               },
             )

@@ -43,18 +43,18 @@ class MandaEqu {
 
   static mandaFirstMonth() {
     Map firstMonth = {
-      'en_US': ' First day of Mandaic Month    ',
-      'fa_IR': '     اول ماه مندایی  ',
-      'ar': '      رأس الشهر '
+      'en_US': ' First day of Mandaic Month ',
+      'fa_IR': ' اول ماه مندایی  ',
+      'ar': ' رأس الشهر '
     };
     return [firstMonth];
   }
 
   static mandaLightMbattal() {
     Map lightMbattal = {
-      'en_US': ' Minor Mbattal Day      ',
-      'fa_IR': '    روز أمبطل سبک  ',
-      'ar': '    یوم مبطل خفیف  '
+      'en_US': ' Minor Mbattal Day ',
+      'fa_IR': ' روز أمبطل سبک ',
+      'ar': ' یوم مبطل خفیف '
     };
 
     return [lightMbattal];
@@ -62,18 +62,18 @@ class MandaEqu {
 
   static mandaHeavyMbattal() {
     Map heavytMbattal = {
-      'en_US': ' Major Mbattal Day     ',
-      'fa_IR': '   روز أمبطل سنگین  ',
-      'ar': '     یوم مبطل ثقیل '
+      'en_US': ' Major Mbattal Day ',
+      'fa_IR': ' روز أمبطل سنگین   ',
+      'ar': ' یوم مبطل ثقیل '
     };
     return [heavytMbattal];
   }
 
   static mandaFeastName() {
     Map heavytMbattal = {
-      'en_US': ' Religious Occasion                    ',
-      'fa_IR': '        مناسبت دینی  ',
-      'ar': '   مناسبه دینیه '
+      'en_US': ' Religious Occasion ',
+      'fa_IR': ' مناسبت دینی ',
+      'ar': ' مناسبه دینیه '
     };
     return [heavytMbattal];
   }
