@@ -458,63 +458,60 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
 
+          List myEvents = [];
           if (holidays.isNotEmpty) {
-            holidays.forEach((holiday) {
-              if (holiday['en_US'].contains("First")) {
-                children.add(
-                  Positioned(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: myIcon.firstMonth,
-                    ),
-                  ),
-                );
-              }
-            });
+            myEvents.addAll(holidays);
+          }
+          if (events.isNotEmpty) {
+            myEvents.addAll(events);
           }
 
-          if (events.isNotEmpty) {
-            events.forEach((event) {
-              // print(event);
-              // print(event.runtimeType.toString());
-              if (event.runtimeType == String) {
-                event = event;
-              } else if ((event.runtimeType.toString()).contains('List')) {
-                event = event[0]['en_US'];
-              } else {
-                event = event['en_US'];
-              }
+          if (myEvents.length == 1) {
+            children.add(
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: findMyIcon(myEvents[0], _sizeRate),
+                ),
+              ),
+            );
+          } else if (myEvents.length == 2) {
+            children.add(
+              Positioned(
+                left: _rightIcon + 7,
+                child: findMyIcon(myEvents[1], _sizeRate),
+              ),
+            );
 
-              if (event.contains("Minor")) {
-                children.add(
-                  Positioned(
-                    // left: lightPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    child: myIcon.minor,
-                  ),
-                );
-              } else if (event.contains("Major")) {
-                children.add(
-                  Positioned(
-                    // left: heavyPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    // child: _buildHeavyEventMarker(),
-                    child: myIcon.major,
-                  ),
-                );
-              } else {
-                children.add(
-                  Positioned(
-                    // left: othrsPosition,
-                    right: _rightIcon,
-                    // bottom: -3,
-                    child: myIcon.relig,
-                  ),
-                );
-              }
-            });
+            children.add(
+              Positioned(
+                right: _rightIcon + 7,
+                child: findMyIcon(myEvents[0], _sizeRate),
+              ),
+            );
+          } else {
+            children.add(
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: findMyIcon(myEvents[0], _sizeRate),
+                ),
+              ),
+            );
+
+            children.add(
+              Positioned(
+                left: _rightIcon,
+                child: findMyIcon(myEvents[2], _sizeRate),
+              ),
+            );
+
+            children.add(
+              Positioned(
+                right: _rightIcon,
+                child: findMyIcon(myEvents[1], _sizeRate),
+              ),
+            );
           }
           return children;
         },
@@ -573,6 +570,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       onVisibleDaysChanged: _onVisibleDaysChanged,
       onCalendarCreated: _onCalendarCreated,
     );
+  }
+
+  static findMyIcon(myEvent, _sizeRate) {
+    MyIcon myIcon = MyIcon(_sizeRate);
+
+    if ((myEvent.runtimeType.toString()).contains('List')) {
+      myEvent = myEvent[0];
+    }
+
+    var myIcone;
+    if (myEvent['en_US'].contains("Minor")) {
+      myIcone = myIcon.minor;
+    } else if (myEvent['en_US'].contains("Major")) {
+      myIcone = myIcon.major;
+    } else if (myEvent['en_US'].contains("Mandaic")) {
+      myIcone = myIcon.firstMonth;
+    } else {
+      myIcone = myIcon.relig;
+    }
+    return myIcone;
   }
 
   Widget _buildEventList() {
