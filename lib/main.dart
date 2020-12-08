@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   double _rightIcon = 0;
   int _sizeRate = 1;
   double _marginHor = 6.0;
+  double _longFontSize = 16.0;
 
   var _listOfEventsForYear;
   Map _myColorSelection = Mycolor.selection();
@@ -231,15 +232,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       // _centerIcon = 67;
       _sizeRate = 2;
       _marginHor = 6 + (_divecWidth - 700) / 2;
+      _longFontSize = 22.0;
     } else {
       _daysOfWeekFontSize = 13.0;
       _headerFontSize = 20.0;
       _daysFontSize = 20.0;
       _sizeRate = 1;
       _marginHor = 6.0;
+      _longFontSize = 16.0;
     }
+
+    //// test22############# icon position for days
     double eleSize = _divecWidth / 7;
-// eleSize > 49 &&
+
     if (_sizeRate == 1) {
       _rightIcon = (eleSize - 50) / 2;
     } else if (_sizeRate == 2) {
@@ -255,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     }
     double _myMandaFontSize = 20;
     if (_localLang != "en_US") {
-      _myMandaFontSize = 24;
+      _myMandaFontSize = 22;
     }
 
     String _myTitle = MandaEqu.calendarTitle(_localLang);
@@ -390,6 +395,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     if (_localLang == "en_US") {
       _myFontWeight = FontWeight.normal;
     }
+
     return TableCalendar(
       // locale: 'fa_IR',
       // locale: 'en_US',
@@ -418,6 +424,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
       calendarStyle: CalendarStyle(
+          // contentDecoration: BoxDecoration(
+          //   border: Border(top: BorderSide()), // customize
+          // ),
           selectedColor: Colors.red[400],
           todayColor: Colors.deepOrange[400],
           markersColor: Colors.green[700],
@@ -480,64 +489,148 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
 
+          // ####### Test22
+          List myEvents = [];
+          // print(date);
+          // print(holidays);
+          // print(holidays.length);
+          // print(date);
+          // print(events);
+          // print(events.length);
+          // print("***************");
+          // print(date);
           if (holidays.isNotEmpty) {
-            holidays.forEach((holiday) {
-              if (holiday['en_US'].contains("First")) {
-                children.add(
-                  Positioned(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: myIcon.firstMonth,
-                    ),
-                  ),
-                );
-              }
-            });
+            myEvents.addAll(holidays);
           }
-
           if (events.isNotEmpty) {
-            events.forEach((event) {
-              // print(event);
-              // print(event.runtimeType.toString());
-              if (event.runtimeType == String) {
-                event = event;
-              } else if ((event.runtimeType.toString()).contains('List')) {
-                event = event[0]['en_US'];
-              } else {
-                event = event['en_US'];
-              }
-
-              if (event.contains("Minor")) {
-                children.add(
-                  Positioned(
-                    // left: lightPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    child: myIcon.minor,
-                  ),
-                );
-              } else if (event.contains("Major")) {
-                children.add(
-                  Positioned(
-                    // left: heavyPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    // child: _buildHeavyEventMarker(),
-                    child: myIcon.major,
-                  ),
-                );
-              } else {
-                children.add(
-                  Positioned(
-                    // left: othrsPosition,
-                    right: _rightIcon,
-                    // bottom: -3,
-                    child: myIcon.relig,
-                  ),
-                );
-              }
-            });
+            myEvents.addAll(events);
           }
+
+          // print(myEvents);
+          // print(myEvents.length);
+
+          var my1StIcone;
+          var my2ndIcone;
+          var my3rdIcone;
+          if (myEvents.length == 1) {
+            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
+            children.add(
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: my1StIcone,
+                ),
+              ),
+            );
+          } else if (myEvents.length == 2) {
+            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
+            my2ndIcone = findMyIcon(myEvents[1], _sizeRate);
+            children.add(
+              Positioned(
+                left: _rightIcon + 7,
+                child: my1StIcone,
+              ),
+            );
+
+            children.add(
+              Positioned(
+                right: _rightIcon + 7,
+                child: my2ndIcone,
+              ),
+            );
+          } else {
+            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
+            my2ndIcone = findMyIcon(myEvents[1], _sizeRate);
+            my3rdIcone = findMyIcon(myEvents[2], _sizeRate);
+            children.add(
+              Positioned(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: my1StIcone,
+                ),
+              ),
+            );
+
+            children.add(
+              Positioned(
+                left: _rightIcon,
+                child: my2ndIcone,
+              ),
+            );
+
+            children.add(
+              Positioned(
+                right: _rightIcon,
+                child: my3rdIcone,
+              ),
+            );
+          }
+
+// ####### Test22
+          // if (holidays.isNotEmpty) {
+          //   holidays.forEach((holiday) {
+          //     if (holiday['en_US'].contains("First")) {
+          //       children.add(
+          //         Positioned(
+          //           // left: lightPosition,
+          //           left: centerIconLen,
+          //           // bottom: 0,
+          //           child: myIcon.firstMonth,
+          //         ),
+          //         // Positioned(
+          //         //   child: Align(
+          //         //     alignment: Alignment.bottomCenter,
+          //         //     child: myIcon.firstMonth,
+          //         //   ),
+          //         // ),
+          //       );
+          //     }
+          //   });
+          // }
+
+          // if (events.isNotEmpty) {
+          //   events.forEach((event) {
+          //     // print(event);
+          //     // print(event.runtimeType.toString());
+          //     if (event.runtimeType == String) {
+          //       event = event;
+          //     } else if ((event.runtimeType.toString()).contains('List')) {
+          //       event = event[0]['en_US'];
+          //     } else {
+          //       event = event['en_US'];
+          //     }
+
+          //     if (event.contains("Minor")) {
+          //       children.add(
+          //         Positioned(
+          //           // left: lightPosition,
+          //           left: _rightIcon,
+          //           // bottom: 0,
+          //           child: myIcon.minor,
+          //         ),
+          //       );
+          //     } else if (event.contains("Major")) {
+          //       children.add(
+          //         Positioned(
+          //           // left: heavyPosition,
+          //           left: _rightIcon,
+          //           // bottom: 0,
+          //           // child: _buildHeavyEventMarker(),
+          //           child: myIcon.major,
+          //         ),
+          //       );
+          //     } else {
+          //       children.add(
+          //         Positioned(
+          //           // left: othrsPosition,
+          //           right: _rightIcon,
+          //           // bottom: -3,
+          //           child: myIcon.relig,
+          //         ),
+          //       );
+          //     }
+          //   });
+          // }
           return children;
         },
         ////
@@ -602,6 +695,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
+  static findMyIcon(myEvent, _sizeRate) {
+    MyIcon myIcon = MyIcon(_sizeRate);
+
+    if ((myEvent.runtimeType.toString()).contains('List')) {
+      myEvent = myEvent[0];
+    }
+
+    var myIcone;
+    if (myEvent['en_US'].contains("Minor")) {
+      myIcone = myIcon.minor;
+    } else if (myEvent['en_US'].contains("Major")) {
+      myIcone = myIcon.major;
+    } else if (myEvent['en_US'].contains("Mandaic")) {
+      myIcone = myIcon.firstMonth;
+    } else {
+      myIcone = myIcon.relig;
+    }
+    return myIcone;
+  }
+
   Widget _buildEventList() {
     // return ListView(
     var myAlignment = MyAlignment.countryLanguage(_localLang);
@@ -611,13 +724,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 constraints: BoxConstraints(
                   minHeight: 30,
                 ),
-                width: 700,
+                width: 688,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
                     border: Border.all(width: 0),
                     borderRadius: BorderRadius.circular(8.0),
                     color: _myColorSelection['minor']),
-                margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                margin: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                 child: Column(children: [
                   _generateIconEvent(event),
                 ]),
@@ -707,7 +820,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           value: value,
           child: Text(
             value,
-            style: TextStyle(fontSize: 12.0 * _sizeRate, color: Colors.black),
+            style: TextStyle(fontSize: _longFontSize, color: Colors.black),
           ),
         );
       }).toList(),

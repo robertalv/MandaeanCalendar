@@ -11,10 +11,12 @@ Widget footerLine(
     BuildContext context, String _localLang, sizeRate, marginHor) {
   Map _myColorSelection = Mycolor.selection();
   double _paddingTop = 4;
-  double helpHight = 90.0;
+  double helpHight = 72.0;
   double _divecWidth = MediaQuery.of(context).size.width;
-  if (_divecWidth > 500) {
-    helpHight = 65.0;
+  if (_divecWidth < 321) {
+    helpHight = 60.0;
+  } else if (_divecWidth > 500) {
+    helpHight = 35.0;
   }
 
   return Container(
@@ -30,9 +32,7 @@ Widget footerLine(
     margin: EdgeInsets.symmetric(horizontal: marginHor, vertical: 8),
     child: Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: _paddingTop)),
         footerFirstLine(context, _localLang, sizeRate),
-        Padding(padding: EdgeInsets.only(top: _paddingTop)),
         footerSecondLine(context, _localLang, sizeRate),
       ],
     ),
@@ -60,7 +60,7 @@ Widget footerFirstLine(BuildContext context, String _localLang, sizeRate) {
     religAfterIcon = myIcon.noon;
     minorBeforeIcon = myIcon.minor;
     minorAfterIcon = myIcon.noon;
-    myFontSize = 14.0 * sizeRate;
+    myFontSize = 16.0 * sizeRate;
     mySpace = " ";
   } else {
     spaceNotEn = ' ';
@@ -68,12 +68,15 @@ Widget footerFirstLine(BuildContext context, String _localLang, sizeRate) {
     religBeforeIcon = myIcon.noon;
     minorAfterIcon = myIcon.minor;
     minorBeforeIcon = myIcon.noon;
-    myFontSize = 17.0 * sizeRate;
+    myFontSize = 18.0 * sizeRate;
   }
-
+  if (_divecWidth < 321) {
+    myFontSize = myFontSize * .80;
+  }
   if (_divecWidth > 700) {
     _iconWidgetSize = 8.0 * sizeRate;
     _textWidgetSize = 300;
+    myFontSize = myFontSize * .70;
   } else {
     _iconWidgetSize = 8;
     _textWidgetSize = _divecWidth / 2 - 32;
@@ -133,7 +136,7 @@ Widget footerSecondLine(BuildContext context, String _localLang, sizeRate) {
     firstMonthAfterIcon = myIcon.noon;
     majorBeforeIcon = myIcon.major;
     majorAfterIcon = myIcon.noon;
-    myFontSize = 14.0 * sizeRate;
+    myFontSize = 16.0 * sizeRate;
     mySpace = '  ';
   } else {
     spaceNotEn = ' ';
@@ -141,12 +144,16 @@ Widget footerSecondLine(BuildContext context, String _localLang, sizeRate) {
     firstMonthBeforeIcon = myIcon.noon;
     majorAfterIcon = myIcon.major;
     majorBeforeIcon = myIcon.noon;
-    myFontSize = 17.0 * sizeRate;
+    myFontSize = 18.0 * sizeRate;
   }
 
+  if (_divecWidth < 321) {
+    myFontSize = myFontSize * .8;
+  }
   if (_divecWidth > 700) {
     _iconWidgetSize = 8.0 * sizeRate;
     _textWidgetSize = 300;
+    myFontSize = myFontSize * .70;
   } else {
     _iconWidgetSize = 8;
     _textWidgetSize = _divecWidth / 2 - 32;
