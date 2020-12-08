@@ -489,16 +489,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
 
-          // ####### Test22
           List myEvents = [];
-          // print(date);
-          // print(holidays);
-          // print(holidays.length);
-          // print(date);
-          // print(events);
-          // print(events.length);
-          // print("***************");
-          // print(date);
           if (holidays.isNotEmpty) {
             myEvents.addAll(holidays);
           }
@@ -506,47 +497,35 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             myEvents.addAll(events);
           }
 
-          // print(myEvents);
-          // print(myEvents.length);
-
-          var my1StIcone;
-          var my2ndIcone;
-          var my3rdIcone;
           if (myEvents.length == 1) {
-            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
             children.add(
               Positioned(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: my1StIcone,
+                  child: findMyIcon(myEvents[0], _sizeRate),
                 ),
               ),
             );
           } else if (myEvents.length == 2) {
-            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
-            my2ndIcone = findMyIcon(myEvents[1], _sizeRate);
             children.add(
               Positioned(
                 left: _rightIcon + 7,
-                child: my1StIcone,
+                child: findMyIcon(myEvents[1], _sizeRate),
               ),
             );
 
             children.add(
               Positioned(
                 right: _rightIcon + 7,
-                child: my2ndIcone,
+                child: findMyIcon(myEvents[0], _sizeRate),
               ),
             );
           } else {
-            my1StIcone = findMyIcon(myEvents[0], _sizeRate);
-            my2ndIcone = findMyIcon(myEvents[1], _sizeRate);
-            my3rdIcone = findMyIcon(myEvents[2], _sizeRate);
             children.add(
               Positioned(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: my1StIcone,
+                  child: findMyIcon(myEvents[0], _sizeRate),
                 ),
               ),
             );
@@ -554,83 +533,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             children.add(
               Positioned(
                 left: _rightIcon,
-                child: my2ndIcone,
+                child: findMyIcon(myEvents[2], _sizeRate),
               ),
             );
 
             children.add(
               Positioned(
                 right: _rightIcon,
-                child: my3rdIcone,
+                child: findMyIcon(myEvents[1], _sizeRate),
               ),
             );
           }
-
-// ####### Test22
-          // if (holidays.isNotEmpty) {
-          //   holidays.forEach((holiday) {
-          //     if (holiday['en_US'].contains("First")) {
-          //       children.add(
-          //         Positioned(
-          //           // left: lightPosition,
-          //           left: centerIconLen,
-          //           // bottom: 0,
-          //           child: myIcon.firstMonth,
-          //         ),
-          //         // Positioned(
-          //         //   child: Align(
-          //         //     alignment: Alignment.bottomCenter,
-          //         //     child: myIcon.firstMonth,
-          //         //   ),
-          //         // ),
-          //       );
-          //     }
-          //   });
-          // }
-
-          // if (events.isNotEmpty) {
-          //   events.forEach((event) {
-          //     // print(event);
-          //     // print(event.runtimeType.toString());
-          //     if (event.runtimeType == String) {
-          //       event = event;
-          //     } else if ((event.runtimeType.toString()).contains('List')) {
-          //       event = event[0]['en_US'];
-          //     } else {
-          //       event = event['en_US'];
-          //     }
-
-          //     if (event.contains("Minor")) {
-          //       children.add(
-          //         Positioned(
-          //           // left: lightPosition,
-          //           left: _rightIcon,
-          //           // bottom: 0,
-          //           child: myIcon.minor,
-          //         ),
-          //       );
-          //     } else if (event.contains("Major")) {
-          //       children.add(
-          //         Positioned(
-          //           // left: heavyPosition,
-          //           left: _rightIcon,
-          //           // bottom: 0,
-          //           // child: _buildHeavyEventMarker(),
-          //           child: myIcon.major,
-          //         ),
-          //       );
-          //     } else {
-          //       children.add(
-          //         Positioned(
-          //           // left: othrsPosition,
-          //           right: _rightIcon,
-          //           // bottom: -3,
-          //           child: myIcon.relig,
-          //         ),
-          //       );
-          //     }
-          //   });
-          // }
           return children;
         },
         ////
