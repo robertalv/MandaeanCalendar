@@ -7,22 +7,33 @@ import 'my_alignment.dart';
 import 'my_color.dart';
 import 'my_icon_events.dart';
 
+double _divecWidth;
+var _religBeforeIcon;
+var _minorBeforeIcon;
+var _religAfterIcon;
+var _minorAfterIcon;
+var _firstMonthAfterIcon;
+var _firstMonthBeforeIcon;
+var _majorBeforeIcon;
+var _majorAfterIcon;
+var _myFontSize;
+double _textBoxSize = 50;
+double _iconWidgetSize;
+double _textWidgetSize;
+String _mySpace = " ";
+String _spaceNotEn = '';
+var _myTextAlignment;
+double _emptyBox;
+
 Widget footerLine(
     BuildContext context, String _localLang, sizeRate, marginHor) {
   Map _myColorSelection = Mycolor.selection();
-  double _paddingTop = 4;
-  double helpHight = 72.0;
-  double _divecWidth = MediaQuery.of(context).size.width;
-  if (_divecWidth < 321) {
-    helpHight = 60.0;
-  } else if (_divecWidth > 500) {
-    helpHight = 35.0;
-  }
 
+  setPrometer(context, _localLang, sizeRate);
   return Container(
-    height: helpHight * sizeRate,
+    // height: helpHight * sizeRate,
     constraints: BoxConstraints(
-      minHeight: helpHight * sizeRate,
+      minHeight: 37,
     ),
     alignment: Alignment.center,
     decoration: BoxDecoration(
@@ -39,159 +50,119 @@ Widget footerLine(
   );
 }
 
-Widget footerFirstLine(BuildContext context, String _localLang, sizeRate) {
-  String spaceNotEn = '';
-  var myTextAlignment = MyAlignment.textAlig(_localLang);
-  Map _myColorSelection = Mycolor.selection();
+setPrometer(BuildContext context, String _localLang, sizeRate) {
+  _divecWidth = MediaQuery.of(context).size.width;
   MyIcon myIcon = MyIcon(sizeRate);
-  // print(_localLang);
-  var religBeforeIcon;
-  var minorBeforeIcon;
-  var religAfterIcon;
-  var minorAfterIcon;
-  var myFontSize;
-  String mySpace = " ";
-  double _divecWidth = MediaQuery.of(context).size.width;
-  double _iconWidgetSize;
-  double _textWidgetSize;
-
+  _myTextAlignment = MyAlignment.textAlig(_localLang);
   if (_localLang == "en_US") {
-    religBeforeIcon = myIcon.relig;
-    religAfterIcon = myIcon.noon;
-    minorBeforeIcon = myIcon.minor;
-    minorAfterIcon = myIcon.noon;
-    myFontSize = 16.0 * sizeRate;
-    mySpace = " ";
+    _religBeforeIcon = myIcon.relig;
+    _religAfterIcon = myIcon.noon;
+    _minorBeforeIcon = myIcon.minor;
+    _minorAfterIcon = myIcon.noon;
+    _myFontSize = 16.0 * sizeRate;
+    _mySpace = " ";
+    _textBoxSize = 50;
+
+    _firstMonthBeforeIcon = myIcon.firstMonth;
+    _firstMonthAfterIcon = myIcon.noon;
+    _majorBeforeIcon = myIcon.major;
+    _majorAfterIcon = myIcon.noon;
+    _emptyBox = 6.0;
   } else {
-    spaceNotEn = ' ';
-    religAfterIcon = myIcon.relig;
-    religBeforeIcon = myIcon.noon;
-    minorAfterIcon = myIcon.minor;
-    minorBeforeIcon = myIcon.noon;
-    myFontSize = 18.0 * sizeRate;
+    _spaceNotEn = ' ';
+    _religAfterIcon = myIcon.relig;
+    _religBeforeIcon = myIcon.noon;
+    _minorAfterIcon = myIcon.minor;
+    _minorBeforeIcon = myIcon.noon;
+    _myFontSize = 17.0 * sizeRate;
+    _textBoxSize = -10;
+
+    _firstMonthAfterIcon = myIcon.firstMonth;
+    _firstMonthBeforeIcon = myIcon.noon;
+    _majorAfterIcon = myIcon.major;
+    _majorBeforeIcon = myIcon.noon;
+    _emptyBox = 2.0;
   }
   if (_divecWidth < 321) {
-    myFontSize = myFontSize * .80;
+    _myFontSize = _myFontSize * .80;
   }
   if (_divecWidth > 700) {
     _iconWidgetSize = 8.0 * sizeRate;
-    _textWidgetSize = 300;
-    myFontSize = myFontSize * .70;
+    _textWidgetSize = 288.0;
+    _myFontSize = _myFontSize * .70;
+    _emptyBox = _emptyBox * sizeRate;
   } else {
     _iconWidgetSize = 8;
     _textWidgetSize = _divecWidth / 2 - 32;
   }
+}
 
-  return Flexible(
+Widget footerFirstLine(BuildContext context, String _localLang, sizeRate) {
+  return FittedBox(
     child: Row(
       children: [
-        SizedBox(width: _iconWidgetSize, child: religBeforeIcon),
-        SizedBox(width: 6),
+        SizedBox(width: _iconWidgetSize, child: _religBeforeIcon),
+        SizedBox(width: _emptyBox),
         SizedBox(
-          width: _textWidgetSize,
-          child: Text(MandaEqu.mandaFeastName()[0][_localLang] + spaceNotEn,
-              textAlign: myTextAlignment,
+          width: _textWidgetSize + _textBoxSize,
+          child: Text(MandaEqu.mandaFeastName()[0][_localLang] + _spaceNotEn,
+              textAlign: _myTextAlignment,
               style: TextStyle(
-                fontSize: myFontSize,
+                fontSize: _myFontSize,
                 color: Colors.black,
               )),
         ),
-        // SizedBox(width: 6),
-        SizedBox(width: _iconWidgetSize, child: religAfterIcon),
-        SizedBox(width: _iconWidgetSize, child: minorBeforeIcon),
-        SizedBox(width: 6),
+        SizedBox(width: _emptyBox),
+        SizedBox(width: _iconWidgetSize, child: _religAfterIcon),
+        SizedBox(width: _iconWidgetSize, child: _minorBeforeIcon),
+        SizedBox(width: _emptyBox),
         SizedBox(
           width: _textWidgetSize,
           child: Text(MandaEqu.mandaLightMbattal()[0][_localLang],
-              textAlign: myTextAlignment,
+              textAlign: _myTextAlignment,
               style: TextStyle(
-                fontSize: myFontSize,
+                fontSize: _myFontSize,
                 color: Colors.black,
               )),
         ),
-        SizedBox(width: _iconWidgetSize, child: minorAfterIcon),
+        SizedBox(width: _emptyBox),
+        SizedBox(width: _iconWidgetSize, child: _minorAfterIcon),
       ],
     ),
   );
 }
 
 Widget footerSecondLine(BuildContext context, String _localLang, sizeRate) {
-  var myTextAlignment = MyAlignment.textAlig(_localLang);
-  String spaceNotEn = '';
-  Map _myColorSelection = Mycolor.selection();
-  MyIcon myIcon = MyIcon(sizeRate);
-  // print(_localLang);
-  var firstMonthBeforeIcon;
-  var firstMonthAfterIcon;
-  var majorBeforeIcon;
-  var majorAfterIcon;
-  var myFontSize;
-  String mySpace = "";
-  double _divecWidth = MediaQuery.of(context).size.width;
-  double _iconWidgetSize;
-  double _textWidgetSize;
-
-  if (_localLang == "en_US") {
-    firstMonthBeforeIcon = myIcon.firstMonth;
-    firstMonthAfterIcon = myIcon.noon;
-    majorBeforeIcon = myIcon.major;
-    majorAfterIcon = myIcon.noon;
-    myFontSize = 16.0 * sizeRate;
-    mySpace = '  ';
-  } else {
-    spaceNotEn = ' ';
-    firstMonthAfterIcon = myIcon.firstMonth;
-    firstMonthBeforeIcon = myIcon.noon;
-    majorAfterIcon = myIcon.major;
-    majorBeforeIcon = myIcon.noon;
-    myFontSize = 18.0 * sizeRate;
-  }
-
-  if (_divecWidth < 321) {
-    myFontSize = myFontSize * .8;
-  }
-  if (_divecWidth > 700) {
-    _iconWidgetSize = 8.0 * sizeRate;
-    _textWidgetSize = 300;
-    myFontSize = myFontSize * .70;
-  } else {
-    _iconWidgetSize = 8;
-    _textWidgetSize = _divecWidth / 2 - 32;
-  }
-
-  return Flexible(
+  return FittedBox(
+    fit: BoxFit.scaleDown,
     child: Row(
       children: [
-        SizedBox(width: _iconWidgetSize, child: firstMonthBeforeIcon),
+        SizedBox(width: _iconWidgetSize, child: _firstMonthBeforeIcon),
+        SizedBox(width: _emptyBox),
         SizedBox(
-          width: 6,
-          child: Text(mySpace),
-        ),
-        SizedBox(
-          width: _textWidgetSize,
-          child: Text(MandaEqu.mandaFirstMonth()[0][_localLang] + spaceNotEn,
-              textAlign: myTextAlignment,
+          width: _textWidgetSize + _textBoxSize,
+          child: Text(MandaEqu.mandaFirstMonth()[0][_localLang] + _spaceNotEn,
+              textAlign: _myTextAlignment,
               style: TextStyle(
-                fontSize: myFontSize,
+                fontSize: _myFontSize,
                 color: Colors.black,
               )),
         ),
-        SizedBox(width: _iconWidgetSize, child: firstMonthAfterIcon),
-        SizedBox(width: _iconWidgetSize, child: majorBeforeIcon),
-        SizedBox(
-          width: 6,
-          child: Text(mySpace),
-        ),
+        SizedBox(width: _emptyBox),
+        SizedBox(width: _iconWidgetSize, child: _firstMonthAfterIcon),
+        SizedBox(width: _iconWidgetSize, child: _majorBeforeIcon),
+        SizedBox(width: _emptyBox),
         SizedBox(
           width: _textWidgetSize,
           child: Text(MandaEqu.mandaHeavyMbattal()[0][_localLang],
-              textAlign: myTextAlignment,
+              textAlign: _myTextAlignment,
               style: TextStyle(
-                fontSize: myFontSize,
+                fontSize: _myFontSize,
                 color: Colors.black,
               )),
         ),
-        SizedBox(width: _iconWidgetSize, child: majorAfterIcon),
+        SizedBox(width: _emptyBox),
+        SizedBox(width: _iconWidgetSize, child: _majorAfterIcon),
       ],
     ),
   );
