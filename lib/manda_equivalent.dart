@@ -153,12 +153,12 @@ class MandaEqu {
         'ar': ' دهوا اد دیما - میلاد نبی یحیی  '
       },
       'kenshi': {
-        'en_US': 'Kenshi-u-Zehli feast',
+        'en_US': 'Kenshi-u-Zehli feast - First day of Kersa',
         'fa_IR': 'کنشو زهلی  ',
         'ar': 'کنشو زهلی  '
       },
       'eidBig': {
-        'en_US': 'Dehva Raba feast',
+        'en_US': 'Dehva Raba feast (The Great feast) - Second day of Kersa',
         'fa_IR': 'دهوا ربا - عید بزرگ ',
         'ar': 'دهوا ربا - عید الکبیر '
       },
@@ -169,14 +169,14 @@ class MandaEqu {
       },
       'shoshian': [
         {
-          // 'en_US': 'The remembrance of Shushian feast - Day 1',
-          'en_US': 'Dehva Sheshian feast - Day 1',
+          'en_US': 'The remembrance of Shushian feast - Day 1',
+          // 'en_US': 'Dehva Sheshian feast - Day 1',
           'fa_IR': ' عید شیشیان - روز اول  ',
           'ar': ' عید شیشیان - یوم اول  '
         },
         {
-          // 'en_US': 'The remembrance of Shushian feast - Day 2',
-          'en_US': 'Dehva Sheshian feast - Day 2',
+          'en_US': 'The remembrance of Shushian feast - Day 2',
+          // 'en_US': 'Dehva Sheshian feast - Day 2',
           'fa_IR': ' عید شیشیان - روز دوم ',
           'ar': ' عید شیشیان - یوم ثانی '
         }
@@ -188,7 +188,7 @@ class MandaEqu {
       },
       // 'alfil': {'en_US': 'The Fel feast', 'fa_IR': 'عید فل', 'ar': 'العید فل'},
       'eidSmall': {
-        'en_US': 'The Dehva Honina feast',
+        'en_US': 'The Dehva Honina feast (The small feast)',
         'fa_IR': 'دهوا حنینا - عید کوچک ',
         'ar': ' دهوا حنینا - العید الصغیر '
       },
