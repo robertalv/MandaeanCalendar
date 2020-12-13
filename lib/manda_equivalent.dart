@@ -43,18 +43,18 @@ class MandaEqu {
 
   static mandaFirstMonth() {
     Map firstMonth = {
-      'en_US': ' First day of Mandaic Month    ',
-      'fa_IR': '     اول ماه مندایی  ',
-      'ar': '      رأس الشهر '
+      'en_US': ' First day of Mandaic Month ',
+      'fa_IR': ' اول ماه مندایی  ',
+      'ar': ' رأس الشهر '
     };
     return [firstMonth];
   }
 
   static mandaLightMbattal() {
     Map lightMbattal = {
-      'en_US': ' Minor Mbattal Day      ',
-      'fa_IR': '    روز أمبطل سبک  ',
-      'ar': '    یوم مبطل خفیف  '
+      'en_US': ' Minor Mbattal Day ',
+      'fa_IR': ' روز أمبطل سبک ',
+      'ar': ' یوم مبطل خفیف '
     };
 
     return [lightMbattal];
@@ -62,18 +62,18 @@ class MandaEqu {
 
   static mandaHeavyMbattal() {
     Map heavytMbattal = {
-      'en_US': ' Major Mbattal Day     ',
-      'fa_IR': '   روز أمبطل سنگین  ',
-      'ar': '     یوم مبطل ثقیل '
+      'en_US': ' Major Mbattal Day ',
+      'fa_IR': ' روز أمبطل سنگین   ',
+      'ar': ' یوم مبطل ثقیل '
     };
     return [heavytMbattal];
   }
 
   static mandaFeastName() {
     Map heavytMbattal = {
-      'en_US': ' Religious Occasion                    ',
-      'fa_IR': '        مناسبت دینی  ',
-      'ar': '   مناسبه دینیه '
+      'en_US': ' Religious Occasion ',
+      'fa_IR': ' مناسبت دینی ',
+      'ar': ' مناسبه دینیه '
     };
     return [heavytMbattal];
   }
@@ -153,12 +153,12 @@ class MandaEqu {
         'ar': ' دهوا اد دیما - میلاد نبی یحیی  '
       },
       'kenshi': {
-        'en_US': 'Kenshi-u-Zehli feast - First day of Kersa',
+        'en_US': 'Kenshi-u-Zehli feast',
         'fa_IR': 'کنشو زهلی  ',
         'ar': 'کنشو زهلی  '
       },
       'eidBig': {
-        'en_US': 'Dehva Raba feast (The Great feast) - Second day of Kersa',
+        'en_US': 'Dehva Raba feast',
         'fa_IR': 'دهوا ربا - عید بزرگ ',
         'ar': 'دهوا ربا - عید الکبیر '
       },
@@ -169,14 +169,14 @@ class MandaEqu {
       },
       'shoshian': [
         {
-          'en_US': 'The remembrance of Shushian feast - Day 1',
-          // 'en_US': 'Dehva Sheshian feast - Day 1',
+          // 'en_US': 'The remembrance of Shushian feast - Day 1',
+          'en_US': 'Dehva Sheshian feast - Day 1',
           'fa_IR': ' عید شیشیان - روز اول  ',
           'ar': ' عید شیشیان - یوم اول  '
         },
         {
-          'en_US': 'The remembrance of Shushian feast - Day 2',
-          // 'en_US': 'Dehva Sheshian feast - Day 2',
+          // 'en_US': 'The remembrance of Shushian feast - Day 2',
+          'en_US': 'Dehva Sheshian feast - Day 2',
           'fa_IR': ' عید شیشیان - روز دوم ',
           'ar': ' عید شیشیان - یوم ثانی '
         }
@@ -188,7 +188,7 @@ class MandaEqu {
       },
       // 'alfil': {'en_US': 'The Fel feast', 'fa_IR': 'عید فل', 'ar': 'العید فل'},
       'eidSmall': {
-        'en_US': 'The Dehva Honina feast (The small feast)',
+        'en_US': 'The Dehva Honina feast',
         'fa_IR': 'دهوا حنینا - عید کوچک ',
         'ar': ' دهوا حنینا - العید الصغیر '
       },
@@ -360,26 +360,26 @@ class MandaEqu {
   static birthLabel(index) {
     Map mulwashal = {
       'en_US': ' Birth Month ',
-      'fa_IR': '     ماه تولد ',
-      'ar': '   شهر المیلاد '
+      'fa_IR': '    ماه تولد ',
+      'ar': 'شهر المیلاد '
     };
     return mulwashal[index];
   }
 
   static motherLabel(index) {
     Map mulwashal = {
-      'en_US': " Mother's \n Melvashe      ",
-      'fa_IR': ' ملواشه مادر ',
-      'ar': '   ملواشة الام  '
+      'en_US': " Mother's Melvashe ",
+      'fa_IR': 'ملواشه مادر  ',
+      'ar': '  ملواشة الام  '
     };
     return mulwashal[index];
   }
 
   static timeLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Time    ',
-      'fa_IR': '   ساعت تولد ',
-      'ar': 'الساعة المیلاد '
+      'en_US': ' Birth Time ',
+      'fa_IR': '  ساعت تولد  ',
+      'ar': 'الساعة المیلاد'
     };
     return mulwashal[index];
   }
@@ -534,7 +534,7 @@ class MandaEqu {
   static femaleMulwashaEn() {
     final List<String> mandaEnName = [
       // "----",
-      'Hawa',
+      'Hawa ',
       'Sharat',
       'Yasman',
       'Modl-lal',
@@ -542,7 +542,7 @@ class MandaEqu {
       'Mahnash',
       'Simet',
       'Hawa Simet',
-      'Sharat Simet    ',
+      'Sharat Simet',
       'Mamani',
       'Hawa Mamani',
       'Maliha',
@@ -554,17 +554,17 @@ class MandaEqu {
   static femaleMulwashaFa() {
     final List<String> mandaEnName = [
       // "----",
-      '  هوا                          ',
+      '  هوا                     ',
       '  شارت  ',
       '  یاسمن  ',
       '  مدلل  ',
       '  انهر  ',
       '  مهنش  ',
       '  سیمت  ',
-      '  هوا سیمت  ',
+      ' هوا سیمت ',
       '  شارت سیمت  ',
       '  مامانی  ',
-      '  هوا مامانی  ',
+      ' هوا مامانی ',
       '  ملیحه  ',
       '  نرگس  ',
     ];
@@ -650,8 +650,8 @@ class MandaEqu {
   static birthTimeSelectorEn() {
     final List data = [
       {
-        'atAfter': [' at', ' after'],
-        'before': '  before  '
+        'atAfter': [' at', ' after '],
+        'before': ' before  '
       }
     ];
     return data;
@@ -670,8 +670,8 @@ class MandaEqu {
   static birthTimeSelectorAr() {
     final List data = [
       {
-        'atAfter': ['الساعة ', 'بعد الساعة '],
-        'before': '  قبل الساعة  '
+        'atAfter': ['الساعة', 'بعد الساعة'],
+        'before': '  قبل الساعة   '
       }
     ];
     return data;
@@ -680,7 +680,7 @@ class MandaEqu {
   static birthMonthNameFa() {
     final List<String> data = [
       // "----",
-      '  امبرا                       ',
+      '  امبرا ',
       '  تورا',
       '  صلمی',
       '  سرطانا',
@@ -689,7 +689,7 @@ class MandaEqu {
       '  پنجه روز اول',
       '  پنجه روز دوم',
       '  پنجه روز سوم',
-      '  پنجه روز چهارم',
+      '  پنجه روز چهارم    ',
       '  پنجه روز پنجم',
       '  قینا',
       '  ارقوا',
@@ -704,15 +704,15 @@ class MandaEqu {
   static birthMonthNameAr() {
     final List<String> data = [
       // "----",
-      '  امبرا                      ',
+      '  امبرا    ',
       '  تورا',
       '  صلمی',
       '  سرطانا',
       '  آریا',
       '  شمبلتا',
       '  پنجه اليوم الأول',
-      '  پنجه اليوم الثاني ',
-      '  پنجه اليوم الثالث ',
+      '  پنجه اليوم الثاني',
+      '  پنجه اليوم الثالث',
       '  پنجه اليوم الرابع',
       '  پنجه اليوم الخامس',
       '  قینا',
@@ -733,8 +733,8 @@ class MandaEqu {
       'Ṣelmi',
       'Sartana',
       'Aria',
-      'Shombolta        ',
-      'Panja Day 1',
+      'Shombolta',
+      'Panja Day 1    ',
       'Panja Day 2',
       'Panja Day 3',
       'Panja Day 4',
