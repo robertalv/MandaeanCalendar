@@ -56,8 +56,8 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
 
   int _dropdownListNum;
 
-  double _cardFontSize = 20.0;
-  double _fontSize = 30.0;
+  double _cardFontSize = 18.0;
+  double _fontSize = 18.0;
   double _paddingTop = 6.0;
   double _iconDropSize = 50;
   double _displaySize;
@@ -76,18 +76,21 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
   Widget build(BuildContext context) {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     _divecWidth = MediaQuery.of(context).size.width;
-    _displaySize = _divecWidth;
+    _displaySize = _divecWidth - 8;
     if (_divecWidth > 700) {
+      _fontSize = 30.0;
+      _cardFontSize = 25.0;
       _displaySize = 700;
       _sizeRate = 2;
-      _cardFontSize = 30.0;
+
       _paddingTop = 20.0;
     } else {
+      _fontSize = 20.0;
+      _cardFontSize = 18.0;
       _sizeRate = 1;
-      _cardFontSize = 20.0;
+
       _paddingTop = 15.0;
     }
-
     return Scaffold(
       appBar: AppBar(
         leading: backToMainPage(context),
@@ -97,106 +100,116 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       ),
       body: Center(
           child: Container(
-              // width: 700,
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              // margin: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
               child: ListView(children: [
-                FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Column(children: [
-                      // Card(child:
-                      Text(
-                        mulwashaLabel.mandaYearEventsLable[1],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: _cardFontSize),
-                        // )
-                      ),
-                      SizedBox(
-                          width: 550,
-                          child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                maxLength: 4,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
-                                ],
-                                validator: (value) =>
-                                    validateYY(value, mulwashaLabel.yearMaxMin),
-                                style: TextStyle(
-                                    fontSize: _fontSize, color: Colors.black),
-                                decoration: InputDecoration(
-                                    labelText: mulwashaLabel.dateLabel[0],
-                                    labelStyle: TextStyle(
-                                      fontSize: _fontSize,
-                                    ),
-                                    hintText: mulwashaLabel.dateLabel[0],
-                                    icon: Icon(
-                                      Icons.date_range,
-                                      size: 30,
-                                    )),
-                              ))),
-                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                      radioButDate(context),
-                      Padding(padding: EdgeInsets.only(top: 25.0 * _sizeRate)),
-                      yearEventsDrop(context),
-                      Padding(padding: EdgeInsets.only(top: 30.0 * _sizeRate)),
-                    ])),
-                _buildEventList(context, _listOfEventsForYear),
-                _listOfEventsForYear == null
-                    ? SizedBox(height: 138.0 * _sizeRate)
-                    : SizedBox(height: 38.0),
-                RaisedButton(
-                  color: Colors.brown[100],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                      side: BorderSide(color: Colors.black)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MandaeanCalendar()));
-                  },
-                  child: Text(mulwashaLabel.backBtn,
-                      style: TextStyle(
-                          color: Colors.black, fontSize: _cardFontSize)),
-                ),
-              ]))),
+        Text(
+          mulwashaLabel.mandaYearEventsLable[1],
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: _cardFontSize - 6),
+        ),
+        Container(
+          width: _displaySize,
+          child: Column(
+            children: [
+              SizedBox(
+                  width: _displaySize,
+                  child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 4,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) =>
+                            validateYY(value, mulwashaLabel.yearMaxMin),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                            labelText: mulwashaLabel.dateLabel[0],
+                            labelStyle: TextStyle(
+                              fontSize: _fontSize,
+                            ),
+                            hintText: mulwashaLabel.dateLabel[0],
+                            icon: Icon(
+                              Icons.date_range,
+                              size: _fontSize,
+                            )),
+                      ))),
+              Padding(padding: EdgeInsets.only(top: _paddingTop)),
+              radioButDate(context),
+              Padding(padding: EdgeInsets.only(top: 25.0 * _sizeRate)),
+              yearEventsDrop(context),
+            ],
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: 30.0 * _sizeRate)),
+        _buildEventList(context, _listOfEventsForYear),
+        _listOfEventsForYear == null
+            ? SizedBox(height: 138.0 * _sizeRate)
+            : SizedBox(height: 38.0),
+        RaisedButton(
+          color: Colors.brown[100],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+              side: BorderSide(color: Colors.black)),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MandaeanCalendar()));
+          },
+          child: Text(mulwashaLabel.backBtn,
+              style: TextStyle(color: Colors.black, fontSize: _cardFontSize)),
+        ),
+      ]))),
     );
   }
 
   Widget radioButDate(BuildContext context) {
     var chooseYear = MandaEqu.chooseYear(localLang);
-
-    return Row(children: <Widget>[
-      new Radio(
-          value: SingingYear.geo,
-          groupValue: _convert,
-          onChanged: (SingingYear value) {
-            setState(() {
-              _convert = value;
-            });
-          }),
-      new Text(
-        chooseYear[0],
-        style: TextStyle(color: Colors.black, fontSize: _fontSize),
-      ),
-      Padding(padding: EdgeInsets.only(left: 180)),
-      new Radio(
-          value: SingingYear.sol,
-          groupValue: _convert,
-          onChanged: (SingingYear value) {
-            setState(() {
-              _convert = value;
-            });
-          }),
-      new Text(
-        chooseYear[1],
-        style: TextStyle(color: Colors.black, fontSize: _fontSize),
-      ),
-    ]);
+    return Container(
+        width: _displaySize,
+        child: Stack(
+          children: [
+            Positioned(
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.geo,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[0],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+            Positioned(
+              right: 10,
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.sol,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[1],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Text(""),
+            // ),
+          ],
+        ));
   }
 
   static sortDate(List<DateTime> newProducts) {
@@ -223,7 +236,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
     validateYear();
     return DropdownButtonHideUnderline(
         child: SizedBox(
-            width: 550,
+            width: _displaySize,
             child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -235,7 +248,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                   // dropdownColor: Colors.green,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 30,
+                    fontSize: _fontSize,
                     fontWeight: FontWeight.bold,
                   ),
                   hint: Container(
@@ -253,8 +266,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                           alignment: myAlignment,
                           child: new Text(value,
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: _cardFontSize)),
+                                  color: Colors.black, fontSize: _fontSize)),
                         ));
                   }).toList(),
                   onChanged: (value) {
@@ -312,7 +324,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                 constraints: BoxConstraints(
                   minHeight: 30,
                 ),
-                width: 700,
+                width: _displaySize,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
                   border: Border.all(width: 0),
@@ -332,8 +344,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
                             event.toString(),
                             textAlign: myTextAlignment,
                             style: TextStyle(
-                                fontSize: 18.0 * _sizeRate,
-                                color: Colors.black),
+                                fontSize: _fontSize, color: Colors.black),
                           ),
                         )),
                         afterIcon

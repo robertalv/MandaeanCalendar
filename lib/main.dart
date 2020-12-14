@@ -13,10 +13,12 @@ import 'manda_footer.dart';
 import 'manda_formate.dart';
 import 'manda_holidays.dart';
 import 'manda_scrolling_text.dart';
+import 'manda_top_icon_mulwasha.dart';
 import 'manda_top_icon_refresh.dart';
 import 'manda_top_icon.dart';
 import 'my_alignment.dart';
 import 'my_color.dart';
+import 'my_functions.dart';
 import 'my_icon_events.dart';
 
 var _localLang = 'en_US';
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   double _rightIcon = 0;
   int _sizeRate = 1;
   double _marginHor = 6.0;
+  double _longFontSize = 16.0;
 
   var _listOfEventsForYear;
   Map _myColorSelection = Mycolor.selection();
@@ -172,6 +175,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
   }
 
+  // void _onDayLongPressed(DateTime selectedDay, List events, List holidays,
+  //     {bool clearMandaDate = false}) {
+  //   print('CALLBACK: _onDayLongPressed');
+  //   Functions.showMyDialog(context, _localLang, "Coming Soon...", "", 1);
+  // }
+
   void _onVisibleDaysChanged(
       DateTime first, DateTime last, CalendarFormat format) {
     print('CALLBACK: _onVisibleDaysChanged');
@@ -179,10 +188,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     // if (!(_panjaDate.lastDayOfPanja.year == first.year)) {
     if (_holidays.keys.toList()[0].year != first.year) {
-      // _panjaDate = new MandaPanja(first.year);
-      // _holidays = MandaHolidays.holidays(first);
       _holidays = MandaFirstDayOfMonthBuilder(first.year).eventsForWholeYear;
-      // _events2 = MandaEvents.mandaEventsForYear(_panjaDate);
+
       _events = MandaEventssBuilder(first.year).wholeYear;
     }
 
@@ -225,15 +232,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       // _centerIcon = 67;
       _sizeRate = 2;
       _marginHor = 6 + (_divecWidth - 700) / 2;
+      _longFontSize = 22.0;
     } else {
       _daysOfWeekFontSize = 13.0;
       _headerFontSize = 20.0;
       _daysFontSize = 20.0;
       _sizeRate = 1;
       _marginHor = 6.0;
+      _longFontSize = 16.0;
     }
+
+    //// test22############# icon position for days
     double eleSize = _divecWidth / 7;
-// eleSize > 49 &&
+
     if (_sizeRate == 1) {
       _rightIcon = (eleSize - 50) / 2;
     } else if (_sizeRate == 2) {
@@ -247,6 +258,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _preLocalLang = _localLang;
       myFooter = null;
     }
+    double _myMandaFontSize = 20;
+    if (_localLang != "en_US") {
+      _myMandaFontSize = 22;
+    }
+
     String _myTitle = MandaEqu.calendarTitle(_localLang);
 
     return Scaffold(
@@ -293,10 +309,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
                 // _buildTableCalendar(),
                 Container(
-                  height: 40.0 * _sizeRate,
+                  height: 35.0 * _sizeRate,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                     color: _myColorSelection['header2'],
                   ),
                   margin:
@@ -306,26 +322,29 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     child: Text(
                       _mandaAndJalaiYear,
                       style: TextStyle(
-                          fontSize: 20.0 * _sizeRate, color: Colors.black),
+                          fontSize: 20.0 * _sizeRate,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 Container(
-                  height: 30.0 * _sizeRate,
+                  // height: 30.0 * _sizeRate,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                     border: Border.all(width: 0),
                     color: Colors.white,
                   ),
                   margin:
                       EdgeInsets.symmetric(horizontal: _marginHor, vertical: 8),
                   child: FittedBox(
-                    fit: BoxFit.scaleDown,
+                    // fit: BoxFit.scaleDown,
                     child: Text(
                       _mandeanDay,
                       style: TextStyle(
-                          fontSize: 20.0 * _sizeRate, color: Colors.black),
+                          fontSize: _myMandaFontSize * _sizeRate,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -338,8 +357,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         style: TextStyle(fontSize: 1.0, color: Colors.black),
                       ),
 
-                myFooter ??=
-                    footerLine(context, _localLang, _sizeRate, _marginHor),
+                // myFooter ??=
+                footerLine(context, _localLang, _sizeRate, _marginHor),
 
                 // const SizedBox(height: 4.0),
 
@@ -372,6 +391,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget _buildTableCalendar() {
     MyIcon myIcon = MyIcon(_sizeRate);
     const double daysMargin = 5.0;
+    var _myFontWeight = FontWeight.bold;
+    if (_localLang == "en_US") {
+      _myFontWeight = FontWeight.normal;
+    }
+
     return TableCalendar(
       // locale: 'fa_IR',
       // locale: 'en_US',
@@ -387,15 +411,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       daysOfWeekStyle: DaysOfWeekStyle(
         // weekendStyle: TextStyle(
         //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
-        weekdayStyle:
-            TextStyle(fontSize: _daysOfWeekFontSize, color: Colors.black),
+        weekdayStyle: TextStyle(
+            fontSize: _daysOfWeekFontSize,
+            color: Colors.black,
+            fontWeight: FontWeight.bold),
         weekendStyle: TextStyle(
-            color: Colors.deepOrange[600], fontSize: _daysOfWeekFontSize),
+            color: Colors.deepOrange[600],
+            fontSize: _daysOfWeekFontSize,
+            fontWeight: FontWeight.bold),
         dowTextBuilder: (date, locale) => _getDayHeader(date, locale),
       ),
 
       // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
       calendarStyle: CalendarStyle(
+          // contentDecoration: BoxDecoration(
+          //   border: Border(top: BorderSide()), // customize
+          // ),
           selectedColor: Colors.red[400],
           todayColor: Colors.deepOrange[400],
           markersColor: Colors.green[700],
@@ -520,6 +551,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ////   _myDayBuilder(context, date, events, _localLang);
         //// },
 
+        /// ###### Day builder day number size, color
         dayBuilder: (context, date, events) => Container(
           margin: const EdgeInsets.all(daysMargin),
           alignment: Alignment.center,
@@ -527,7 +559,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               fit: BoxFit.scaleDown,
               child: Text(
                 DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: _daysFontSize,
+                    fontWeight: _myFontWeight),
               )),
         ),
 
@@ -569,6 +604,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
       onCalendarCreated: _onCalendarCreated,
+      // onDayLongPressed: _onDayLongPressed,
     );
   }
 
@@ -601,13 +637,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 constraints: BoxConstraints(
                   minHeight: 30,
                 ),
-                width: 700,
+                width: 688,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
                     border: Border.all(width: 0),
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                     color: _myColorSelection['minor']),
-                margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                margin: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                 child: Column(children: [
                   _generateIconEvent(event),
                 ]),
@@ -659,7 +695,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: Text(
             event.toString(),
             textAlign: myTextAlignment,
-            style: TextStyle(fontSize: 18.0 * _sizeRate, color: Colors.black),
+            style: TextStyle(fontSize: 20.0 * _sizeRate, color: Colors.black),
           ),
         )),
         Text(" "),
@@ -697,7 +733,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           value: value,
           child: Text(
             value,
-            style: TextStyle(fontSize: 12.0 * _sizeRate, color: Colors.black),
+            style: TextStyle(fontSize: _longFontSize, color: Colors.black),
           ),
         );
       }).toList(),

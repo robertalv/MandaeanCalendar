@@ -51,11 +51,18 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   SingingYear _convert = SingingYear.geo;
   Map _myColorSelection = Mycolor.selection();
   double _displaySize;
-  double _fontSize = 30.0;
+  double _fontSize = 18.0;
   double _paddingTop = 6.0;
-  double _iconDropSize = 50;
-  double _iconHelpSize = 35;
+  double _iconDropSize = 18;
+  double _iconHelpSize = 25;
   double _cardFontSize = 20.0;
+  double _resetCardFontSize;
+  double _timeWidthCon;
+  double _helpWidgetSize;
+  double _labelWidgetSize;
+  double _dropWidgetSize;
+  double _dropFontSize = 24;
+  double _margin = 0;
 
   _MyMulwashalPageState(localLang) {
     this.localLang = localLang;
@@ -90,8 +97,13 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         convertMsg = mulwashaLabel.alertMsg['s'];
       }
 
-      showAlertDialog(
-          context, localLang, mulwashaLabel.alertTtitle, convertMsg);
+      // showAlertDialog(
+      //     context, localLang, mulwashaLabel.alertTtitle, convertMsg);
+
+      _resetCardFontSize = _cardFontSize;
+      _cardFontSize = _cardFontSize + 10;
+
+      _showMyDialog(context, localLang, mulwashaLabel.alertTtitle, convertMsg);
     }
   }
 
@@ -157,15 +169,35 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   @override
   Widget build(BuildContext context) {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    _displaySize = MediaQuery.of(context).size.width;
+    double _divecWidth = MediaQuery.of(context).size.width;
 
-    if (_displaySize > 700) {
+    // _displaySize = 250;
+    double extraSpeace = 0;
+    if (_divecWidth > 700) {
       _paddingTop = 12.0;
       _cardFontSize = 30.0;
+      _fontSize = 30.0;
+      _iconDropSize = 50;
+      _iconHelpSize = 35;
+      _displaySize = 700;
+      // _timeWidthCon = 200.0;
+      _dropFontSize = 35;
+      extraSpeace = 5;
+      _margin = (_divecWidth - 700) / 2;
     } else {
+      _displaySize = _divecWidth - 8;
       _paddingTop = 6.0;
       _cardFontSize = 20.0;
+      _fontSize = 20.0;
+      _iconDropSize = 20;
+      _iconHelpSize = 20;
+      // _timeWidthCon = _displaySize / 3 - 30;
+      _dropFontSize = 25;
+      _margin = 0;
     }
+    _helpWidgetSize = 10;
+    _labelWidgetSize = (_displaySize - 20) / 2 - 45 - extraSpeace;
+    _dropWidgetSize = _labelWidgetSize + 90 - extraSpeace;
 
     return Scaffold(
         appBar: AppBar(
@@ -176,94 +208,57 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               style: TextStyle(color: Colors.black, fontSize: _cardFontSize)),
         ),
         body: Center(
-          child: Container(
-            width: _displaySize,
-            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-            child: ListView(shrinkWrap: false, children: <Widget>[
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Column(
-                  children: [
-                    // Card(child:
-                    Text(
-                      MandaEqu.donotUseMelvash(localLang),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.red[900], fontSize: _cardFontSize),
-                      // )
-                    ),
-                    Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                    radioButGender(context),
-                    Padding(padding: EdgeInsets.only(top: _paddingTop)),
-
-                    Row(children: <Widget>[
+          child: ListView(
+            children: [
+              Center(
+                child: Container(
+                  // width: _displaySize,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: _margin, vertical: 0),
+                  child: Column(
+                    children: [
                       Text(
-                        mulwashaLabel.motherLabel,
-                        style:
-                            TextStyle(color: Colors.black, fontSize: _fontSize),
+                        MandaEqu.donotUseMelvash(localLang),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.red[900],
+                            fontSize: _cardFontSize - 5),
+                        // )
                       ),
-                      motherMulwashaDrop(context),
-                      IconButton(
-                        icon: Icon(
-                          Icons.help,
-                          size: _iconHelpSize,
-                          color: Colors.blue,
+
+                      radioButGender(context),
+                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
+                      motherLine(context, mulwashaLabel),
+                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
+                      monthLine(context, mulwashaLabel),
+                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
+                      timeLine(context, mulwashaLabel),
+                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
+                      findMulwasha(context),
+
+                      /////////############# Second Part start Here Convert Date to Manda Date
+                      Padding(
+                        padding: EdgeInsets.only(top: _paddingTop),
+                        child: Container(
+                          height: 1.0,
+                          width: _displaySize + 150,
+                          color: Colors.black,
                         ),
-                        onPressed: () => mulwashaInLineHelp(
-                            context, InLineHelp.mother, localLang),
                       ),
-                    ]),
-                    Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                    Row(children: <Widget>[
+                      Padding(padding: EdgeInsets.only(top: _paddingTop)),
                       Text(
-                        mulwashaLabel.birthMonthLabel,
-                        style:
-                            TextStyle(color: Colors.black, fontSize: _fontSize),
+                        mulwashaLabel.convertDate[1],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.red[900],
+                            fontSize: _cardFontSize - 7),
                       ),
-                      // Container(width: 10),
-                      birthMonthDrop(context),
-
-                      IconButton(
-                        icon: Icon(
-                          Icons.help,
-                          size: _iconHelpSize,
-                          color: Colors.blue,
-                        ),
-                        onPressed: () => mulwashaInLineHelp(
-                            context, InLineHelp.month, localLang),
-                      ),
-                    ]),
-                    Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                    birthTimeLine(context),
-                    // Padding(padding: EdgeInsets.only(top: _paddingTop * 2)),
-                    findMulwasha(context),
-                    /////////############# Second Part start Here Convert Date to Manda Date
-
-                    Padding(
-                      padding: EdgeInsets.only(top: _paddingTop),
-                      child: Container(
-                        height: 1.0,
-                        width: _displaySize + 150,
-                        color: Colors.black,
-                      ),
-                    ),
-
-                    Padding(padding: EdgeInsets.only(top: _paddingTop)),
-                    // Card(child:
-                    Text(
-                      mulwashaLabel.convertDate[1],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.red[900], fontSize: _cardFontSize),
-                      // )
-                    ),
-
-                    // //// ## Convert Date to Manda Date
-                    convertToMandaDate(context),
-                  ],
+                      //// ## Convert Date to Manda Date
+                      convertToMandaDate(context),
+                    ],
+                  ),
                 ),
               ),
-
               RaisedButton(
                 color: Colors.brown[100],
                 shape: RoundedRectangleBorder(
@@ -282,57 +277,90 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                   ),
                 ),
               ),
-              // ###########
-              // ListTile(
-              //   title: Text('One-line with leading widget'),
-              //   leading: FlutterLogo(),
-              //   trailing: Icon(
-              //     Icons.help,
-              //   ),
-              // ),
-            ]),
+            ],
           ),
         ));
   }
 
   // #################
 
-  Widget radioButGender(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-
+  Widget motherLine(BuildContext context, var mulwashaLabel) {
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Radio(
-            value: SingingCharacter.female,
-            groupValue: _character,
-            onChanged: (SingingCharacter value) {
-              setState(() {
-                _character = value;
-              });
-            }),
-        new Text(
-          mulwashaLabel.female,
-          style: TextStyle(color: Colors.black, fontSize: _fontSize),
-        ),
-        Padding(padding: EdgeInsets.only(left: 180)),
-        new Radio(
-            value: SingingCharacter.male,
-            groupValue: _character,
-            onChanged: (SingingCharacter value) {
-              setState(() {
-                _character = value;
-              });
-            }),
-        new Text(
-          mulwashaLabel.male,
-          style: TextStyle(color: Colors.black, fontSize: _fontSize),
-        ),
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: _labelWidgetSize,
+              // height: boxHight,
+              child: Text(
+                mulwashaLabel.motherLabel,
+                style: TextStyle(color: Colors.black, fontSize: _fontSize),
+              ),
+            ),
+
+            SizedBox(
+                width: _dropWidgetSize,
+                child: FittedBox(
+                  child: motherMulwashaDrop(context),
+                )),
+            SizedBox(
+              width: _helpWidgetSize + 15,
+              child: IconButton(
+                icon: Icon(
+                  Icons.help,
+                  size: _iconHelpSize,
+                  color: Colors.blue,
+                ),
+                onPressed: () =>
+                    mulwashaInLineHelp(context, InLineHelp.mother, localLang),
+              ),
+            ),
+            // SizedBox(
+            //   width: 18,
+            // ),
+          ],
+        )
       ],
     );
   }
 
-  Widget birthTimeLine(BuildContext context) {
+  Widget monthLine(BuildContext context, var mulwashaLabel) {
+    return Row(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: _labelWidgetSize,
+              // height: boxHight,
+              child: Text(
+                mulwashaLabel.birthMonthLabel,
+                style: TextStyle(color: Colors.black, fontSize: _fontSize),
+              ),
+            ),
+            SizedBox(
+                width: _dropWidgetSize,
+                child: FittedBox(
+                  child: monthMulwashaDrop(context),
+                )),
+            SizedBox(
+              width: _helpWidgetSize + 15,
+              child: IconButton(
+                icon: Icon(
+                  Icons.help,
+                  size: _iconHelpSize,
+                  color: Colors.blue,
+                ),
+                onPressed: () =>
+                    mulwashaInLineHelp(context, InLineHelp.month, localLang),
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget timeLine(BuildContext context, var mulwashaLabel) {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     // var dropListData = mulwashaLabel.monthName;
     var dropListDataAtHours = mulwashaLabel.birthTime;
@@ -344,7 +372,8 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     String timeText = mulwashaLabel.birthTimeLabel;
     if (dropListDataAtAfter.indexOf(_atAfterName) == 1 &&
         _birthTimeSelectedName != null) {
-      timeText = "\n" + mulwashaLabel.birthTimeLabel;
+      timeText = mulwashaLabel.birthTimeLabel;
+      timeText = "\n" + timeText;
       var parts = _birthTimeSelectedName.split(':');
 
       // var newString = parts[0];
@@ -354,111 +383,141 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
       if (beforeTime > 24) {
         beforeTime = beforeTime - 24;
       }
-      textBeforeTime = "  " + beforeTime.toString() + ':00  ';
+      textBeforeTime = " " + beforeTime.toString() + ':00  ';
       textBeforeTime = LocalNum.convertEntoFa(textBeforeTime, localLang);
 
       textBeforeMsg = beforeMsg;
     }
-
     return Column(
       children: [
-        Row(children: <Widget>[
-          Text(
-            timeText,
-            style: TextStyle(color: Colors.black, fontSize: _fontSize),
-          ),
-          atAfterDropNew(context, dropListDataAtAfter),
-          Padding(padding: EdgeInsets.only(left: 10)),
-          birthTimeDropNew(context, dropListDataAtHours),
-          IconButton(
-            icon: Icon(
-              Icons.help,
-              size: _iconHelpSize,
-              color: Colors.blue,
+        Row(
+          children: [
+            SizedBox(
+              width: _labelWidgetSize,
+              child: Text(
+                timeText,
+                style: TextStyle(color: Colors.black, fontSize: _fontSize),
+              ),
             ),
-            onPressed: () =>
-                mulwashaInLineHelp(context, InLineHelp.time, localLang),
-          ),
-        ]),
+            SizedBox(
+              width: _dropWidgetSize,
+              child: FittedBox(
+                  child: Row(
+                children: [
+                  birthAfterDrop(context, dropListDataAtAfter),
+                  Padding(padding: EdgeInsets.only(left: 5)),
+                  birthTimeDrop(context, dropListDataAtHours),
+                ],
+              )),
+            ),
+            SizedBox(
+              width: _helpWidgetSize + 15,
+              child: IconButton(
+                icon: Icon(
+                  Icons.help,
+                  size: _iconHelpSize,
+                  color: Colors.blue,
+                ),
+                onPressed: () =>
+                    mulwashaInLineHelp(context, InLineHelp.time, localLang),
+              ),
+            ),
+          ],
+        ),
         textBeforeMsg.isNotEmpty
-            ? beforeTextTime(context, textBeforeMsg, textBeforeTime)
+            ? secondTimeLine(context, textBeforeMsg, textBeforeTime)
             : Padding(padding: EdgeInsets.only(top: _paddingTop))
       ],
     );
   }
 
   @override
-  Widget beforeTextTime(
+  Widget secondTimeLine(
       BuildContext context, String textBeforeMsg, String textBeforeTime) {
-    return Column(
+    return Row(
       children: [
-        Row(
-          children: <Widget>[
-            Text(
-              "                  ",
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-            ),
-            Card(
-              color: Colors.grey[200],
-              child: Text(
-                textBeforeMsg,
-                style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              ),
-            ),
-            Text(
-              "      ",
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-            ),
-            Card(
-              color: Colors.grey[200],
-              child: Text(
-                textBeforeTime,
-                style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              ),
-            ),
-          ],
+        SizedBox(
+          width: _labelWidgetSize,
+          // height: boxHight,
+          child: Text(""),
         ),
-        Padding(padding: EdgeInsets.only(top: _paddingTop)),
+        SizedBox(
+            width: _dropWidgetSize + _helpWidgetSize,
+            // height: boxHight,
+            child: FittedBox(
+              child: Row(
+                children: [
+                  Card(
+                    color: Colors.grey[200],
+                    child: Text(
+                      textBeforeMsg,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: _dropFontSize),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.only(left: 4)),
+                  Card(
+                    color: Colors.grey[200],
+                    child: Text(
+                      textBeforeTime,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: _dropFontSize),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+        SizedBox(
+          width: 0,
+          // height: boxHight,
+          child: Text(""),
+        ),
       ],
     );
   }
 
-  // #################
-  String birthValue;
-  @override
-  Widget birthMonthDrop(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    var dropListData = mulwashaLabel.monthName;
-    return DropdownButtonHideUnderline(
-        child: Container(
-            // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton<String>(
-              // value: birthValue,
-              value: birthValue == null ? null : birthValue,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: _iconDropSize,
-              elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              // underline: Container(
-              //   height: 2,
-              //   color: Colors.deepPurpleAccent,
-              // ),
-              onChanged: (String newValue) {
-                setState(() {
-                  birthValue = newValue;
-                  _monthM = dropListData.indexOf(newValue) + 1;
-                });
-              },
-              items: dropListData.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )));
+  Widget radioButGender(BuildContext context) {
+    String male = MandaEqu.mulwashaMale(localLang);
+    String female = MandaEqu.mulwashaFemale(localLang);
+    return Container(
+        width: _displaySize,
+        child: Stack(
+          children: [
+            Positioned(
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingCharacter.female,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                      });
+                    }),
+                Text(
+                  female,
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+            Positioned(
+              right: 10,
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingCharacter.male,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                      });
+                    }),
+                Text(
+                  male,
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+          ],
+        ));
   }
 
   // #################
@@ -469,140 +528,151 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     var dropListData = mulwashaLabel.mother;
     return DropdownButtonHideUnderline(
-        child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton<String>(
-              value: motherValue == null ? null : motherValue,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: _iconDropSize,
-              elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              onChanged: (String newValue) {
-                setState(() {
-                  motherValue = newValue;
-                  _motherM = dropListData.indexOf(newValue) + 1;
-                });
-              },
-              items: dropListData.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )));
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            // width: _dropWidgetSize,
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: motherValue == null ? null : motherValue,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      motherValue = newValue;
+                      _motherM = dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
+  }
+
+  // #################
+  String birthValue;
+  @override
+  Widget monthMulwashaDrop(BuildContext context) {
+    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    var dropListData = mulwashaLabel.monthName;
+    return DropdownButtonHideUnderline(
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: birthValue == null ? null : birthValue,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      birthValue = newValue;
+                      _monthM = dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
+  }
+
+  // // ################# New
+  String _atAfterName;
+  int _atAfterValue;
+  @override
+  Widget birthAfterDrop(BuildContext context, var dropListData) {
+    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    // var dropListData = mulwashaLabel.monthName;
+    return DropdownButtonHideUnderline(
+        child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: _atAfterName == null ? null : _atAfterName,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      _atAfterName = newValue;
+                      _atAfterValue = dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
   }
 
   // #################
   String _birthTimeSelectedName;
   int _birthTimeSelectedValue;
   @override
-  Widget birthTimeDropNew(BuildContext context, var dropListData) {
+  Widget birthTimeDrop(BuildContext context, var dropListData) {
     return DropdownButtonHideUnderline(
-        child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton<String>(
-              value: _birthTimeSelectedName == null
-                  ? null
-                  : _birthTimeSelectedName,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: _iconDropSize,
-              elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              onChanged: (String newValue) {
-                setState(() {
-                  _birthTimeSelectedName = newValue;
-                  _birthTimeSelectedValue = dropListData.indexOf(newValue) + 1;
-                });
-              },
-              items: dropListData.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )));
-  }
-
-  String _atAfterName;
-  int _atAfterValue;
-  @override
-  Widget atAfterDropNew(BuildContext context, var dropListData) {
-    return DropdownButtonHideUnderline(
-        child: Container(
-            // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: DropdownButton<String>(
-              value: _atAfterName == null ? null : _atAfterName,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: _iconDropSize,
-              elevation: 16,
-              style: TextStyle(color: Colors.black, fontSize: _fontSize),
-              onChanged: (String newValue) {
-                setState(() {
-                  _atAfterName = newValue;
-                  _atAfterValue = dropListData.indexOf(newValue) + 1;
-                });
-              },
-              items: dropListData.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )));
+        child: FittedBox(
+            // width: (_dropWidgetSize - 80) / 2,
+            fit: BoxFit.scaleDown,
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton<String>(
+                  value: _birthTimeSelectedName == null
+                      ? null
+                      : _birthTimeSelectedName,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  elevation: 16,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: _dropFontSize),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      _birthTimeSelectedName = newValue;
+                      _birthTimeSelectedValue =
+                          dropListData.indexOf(newValue) + 1;
+                    });
+                  },
+                  items: dropListData
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))));
   }
 
 // #################
-
-  showAlertDialog(
-      BuildContext context, String localLang, String title, String msg) {
-    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-
-    Widget okButton = FlatButton(
-      child: Text(
-        MandaEqu.alertOk(localLang),
-        style: TextStyle(color: Colors.blue[800], fontSize: _cardFontSize),
-      ),
-      onPressed: () {
-        // Navigator.of(context).pop('dialog');
-        Navigator.of(context, rootNavigator: true).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: _cardFontSize,
-            fontWeight: FontWeight.bold),
-      ),
-      content: Text(
-        msg,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.black, fontSize: _cardFontSize),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   String validateYY(String value, List yearMaxMin) {
     int yearMin = 1300;
@@ -674,7 +744,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
           onPressed: defineMulwasha,
           child: Text(
             mulwashaLabel.findBut,
-            style: TextStyle(fontSize: _fontSize),
+            style: TextStyle(fontSize: _cardFontSize),
           ),
         )
       ],
@@ -737,8 +807,11 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     // print("_character $_character");
     // print("_motherM $_motherM");
     // print('_monthM $_monthM');
+    _resetCardFontSize = _cardFontSize;
+    _cardFontSize = _cardFontSize + 10;
+    // showAlertDialog(context, localLang, title, msg);
+    _showMyDialog(context, localLang, title, msg);
 
-    showAlertDialog(context, localLang, title, msg);
     // findMulwashaTest(context);
   }
 
@@ -875,7 +948,6 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
 
   @override
   Widget convertToMandaDate(BuildContext context) {
-    double timeWidthCon = 150.0;
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     _localLang = localLang;
     var mandaYear = '';
@@ -886,175 +958,181 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
       mandaYear = mandaDateList[0];
       mandaDayMonth = mandaDateList[1] + ",  " + mandaDateList[2];
     }
-
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.date_range,
-                size: _iconDropSize,
-              ),
-              Text("  "),
-              SizedBox(
-                width: timeWidthCon,
-                child: new TextFormField(
-                    keyboardType: TextInputType.number,
-                    maxLength: 4,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: (value) =>
-                        validateYY(value, mulwashaLabel.yearMaxMin),
-                    style: TextStyle(fontSize: _fontSize, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: mulwashaLabel.dateLabel[0],
-                      labelStyle: TextStyle(
-                        fontSize: _fontSize,
-                      ),
-                      hintText: mulwashaLabel.dateLabel[0],
-                    )),
-              ),
-              Text("  "),
-              SizedBox(
-                width: timeWidthCon,
-                child: new TextFormField(
-                    keyboardType: TextInputType.number,
-                    maxLength: 2,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: (value) => validateMM(value),
-                    style: TextStyle(fontSize: _fontSize, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: mulwashaLabel.dateLabel[1],
-                      labelStyle: TextStyle(
-                        fontSize: _fontSize,
-                      ),
-                      hintText: mulwashaLabel.dateLabel[1],
-                    )),
-              ),
-              Text("  "),
-              SizedBox(
-                width: timeWidthCon,
-                child: new TextFormField(
-                    keyboardType: TextInputType.number,
-                    maxLength: 2,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: (value) => validateDD(value),
-                    style: TextStyle(fontSize: _fontSize, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: mulwashaLabel.dateLabel[2],
-                      labelStyle: TextStyle(
-                        fontSize: _fontSize,
-                      ),
-                      hintText: mulwashaLabel.dateLabel[2],
-                    )),
-              ),
-            ],
-          ),
-        ),
-        radioButDate(context),
-        Padding(padding: EdgeInsets.only(top: _paddingTop)),
-        RaisedButton(
-            color: Colors.brown[100],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0),
-                side: BorderSide(color: Colors.black)),
-            child: Text(
-              mulwashaLabel.convertDate[0],
-              style: TextStyle(fontSize: _fontSize),
-            ),
-            onPressed: validateAndConvert),
-        FittedBox(
-            child: Column(
+    _timeWidthCon = (_displaySize - _iconDropSize) / 3 - 10;
+    return Container(
+        width: _displaySize,
+        child: Column(
           children: [
-            Row(
+            Form(
+              key: _formKey,
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.date_range,
+                    size: _iconDropSize,
+                  ),
+                  Text("  "),
+                  SizedBox(
+                    width: _timeWidthCon,
+                    child: new TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 4,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) =>
+                            validateYY(value, mulwashaLabel.yearMaxMin),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                          labelText: mulwashaLabel.dateLabel[0],
+                          labelStyle: TextStyle(
+                            fontSize: _fontSize,
+                          ),
+                          hintText: mulwashaLabel.dateLabel[0],
+                        )),
+                  ),
+                  Text("  "),
+                  SizedBox(
+                    width: _timeWidthCon,
+                    child: new TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 2,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) => validateMM(value),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                          labelText: mulwashaLabel.dateLabel[1],
+                          labelStyle: TextStyle(
+                            fontSize: _fontSize,
+                          ),
+                          hintText: mulwashaLabel.dateLabel[1],
+                        )),
+                  ),
+                  Text("  "),
+                  SizedBox(
+                    width: _timeWidthCon,
+                    child: new TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 2,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) => validateDD(value),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                          labelText: mulwashaLabel.dateLabel[2],
+                          labelStyle: TextStyle(
+                            fontSize: _fontSize,
+                          ),
+                          hintText: mulwashaLabel.dateLabel[2],
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            radioButDate(context),
+            Padding(padding: EdgeInsets.only(top: _paddingTop)),
+            RaisedButton(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                    side: BorderSide(color: Colors.black)),
+                child: Text(
+                  mulwashaLabel.convertDate[0],
+                  style: TextStyle(fontSize: _cardFontSize),
+                ),
+                onPressed: validateAndConvert),
+            FittedBox(
+                child: Column(
               children: [
                 Text(
                   "\n" + mulwashaLabel.convertDateLabel[0],
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
-                // Text(_dateM),
                 Text(
-                  "\n" + mandaDayMonth,
+                  mandaDayMonth,
                   style: TextStyle(fontSize: _fontSize),
                 ),
-              ],
-            ),
-            Row(
-              children: [
                 Text(
                   mandaYear,
                   style: TextStyle(fontSize: _fontSize),
                 ),
-              ],
-            ),
-            Row(
-              children: [
+
                 Text(
                   "\n" + mulwashaLabel.convertDateLabel[1],
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\n" + _dateG,
+                  _dateG,
                   style: TextStyle(fontSize: _fontSize),
                 ),
-              ],
-            ),
-            Row(
-              children: [
+
                 Text(
-                  ("\n" + mulwashaLabel.convertDateLabel[2] + "\n"),
-                  style: TextStyle(fontSize: _fontSize),
+                  ("\n" + mulwashaLabel.convertDateLabel[2]),
+                  style: TextStyle(
+                      fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   LocalNum.convertEntoFa(_dateS, localLang),
                   style: TextStyle(fontSize: _fontSize),
                 ),
+                // ############
               ],
-            ),
+            )),
           ],
-        )),
-      ],
-    );
+        ));
   }
 
   Widget radioButDate(BuildContext context) {
     // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     var chooseYear = MandaEqu.chooseYear(localLang);
 
-    return Row(children: <Widget>[
-      new Radio(
-          value: SingingYear.geo,
-          groupValue: _convert,
-          onChanged: (SingingYear value) {
-            setState(() {
-              _convert = value;
-            });
-          }),
-      new Text(
-        chooseYear[0],
-        style: TextStyle(color: Colors.black, fontSize: _fontSize),
-      ),
-      Padding(padding: EdgeInsets.only(left: 180)),
-      new Radio(
-          value: SingingYear.sol,
-          groupValue: _convert,
-          onChanged: (SingingYear value) {
-            setState(() {
-              _convert = value;
-            });
-          }),
-      new Text(
-        chooseYear[1],
-        style: TextStyle(color: Colors.black, fontSize: _fontSize),
-      ),
-    ]);
+    return Container(
+        width: _displaySize,
+        child: Stack(
+          children: [
+            Positioned(
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.geo,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[0],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+            Positioned(
+              right: 10,
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.sol,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[1],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
+            ),
+          ],
+        ));
   }
 
   Widget backToMainPage(BuildContext context) {
@@ -1128,6 +1206,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
               ),
               onPressed: () {
                 // Navigator.of(context).pop('dialog');
+                _cardFontSize = _resetCardFontSize;
                 Navigator.of(context, rootNavigator: true).pop();
               },
             )

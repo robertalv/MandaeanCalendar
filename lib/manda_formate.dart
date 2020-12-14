@@ -11,7 +11,6 @@ class MandaFormatedDateBuilder {
     List mandaFormated = convertSelectedDayToMandaDay(selectedDay, localLang);
 
     this.fullYearEnFa = LocalNum.convertEntoFa(mandaFormated[1], localLang);
-
     this.fullDay = LocalNum.convertEntoFa(mandaFormated[0], localLang);
     this.localLang = localLang;
   }
@@ -31,28 +30,61 @@ class MandaFormatedDateBuilder {
           '   (ح آدم  ${mandaDate.yearAdam})  (ح یحیی  ${mandaDate.yearYahya})  (شمسی  ${jalaliDay.year})   ';
     }
 
-    String mandaFullDay;
+    String mandaDay;
     if (localLang == 'en_US') {
-      mandaFullDay =
-          '   ( ${mandaDate.yearAdam} Adam)  (${mandaDate.yearYahya} Yahyaiee)  $mandaDayNum, ${mandaDate.monthEn} ( ${mandaDate.monthFa} ) ';
+      mandaDay = '  ' +
+          mandaDayNum +
+          ' ' +
+          mandaDate.monthEn +
+          '  =  ' +
+          jalaliDay.day.toString() +
+          ' ' +
+          MandaEqu.jalaliMonth(jalaliDay.month) +
+          '  ';
+    } else if (localLang == 'ar') {
+      mandaDay = '  ' +
+          mandaDayNum +
+          ' ' +
+          mandaDate.monthFa +
+          '  =  ' +
+          jalaliDay.day.toString() +
+          ' ' +
+          jalaliDay.formatter.mN +
+          '  ';
     } else {
-      mandaFullDay =
-          '   (ح آدم  ${mandaDate.yearAdam})  (ح یحیی  ${mandaDate.yearYahya}) $mandaDayNum, ${mandaDate.monthEn} ( ${mandaDate.monthFa} ) ';
+      mandaDay = '  ' +
+          mandaDate.monthFa +
+          ' ، ' +
+          mandaDayNum +
+          '  =  ' +
+          jalaliDay.formatter.mN +
+          ' ، ' +
+          jalaliDay.day.toString() +
+          '  ';
+
+      // mandaDay = '  ' +
+      //     mandaDayNum.toString() +
+      //     ' ' +
+      //     mandaDate.monthFa +
+      //     '  =  ' +
+      //     jalaliDay.day.toString() +
+      //     ' ' +
+      //     jalaliDay.formatter.mN;
     }
 
-    String mandaDay = '  ' +
-        mandaDayNum +
-        ' , ' +
-        mandaDate.monthEn +
-        ' ( ' +
-        mandaDate.monthFa +
-        ' )   =  ' +
-        jalaliDay.day.toString() +
-        ' , ' +
-        MandaEqu.jalaliMonth(jalaliDay.month) +
-        ' ( ' +
-        jalaliDay.formatter.mN +
-        ' )  ';
+    // String mandaDay = '  ' +
+    //     mandaDayNum +
+    //     ' , ' +
+    //     mandaDate.monthEn +
+    //     ' ( ' +
+    //     mandaDate.monthFa +
+    //     ' )   =  ' +
+    //     jalaliDay.day.toString() +
+    //     ' , ' +
+    //     MandaEqu.jalaliMonth(jalaliDay.month) +
+    //     ' ( ' +
+    //     jalaliDay.formatter.mN +
+    //     ' )  ';
 
     return [mandaDay, mandaYear];
   }
