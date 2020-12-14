@@ -451,15 +451,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           Icons.chevron_right,
           size: _headerFontSize,
         ),
-        titleBuilder: (date) {
-          return Container(
-            alignment: Alignment.center,
-            child: Text(
-              _getMonthHeader(date, _localLang),
-              style: TextStyle(color: Colors.black, fontSize: _headerFontSize),
-            ),
-          );
-        },
+        ///// // ################# Year & Month Header
+        titleTextBuilder: (date, locale) => _getMonthHeader(date, _localLang),
+
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: _headerFontSize,
+        ),
+        centerHeaderTitle: true,
       ),
 
       // headerStyle: HeaderStyle(
