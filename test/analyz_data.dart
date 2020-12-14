@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:MandaeanCalendar/manda_date.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'panja_gor_match.dart';
+import 'package:mandaean_calendar/manda_date.dart';
 // import 'package:path_provider/path_provider.dart';
 
 void main() async {

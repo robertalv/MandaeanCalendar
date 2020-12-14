@@ -1,5 +1,5 @@
-import 'package:MandaeanCalendar/manda_holidays.dart';
 import 'package:flutter/material.dart';
+import 'package:mandaean_calendar/manda_holidays.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

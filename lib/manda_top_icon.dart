@@ -13,8 +13,8 @@ Widget topIconDrawer(
   MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
   var dropListData = mulwashaLabel.menuDrop;
   double _divecWidth = MediaQuery.of(context).size.width;
-  int sizeRate = 1;
-  if (_divecWidth > 1000) {
+  double sizeRate = 1;
+  if (_divecWidth > 700) {
     sizeRate = 2;
   }
 

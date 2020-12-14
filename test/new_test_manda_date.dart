@@ -1,11 +1,7 @@
-import 'dart:io';
-
-import 'package:MandaeanCalendar/manda_date.dart';
-import 'package:MandaeanCalendar/manda_formate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MandaeanCalendar/manda_panja.dart';
-import 'package:intl/intl.dart';
+import 'package:mandaean_calendar/manda_date.dart';
+import 'package:mandaean_calendar/manda_formate.dart';
 import 'analyz_data.dart';
 
 void main() async {

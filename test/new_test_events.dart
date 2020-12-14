@@ -1,6 +1,6 @@
-import 'package:MandaeanCalendar/manda_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mandaean_calendar/manda_events.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

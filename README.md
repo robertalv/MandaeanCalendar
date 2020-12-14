@@ -1,4 +1,4 @@
-# manda_calendar
+# mandaean_calendar
 
 A new Flutter project.
 

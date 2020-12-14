@@ -6,6 +6,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'manda_equivalent.dart';
 import 'manda_events.dart';
@@ -13,25 +14,29 @@ import 'manda_footer.dart';
 import 'manda_formate.dart';
 import 'manda_holidays.dart';
 import 'manda_scrolling_text.dart';
-import 'manda_top_icon_mulwasha.dart';
+// import 'manda_top_icon_mulwasha.dart';
 import 'manda_top_icon_refresh.dart';
 import 'manda_top_icon.dart';
 import 'my_alignment.dart';
 import 'my_color.dart';
-import 'my_functions.dart';
+// import 'my_functions.dart';
 import 'my_icon_events.dart';
 
 var _localLang = 'en_US';
 var _preLocalLang = 'en_US';
 var mandaDay;
-var myFooter;
+// var myFooter;
 DateTime _selectedDay;
 Map<DateTime, List> _holidays;
+List _todayHolidayEvents = [];
 
-MandaFormatedDateBuilder mandaDate =
-    new MandaFormatedDateBuilder(DateTime.now(), _localLang);
-var _mandaAndJalaiYear = mandaDate.fullYearEnFa;
-var _mandeanDay = mandaDate.fullDay;
+// MandaFormatedDateBuilder mandaDate =
+//     new MandaFormatedDateBuilder(DateTime.now(), _localLang);
+// var _mandaAndJalaiYear = mandaDate.fullYearEnFa;
+// var _mandeanDay = mandaDate.fullDay;
+MandaFormatedDateBuilder mandaDate;
+var _mandaAndJalaiYear;
+var _mandeanDay;
 
 List _selectedEvent;
 List _selectedHoliday;
@@ -44,8 +49,8 @@ class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: MandaEqu.calendarTitle(_localLang),
-      home: MyHomePage(title: MandaEqu.calendarTitle(_localLang)),
+      title: " MandaEqu.calendarTitle(_localLang)",
+      home: MyHomePage(title: "MandaEqu.calendarTitle(_localLang)"),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -77,11 +82,35 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   var _listOfEventsForYear;
   Map _myColorSelection = Mycolor.selection();
 
-  @override
-  void initState() {
-    super.initState();
+  // ######################
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  static final String _kLanguageCode = "language";
 
-    _selectedDay = DateTime.now();
+  /// ------------------------------------------------------------
+  /// Method that returns the user language code, 'en' if not set
+  /// ------------------------------------------------------------
+  Future<void> getLanguage() async {
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    setState(() {
+      _localLang = prefs.getString(_kLanguageCode) ?? 'en_US';
+      // print(_localLang);
+    });
+    // _localLang = prefs.getString(_kLanguageCode) ?? 'en_US';
+  }
+
+  /// ----------------------------------------------------------
+  /// Method that saves the user language code
+  /// ----------------------------------------------------------
+  static Future<bool> setLanguage(String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.setString(_kLanguageCode, value);
+  }
+
+  void todayEven(DateTime date) {
+    _todayHolidayEvents = [];
+    _selectedDay = DateTime(date.year, date.month, date.day, 0, 0);
 
     _holidays =
         MandaFirstDayOfMonthBuilder(_selectedDay.year).eventsForWholeYear;
@@ -91,25 +120,37 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _listOfEventsForYear =
         scrollingText.generateEventsforScroll(_events, _holidays);
     // ***************************
-    List todayHolidayEvents = [];
 
     var todayHoliday = _holidays[_selectedDay] ?? [];
     if (todayHoliday.isNotEmpty) {
-      todayHolidayEvents.add(todayHoliday[0][_localLang]);
+      _todayHolidayEvents.add(todayHoliday[0][_localLang]);
     }
 
     var todayEvents = _events[_selectedDay] ?? [];
     if (todayEvents.isNotEmpty) {
       todayEvents.forEach((event) {
         if ((event.runtimeType.toString()).contains('List')) {
-          todayHolidayEvents.add(event[0][_localLang]);
+          _todayHolidayEvents.add(event[0][_localLang]);
         } else {
-          todayHolidayEvents.add(todayEvents[0][_localLang]);
+          _todayHolidayEvents.add(todayEvents[0][_localLang]);
         }
       });
     }
+  }
 
-    _selectedEvents = todayHolidayEvents ?? [];
+  @override
+  void initState() {
+    super.initState();
+    getLanguage();
+    // mandaDate = new MandaFormatedDateBuilder(DateTime.now(), _localLang);
+    // _mandaAndJalaiYear = mandaDate.fullYearEnFa;
+    // _mandeanDay = mandaDate.fullDay;
+
+    // _selectedDay = DateTime.now();
+    var today = DateTime.now();
+    todayEven(today);
+
+    _selectedEvents = _todayHolidayEvents ?? [];
     // _selectedEvents = _events[_selectedDay] ?? [];
     // ***************************
 
@@ -150,28 +191,29 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         events = [];
       }
 
-      mandaDate = new MandaFormatedDateBuilder(selectedDay, _localLang);
-      _mandeanDay = mandaDate.fullDay;
-      _mandaAndJalaiYear = mandaDate.fullYearEnFa;
+      // mandaDate = new MandaFormatedDateBuilder(selectedDay, _localLang);
+      // _mandeanDay = mandaDate.fullDay;
+      // _mandaAndJalaiYear = mandaDate.fullYearEnFa;
 
-      holidays = holidays ?? [];
-      if (holidays.isNotEmpty) {
-        holidays = [holidays[0][_localLang]];
-      }
+      // holidays = holidays ?? [];
+      // if (holidays.isNotEmpty) {
+      //   holidays = [holidays[0][_localLang]];
+      // }
 
-      events = events ?? [];
-      if (events.isNotEmpty) {
-        events.forEach((event) {
-          // print(event);
-          // print(event.runtimeType);
-          if ((event.runtimeType.toString()).contains('List')) {
-            newEvents.add(event[0][_localLang]);
-          } else {
-            newEvents.add(events[0][_localLang]);
-          }
-        });
-      }
-      _selectedEvents = holidays + newEvents;
+      // events = events ?? [];
+      // if (events.isNotEmpty) {
+      //   events.forEach((event) {
+      //     // print(event);
+      //     // print(event.runtimeType);
+      //     if ((event.runtimeType.toString()).contains('List')) {
+      //       newEvents.add(event[0][_localLang]);
+      //     } else {
+      //       newEvents.add(events[0][_localLang]);
+      //     }
+      //   });
+      // }
+      // _selectedEvents = holidays + newEvents;
+      // print(_selectedEvents);
     });
   }
 
@@ -211,6 +253,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
+    getLanguage();
     print('CALLBACK: _onCalendarCreated');
   }
 
@@ -224,9 +267,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     // const double daysMargin = 5.0;
     // double centerIcon = 21;
     // int sizeRate = 1;
+    mandaDate = new MandaFormatedDateBuilder(_selectedDay, _localLang);
+    _mandaAndJalaiYear = mandaDate.fullYearEnFa;
+    _mandeanDay = mandaDate.fullDay;
 
     if (_divecWidth > 700) {
-      _daysOfWeekFontSize = 30.0;
+      _daysOfWeekFontSize = 24.0;
       _headerFontSize = 40.0;
       _daysFontSize = 40.0;
       // _centerIcon = 67;
@@ -254,16 +300,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _rightIcon = 0;
     }
 
-    if (_preLocalLang != _localLang) {
-      _preLocalLang = _localLang;
-      myFooter = null;
-    }
+    // if (_preLocalLang != _localLang) {
+    //   _preLocalLang = _localLang;
+    //   myFooter = null;
+    // }
     double _myMandaFontSize = 20;
     if (_localLang != "en_US") {
       _myMandaFontSize = 22;
     }
 
     String _myTitle = MandaEqu.calendarTitle(_localLang);
+    todayEven(_selectedDay);
+    _selectedEvents = _todayHolidayEvents ?? [];
+    print(_selectedEvents);
 
     return Scaffold(
         key: _scaffoldKey,
@@ -407,7 +456,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       startingDayOfWeek: StartingDayOfWeek.sunday,
       headerVisible: true,
       formatAnimation: FormatAnimation.scale,
-
+      ////// /// ######## Name of Day
       daysOfWeekStyle: DaysOfWeekStyle(
         // weekendStyle: TextStyle(
         //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
@@ -722,6 +771,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             'English': 'en_US'
           };
           _localLang = langList[newValue];
+          setLanguage(_localLang);
         });
         // _onDaySelected(DateTime.now(), [], [], clearMandaDate: true);
         _onDaySelected(_selectedDay, _selectedEvent, _selectedHoliday);
