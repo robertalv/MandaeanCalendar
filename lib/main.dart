@@ -286,6 +286,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _sizeRate = 1;
       _marginHor = 6.0;
       _longFontSize = 16.0;
+      if (_localLang == "en_US") {
+        _daysFontSize = 16.0;
+      }
     }
 
     //// test22############# icon position for days
@@ -439,7 +442,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
     MyIcon myIcon = MyIcon(_sizeRate);
-    const double daysMargin = 5.0;
+    const double daysMargin = 3.0;
     var _myFontWeight = FontWeight.bold;
     if (_localLang == "en_US") {
       _myFontWeight = FontWeight.normal;
@@ -603,15 +606,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         dayBuilder: (context, date, events) => Container(
           margin: const EdgeInsets.all(daysMargin),
           alignment: Alignment.center,
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
+          child: SizedBox(
+              // fit: BoxFit.scaleDown,
               child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: _daysFontSize,
-                    fontWeight: _myFontWeight),
-              )),
+            DateFormat.d(_localLang).format(date),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: _daysFontSize,
+                fontWeight: _myFontWeight),
+          )),
         ),
 
         /// selected Day Builder the color of today and the marker
@@ -624,12 +627,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             color: Colors.black54,
             //
           ),
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
+          child: SizedBox(
+              // fit: BoxFit.scaleDown,
               child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.white, fontSize: _daysFontSize),
-              )),
+            DateFormat.d(_localLang).format(date),
+            style: TextStyle(color: Colors.white, fontSize: _daysFontSize),
+          )),
         ),
 
         /// today Day Builder the color of today and the marker
@@ -640,12 +643,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             shape: BoxShape.circle,
             color: _myColorSelection['header2'],
           ),
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
+          child: SizedBox(
+              // fit: BoxFit.scaleDown,
               child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
-              )),
+            DateFormat.d(_localLang).format(date),
+            style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
+          )),
         ),
       ),
 
