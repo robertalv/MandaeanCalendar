@@ -287,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _sizeRate = 2;
       _marginHor = 6 + (_divecWidth - 700) / 2;
       _longFontSize = 22.0;
-      dateIconSize = 25;
+      dateIconSize = 30;
     } else {
       _daysOfWeekFontSize = 12.0;
       _headerFontSize = 20.0;
