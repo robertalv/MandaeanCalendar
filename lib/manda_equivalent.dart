@@ -122,48 +122,48 @@ class MandaEqu {
     final Map mandaFeast = {
       'banja': [
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 1',
-          'fa_IR': ' پنجه (پروانایا) روز اول ',
-          'ar': 'البنجه (بروانایا) یوم اول '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 1',
+          'fa_IR': ' پروانایا (پنجه) روز اول ',
+          'ar': 'بروانایا (البنجه) یوم اول '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 2',
-          'fa_IR': ' پنجه (پروانایا) روز دوم ',
-          'ar': 'البنجه (بروانایا) یوم ثانی '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 2',
+          'fa_IR': ' پروانایا (پنجه) روز دوم ',
+          'ar': 'بروانایا (البنجه) یوم ثانی '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 3',
-          'fa_IR': ' پنجه (پروانایا) روز سوم ',
-          'ar': 'البنجه (بروانایا) یوم ثالث '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 3',
+          'fa_IR': ' پروانایا (پنجه) روز سوم ',
+          'ar': 'بروانایا (البنجه) یوم ثالث '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 4',
-          'fa_IR': ' پنجه (پروانایا) روز چهارم ',
-          'ar': 'البنجه (بروانایا) یوم الرابع '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 4',
+          'fa_IR': ' پروانایا (پنجه) روز چهارم ',
+          'ar': 'بروانایا (البنجه) یوم الرابع '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 5',
-          'fa_IR': ' پنجه (پروانایا) روز پنجم ',
-          'ar': 'البنجه (بروانایا) یوم الخامس '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 5',
+          'fa_IR': ' پروانایا (پنجه) روز پنجم ',
+          'ar': 'بروانایا (البنجه) یوم الخامس '
         },
       ],
       'yahya': {
-        'en_US': 'Dehva ed Daima feast - Birth of John the Baptist',
-        'fa_IR': ' دهوا اد دیما - میلاد حضرت یحیی  ',
-        'ar': ' دهوا اد دیما - میلاد نبی یحیی  '
+        'en_US': 'Dehva ed Daima feast (Birth of John the Baptist)',
+        'fa_IR': ' (دهوا اد دیما (میلاد حضرت یحیی  ',
+        'ar': ' (دهوا اد دیما (میلاد نبی یحیی  ',
       },
       'kenshi': {
-        'en_US': 'Kenshi-u-Zehli feast',
-        'fa_IR': 'کنشو زهلی  ',
-        'ar': 'کنشو زهلی  '
+        'en_US': 'Kenshi-u-Zehli feast - Beginning of Kersa',
+        'fa_IR': ' کنشو زهلی - شروع كراصا  ',
+        'ar': ' کنشو زهلی - بداية كراصا  '
       },
       'eidBig': {
-        'en_US': 'Dehva Raba feast',
-        'fa_IR': 'دهوا ربا - عید بزرگ ',
-        'ar': 'دهوا ربا - عید الکبیر '
+        'en_US': 'Dehva Raba feast (The Great feast) - Second day of Kersa',
+        'fa_IR': ' دهوا ربا (عید بزرگ) - روز دوم كراصا   ',
+        'ar': 'دهوا ربا (عید الکبیر) -  كراصا یوم ثانی '
       },
       'kersa': {
-        'en_US': 'Dehva Raba - End of Kersa',
+        'en_US': 'Dehva Raba feast - End of Kersa',
         'fa_IR': ' دهوا ربا - پایان کراصا ',
         'ar': 'دهوا ربا - یوم الطلعه '
       },
@@ -188,9 +188,9 @@ class MandaEqu {
       },
       // 'alfil': {'en_US': 'The Fel feast', 'fa_IR': 'عید فل', 'ar': 'العید فل'},
       'eidSmall': {
-        'en_US': 'The Dehva Honina feast',
-        'fa_IR': 'دهوا حنینا - عید کوچک ',
-        'ar': ' دهوا حنینا - العید الصغیر '
+        'en_US': 'The Dehva Honina feast (The small feast) ',
+        'fa_IR': '(عید کوچک ) دهوا حنینا ',
+        'ar': ' (العید الصغیر ) دهوا حنینا '
       },
       'ashoreh': {
         'en_US': 'The Ashorieh day (AbulHeris)',
