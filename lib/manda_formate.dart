@@ -1,6 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
 import 'local_number.dart';
 import 'manda_date.dart';
 import 'manda_equivalent.dart';
+import 'my_alignment.dart';
 
 class MandaFormatedDateBuilder {
   String fullDay;
@@ -33,32 +37,32 @@ class MandaFormatedDateBuilder {
     String mandaDay;
     if (localLang == 'en_US') {
       mandaDay = '  ' +
-          mandaDayNum +
-          ' ' +
           mandaDate.monthEn +
-          '  =  ' +
-          jalaliDay.day.toString() +
           ' ' +
+          mandaDayNum +
+          '  =  ' +
           MandaEqu.jalaliMonth(jalaliDay.month) +
+          ' ' +
+          jalaliDay.day.toString() +
           '  ';
     } else if (localLang == 'ar') {
       mandaDay = '  ' +
-          mandaDayNum +
-          ' ' +
           mandaDate.monthFa +
-          '  =  ' +
-          jalaliDay.day.toString() +
           ' ' +
+          mandaDayNum +
+          '  =  ' +
           jalaliDay.formatter.mN +
+          ' ' +
+          jalaliDay.day.toString() +
           '  ';
     } else {
       mandaDay = '  ' +
           mandaDate.monthFa +
-          ' ، ' +
+          '  ' +
           mandaDayNum +
           '  =  ' +
           jalaliDay.formatter.mN +
-          ' ، ' +
+          '  ' +
           jalaliDay.day.toString() +
           '  ';
 
@@ -105,3 +109,68 @@ class MandaFormatedDateBuilder {
     return mandaFullDay;
   }
 }
+
+// @override
+// Widget mandaDayFa(BuildContext context, _selectedDay, _localLang) {
+//   double _divecWidth = MediaQuery.of(context).size.width;
+//   double dateIconSize;
+//   double _sizeRate;
+//   double _listFontSize = 20;
+//   if (_divecWidth > 700) {
+//     _sizeRate = 2;
+
+//     dateIconSize = 25;
+//   } else {
+//     _sizeRate = 1;
+
+//     dateIconSize = 16;
+//   }
+
+//   var myDateIcon = Icon(
+//     Icons.date_range,
+//     size: dateIconSize,
+//   );
+
+//   var beforeDateIcon;
+//   var afterDateIcon;
+
+//   if (_localLang != "en_US") {
+//     _listFontSize = 20;
+//     beforeDateIcon = Text("");
+//     afterDateIcon = myDateIcon;
+//   } else {
+//     beforeDateIcon = myDateIcon;
+//     afterDateIcon = Text("");
+//   }
+//   var myTextAlignment = MyAlignment.textAlig(_localLang);
+//   var myAlignment = MyAlignment.countryLanguage(_localLang);
+//   MandaDateBuilder mandaDate = MandaDateBuilder(_selectedDay);
+//   return Row(
+//     children: [
+//       beforeDateIcon,
+//       Flexible(
+//         child: Container(
+//           alignment: myAlignment,
+//           child: Text(
+//             // _mandeanDay,
+//             "",
+//             textAlign: myTextAlignment,
+//             style: TextStyle(
+//                 fontSize: _listFontSize * _sizeRate, color: Colors.black),
+//           ),
+//         ),
+//       ),
+//       Text(
+//         (mandaDate.monthFa).toString(),
+//         style:
+//             TextStyle(fontSize: _listFontSize * _sizeRate, color: Colors.black),
+//       ),
+//       Text(
+//         LocalNum.convertEntoFa(mandaDate.day.toString(), _localLang),
+//         style:
+//             TextStyle(fontSize: _listFontSize * _sizeRate, color: Colors.black),
+//       ),
+//       afterDateIcon
+//     ],
+//   );
+// }

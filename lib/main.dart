@@ -8,6 +8,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'local_number.dart';
+import 'manda_date.dart';
 import 'manda_equivalent.dart';
 import 'manda_events.dart';
 import 'manda_footer.dart';
@@ -25,8 +27,10 @@ import 'my_icon_events.dart';
 var _localLang = 'en_US';
 var _preLocalLang = 'en_US';
 var mandaDay;
+double _listFontSize = 20;
 // var myFooter;
 DateTime _selectedDay;
+
 Map<DateTime, List> _holidays;
 List _todayHolidayEvents = [];
 
@@ -48,6 +52,8 @@ void main() {
 class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var today = DateTime.now();
+    _selectedDay = DateTime(today.year, today.month, today.day, 0, 0);
     return MaterialApp(
       title: " MandaEqu.calendarTitle(_localLang)",
       home: MyHomePage(title: "MandaEqu.calendarTitle(_localLang)"),
@@ -147,11 +153,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     // _mandeanDay = mandaDate.fullDay;
 
     // _selectedDay = DateTime.now();
-    var today = DateTime.now();
-    todayEven(today);
+    // var today = DateTime.now();
+    // todayEven(today);
 
-    _selectedEvents = _todayHolidayEvents ?? [];
-    // _selectedEvents = _events[_selectedDay] ?? [];
+    // _selectedEvents = _todayHolidayEvents ?? [];
+
     // ***************************
 
     _calendarController = CalendarController();
@@ -267,10 +273,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     // const double daysMargin = 5.0;
     // double centerIcon = 21;
     // int sizeRate = 1;
+
     mandaDate = new MandaFormatedDateBuilder(_selectedDay, _localLang);
     _mandaAndJalaiYear = mandaDate.fullYearEnFa;
     _mandeanDay = mandaDate.fullDay;
 
+    double dateIconSize;
     if (_divecWidth > 700) {
       _daysOfWeekFontSize = 24.0;
       _headerFontSize = 40.0;
@@ -279,15 +287,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _sizeRate = 2;
       _marginHor = 6 + (_divecWidth - 700) / 2;
       _longFontSize = 22.0;
+      dateIconSize = 25;
     } else {
-      _daysOfWeekFontSize = 13.0;
+      _daysOfWeekFontSize = 12.0;
       _headerFontSize = 20.0;
-      _daysFontSize = 20.0;
+      _daysFontSize = 22.0;
       _sizeRate = 1;
       _marginHor = 6.0;
       _longFontSize = 16.0;
+      dateIconSize = 16;
       if (_localLang == "en_US") {
-        _daysFontSize = 16.0;
+        _daysFontSize = 18.0;
       }
     }
 
@@ -307,15 +317,30 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     //   _preLocalLang = _localLang;
     //   myFooter = null;
     // }
-    double _myMandaFontSize = 20;
+    _listFontSize = 20;
+    var myDateIcon = Icon(
+      Icons.date_range,
+      size: dateIconSize,
+    );
+
+    var beforeDateIcon;
+    var afterDateIcon;
+
     if (_localLang != "en_US") {
-      _myMandaFontSize = 22;
+      _listFontSize = 20;
+      beforeDateIcon = Text("");
+      afterDateIcon = myDateIcon;
+    } else {
+      beforeDateIcon = myDateIcon;
+      afterDateIcon = Text("");
     }
 
     String _myTitle = MandaEqu.calendarTitle(_localLang);
     todayEven(_selectedDay);
     _selectedEvents = _todayHolidayEvents ?? [];
-    print(_selectedEvents);
+
+    var myTextAlignment = MyAlignment.textAlig(_localLang);
+    var myAlignment = MyAlignment.countryLanguage(_localLang);
 
     return Scaffold(
         key: _scaffoldKey,
@@ -361,47 +386,82 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
                 // _buildTableCalendar(),
                 Container(
-                  height: 35.0 * _sizeRate,
+                  constraints: BoxConstraints(
+                    minHeight: 35.0 * _sizeRate,
+                  ),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     color: _myColorSelection['header2'],
                   ),
-                  margin:
-                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
+                  margin: EdgeInsets.only(
+                      left: _marginHor, right: _marginHor, bottom: 8),
                   child: FittedBox(
-                    fit: BoxFit.scaleDown,
+                    // fit: BoxFit.scaleDown,
                     child: Text(
                       _mandaAndJalaiYear,
                       style: TextStyle(
-                          fontSize: 20.0 * _sizeRate,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                        fontSize: _listFontSize * _sizeRate,
+                        color: Colors.black,
+                        // fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),
                 Container(
                   // height: 30.0 * _sizeRate,
-                  alignment: Alignment.center,
+                  constraints: BoxConstraints(
+                    minHeight: 0,
+                  ),
+                  alignment: myAlignment,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     border: Border.all(width: 0),
                     color: Colors.white,
                   ),
                   margin:
-                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 8),
-                  child: FittedBox(
-                    // fit: BoxFit.scaleDown,
-                    child: Text(
-                      _mandeanDay,
-                      style: TextStyle(
-                          fontSize: _myMandaFontSize * _sizeRate,
-                          color: Colors.black),
-                    ),
-                  ),
+                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
+                  child: SizedBox(
+                      // fit: BoxFit.scaleDown,
+                      child: Row(
+                    children: [
+                      beforeDateIcon,
+                      Flexible(
+                        child: Container(
+                          alignment: myAlignment,
+                          child: Text(
+                            _mandeanDay,
+                            textAlign: myTextAlignment,
+                            style: TextStyle(
+                                fontSize: _listFontSize * _sizeRate,
+                                color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      Text(" "),
+                      afterDateIcon
+                    ],
+                  )),
                 ),
-                // const SizedBox(height: 4.0),
-                // _buildEventList(),
+// ######## New
+                // Container(
+                //   // height: 30.0 * _sizeRate,
+                //   constraints: BoxConstraints(
+                //     minHeight: 0,
+                //   ),
+                //   alignment: myAlignment,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(8.0),
+                //     border: Border.all(width: 0),
+                //     color: Colors.white,
+                //   ),
+                //   margin:
+                //       EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
+                //   child: SizedBox(
+                //       // fit: BoxFit.scaleDown,
+                //       child: mandaDayFa(context, _selectedDay, _localLang)),
+                // ),
+
                 _selectedEvents.isNotEmpty
                     ? _buildEventList()
                     : Text(
@@ -443,10 +503,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget _buildTableCalendar() {
     MyIcon myIcon = MyIcon(_sizeRate);
     const double daysMargin = 3.0;
-    var _myFontWeight = FontWeight.bold;
-    if (_localLang == "en_US") {
-      _myFontWeight = FontWeight.normal;
-    }
+    // var _myFontWeight = FontWeight.bold;
+    // if (_localLang == "en_US") {
+    //   _myFontWeight = FontWeight.normal;
+    // }
 
     return TableCalendar(
       // locale: 'fa_IR',
@@ -459,20 +519,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       startingDayOfWeek: StartingDayOfWeek.sunday,
       headerVisible: true,
       formatAnimation: FormatAnimation.scale,
-      ////// /// ######## Name of Day
-      daysOfWeekStyle: DaysOfWeekStyle(
-        // weekendStyle: TextStyle(
-        //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
-        weekdayStyle: TextStyle(
-            fontSize: _daysOfWeekFontSize,
-            color: Colors.black,
-            fontWeight: FontWeight.bold),
-        weekendStyle: TextStyle(
-            color: Colors.deepOrange[600],
-            fontSize: _daysOfWeekFontSize,
-            fontWeight: FontWeight.bold),
-        dowTextBuilder: (date, locale) => _getDayHeader(date, locale),
-      ),
 
       // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
       calendarStyle: CalendarStyle(
@@ -494,6 +540,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         CalendarFormat.month: 'Month',
       },
 
+      ///// // ################# Year & Month & < > icon Header
       headerStyle: HeaderStyle(
         leftChevronIcon: Icon(
           Icons.chevron_left,
@@ -503,9 +550,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           Icons.chevron_right,
           size: _headerFontSize,
         ),
-        ///// // ################# Year & Month Header
         titleTextBuilder: (date, locale) => _getMonthHeader(date, _localLang),
-
         titleTextStyle: TextStyle(
           color: Colors.black,
           fontSize: _headerFontSize,
@@ -532,6 +577,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       //   //   borderRadius: BorderRadius.circular(16.0),
       //   // ),
       // ),
+
+      ////// /// ######## Name of Day Header
+      daysOfWeekStyle: DaysOfWeekStyle(
+        // weekendStyle: TextStyle(
+        //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
+        weekdayStyle: TextStyle(
+            fontSize: _daysOfWeekFontSize,
+            color: Colors.black,
+            fontWeight: FontWeight.bold),
+        weekendStyle: TextStyle(
+            color: Colors.deepOrange[600],
+            fontSize: _daysOfWeekFontSize,
+            fontWeight: FontWeight.bold),
+        dowTextBuilder: (date, locale) => _getDayHeader(date, locale),
+      ),
 
       builders: CalendarBuilders(
         // markersBuilder: (context, date, events, holidays) {
@@ -611,9 +671,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               child: Text(
             DateFormat.d(_localLang).format(date),
             style: TextStyle(
-                color: Colors.black,
-                fontSize: _daysFontSize,
-                fontWeight: _myFontWeight),
+              color: Colors.black,
+              fontSize: _daysFontSize,
+            ),
           )),
         ),
 
@@ -694,7 +754,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     border: Border.all(width: 0),
                     borderRadius: BorderRadius.circular(8.0),
                     color: _myColorSelection['minor']),
-                margin: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                margin:
+                    EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
                 child: Column(children: [
                   _generateIconEvent(event),
                 ]),
@@ -732,9 +793,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     if (_localLang == "en_US") {
       beforeEvent = eventIcon;
       afterEvent = myIcon.noon;
+      _listFontSize = 20;
     } else {
       beforeEvent = myIcon.noon;
       afterEvent = eventIcon;
+      _listFontSize = 22;
     }
 
     return Row(
@@ -746,7 +809,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: Text(
             event.toString(),
             textAlign: myTextAlignment,
-            style: TextStyle(fontSize: 20.0 * _sizeRate, color: Colors.black),
+            style: TextStyle(
+                fontSize: _listFontSize * _sizeRate, color: Colors.black),
           ),
         )),
         Text(" "),
