@@ -339,13 +339,13 @@ class MandaEqu {
     return mulwashal[index];
   }
 
-  static calendarTitle(index) {
+  static calendarTitle() {
     Map mulwashal = {
       'en_US': '  Mandaean Calendar',
       'fa_IR': '  تقویم  مندایی',
       'ar': ' التقويم المندائي '
     };
-    return mulwashal[index];
+    return mulwashal;
   }
 
   static mulwashaTitle(index) {
