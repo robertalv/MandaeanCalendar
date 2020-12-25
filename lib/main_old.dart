@@ -18,7 +18,7 @@ import 'manda_holidays.dart';
 import 'manda_scrolling_text.dart';
 // import 'manda_top_icon_mulwasha.dart';
 import 'manda_top_icon_refresh.dart';
-import 'manda_top_icon.dart';
+import 'widget_drawer.dart';
 import 'my_alignment.dart';
 import 'my_color.dart';
 // import 'my_functions.dart';
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   double _longFontSize = 16.0;
 
   var _listOfEventsForYear;
-  Map _myColorSelection = Mycolor.selection();
+  Map _myColorSelection = MyColor.selection();
 
   // ######################
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

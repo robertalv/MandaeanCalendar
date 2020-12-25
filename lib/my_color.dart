@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Mycolor {
+class MyColor {
   static selection() {
     Map data = {
       // 'header': Colors.brown[200],

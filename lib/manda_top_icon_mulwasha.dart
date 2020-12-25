@@ -49,7 +49,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
   SingingCharacter _character = SingingCharacter.female;
   OclockDeclaration _oclock = OclockDeclaration.at;
   SingingYear _convert = SingingYear.geo;
-  Map _myColorSelection = Mycolor.selection();
+  Map _myColorSelection = MyColor.selection();
   double _displaySize;
   double _fontSize = 18.0;
   double _paddingTop = 6.0;

@@ -3,30 +3,40 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'local_long.dart';
+import 'my_font_size.dart';
+import 'setter_getter.dart';
 import 'manda_equivalent.dart';
-import 'manda_top_icon.dart';
-import 'top_icon_widget.dart';
+import 'widget_calendar_builder.dart';
+import 'widget_drawer.dart';
+import 'widget_top_icon.dart';
 import 'my_color.dart';
 import 'user_set.dart';
 
 LocalLang _lang = new LocalLang();
-
-Map _myColorSelection = Mycolor.selection();
-
-// import 'month_display_date_builder.dart';
-
+MandaCalendar _manda = new MandaCalendar();
+GregCalendar _greg = new GregCalendar();
+ShamsiCalendar _shamsi = new ShamsiCalendar();
+Selected _selected = new Selected();
+DivecSize _divec = new DivecSize();
+Data _data = new Data();
+Map _myColorSelection = MyColor.selection();
 DateTime todayNow = DateTime.now();
 DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
 DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
-
-double _divecWidth;
 double _cellWidth;
-double _margin = 4;
-List _preMonthList = [];
+
+// double _divecWidth;
+
+// import 'month_display_date_builder.dart';
+
+// DateTime todayNow = DateTime.now();
+// DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
+// DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
+
+// double _margin = 4;
+// List _preMonthList = [];
 
 void main() {
-  // Intl.defaultLocale = 'en_US';
   initializeDateFormatting().then((_) => runApp(MandaeanCalendar()));
 }
 
@@ -35,10 +45,19 @@ class MandaeanCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _data.lang = _lang;
+    _data.greg = _greg;
+    _data.manda = _manda;
+    _data.shamsi = _shamsi;
+    _data.selected = _selected;
     _lang.name = "en_US";
+    _greg.active = true;
+    _manda.active = false;
+    _shamsi.active = false;
+    _selected.date = _selectedDay;
 
-    // var test = UserSetting.getLanguage(_long);
-    // print(test);
+    print(_selected.date);
+    print(_data.selected.date);
 
     return MaterialApp(
       title: 'Mandaean Calendar',
@@ -62,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     UserSetting.getLanguage(setState, _lang);
+
     // mandaDate = new MandaFormatedDateBuilder(DateTime.now(), _localLang);
     // _mandaAndJalaiYear = mandaDate.fullYearEnFa;
     // _mandeanDay = mandaDate.fullDay;
@@ -88,9 +108,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int _sizeRate = 1;
-    double _headerFontSize = 15;
+    double divecWidth = MediaQuery.of(context).size.width;
+    _data.divecSize = _divec;
+    _divec.width = divecWidth;
+    _cellWidth = MyFontSize.cellWidth(_data);
+    double _sizeRate = MyFontSize.s21(_data);
     String _myTitle = MandaEqu.calendarTitle()[_lang.name];
+    // _data.greg.active = true;
+    // _data.manda.active = false;
+    // _data.shamsi.active = false;
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
@@ -105,16 +131,13 @@ class _MyHomePageState extends State<MyHomePage> {
           actionsIconTheme:
               IconThemeData(size: 50, color: Colors.green, opacity: 10),
           title: FittedBox(
-            fit: BoxFit.scaleDown,
-            // child: Text(widget.title, style: TextStyle(color: Colors.black)),
+            // fit: BoxFit.scaleDown,
             child: Text(_myTitle,
-                style:
-                    TextStyle(color: Colors.black, fontSize: _headerFontSize)),
+                style: TextStyle(
+                    color: Colors.black, fontSize: MyFontSize.s4020(_data))),
           ),
-          // title: Text(widget.title),
           actions: <Widget>[
-            // languageSwitch('English'),
-            topIconInfo(context, _lang, setState),
+            topIconInfo(context, _data, setState),
           ],
         ),
       ),
@@ -123,7 +146,40 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.white,
         child: topIconDrawer(context, _lang.name),
       ),
-      body: Text(_lang.name),
+      body: GestureDetector(
+        onHorizontalDragEnd: (dragEndDetails) {
+          print('Move page ');
+          print(dragEndDetails.primaryVelocity);
+          if (dragEndDetails.primaryVelocity < 0) {
+            // Page forwards
+            print('Move page forwards');
+            setState(() {
+              CalendarBuilder.onVisibleMonthRight(_data.selected.date, _data);
+            });
+          } else if (dragEndDetails.primaryVelocity > 0) {
+            // Page backwards
+            print('Move page backwards');
+            setState(() {
+              CalendarBuilder.onVisibleMonthLeft(_data.selected.date, _data);
+            });
+          }
+        },
+        child: Center(
+            child: ListView(children: [
+          Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+            CalendarBuilder().buildTableCalendar(_data, setState),
+
+            // Container(
+            //   margin:
+            //       // EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
+            //       EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+            //   child: buildTableCalendar(_data),
+            // ),
+            Text("test111")
+          ]),
+          Text("test")
+        ])),
+      ),
     );
   }
 }

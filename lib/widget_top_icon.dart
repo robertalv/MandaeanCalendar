@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'main.dart';
+import 'my_font_size.dart';
 import 'user_set.dart';
 
-Widget topIconInfo(BuildContext context, var lang, setState) {
+Widget topIconInfo(BuildContext context, var data, setState) {
   return Container(
       child: FittedBox(
           fit: BoxFit.contain,
@@ -14,8 +15,8 @@ Widget topIconInfo(BuildContext context, var lang, setState) {
                 FittedBox(
                   child: Row(
                     children: [
-                      languageSwitch('English', lang, setState),
-                      refresh(context, lang),
+                      languageSwitch('English', data, setState),
+                      refresh(context),
                     ],
                   ),
                 ),
@@ -24,7 +25,8 @@ Widget topIconInfo(BuildContext context, var lang, setState) {
           )));
 }
 
-Widget languageSwitch(String dropdownValue, lang, setState) {
+Widget languageSwitch(String dropdownValue, data, setState) {
+  var lang = data.lang;
   String localLang = lang.name;
   return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
@@ -51,15 +53,16 @@ Widget languageSwitch(String dropdownValue, lang, setState) {
         value: value,
         child: Text(
           value,
-          // style: TextStyle(fontSize: _longFontSize, color: Colors.black),
-          style: TextStyle(fontSize: 10.0, color: Colors.black),
+          style:
+              TextStyle(fontSize: MyFontSize.s2216(data), color: Colors.black),
+          // style: TextStyle(fontSize: 10.0, color: Colors.black),
         ),
       );
     }).toList(),
   ));
 }
 
-Widget refresh(BuildContext context, var localLang) {
+Widget refresh(BuildContext context) {
   return Center(
       child: FlatButton.icon(
           onPressed: () {

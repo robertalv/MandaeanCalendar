@@ -66,7 +66,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var _listOfEventsForYear;
-  Map _myColorSelection = Mycolor.selection();
+  Map _myColorSelection = MyColor.selection();
 
   MandaHolyDaysDisplay(localLang) {
     this.localLang = localLang;

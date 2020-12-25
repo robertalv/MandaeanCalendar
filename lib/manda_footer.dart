@@ -27,7 +27,7 @@ double _emptyBox;
 
 Widget footerLine(
     BuildContext context, String _localLang, sizeRate, marginHor) {
-  Map _myColorSelection = Mycolor.selection();
+  Map _myColorSelection = MyColor.selection();
 
   setPrometer(context, _localLang, sizeRate);
   return Container(

@@ -15,7 +15,7 @@ class HelpDoc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    Map _myColorSelection = Mycolor.selection();
+    Map _myColorSelection = MyColor.selection();
     List imageName;
     Map imageNameMap = {
       'fa_IR': [
