@@ -25,8 +25,9 @@ String _spaceNotEn = '';
 var _myTextAlignment;
 double _emptyBox;
 
-Widget footerLine(
-    BuildContext context, String _localLang, sizeRate, marginHor) {
+// Widget footerLine(
+//     BuildContext context, String _localLang, sizeRate, marginHor) {
+Widget footerLine(BuildContext context, String _localLang, sizeRate) {
   Map _myColorSelection = MyColor.selection();
 
   setPrometer(context, _localLang, sizeRate);
@@ -40,7 +41,7 @@ Widget footerLine(
       borderRadius: BorderRadius.circular(8.0),
       color: _myColorSelection['header2'],
     ),
-    margin: EdgeInsets.symmetric(horizontal: marginHor, vertical: 8),
+    // margin: EdgeInsets.symmetric(horizontal: marginHor, vertical: 8),
     child: Column(
       children: [
         footerFirstLine(context, _localLang, sizeRate),

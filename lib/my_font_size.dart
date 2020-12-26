@@ -127,3 +127,24 @@ class MyFontSize {
     return size;
   }
 }
+
+class MainSize {
+  double f8040;
+  double f5025;
+  double marginH;
+  MainSize(data) {
+    double divecWidth = data.divecSize.width;
+    if (divecWidth > 700) {
+      f8040 = 80;
+      f5025 = 50;
+      marginH = (divecWidth - 700) / 2;
+    } else {
+      f8040 = 40;
+      f5025 = 25;
+      marginH = 0;
+    }
+    this.f8040 = f8040;
+    this.f5025 = f5025;
+    this.marginH = marginH;
+  }
+}

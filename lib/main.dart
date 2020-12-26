@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'manda_footer.dart';
 import 'my_font_size.dart';
 import 'setter_getter.dart';
 import 'manda_equivalent.dart';
@@ -133,13 +134,14 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.gregKind.active = true;
     _data.mandaKind.active = true;
     _data.shamsiKind.active = true;
+    MainSize _mainZise = new MainSize(_data);
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0 * _sizeRate),
+        preferredSize: Size.fromHeight(_mainZise.f8040),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.menu, size: (25.0 * _sizeRate)),
+            icon: Icon(Icons.menu, size: (_mainZise.f5025)),
             onPressed: () => _scaffoldKey.currentState.openDrawer(),
           ),
           titleSpacing: -10.0,
@@ -182,29 +184,52 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Center(
             child: Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: ((_data.divecSize.width -
-                            MyFontSize.displayWidth(_data)) /
-                        2),
-                    vertical: 0),
+                // margin: EdgeInsets.symmetric(
+                //     horizontal: ((_data.divecSize.width -
+                //             MyFontSize.displayWidth(_data)) /
+                //         2),
+                //     vertical: 0),
                 child: ListView(children: [
-                  Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-                    if (_data.gregKind.active == true)
-                      CalendarBuilder().gregCalendarTable(_data, setState),
-                    if (_data.mandaKind.active == true)
-                      CalendarBuilder().mandaCalendarTable(_data, setState),
-                    if (_data.shamsiKind.active == true)
-                      CalendarBuilder().shamsiCalendarTable(_data, setState),
-                    // Container(
-                    //   margin:
-                    //       // EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
-                    //
-                    //   child: Text("test111"),
-                    // ),
-                    Text("test111")
-                  ]),
-                  Text("test")
-                ])),
+              Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+                if (_data.gregKind.active == true)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    child: CalendarBuilder().gregCalendarTable(_data, setState),
+                  ),
+
+                if (_data.mandaKind.active == true)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    child:
+                        CalendarBuilder().mandaCalendarTable(_data, setState),
+                  ),
+
+                if (_data.shamsiKind.active == true)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    child:
+                        CalendarBuilder().shamsiCalendarTable(_data, setState),
+                  ),
+
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: _mainZise.marginH, vertical: 0),
+                  child: footerLine(context, _data.lang.name, _sizeRate),
+                ),
+
+                // Container(
+                //   margin:
+                //       // EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
+                //
+                //   child: Text("test111"),
+                // ),
+                Text("test111")
+              ]),
+              Text("test")
+            ])),
           )),
     );
   }
