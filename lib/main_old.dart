@@ -471,6 +471,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                 // myFooter ??=
                 // footerLine(context, _localLang, _sizeRate, _marginHor),
+                //  myFooter ??=
+                footerLine(context, _localLang, _sizeRate),
 
                 // const SizedBox(height: 4.0),
 

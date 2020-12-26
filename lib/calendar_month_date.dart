@@ -48,8 +48,8 @@ class CalendarDateBuilder {
 
     var mandaDay = mandaDate.day;
     var mandaDayInMonth = 30;
-    if (mandaDate.month > 11) {
-      mandaDayInMonth = 35;
+    if (mandaDate.month == 13) {
+      mandaDayInMonth = 5;
     }
     DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
         selectedDay.day - mandaDay + 1, 0, 0);

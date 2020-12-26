@@ -123,6 +123,7 @@ class CalendarBuilder extends MyHomePage {
     // print("monthList #############");
     // today = DateTime.now();
     // DateTime selectedDay = DateTime(today.year, today.month, today.day, 0, 0);
+    print(kind);
 
     return Column(children: <Widget>[
       // if (monthList.length > 6)
@@ -131,7 +132,7 @@ class CalendarBuilder extends MyHomePage {
       //   ),
       if (monthList.length > 6) _buildYearMonthHeader(kind),
       if (monthList.length > 6)
-        _buildDayNameHeader(monthList.getRange(7, 14).toList()),
+        _buildDayNameHeader(monthList.getRange(0, 7).toList()),
       if (monthList.length > 6)
         _buildDateRow(monthList.getRange(0, 7).toList()),
       if (monthList.length > 6)
@@ -149,7 +150,15 @@ class CalendarBuilder extends MyHomePage {
     ]);
   }
 
-  Widget _buildYearMonthHeader(kind) {
+  _buildYearMonthHeader(kind) {
+    if (kind == 'manda') {
+      return _buildYearMonthHeaderManda(kind);
+    } else {
+      return _buildYearMonthHeaderGreg(kind);
+    }
+  }
+
+  Widget _buildYearMonthHeaderGreg(kind) {
     // var _sizeRate = MyFontSize.s21(data);
     return GestureDetector(
         child: Center(
@@ -176,6 +185,44 @@ class CalendarBuilder extends MyHomePage {
           onPressed: () {
             _setState(() {
               onVisibleMonthRight(_data);
+            });
+          },
+        ),
+      ],
+    )));
+  }
+
+  Widget _buildYearMonthHeaderManda(kind) {
+    // var _sizeRate = MyFontSize.s21(data);
+    return GestureDetector(
+        child: Center(
+            child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            size: (25.0 * _sizeRate),
+            color: Colors.green,
+          ),
+          onPressed: () {
+            _setState(() {
+              onVisibleMandaMonthLeft(_data);
+            });
+          },
+        ),
+        Container(
+          width: MyFontSize.headerMonthYearWidth(_data),
+          child: Text(
+            _getYearMonthHeader(kind, _data),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        IconButton(
+          icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
+          onPressed: () {
+            _setState(() {
+              onVisibleMandaMonthRight(_data);
             });
           },
         ),
@@ -477,6 +524,49 @@ class CalendarBuilder extends MyHomePage {
     } else {
       data.selected.date =
           DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    }
+  }
+
+  static onVisibleMandaMonthLeft(data) {
+    print('CALLBACK: _onVisibleDaysChanged');
+    // DateTime selectedDay = data.selected.date;
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 1) {
+      duration = 5;
+    }
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(first.year, first.month, first.day - duration, 0, 0);
+    }
+  }
+
+  static onVisibleMandaMonthRight(data) {
+    print('CALLBACK: _onVisibleDaysChanged');
+    // DateTime selectedDay = data.selected.date;
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 1) {
+      duration = 5;
+    }
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(first.year, first.month, first.day - duration, 0, 0);
+    } else {
+      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
     }
   }
 }
