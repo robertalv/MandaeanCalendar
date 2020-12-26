@@ -59,9 +59,9 @@ class CalendarBuilder extends MyHomePage {
   double _cellWidth;
   double _divecWidth;
   DateTime _selectedDay;
-  List _mandaMonthDate;
-  List _gregMonthDate = [];
-  List _shamsiMonthDate = [];
+  // List _mandaMonthDate;
+  // List _gregMonthDate = [];
+  // List _shamsiMonthDate = [];
   var _sizeRate;
 
   String _local;
@@ -70,7 +70,7 @@ class CalendarBuilder extends MyHomePage {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    // throw UnimplementedError();
   }
 
   gregCalendarTable(data, setState) {
@@ -87,7 +87,7 @@ class CalendarBuilder extends MyHomePage {
   }
 
   shamsiCalendarTable(data, setState) {
-    print('CALLBACK: mandaCalendarTable');
+    print('CALLBACK: shamsiCalendarTable');
     List monthList = CalendarDateBuilder.shamsi(data);
 
     return buildTableCalendar('shamsi', monthList, data, setState);
@@ -242,8 +242,6 @@ class CalendarBuilder extends MyHomePage {
 
   _getYearMonthHeader(kind, data) {
     var day;
-    print("greg ${data.gregMonth.info['kind']}");
-    print("manda ${data.mandaMonth.info['kind']}");
 
     if (kind == 'greg') {
       day = gregHeaderBuilder(data);
@@ -346,9 +344,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildDateCell(var cellText) {
-    // double _divecWidth = MediaQuery.of(context).size.width;
-    // double _cellWidth = _divecWidth / 7;
-    // _selectedDay
     // print(cellText);
     DateTime dateCellText = cellText[0];
     String labelCellText = cellText[1];
@@ -374,13 +369,13 @@ class CalendarBuilder extends MyHomePage {
             },
             onTap: () {
               _setState(() {
-                onDayTap(dateCellText, _data);
+                onDayTap(cellText, _data);
               });
             },
             child: Text(
               // "t",
               // DateFormat.d(local).format(dateCellText).toString(),
-              LocalNum.convertEntoFaAr(labelCellText, _data.lang.name),
+              LocalNum.convertEntoFaAr(cellText[1], _data.lang.name),
               textAlign: TextAlign.center,
               style: _builderTextStyle(dateCellText),
             ),
@@ -440,8 +435,11 @@ class CalendarBuilder extends MyHomePage {
 
   static onDayTap(cellText, data) {
     print('CALLBACK: _onDayTap');
-    // _selectedDay = cellText;
-    data.selected.date = cellText;
+
+    if (cellText[1] != "") {
+      data.selected.date = cellText[0];
+    }
+    // data.selected.date = cellText[0];
     print('_onDayTap $cellText');
   }
 

@@ -158,9 +158,9 @@ class CalendarDateBuilder {
     List allDateList = [];
 
     var shamsiDay = jalaliDay.day;
-    print('shamsiDay: $shamsiDay');
+    // print('shamsiDay: $shamsiDay');
     var shamsiDayInMonth = jalaliDay.monthLength;
-    print('shamsiDayInMonth: $shamsiDayInMonth');
+    // print('shamsiDayInMonth: $shamsiDayInMonth');
     // if (mandaDate.month > 11) {
     //   mandaDayInMonth = 35;
     // }

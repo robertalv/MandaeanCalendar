@@ -183,15 +183,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
             child: ListView(children: [
           Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-            // if (_data.gregKind.active == true)
-            //   CalendarBuilder().buildTableCalendar("greg", _data, setState),
-            // if (_data.mandaKind.active == true)
-            //   CalendarBuilder().buildTableCalendar("manda", _data, setState),
-
-            // if (_data.gregKind.active == true)
-            //   GregCalendarTable(_data, setState).build(context),
-            // if (_data.mandaKind.active == true)
-            //   MandaCalendarTable(_data).build(context),
             if (_data.gregKind.active == true)
               CalendarBuilder().gregCalendarTable(_data, setState),
             if (_data.mandaKind.active == true)
