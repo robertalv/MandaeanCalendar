@@ -458,19 +458,26 @@ class CalendarBuilder extends MyHomePage {
   static onVisibleMonthLeft(data) {
     print('CALLBACK: _onVisibleDaysChanged');
     DateTime selectedDay = data.selected.date;
-    // print('_onVisibleMonthLeft $selectedDay');
-    // _selectedDay = DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    data.selected.date =
-        DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    }
   }
 
   static onVisibleMonthRight(data) {
     print('CALLBACK: _onVisibleDaysChanged');
     DateTime selectedDay = data.selected.date;
-    // print('_onVisibleMonthRight $selectedDay');
-    // _selectedDay = DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    data.selected.date =
-        DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    }
   }
 }
 
