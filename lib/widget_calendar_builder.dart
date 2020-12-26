@@ -8,52 +8,62 @@ import 'main.dart';
 import 'manda_equivalent.dart';
 import 'my_font_size.dart';
 
-class MandaCalendarTable extends State<MyHomePage> {
-  var data;
-  // var setState;
-  List monthList;
-  MandaCalendarTable(data) {
-    this.data = data;
-    // this.setState = setState;
-    this.monthList = CalendarDateBuilder.manda(data);
-    // gregBuilder(monthList, data, setState);
-  }
+// class MandaCalendarTable extends State<MyHomePage> {
+//   var data;
+//   // var setState;
+//   List monthList;
+//   MandaCalendarTable(data) {
+//     this.data = data;
+//     // this.setState = setState;
+//     this.monthList = CalendarDateBuilder.manda(data);
+//     // gregBuilder(monthList, data, setState);
+//   }
 
-  static wholeMonthDate(data) {}
+//   // static wholeMonthDate(data) {}
 
-  @override
-  Widget build(BuildContext context) {
-    return CalendarBuilder()
-        .buildTableCalendar('manda', this.monthList, this.data, setState);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return CalendarBuilder()
+//         .buildTableCalendar('manda', this.monthList, this.data, setState);
+//   }
+// }
 
-class GregCalendarTable extends State<MyHomePage> {
-  var data;
-  // var setState;
-  List monthList;
-  GregCalendarTable(data) {
-    this.data = data;
-    // this.setState = setState;
-    this.monthList = CalendarDateBuilder.greg(data);
-    // gregBuilder(monthList, data, setState);
-  }
+// class GregCalendarTable extends State<MyHomePage> {
+//   var data;
+//   // var setState;
+//   List monthList;
+//   GregCalendarTable(data, setState) {
+//     this.data = data;
+//     // this.setState = setState;
+//     this.monthList = CalendarDateBuilder.greg(data);
+//     // gregBuilder(monthList, data, setState);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return CalendarBuilder()
-        .buildTableCalendar('greg', this.monthList, this.data, setState);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     // return CalendarBuilder()
+//     //     .buildTableCalendar('greg', this.monthList, this.data);
+//     return IconButton(
+//       icon: Icon(Icons.chevron_left, size: (25.0 * 2)),
+//       onPressed: () {
+//         setState(() {
+//           // onVisibleMonthLeft(_data);
+//           Text("New Test");
+//         });
+//       },
+//     );
+//   }
+// }
 
-class CalendarBuilder extends State<MyHomePage> {
+class CalendarBuilder extends MyHomePage {
   double _cellWidth;
   double _divecWidth;
   DateTime _selectedDay;
-  DateTime _startOfMonth;
-  DateTime _endOfMonth;
+  List _mandaMonthDate;
+  List _gregMonthDate = [];
+  List _shamsiMonthDate = [];
   var _sizeRate;
-  DateTime _today;
+
   String _local;
   var _data;
   var _setState;
@@ -61,6 +71,26 @@ class CalendarBuilder extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     throw UnimplementedError();
+  }
+
+  gregCalendarTable(data, setState) {
+    print('CALLBACK: gregCalendarTable');
+    List monthList = CalendarDateBuilder.greg(data);
+    return buildTableCalendar('greg', monthList, data, setState);
+  }
+
+  mandaCalendarTable(data, setState) {
+    print('CALLBACK: mandaCalendarTable');
+    List monthList = CalendarDateBuilder.manda(data);
+
+    return buildTableCalendar('manda', monthList, data, setState);
+  }
+
+  shamsiCalendarTable(data, setState) {
+    print('CALLBACK: mandaCalendarTable');
+    List monthList = CalendarDateBuilder.shamsi(data);
+
+    return buildTableCalendar('shamsi', monthList, data, setState);
   }
 
   @override
@@ -71,7 +101,7 @@ class CalendarBuilder extends State<MyHomePage> {
     _sizeRate = MyFontSize.s21(data);
     _divecWidth = data.divecSize.width;
     _selectedDay = data.selected.date;
-    _today = _selectedDay;
+    // _today = _selectedDay;
     _local = data.lang.name;
     _data = data;
 
@@ -219,6 +249,8 @@ class CalendarBuilder extends State<MyHomePage> {
       day = gregHeaderBuilder(data);
     } else if (kind == 'manda') {
       day = mandaHeaderBuilder(data);
+    } else if (kind == 'shamsi') {
+      day = shamsiHeaderBuilder(data);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
     }
@@ -238,8 +270,6 @@ class CalendarBuilder extends State<MyHomePage> {
     } else {
       day = DateFormat.yMMMM(local).format(date);
     }
-    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-    // print("greg day $day");
     return day;
   }
 
@@ -253,12 +283,29 @@ class CalendarBuilder extends State<MyHomePage> {
       day =
           "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['adam']} / ${data.mandaMonth.info['yahya']}";
       day = LocalNum.convertEntoFaAr(day, local);
-    } else {
+    } else if (local == 'fa_IR') {
       day =
           "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
       day = LocalNum.convertEntoFaAr(day, local);
+    } else {
+      day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
     }
-    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
+    return day;
+  }
+
+  static shamsiHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    if (local == 'en_US') {
+      day =
+          "${data.shamsiMonth.info['monthEn']} ${data.shamsiMonth.info['year']}";
+    } else if (local == 'ar' || local == 'fa_IR') {
+      day =
+          "${data.shamsiMonth.info['monthFaAr']} ${data.shamsiMonth.info['year']}";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else {
+      day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
+    }
     return day;
   }
 
@@ -395,7 +442,7 @@ class CalendarBuilder extends State<MyHomePage> {
     print('CALLBACK: _onDayTap');
     // _selectedDay = cellText;
     data.selected.date = cellText;
-    // print('_onDayTap $cellText');
+    print('_onDayTap $cellText');
   }
 
   static onDayLogPressed(cellText) {

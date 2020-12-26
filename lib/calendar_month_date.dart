@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 import 'manda_date.dart';
+import 'manda_equivalent.dart';
 
 class CalendarDateBuilder {
   // DateTime selectedDay;
@@ -37,7 +38,7 @@ class CalendarDateBuilder {
     List afterDateList = [];
     List allDateList = [];
     // List allDateLebelList = [];
-    DateTime today = selectedDay;
+    // DateTime today = selectedDay;
 
     // // 11 Sartana(10) == 24 Dec(12)
     // today = DateTime(2021, 7, 1, 0, 0);
@@ -50,8 +51,8 @@ class CalendarDateBuilder {
     if (mandaDate.month > 11) {
       mandaDayInMonth = 35;
     }
-    DateTime startMonth =
-        DateTime(today.year, today.month, today.day - mandaDay + 1, 0, 0);
+    DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
+        selectedDay.day - mandaDay + 1, 0, 0);
 
     DateTime endMonth = DateTime(startMonth.year, startMonth.month,
         startMonth.day + mandaDayInMonth - 1, 0, 0);
@@ -107,10 +108,12 @@ class CalendarDateBuilder {
     List monthDateList = [];
     List afterDateList = [];
     List allDateList = [];
-    DateTime today = selectedDay;
+    // DateTime today = selectedDay;
     // today = DateTime(2021, 7, 1, 0, 0);
-    DateTime startMonth = DateTime(today.year, today.month, 1, 0, 0);
-    DateTime endMonth = DateTime(today.year, today.month + 1, 0, 0, 0);
+    DateTime startMonth =
+        DateTime(selectedDay.year, selectedDay.month, 1, 0, 0);
+    DateTime endMonth =
+        DateTime(selectedDay.year, selectedDay.month + 1, 0, 0, 0);
     // data.first.date = startMonth;
     // data.last.date = endMonth;
     data.gregMonth.info = {
@@ -125,6 +128,73 @@ class CalendarDateBuilder {
 
     int dayInMonth = endMonth.day;
     monthDateList = monthLoop(startMonth, dayInMonth);
+    // print(monthDateList);
+
+    day = DateFormat.E("en_US").format(endMonth);
+    int afterDayIndex = 6 - getNumDayOdWeek(day);
+    // print(day);
+    // print(afterDayIndex);
+
+    afterDateList = afterLoop(endMonth, afterDayIndex);
+    // print(afterDateList);
+
+    allDateList.addAll(beforeDateList);
+    allDateList.addAll(monthDateList);
+    allDateList.addAll(afterDateList);
+    // print(allDateList);
+    // print(allDateLebelList);
+    return allDateList;
+  }
+
+  static shamsi(var data) {
+    print('CALLBACK: _MandaDateBuilder');
+    DateTime selectedDay = data.selected.date;
+    var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay);
+    // MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
+
+    List beforeDateList = [];
+    List monthDateList = [];
+    List afterDateList = [];
+    List allDateList = [];
+
+    var shamsiDay = jalaliDay.day;
+    print('shamsiDay: $shamsiDay');
+    var shamsiDayInMonth = jalaliDay.monthLength;
+    print('shamsiDayInMonth: $shamsiDayInMonth');
+    // if (mandaDate.month > 11) {
+    //   mandaDayInMonth = 35;
+    // }
+    DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
+        selectedDay.day - shamsiDay + 1, 0, 0);
+
+    DateTime endMonth = DateTime(startMonth.year, startMonth.month,
+        startMonth.day + shamsiDayInMonth - 1, 0, 0);
+
+    // data.first.date = startMonth;
+    // data.last.date = endMonth;
+    data.shamsiMonth.info = {
+      'first': startMonth,
+      'last': endMonth,
+      'dayInMonth': shamsiDayInMonth,
+      'month': jalaliDay.month,
+      'year': jalaliDay.year,
+      'monthFaAr': jalaliDay.formatter.mN,
+      'monthEn': MandaEqu.jalaliMonth(jalaliDay.month),
+      'kind': 'shamsi'
+    };
+
+    // print("startDate $startMonth");
+    // print("endDate $endMonth");
+
+    var day = DateFormat.E("en_US").format(startMonth);
+    int beforeDayIndex = getNumDayOdWeek(day);
+    // print(day);
+    // print(beforeDayIndex);
+
+    beforeDateList = beforeLoop(startMonth, beforeDayIndex);
+    // print(beforeDateList);
+
+    monthDateList = monthLoop(startMonth, shamsiDayInMonth);
     // print(monthDateList);
 
     day = DateFormat.E("en_US").format(endMonth);

@@ -131,8 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
     double _sizeRate = MyFontSize.s21(_data);
     String _myTitle = MandaEqu.calendarTitle()[_lang.name];
     _data.gregKind.active = true;
-    _data.mandaKind.active = false;
-    _data.shamsiKind.active = false;
+    _data.mandaKind.active = true;
+    _data.shamsiKind.active = true;
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
@@ -183,15 +183,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
             child: ListView(children: [
           Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-            // if (_data.greg.active == true)
+            // if (_data.gregKind.active == true)
             //   CalendarBuilder().buildTableCalendar("greg", _data, setState),
-            // if (_data.manda.active == true)
+            // if (_data.mandaKind.active == true)
             //   CalendarBuilder().buildTableCalendar("manda", _data, setState),
 
+            // if (_data.gregKind.active == true)
+            //   GregCalendarTable(_data, setState).build(context),
+            // if (_data.mandaKind.active == true)
+            //   MandaCalendarTable(_data).build(context),
             if (_data.gregKind.active == true)
-              GregCalendarTable(_data).build(context),
+              CalendarBuilder().gregCalendarTable(_data, setState),
             if (_data.mandaKind.active == true)
-              MandaCalendarTable(_data).build(context),
+              CalendarBuilder().mandaCalendarTable(_data, setState),
+            if (_data.shamsiKind.active == true)
+              CalendarBuilder().shamsiCalendarTable(_data, setState),
 
             // Container(
             //   margin:
