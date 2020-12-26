@@ -523,7 +523,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       final DateFormat formatter = DateFormat('yyyy/MM/dd');
       formatted = formatter.format(date);
     }
-    formatted = LocalNum.convertEntoFa(formatted, localLang);
+    formatted = LocalNum.convertEntoFaAr(formatted, localLang);
 
     return formatted;
   }

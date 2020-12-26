@@ -3,13 +3,55 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 import 'calendar_month_date.dart';
+import 'local_number.dart';
 import 'main.dart';
+import 'manda_equivalent.dart';
 import 'my_font_size.dart';
+
+class MandaCalendarTable extends State<MyHomePage> {
+  var data;
+  // var setState;
+  List monthList;
+  MandaCalendarTable(data) {
+    this.data = data;
+    // this.setState = setState;
+    this.monthList = CalendarDateBuilder.manda(data);
+    // gregBuilder(monthList, data, setState);
+  }
+
+  static wholeMonthDate(data) {}
+
+  @override
+  Widget build(BuildContext context) {
+    return CalendarBuilder()
+        .buildTableCalendar('manda', this.monthList, this.data, setState);
+  }
+}
+
+class GregCalendarTable extends State<MyHomePage> {
+  var data;
+  // var setState;
+  List monthList;
+  GregCalendarTable(data) {
+    this.data = data;
+    // this.setState = setState;
+    this.monthList = CalendarDateBuilder.greg(data);
+    // gregBuilder(monthList, data, setState);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CalendarBuilder()
+        .buildTableCalendar('greg', this.monthList, this.data, setState);
+  }
+}
 
 class CalendarBuilder extends State<MyHomePage> {
   double _cellWidth;
   double _divecWidth;
   DateTime _selectedDay;
+  DateTime _startOfMonth;
+  DateTime _endOfMonth;
   var _sizeRate;
   DateTime _today;
   String _local;
@@ -22,7 +64,7 @@ class CalendarBuilder extends State<MyHomePage> {
   }
 
   @override
-  Widget buildTableCalendar(data, setState) {
+  Widget buildTableCalendar(kind, monthList, data, setState) {
     print('CALLBACK: _onCalendarCreated');
     _setState = setState;
     _cellWidth = MyFontSize.cellWidth(data);
@@ -32,16 +74,18 @@ class CalendarBuilder extends State<MyHomePage> {
     _today = _selectedDay;
     _local = data.lang.name;
     _data = data;
-    List monthList;
-    print('_selectedDay: $_selectedDay');
 
-    // String kind = data.manda.name;
+    // List monthData;
+    // List monthList;
+    // print('_selectedDay: $_selectedDay');
 
-    if (data.greg.active == true) {
-      monthList = CalendarDateBuilder.greg(_selectedDay);
-    } else if (data.manda.active == true) {
-      monthList = CalendarDateBuilder.manda(_selectedDay);
-    }
+    // // String kind = data.manda.name;
+
+    // if (kind == "greg") {
+    //   monthList = CalendarDateBuilder.greg(_data);
+    // } else if (kind == "manda") {
+    //   monthList = CalendarDateBuilder.manda(_data);
+    // }
 
     // print(monthList);
     // print("monthList #############");
@@ -49,7 +93,7 @@ class CalendarBuilder extends State<MyHomePage> {
     // DateTime selectedDay = DateTime(today.year, today.month, today.day, 0, 0);
 
     return Column(children: <Widget>[
-      if (monthList.length > 6) _buildYearMonthHeader(monthList[20][0]),
+      if (monthList.length > 6) _buildYearMonthHeader(kind),
       if (monthList.length > 6)
         _buildDayNameHeader(monthList.getRange(7, 14).toList()),
       if (monthList.length > 6)
@@ -69,7 +113,7 @@ class CalendarBuilder extends State<MyHomePage> {
     ]);
   }
 
-  Widget _buildYearMonthHeader(DateTime first) {
+  Widget _buildYearMonthHeader(kind) {
     // var _sizeRate = MyFontSize.s21(data);
     return GestureDetector(
         child: Row(
@@ -78,14 +122,14 @@ class CalendarBuilder extends State<MyHomePage> {
           icon: Icon(Icons.chevron_left, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              onVisibleMonthLeft(first, _data);
+              onVisibleMonthLeft(_data);
             });
           },
         ),
         Container(
           width: _divecWidth - 100,
           child: Text(
-            _getYearMonthHeader(first, _local),
+            _getYearMonthHeader(kind, _data),
             textAlign: TextAlign.center,
           ),
         ),
@@ -93,7 +137,7 @@ class CalendarBuilder extends State<MyHomePage> {
           icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              onVisibleMonthRight(first, _data);
+              onVisibleMonthRight(_data);
             });
           },
         ),
@@ -166,19 +210,55 @@ class CalendarBuilder extends State<MyHomePage> {
     // .toList());
   }
 
-  _getYearMonthHeader(date, locale) {
+  _getYearMonthHeader(kind, data) {
     var day;
-    // print(date);
-    // if (locale == 'ar') {
-    //   var monthEn = DateFormat.MMMM('en_US').format(date);
-    //   var yearAr = DateFormat.y(locale).format(date);
-    //   var monthAr = MandaEqu.changeMonthFormate(monthEn);
-    //   day = '$monthAr $yearAr';
-    // } else {
-    //   day = DateFormat.yMMMM(locale).format(date);
-    // }
-    // // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-    day = DateFormat.yMMMM(locale).format(date);
+    print("greg ${data.gregMonth.info['kind']}");
+    print("manda ${data.mandaMonth.info['kind']}");
+
+    if (kind == 'greg') {
+      day = gregHeaderBuilder(data);
+    } else if (kind == 'manda') {
+      day = mandaHeaderBuilder(data);
+    } else {
+      day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
+    }
+
+    return day;
+  }
+
+  static gregHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    DateTime date = data.gregMonth.info['first'];
+    if (local == 'ar') {
+      var monthEn = DateFormat.MMMM('en_US').format(date);
+      var yearAr = DateFormat.y(local).format(date);
+      var monthAr = MandaEqu.changeMonthFormate(monthEn);
+      day = '$monthAr $yearAr';
+    } else {
+      day = DateFormat.yMMMM(local).format(date);
+    }
+    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
+    // print("greg day $day");
+    return day;
+  }
+
+  static mandaHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    if (local == 'en_US') {
+      day =
+          "${data.mandaMonth.info['monthEn']}\n${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
+    } else if (local == 'ar') {
+      day =
+          "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['adam']} / ${data.mandaMonth.info['yahya']}";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else {
+      day =
+          "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
+      day = LocalNum.convertEntoFaAr(day, local);
+    }
+    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
     return day;
   }
 
@@ -253,7 +333,7 @@ class CalendarBuilder extends State<MyHomePage> {
             child: Text(
               // "t",
               // DateFormat.d(local).format(dateCellText).toString(),
-              labelCellText,
+              LocalNum.convertEntoFaAr(labelCellText, _data.lang.name),
               textAlign: TextAlign.center,
               style: _builderTextStyle(dateCellText),
             ),
@@ -284,10 +364,11 @@ class CalendarBuilder extends State<MyHomePage> {
 
   _dayDecorationBuilder(cellText) {
     var dayColor;
-    // print("_today $_today");
+    // print("_today ${_data.today}");
+    // print("cellText $cellText");
     if (_selectedDay == cellText) {
       dayColor = Colors.black54;
-    } else if (_today == cellText) {
+    } else if (_data.today == cellText) {
       dayColor = Colors.brown[100];
     } else {
       dayColor = Colors.white12;
@@ -321,16 +402,18 @@ class CalendarBuilder extends State<MyHomePage> {
     print('_onDayLogPressed $cellText');
   }
 
-  static onVisibleMonthLeft(selectedDay, data) {
+  static onVisibleMonthLeft(data) {
     print('CALLBACK: _onVisibleDaysChanged');
+    DateTime selectedDay = data.selected.date;
     // print('_onVisibleMonthLeft $selectedDay');
     // _selectedDay = DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
     data.selected.date =
         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
   }
 
-  static onVisibleMonthRight(selectedDay, data) {
+  static onVisibleMonthRight(data) {
     print('CALLBACK: _onVisibleDaysChanged');
+    DateTime selectedDay = data.selected.date;
     // print('_onVisibleMonthRight $selectedDay');
     // _selectedDay = DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
     data.selected.date =

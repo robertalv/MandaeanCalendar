@@ -13,10 +13,16 @@ import 'my_color.dart';
 import 'user_set.dart';
 
 LocalLang _lang = new LocalLang();
-MandaCalendar _manda = new MandaCalendar();
-GregCalendar _greg = new GregCalendar();
-ShamsiCalendar _shamsi = new ShamsiCalendar();
+MandaCalendarActive _manda = new MandaCalendarActive();
+GregCalendarActive _greg = new GregCalendarActive();
+ShamsiCalendarActive _shamsi = new ShamsiCalendarActive();
 Selected _selected = new Selected();
+StartOfMonth _first = new StartOfMonth();
+EndOfMonth _last = new EndOfMonth();
+GregMonthInfo _gregMonth = new GregMonthInfo();
+MandaMonthInfo _mandaMonth = new MandaMonthInfo();
+ShamsiMonthInfo _shamsiMonth = new ShamsiMonthInfo();
+// CalendarActiveKind _calendarActive = new CalendarActiveKind();
 DivecSize _divec = new DivecSize();
 Data _data = new Data();
 Map _myColorSelection = MyColor.selection();
@@ -46,15 +52,25 @@ class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _data.lang = _lang;
-    _data.greg = _greg;
-    _data.manda = _manda;
-    _data.shamsi = _shamsi;
+    _data.gregKind = _greg;
+    _data.mandaKind = _manda;
+    _data.shamsiKind = _shamsi;
     _data.selected = _selected;
+    _data.first = _first;
+    _data.last = _last;
+    _data.gregMonth = _gregMonth;
+    _data.mandaMonth = _mandaMonth;
+    _data.shamsiMonth = _shamsiMonth;
+    // _data.calendarActive = _calendarActive;
+    _data.gregMonth.info = {};
+    _data.mandaMonth.info = {};
+    _data.shamsiMonth.info = {};
     _lang.name = "en_US";
     _greg.active = true;
     _manda.active = false;
     _shamsi.active = false;
     _selected.date = _selectedDay;
+    _data.today = _selectedDay;
 
     print(_selected.date);
     print(_data.selected.date);
@@ -114,9 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _cellWidth = MyFontSize.cellWidth(_data);
     double _sizeRate = MyFontSize.s21(_data);
     String _myTitle = MandaEqu.calendarTitle()[_lang.name];
-    // _data.greg.active = true;
-    // _data.manda.active = false;
-    // _data.shamsi.active = false;
+    _data.gregKind.active = true;
+    _data.mandaKind.active = false;
+    _data.shamsiKind.active = false;
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
@@ -148,26 +164,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: GestureDetector(
         onHorizontalDragEnd: (dragEndDetails) {
-          print('Move page ');
-          print(dragEndDetails.primaryVelocity);
+          // print('Move page ');
+          // print(dragEndDetails.primaryVelocity);
           if (dragEndDetails.primaryVelocity < 0) {
             // Page forwards
-            print('Move page forwards');
+            // print('Move page forwards');
             setState(() {
-              CalendarBuilder.onVisibleMonthRight(_data.selected.date, _data);
+              CalendarBuilder.onVisibleMonthRight(_data);
             });
           } else if (dragEndDetails.primaryVelocity > 0) {
             // Page backwards
-            print('Move page backwards');
+            // print('Move page backwards');
             setState(() {
-              CalendarBuilder.onVisibleMonthLeft(_data.selected.date, _data);
+              CalendarBuilder.onVisibleMonthLeft(_data);
             });
           }
         },
         child: Center(
             child: ListView(children: [
           Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-            CalendarBuilder().buildTableCalendar(_data, setState),
+            // if (_data.greg.active == true)
+            //   CalendarBuilder().buildTableCalendar("greg", _data, setState),
+            // if (_data.manda.active == true)
+            //   CalendarBuilder().buildTableCalendar("manda", _data, setState),
+
+            if (_data.gregKind.active == true)
+              GregCalendarTable(_data).build(context),
+            if (_data.mandaKind.active == true)
+              MandaCalendarTable(_data).build(context),
 
             // Container(
             //   margin:

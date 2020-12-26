@@ -10,7 +10,19 @@ class LocalLang {
   }
 }
 
-class MandaCalendar {
+// class CalendarActiveKind {
+//   String value;
+
+//   String get kind {
+//     return value;
+//   }
+
+//   set kind(String kind) {
+//     this.value = kind;
+//   }
+// }
+
+class MandaCalendarActive {
   bool kind;
 
   bool get active {
@@ -22,7 +34,7 @@ class MandaCalendar {
   }
 }
 
-class GregCalendar {
+class GregCalendarActive {
   bool kind;
 
   bool get active {
@@ -34,7 +46,7 @@ class GregCalendar {
   }
 }
 
-class ShamsiCalendar {
+class ShamsiCalendarActive {
   bool kind;
 
   bool get active {
@@ -43,10 +55,70 @@ class ShamsiCalendar {
 
   set active(bool active) {
     this.kind = active;
+  }
+}
+
+class MandaMonthInfo {
+  Map value;
+
+  Map get info {
+    return value;
+  }
+
+  set info(Map info) {
+    this.value = info;
+  }
+}
+
+class GregMonthInfo {
+  Map value;
+
+  Map get info {
+    return value;
+  }
+
+  set info(Map info) {
+    this.value = info;
+  }
+}
+
+class ShamsiMonthInfo {
+  Map value;
+
+  Map get info {
+    return value;
+  }
+
+  set info(Map info) {
+    this.value = info;
   }
 }
 
 class Selected {
+  DateTime value;
+
+  DateTime get date {
+    return value;
+  }
+
+  set date(DateTime date) {
+    this.value = date;
+  }
+}
+
+class StartOfMonth {
+  DateTime value;
+
+  DateTime get date {
+    return value;
+  }
+
+  set date(DateTime date) {
+    this.value = date;
+  }
+}
+
+class EndOfMonth {
   DateTime value;
 
   DateTime get date {
@@ -73,16 +145,28 @@ class DivecSize {
 class Data {
   var lang;
   var divecSize;
-  var manda;
-  var greg;
-  var shamsi;
+  var mandaKind;
+  var gregKind;
+  var shamsiKind;
   var selected;
+  DateTime today;
+  var last;
+  var first;
+  var mandaMonth;
+  var gregMonth;
+  var shamsiMonth;
 
   Data(
       {this.lang,
+      this.today,
+      this.last,
+      this.first,
+      this.mandaMonth,
+      this.gregMonth,
+      this.shamsiMonth,
       this.divecSize,
       this.selected,
-      this.manda,
-      this.greg,
-      this.shamsi});
+      this.mandaKind,
+      this.gregKind,
+      this.shamsiKind});
 }

@@ -14,8 +14,8 @@ class MandaFormatedDateBuilder {
   MandaFormatedDateBuilder(DateTime selectedDay, String localLang) {
     List mandaFormated = convertSelectedDayToMandaDay(selectedDay, localLang);
 
-    this.fullYearEnFa = LocalNum.convertEntoFa(mandaFormated[1], localLang);
-    this.fullDay = LocalNum.convertEntoFa(mandaFormated[0], localLang);
+    this.fullYearEnFa = LocalNum.convertEntoFaAr(mandaFormated[1], localLang);
+    this.fullDay = LocalNum.convertEntoFaAr(mandaFormated[0], localLang);
     this.localLang = localLang;
   }
 

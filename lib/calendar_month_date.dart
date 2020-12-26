@@ -1,29 +1,75 @@
 import 'package:intl/intl.dart';
 
+import 'manda_date.dart';
+
 class CalendarDateBuilder {
   // DateTime selectedDay;
+  // DateTime today;
+  // List mandaMonthDate;
+  // List gregMonthDate;
+  // DateTime endOfMonth;
+  // DateTime startOfMonth;
 
-  // GregDayBuilder(selectedDay) {
+  // CalendarDateBuilder(selectedDay) {
+
   //   this.selectedDay = selectedDay;
+  //   this.today = getToday();
+  //   this.gregMonthDate = greg(selectedDay);
+  //   this.endOfMonth =  _start.date;
+  //   this.startOfMonth = startOfMonth;
+
   // }
 
-  static manda(DateTime selectedDay) {
+  // static getToday() {
+  //   DateTime todayNow = DateTime.now();
+  //   DateTime today =
+  //       DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
+  //   return today;
+  // }
+
+  static manda(var data) {
     print('CALLBACK: _MandaDateBuilder');
+    DateTime selectedDay = data.selected.date;
+    MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
+
     List beforeDateList = [];
     List monthDateList = [];
     List afterDateList = [];
     List allDateList = [];
     // List allDateLebelList = [];
     DateTime today = selectedDay;
-    var mandaDay = 11;
-    var mandaDayInMonth = 30;
+
     // // 11 Sartana(10) == 24 Dec(12)
     // today = DateTime(2021, 7, 1, 0, 0);
     // print("selectedDay $selectedDay");
+    // var mandaDay = 11;
+    // var mandaDayInMonth = 30;
+
+    var mandaDay = mandaDate.day;
+    var mandaDayInMonth = 30;
+    if (mandaDate.month > 11) {
+      mandaDayInMonth = 35;
+    }
     DateTime startMonth =
         DateTime(today.year, today.month, today.day - mandaDay + 1, 0, 0);
+
     DateTime endMonth = DateTime(startMonth.year, startMonth.month,
         startMonth.day + mandaDayInMonth - 1, 0, 0);
+
+    // data.first.date = startMonth;
+    // data.last.date = endMonth;
+    data.mandaMonth.info = {
+      'first': startMonth,
+      'last': endMonth,
+      'dayInMonth': mandaDayInMonth,
+      'month': mandaDate.month,
+      'yahya': mandaDate.yearYahya,
+      'adam': mandaDate.yearAdam,
+      'monthFaAr': mandaDate.monthFa,
+      'monthEn': mandaDate.monthEn,
+      'kind': 'manda'
+    };
+
     // print("startDate $startMonth");
     // print("endDate $endMonth");
 
@@ -54,8 +100,9 @@ class CalendarDateBuilder {
     return allDateList;
   }
 
-  static greg(DateTime selectedDay) {
+  static greg(var data) {
     print('CALLBACK: _GregDateBuilder');
+    DateTime selectedDay = data.selected.date;
     List beforeDateList = [];
     List monthDateList = [];
     List afterDateList = [];
@@ -64,6 +111,13 @@ class CalendarDateBuilder {
     // today = DateTime(2021, 7, 1, 0, 0);
     DateTime startMonth = DateTime(today.year, today.month, 1, 0, 0);
     DateTime endMonth = DateTime(today.year, today.month + 1, 0, 0, 0);
+    // data.first.date = startMonth;
+    // data.last.date = endMonth;
+    data.gregMonth.info = {
+      'first': startMonth,
+      'last': endMonth,
+      'kind': 'greg'
+    };
     var day = DateFormat.E("en_US").format(startMonth);
     int beforeDayIndex = getNumDayOdWeek(day);
 
@@ -142,5 +196,29 @@ class CalendarDateBuilder {
       "Sat": 6,
     };
     return daysWeek[day];
+  }
+}
+
+class StartOfMonth {
+  DateTime value;
+
+  DateTime get date {
+    return value;
+  }
+
+  set date(DateTime date) {
+    this.value = date;
+  }
+}
+
+class EndOfMonth {
+  DateTime value;
+
+  DateTime get date {
+    return value;
+  }
+
+  set date(DateTime date) {
+    this.value = date;
   }
 }

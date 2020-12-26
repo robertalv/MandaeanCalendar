@@ -384,7 +384,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
         beforeTime = beforeTime - 24;
       }
       textBeforeTime = " " + beforeTime.toString() + ':00  ';
-      textBeforeTime = LocalNum.convertEntoFa(textBeforeTime, localLang);
+      textBeforeTime = LocalNum.convertEntoFaAr(textBeforeTime, localLang);
 
       textBeforeMsg = beforeMsg;
     }
@@ -954,7 +954,8 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
     var mandaDayMonth = '';
 
     if (_dateM != '') {
-      var mandaDateList = LocalNum.convertEntoFa(_dateM, localLang).split(",");
+      var mandaDateList =
+          LocalNum.convertEntoFaAr(_dateM, localLang).split(",");
       mandaYear = mandaDateList[0];
       mandaDayMonth = mandaDateList[1] + ",  " + mandaDateList[2];
     }
@@ -1080,7 +1081,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                       fontSize: _fontSize, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  LocalNum.convertEntoFa(_dateS, localLang),
+                  LocalNum.convertEntoFaAr(_dateS, localLang),
                   style: TextStyle(fontSize: _fontSize),
                 ),
                 // ############
