@@ -163,44 +163,49 @@ class _MyHomePageState extends State<MyHomePage> {
         child: topIconDrawer(context, _lang.name),
       ),
       body: GestureDetector(
-        onHorizontalDragEnd: (dragEndDetails) {
-          // print('Move page ');
-          // print(dragEndDetails.primaryVelocity);
-          if (dragEndDetails.primaryVelocity < 0) {
-            // Page forwards
-            // print('Move page forwards');
-            setState(() {
-              CalendarBuilder.onVisibleMonthRight(_data);
-            });
-          } else if (dragEndDetails.primaryVelocity > 0) {
-            // Page backwards
-            // print('Move page backwards');
-            setState(() {
-              CalendarBuilder.onVisibleMonthLeft(_data);
-            });
-          }
-        },
-        child: Center(
-            child: ListView(children: [
-          Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-            if (_data.gregKind.active == true)
-              CalendarBuilder().gregCalendarTable(_data, setState),
-            if (_data.mandaKind.active == true)
-              CalendarBuilder().mandaCalendarTable(_data, setState),
-            if (_data.shamsiKind.active == true)
-              CalendarBuilder().shamsiCalendarTable(_data, setState),
-
-            // Container(
-            //   margin:
-            //       // EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
-            //       EdgeInsets.symmetric(horizontal: 4, vertical: 0),
-            //   child: buildTableCalendar(_data),
-            // ),
-            Text("test111")
-          ]),
-          Text("test")
-        ])),
-      ),
+          onHorizontalDragEnd: (dragEndDetails) {
+            // print('Move page ');
+            // print(dragEndDetails.primaryVelocity);
+            if (dragEndDetails.primaryVelocity < 0) {
+              // Page forwards
+              // print('Move page forwards');
+              setState(() {
+                CalendarBuilder.onVisibleMonthRight(_data);
+              });
+            } else if (dragEndDetails.primaryVelocity > 0) {
+              // Page backwards
+              // print('Move page backwards');
+              setState(() {
+                CalendarBuilder.onVisibleMonthLeft(_data);
+              });
+            }
+          },
+          child: Center(
+            child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: ((_data.divecSize.width -
+                            MyFontSize.displayWidth(_data)) /
+                        2),
+                    vertical: 0),
+                child: ListView(children: [
+                  Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+                    if (_data.gregKind.active == true)
+                      CalendarBuilder().gregCalendarTable(_data, setState),
+                    if (_data.mandaKind.active == true)
+                      CalendarBuilder().mandaCalendarTable(_data, setState),
+                    if (_data.shamsiKind.active == true)
+                      CalendarBuilder().shamsiCalendarTable(_data, setState),
+                    // Container(
+                    //   margin:
+                    //       // EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
+                    //
+                    //   child: Text("test111"),
+                    // ),
+                    Text("test111")
+                  ]),
+                  Text("test")
+                ])),
+          )),
     );
   }
 }

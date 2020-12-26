@@ -104,4 +104,26 @@ class MyFontSize {
     }
     return size;
   }
+
+  static displayWidth(var data) {
+    double size;
+    double divecWidth = data.divecSize.width;
+    if (divecWidth > 700) {
+      size = 700;
+    } else {
+      size = divecWidth;
+    }
+    return size;
+  }
+
+  static headerMonthYearWidth(var data) {
+    double size = cellWidth(data);
+    double divecWidth = data.divecSize.width;
+    if (divecWidth > 700) {
+      size = 470;
+    } else {
+      size = size * 4.5;
+    }
+    return size;
+  }
 }

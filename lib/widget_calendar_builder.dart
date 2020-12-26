@@ -59,6 +59,7 @@ class CalendarBuilder extends MyHomePage {
   double _cellWidth;
   double _divecWidth;
   DateTime _selectedDay;
+  double _displayWidth;
   // List _mandaMonthDate;
   // List _gregMonthDate = [];
   // List _shamsiMonthDate = [];
@@ -100,6 +101,7 @@ class CalendarBuilder extends MyHomePage {
     _cellWidth = MyFontSize.cellWidth(data);
     _sizeRate = MyFontSize.s21(data);
     _divecWidth = data.divecSize.width;
+    _displayWidth = MyFontSize.displayWidth(data);
     _selectedDay = data.selected.date;
     // _today = _selectedDay;
     _local = data.lang.name;
@@ -123,6 +125,10 @@ class CalendarBuilder extends MyHomePage {
     // DateTime selectedDay = DateTime(today.year, today.month, today.day, 0, 0);
 
     return Column(children: <Widget>[
+      // if (monthList.length > 6)
+      //   Center(
+      //     child: _buildYearMonthHeader(kind),
+      //   ),
       if (monthList.length > 6) _buildYearMonthHeader(kind),
       if (monthList.length > 6)
         _buildDayNameHeader(monthList.getRange(7, 14).toList()),
@@ -146,7 +152,9 @@ class CalendarBuilder extends MyHomePage {
   Widget _buildYearMonthHeader(kind) {
     // var _sizeRate = MyFontSize.s21(data);
     return GestureDetector(
-        child: Row(
+        child: Center(
+            child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           icon: Icon(Icons.chevron_left, size: (25.0 * _sizeRate)),
@@ -157,7 +165,7 @@ class CalendarBuilder extends MyHomePage {
           },
         ),
         Container(
-          width: _divecWidth - 100,
+          width: MyFontSize.headerMonthYearWidth(_data),
           child: Text(
             _getYearMonthHeader(kind, _data),
             textAlign: TextAlign.center,
@@ -172,7 +180,7 @@ class CalendarBuilder extends MyHomePage {
           },
         ),
       ],
-    ));
+    )));
   }
 
   Widget _buildDayNameHeader(List rowText) {
