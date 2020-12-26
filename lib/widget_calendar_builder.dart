@@ -350,7 +350,7 @@ class CalendarBuilder extends MyHomePage {
     return Container(
       // margin: const EdgeInsets.all(daysMargin),
       // alignment: Alignment.center,
-      decoration: _dayDecorationBuilder(dateCellText),
+      decoration: _dayDecorationBuilder(cellText),
       width: _cellWidth,
       constraints: BoxConstraints(
         // minHeight: 35.0 * _sizeRate,
@@ -408,9 +408,9 @@ class CalendarBuilder extends MyHomePage {
     var dayColor;
     // print("_today ${_data.today}");
     // print("cellText $cellText");
-    if (_selectedDay == cellText) {
+    if (_selectedDay == cellText[0]) {
       dayColor = Colors.black54;
-    } else if (_data.today == cellText) {
+    } else if (_data.today == cellText[0] && cellText[1] != "") {
       dayColor = Colors.brown[100];
     } else {
       dayColor = Colors.white12;
