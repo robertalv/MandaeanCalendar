@@ -128,6 +128,58 @@ class MyFontSize {
   }
 }
 
+class TableSize {
+  double divecWidth;
+  double cellWidth;
+  double displayWidth;
+  double sizeRate;
+  double minHeightCell;
+  double headerMonthYear;
+  double headerMonthYearWidth;
+  double headerDayWeek;
+  double marginDayRow;
+  double dayNum;
+  double f8040;
+  double f5025;
+  double marginH;
+  TableSize(data) {
+    divecWidth = data.divecSize.width;
+    if (divecWidth > 700) {
+      cellWidth = 100.0;
+      displayWidth = 700.0;
+      minHeightCell = 70.0;
+      sizeRate = 2;
+      headerMonthYear = 40.0;
+      headerMonthYearWidth = 470;
+      headerDayWeek = 24.0;
+      marginDayRow = 20.0;
+      dayNum = 40.0;
+      f8040 = 80;
+      f5025 = 50;
+      marginH = (divecWidth - 700) / 2;
+    } else {
+      cellWidth = divecWidth / 7;
+      displayWidth = divecWidth;
+      minHeightCell = 40.0;
+      sizeRate = 1;
+      headerMonthYear = 18.0;
+      headerMonthYearWidth = cellWidth * 4.5;
+      headerDayWeek = 16.0;
+      marginDayRow = 2.0;
+      dayNum = 22.0;
+      f5025 = 25;
+      marginH = 0;
+    }
+    // this.divecWidth = divecWidth;
+    // this.cellWidth = cellWidth;
+    // this.displayWidth = displayWidth;
+    // this.sizeRate = sizeRate;
+    // this.f8040 = f8040;
+    // this.f5025 = f5025;
+    // this.marginH = marginH;
+  }
+}
+
 class MainSize {
   double f8040;
   double f5025;

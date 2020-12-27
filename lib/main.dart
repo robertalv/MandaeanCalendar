@@ -358,8 +358,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // ###############################################################
     // ###############################################################
 
-    _data.gregKind.active = false;
-    _data.mandaKind.active = false;
+    _data.gregKind.active = true;
+    _data.mandaKind.active = true;
     _data.shamsiKind.active = true;
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
@@ -401,7 +401,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // print('Move page forwards');
               setState(() {
                 // CalendarBuilder.onVisibleMonthRight(_data);
-                MyHomePage.onVisibleGregLeft(_data);
+                MyHomePage.onVisibleGregRight(_data);
               });
             } else if (dragEndDetails.primaryVelocity > 0) {
               // print('Move page backwards');

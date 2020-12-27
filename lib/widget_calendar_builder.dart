@@ -18,14 +18,16 @@ class CalendarBuilder extends MyHomePage {
   double _displayWidth;
   var _data;
   var data;
-  Map<DateTime, List> _events;
+  static TableSize _tableSize;
+  static Map<DateTime, List> _events;
   static Map<DateTime, List> _holidays;
-  static String _farid;
+
   CalendarBuilder(holidays, events, data) {
     this.data = data;
     _data = this.data;
     _events = events;
     _holidays = holidays;
+    _tableSize = new TableSize(_data);
 
     // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
     //     .eventsForWholeYear;
@@ -84,10 +86,7 @@ class CalendarBuilder extends MyHomePage {
     _data = data;
 
     return Column(children: <Widget>[
-      // if (monthList.length > 6)
-      //   Center(
-      //     child: _buildYearMonthHeader(kind),
-      //   ),
+      Padding(padding: EdgeInsets.only(top: 4)),
       if (monthList.length > 6) _buildYearMonthHeader(kind),
       if (monthList.length > 6)
         _buildDayNameHeader(monthList.getRange(0, 7).toList()),
@@ -126,7 +125,7 @@ class CalendarBuilder extends MyHomePage {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          icon: Icon(Icons.chevron_left, size: (25.0 * _sizeRate)),
+          icon: Icon(Icons.chevron_left, size: (_tableSize.f5025)),
           onPressed: () {
             _setState(() {
               MyHomePage.onVisibleGregLeft(_data);
@@ -134,14 +133,15 @@ class CalendarBuilder extends MyHomePage {
           },
         ),
         Container(
-          width: MyFontSize.headerMonthYearWidth(_data),
+          width: _tableSize.headerMonthYearWidth,
           child: Text(
             _getYearMonthHeader(kind, _data),
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: _tableSize.headerMonthYear),
           ),
         ),
         IconButton(
-          icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
+          icon: Icon(Icons.chevron_right, size: (_tableSize.f5025)),
           onPressed: () {
             _setState(() {
               // onVisibleMonthRight(_data);
@@ -163,7 +163,7 @@ class CalendarBuilder extends MyHomePage {
         IconButton(
           icon: Icon(
             Icons.chevron_left,
-            size: (25.0 * _sizeRate),
+            size: (_tableSize.f5025),
             color: Colors.green,
           ),
           onPressed: () {
@@ -177,10 +177,11 @@ class CalendarBuilder extends MyHomePage {
           child: Text(
             _getYearMonthHeader(kind, _data),
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: _tableSize.headerMonthYear),
           ),
         ),
         IconButton(
-          icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
+          icon: Icon(Icons.chevron_right, size: (_tableSize.f5025)),
           onPressed: () {
             _setState(() {
               MyHomePage.onVisibleMandaRight(_data);
@@ -201,7 +202,7 @@ class CalendarBuilder extends MyHomePage {
         IconButton(
           icon: Icon(
             Icons.chevron_left,
-            size: (25.0 * _sizeRate),
+            size: (_tableSize.f5025),
             color: Colors.red,
           ),
           onPressed: () {
@@ -215,10 +216,11 @@ class CalendarBuilder extends MyHomePage {
           child: Text(
             _getYearMonthHeader(kind, _data),
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: _tableSize.headerMonthYear),
           ),
         ),
         IconButton(
-          icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
+          icon: Icon(Icons.chevron_right, size: (_tableSize.f5025)),
           onPressed: () {
             _setState(() {
               MyHomePage.onVisibleShamsiRight(_data);
@@ -230,36 +232,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildDayNameHeader(List rowText) {
-    [
-      'Sun',
-      'Mon',
-      'Tue',
-      'Wed',
-      'Thu',
-      'Fri',
-      'Sat',
-    ];
-    [
-      'شنبه',
-      'جمعه',
-      'پنج شنبه',
-      'چهار شنبه',
-      'سه ‌شنبه',
-      'دو شنبه',
-      'یک شنبه',
-    ];
-
-    [
-      'الأحد',
-      'الاثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعة',
-      'السبت',
-    ];
-    // rowText.sort();
-    // print(rowText);
     List rowTextSort = rowText;
 
     if (_local != "en_US") {
@@ -269,12 +241,9 @@ class CalendarBuilder extends MyHomePage {
     // print(rowTextSort);
 
     return Row(
-        children:
-            // rowText.map((cellText) => Text(cellText.toString())).toList());
-            rowTextSort
-                .map((cellText) => _buildDayNameCell(cellText, _data))
-                .toList());
-    // .toList());
+        children: rowTextSort
+            .map((cellText) => _buildDayNameCell(cellText, _data))
+            .toList());
   }
 
   Widget _buildDateRow(List rowText) {
@@ -282,9 +251,7 @@ class CalendarBuilder extends MyHomePage {
     if (_local != "en_US") {
       rowTextSort = rowText.reversed.toList();
     }
-
     // print(rowTextSort);
-
     return Row(
         children:
             rowTextSort.map((cellText) => _buildDateCell(cellText)).toList());
@@ -324,8 +291,8 @@ class CalendarBuilder extends MyHomePage {
   //   // .toList());
   // }
 
-  static findMyIcon(myEvent, _sizeRate) {
-    MyIcon myIcon = MyIcon(_sizeRate);
+  static findMyIcon(myEvent) {
+    MyIcon myIcon = MyIcon(_tableSize.sizeRate);
 
     if ((myEvent.runtimeType.toString()).contains('List')) {
       myEvent = myEvent[0];
@@ -363,14 +330,14 @@ class CalendarBuilder extends MyHomePage {
     // print(myEvents.length);
 
     if (myEvents.length == 1) {
-      child1 = findMyIcon(myEvents[0], _sizeRate);
+      child1 = findMyIcon(myEvents[0]);
     } else if (myEvents.length == 2) {
-      child1 = findMyIcon(myEvents[1], _sizeRate);
-      child2 = findMyIcon(myEvents[0], _sizeRate);
+      child1 = findMyIcon(myEvents[1]);
+      child2 = findMyIcon(myEvents[0]);
     } else if (myEvents.length == 3) {
-      child1 = findMyIcon(myEvents[0], _sizeRate);
-      child2 = findMyIcon(myEvents[2], _sizeRate);
-      child3 = findMyIcon(myEvents[1], _sizeRate);
+      child1 = findMyIcon(myEvents[0]);
+      child2 = findMyIcon(myEvents[2]);
+      child3 = findMyIcon(myEvents[1]);
     }
 
     return Container(
@@ -471,6 +438,7 @@ class CalendarBuilder extends MyHomePage {
             child: Text(
               _getDayHeader(dateCellText),
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: _tableSize.headerDayWeek),
             ),
           ))
         ],
@@ -486,12 +454,13 @@ class CalendarBuilder extends MyHomePage {
     return Container(
       // margin: const EdgeInsets.all(daysMargin),
       // alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+      margin: EdgeInsets.symmetric(
+          horizontal: 0, vertical: _tableSize.marginDayRow),
       decoration: _dayDecorationBuilder(cellText),
-      width: _cellWidth,
+      width: _tableSize.cellWidth,
       constraints: BoxConstraints(
-        // minHeight: 35.0 * _sizeRate,
-        minHeight: 75.0,
+        minHeight: _tableSize.minHeightCell,
+        // minHeight: 75.0,
       ),
       child: Column(children: [
         Row(
@@ -531,15 +500,14 @@ class CalendarBuilder extends MyHomePage {
   _getDayHeader(DateTime date) {
     var day;
 
-    // if (local == 'fa_IR') {
-    //   var dayFa = DateFormat.EEEE(local).format(date);
+    if (_local == 'fa_IR') {
+      var dayFa = DateFormat.EEEE(_local).format(date);
 
-    //   day = MandaEqu.changeDayFormate(dayFa);
-    // } else {
-    //   day = DateFormat.E(local).format(date);
-    // }
-    // // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-    day = DateFormat.E(_local).format(date);
+      day = MandaEqu.changeDayFormate(dayFa);
+    } else {
+      day = DateFormat.E(_local).format(date);
+    }
+    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
 
     return day;
   }
@@ -570,7 +538,7 @@ class CalendarBuilder extends MyHomePage {
       dayColor = Colors.black;
     }
     // return TextStyle(color: dayColor, fontSize: _daysFontSize);
-    return TextStyle(color: dayColor, fontSize: 40);
+    return TextStyle(color: dayColor, fontSize: _tableSize.dayNum);
   }
 
   static onDayTap(cellText, data) {
