@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'manda_events.dart';
@@ -105,45 +106,82 @@ class MyHomePage extends StatefulWidget {
     print(_holidays);
   }
 
-  static void onVisibleMonthLeft(data) {
+  static void _onVisibleMonth(
+      data, DateTime dateFaAr, DateTime date, String leftRight) {
+    print('CALLBACK: _onVisibleMonth');
+    DateTime selectedDay = data.selected.date;
+    int monthChangeYear;
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
+      data.selected.date = dateFaAr;
+      monthChangeYear = 1;
+      if (leftRight == 'right') {
+        monthChangeYear = 12;
+      }
+    } else {
+      data.selected.date = date;
+      monthChangeYear = 12;
+      if (leftRight == 'right') {
+        monthChangeYear = 1;
+      }
+    }
+
+    selectedDay = data.selected.date;
+    // print(selectedDay);
+    if (selectedDay.month == monthChangeYear) {
+      runHolidaysEvents(selectedDay.year);
+    }
+  }
+
+  static void onVisibleGregLeft(data) {
     print('CALLBACK: _onVisibleMonthLeft');
     DateTime selectedDay = data.selected.date;
 
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    }
+    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
+    //   data.selected.date =
+    //       DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    // } else {
+    //   data.selected.date =
+    //       DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    // }
 
-    selectedDay = data.selected.date;
-    // print(selectedDay);
-    if (selectedDay.month == 12) {
-      runHolidaysEvents(selectedDay.year);
-    }
+    // selectedDay = data.selected.date;
+    // // print(selectedDay);
+    // if (selectedDay.month == 12) {
+    //   runHolidaysEvents(selectedDay.year);
+    // }
+    _onVisibleMonth(
+        data,
+        DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
+        DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
+        'left');
   }
 
-  static onVisibleMonthRight(data) {
+  static onVisibleGregRight(data) {
     print('CALLBACK: _onVisibleMonthRight');
     DateTime selectedDay = data.selected.date;
 
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    }
+    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
+    //   data.selected.date =
+    //       DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    // } else {
+    //   data.selected.date =
+    //       DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    // }
 
-    selectedDay = data.selected.date;
-    // print(selectedDay);
-    if (selectedDay.month == 1) {
-      runHolidaysEvents(selectedDay.year);
-    }
+    // selectedDay = data.selected.date;
+    // // print(selectedDay);
+    // if (selectedDay.month == 1) {
+    //   runHolidaysEvents(selectedDay.year);
+    // }
+    _onVisibleMonth(
+        data,
+        DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
+        DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
+        'right');
   }
 
-  static onVisibleMandaMonthLeft(data) {
+  static onVisibleMandaLeft(data) {
     print('CALLBACK: _onVisibleMandaMonthLeft');
 
     DateTime first = data.mandaMonth.info["first"];
@@ -156,21 +194,24 @@ class MyHomePage extends StatefulWidget {
     if (month == 1) {
       duration = 5;
     }
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(first.year, first.month, first.day - duration, 0, 0);
-    }
+    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
+    //   data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+    // } else {
+    //   data.selected.date =
+    //       DateTime(first.year, first.month, first.day - duration, 0, 0);
+    // }
 
-    DateTime selectedDay = data.selected.date;
-    // print(selectedDay);
-    if (selectedDay.month == 12) {
-      runHolidaysEvents(selectedDay.year);
-    }
+    // DateTime selectedDay = data.selected.date;
+    // // print(selectedDay);
+    // if (selectedDay.month == 12) {
+    //   runHolidaysEvents(selectedDay.year);
+    // }
+
+    _onVisibleMonth(data, DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0), 'left');
   }
 
-  static onVisibleMandaMonthRight(data) {
+  static onVisibleMandaRight(data) {
     print('CALLBACK: _onVisibleMandaMonthRight');
     // DateTime selectedDay = data.selected.date;
     DateTime first = data.mandaMonth.info["first"];
@@ -184,18 +225,55 @@ class MyHomePage extends StatefulWidget {
       duration = 5;
     }
 
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(first.year, first.month, first.day - duration, 0, 0);
-    } else {
-      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    }
+    // if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+    //   data.selected.date =
+    //       DateTime(first.year, first.month, first.day - duration, 0, 0);
+    // } else {
+    //   data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+    // }
 
-    DateTime selectedDay = data.selected.date;
-    // print(selectedDay);
-    if (selectedDay.month == 1) {
-      runHolidaysEvents(selectedDay.year);
-    }
+    // DateTime selectedDay = data.selected.date;
+    // // print(selectedDay);
+    // if (selectedDay.month == 1) {
+    //   runHolidaysEvents(selectedDay.year);
+    // }
+    _onVisibleMonth(
+        data,
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        'right');
+  }
+
+  static onVisibleShamsiLeft(data) {
+    print('CALLBACK: _onVisibleShamsiMonthLeft');
+
+    DateTime first = data.shamsiMonth.info["first"];
+    DateTime last = data.shamsiMonth.info["last"];
+    var jalaliDay = data.shamsiMonth.info["jalaliDay"];
+    // print('old $jalaliDay');
+    jalaliDay = jalaliDay.addMonths(-1);
+    var duration = jalaliDay.monthLength;
+    // print('duration $duration');
+
+    _onVisibleMonth(data, DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0), 'left');
+  }
+
+  static onVisibleShamsiRight(data) {
+    print('CALLBACK: _onVisibleShamsiMonthRight');
+
+    DateTime first = data.shamsiMonth.info["first"];
+    DateTime last = data.shamsiMonth.info["last"];
+    var jalaliDay = data.shamsiMonth.info["jalaliDay"];
+    // print('old $jalaliDay');
+    jalaliDay = jalaliDay.addMonths(-1);
+    var duration = jalaliDay.monthLength;
+
+    _onVisibleMonth(
+        data,
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        'right');
   }
 }
 
@@ -280,8 +358,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // ###############################################################
     // ###############################################################
 
-    _data.gregKind.active = true;
-    _data.mandaKind.active = true;
+    _data.gregKind.active = false;
+    _data.mandaKind.active = false;
     _data.shamsiKind.active = true;
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
@@ -323,13 +401,13 @@ class _MyHomePageState extends State<MyHomePage> {
               // print('Move page forwards');
               setState(() {
                 // CalendarBuilder.onVisibleMonthRight(_data);
-                MyHomePage.onVisibleMonthLeft(_data);
+                MyHomePage.onVisibleGregLeft(_data);
               });
             } else if (dragEndDetails.primaryVelocity > 0) {
               // print('Move page backwards');
               setState(() {
                 // CalendarBuilder.onVisibleMonthLeft(_data);
-                MyHomePage.onVisibleMonthLeft(_data);
+                MyHomePage.onVisibleGregLeft(_data);
               });
             }
           },

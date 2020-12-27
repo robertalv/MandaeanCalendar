@@ -111,6 +111,8 @@ class CalendarBuilder extends MyHomePage {
   _buildYearMonthHeader(kind) {
     if (kind == 'manda') {
       return _buildYearMonthHeaderManda(kind);
+    } else if (kind == 'shamsi') {
+      return _buildYearMonthHeaderShamsi(kind);
     } else {
       return _buildYearMonthHeaderGreg(kind);
     }
@@ -127,7 +129,7 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(Icons.chevron_left, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              MyHomePage.onVisibleMonthLeft(_data);
+              MyHomePage.onVisibleGregLeft(_data);
             });
           },
         ),
@@ -143,7 +145,7 @@ class CalendarBuilder extends MyHomePage {
           onPressed: () {
             _setState(() {
               // onVisibleMonthRight(_data);
-              MyHomePage.onVisibleMonthRight(_data);
+              MyHomePage.onVisibleGregRight(_data);
             });
           },
         ),
@@ -166,7 +168,7 @@ class CalendarBuilder extends MyHomePage {
           ),
           onPressed: () {
             _setState(() {
-              MyHomePage.onVisibleMandaMonthLeft(_data);
+              MyHomePage.onVisibleMandaLeft(_data);
             });
           },
         ),
@@ -181,7 +183,45 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              MyHomePage.onVisibleMandaMonthRight(_data);
+              MyHomePage.onVisibleMandaRight(_data);
+            });
+          },
+        ),
+      ],
+    )));
+  }
+
+  Widget _buildYearMonthHeaderShamsi(kind) {
+    // var _sizeRate = MyFontSize.s21(data);
+    return GestureDetector(
+        child: Center(
+            child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            size: (25.0 * _sizeRate),
+            color: Colors.red,
+          ),
+          onPressed: () {
+            _setState(() {
+              MyHomePage.onVisibleShamsiLeft(_data);
+            });
+          },
+        ),
+        Container(
+          width: MyFontSize.headerMonthYearWidth(_data),
+          child: Text(
+            _getYearMonthHeader(kind, _data),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        IconButton(
+          icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
+          onPressed: () {
+            _setState(() {
+              MyHomePage.onVisibleShamsiRight(_data);
             });
           },
         ),

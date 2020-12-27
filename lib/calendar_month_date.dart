@@ -175,6 +175,7 @@ class CalendarDateBuilder {
     data.shamsiMonth.info = {
       'first': startMonth,
       'last': endMonth,
+      'jalaliDay': jalaliDay,
       'dayInMonth': shamsiDayInMonth,
       'month': jalaliDay.month,
       'year': jalaliDay.year,
@@ -184,7 +185,7 @@ class CalendarDateBuilder {
     };
 
     // print("startDate $startMonth");
-    // print("endDate $endMonth");
+    // print("jalaliDay $jalaliDay");
 
     var day = DateFormat.E("en_US").format(startMonth);
     int beforeDayIndex = getNumDayOdWeek(day);
