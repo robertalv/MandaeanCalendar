@@ -34,6 +34,8 @@ DateTime todayNow = DateTime.now();
 DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
 DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
 double _cellWidth;
+Map<DateTime, List> _events;
+Map<DateTime, List> _holidays;
 
 // Map<DateTime, List> _holidays;
 // Map<DateTime, List> _events;
@@ -80,9 +82,6 @@ class MandaeanCalendar extends StatelessWidget {
     _selected.date = _selectedDay;
     _data.today = _selectedDay;
 
-    print(_selected.date);
-    print(_data.selected.date);
-
     return MaterialApp(
       title: 'Mandaean Calendar',
       home: MyHomePage(title: ""),
@@ -98,15 +97,121 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+  static void runHolidaysEvents(int selectedYear) {
+    _holidays = MandaFirstDayOfMonthBuilder(selectedYear).eventsForWholeYear;
+    _events = MandaEventssBuilder(selectedYear).wholeYear;
+    print("_holidays builded ****" * 5);
+    print(_holidays);
+  }
+
+  static void onVisibleMonthLeft(data) {
+    print('CALLBACK: _onVisibleMonthLeft');
+    DateTime selectedDay = data.selected.date;
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    }
+
+    selectedDay = data.selected.date;
+    // print(selectedDay);
+    if (selectedDay.month == 12) {
+      runHolidaysEvents(selectedDay.year);
+    }
+  }
+
+  static onVisibleMonthRight(data) {
+    print('CALLBACK: _onVisibleMonthRight');
+    DateTime selectedDay = data.selected.date;
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+    }
+
+    selectedDay = data.selected.date;
+    // print(selectedDay);
+    if (selectedDay.month == 1) {
+      runHolidaysEvents(selectedDay.year);
+    }
+  }
+
+  static onVisibleMandaMonthLeft(data) {
+    print('CALLBACK: _onVisibleMandaMonthLeft');
+
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 1) {
+      duration = 5;
+    }
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+    } else {
+      data.selected.date =
+          DateTime(first.year, first.month, first.day - duration, 0, 0);
+    }
+
+    DateTime selectedDay = data.selected.date;
+    // print(selectedDay);
+    if (selectedDay.month == 12) {
+      runHolidaysEvents(selectedDay.year);
+    }
+  }
+
+  static onVisibleMandaMonthRight(data) {
+    print('CALLBACK: _onVisibleMandaMonthRight');
+    // DateTime selectedDay = data.selected.date;
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 1) {
+      duration = 5;
+    }
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+      data.selected.date =
+          DateTime(first.year, first.month, first.day - duration, 0, 0);
+    } else {
+      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+    }
+
+    DateTime selectedDay = data.selected.date;
+    // print(selectedDay);
+    if (selectedDay.month == 1) {
+      runHolidaysEvents(selectedDay.year);
+    }
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   var _listOfEventsForYear;
   List _selectedEvents;
+
   @override
   void initState() {
     super.initState();
+    print("one time run main ################");
     UserSetting.getLanguage(setState, _lang);
+    MyHomePage.runHolidaysEvents(_data.selected.date.year);
+    // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
+    //     .eventsForWholeYear;
+    // _events = MandaEventssBuilder(_data.selected.date.year).wholeYear;
 
     // mandaDate = new MandaFormatedDateBuilder(DateTime.now(), _localLang);
     // _mandaAndJalaiYear = mandaDate.fullYearEnFa;
@@ -172,6 +277,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _cellWidth = MyFontSize.cellWidth(_data);
     double _sizeRate = MyFontSize.s21(_data);
     String _myTitle = MandaEqu.calendarTitle()[_lang.name];
+    // ###############################################################
+    // ###############################################################
+
     _data.gregKind.active = true;
     _data.mandaKind.active = true;
     _data.shamsiKind.active = true;
@@ -212,49 +320,45 @@ class _MyHomePageState extends State<MyHomePage> {
             // print('Move page ');
             // print(dragEndDetails.primaryVelocity);
             if (dragEndDetails.primaryVelocity < 0) {
-              // Page forwards
               // print('Move page forwards');
               setState(() {
-                CalendarBuilder.onVisibleMonthRight(_data);
+                // CalendarBuilder.onVisibleMonthRight(_data);
+                MyHomePage.onVisibleMonthLeft(_data);
               });
             } else if (dragEndDetails.primaryVelocity > 0) {
-              // Page backwards
               // print('Move page backwards');
               setState(() {
-                CalendarBuilder.onVisibleMonthLeft(_data);
+                // CalendarBuilder.onVisibleMonthLeft(_data);
+                MyHomePage.onVisibleMonthLeft(_data);
               });
             }
           },
           child: Center(
             child: Container(
-                // margin: EdgeInsets.symmetric(
-                //     horizontal: ((_data.divecSize.width -
-                //             MyFontSize.displayWidth(_data)) /
-                //         2),
-                //     vertical: 0),
                 child: ListView(children: [
               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
                 if (_data.gregKind.active == true)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
-                    child: CalendarBuilder().gregCalendarTable(_data, setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .gregCalendarTable(setState),
                   ),
 
                 if (_data.mandaKind.active == true)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
-                    child:
-                        CalendarBuilder().mandaCalendarTable(_data, setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .mandaCalendarTable(setState),
                   ),
 
                 if (_data.shamsiKind.active == true)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
-                    child:
-                        CalendarBuilder().shamsiCalendarTable(_data, setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .shamsiCalendarTable(setState),
                   ),
 
                 Container(

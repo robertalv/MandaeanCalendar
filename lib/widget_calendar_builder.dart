@@ -6,97 +6,73 @@ import 'calendar_month_date.dart';
 import 'local_number.dart';
 import 'main.dart';
 import 'manda_equivalent.dart';
+import 'manda_events.dart';
+import 'manda_holidays.dart';
 import 'my_font_size.dart';
-
-// class MandaCalendarTable extends State<MyHomePage> {
-//   var data;
-//   // var setState;
-//   List monthList;
-//   MandaCalendarTable(data) {
-//     this.data = data;
-//     // this.setState = setState;
-//     this.monthList = CalendarDateBuilder.manda(data);
-//     // gregBuilder(monthList, data, setState);
-//   }
-
-//   // static wholeMonthDate(data) {}
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CalendarBuilder()
-//         .buildTableCalendar('manda', this.monthList, this.data, setState);
-//   }
-// }
-
-// class GregCalendarTable extends State<MyHomePage> {
-//   var data;
-//   // var setState;
-//   List monthList;
-//   GregCalendarTable(data, setState) {
-//     this.data = data;
-//     // this.setState = setState;
-//     this.monthList = CalendarDateBuilder.greg(data);
-//     // gregBuilder(monthList, data, setState);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // return CalendarBuilder()
-//     //     .buildTableCalendar('greg', this.monthList, this.data);
-//     return IconButton(
-//       icon: Icon(Icons.chevron_left, size: (25.0 * 2)),
-//       onPressed: () {
-//         setState(() {
-//           // onVisibleMonthLeft(_data);
-//           Text("New Test");
-//         });
-//       },
-//     );
-//   }
-// }
+import 'my_icon_events.dart';
 
 class CalendarBuilder extends MyHomePage {
   double _cellWidth;
   double _divecWidth;
   DateTime _selectedDay;
   double _displayWidth;
+  var _data;
+  var data;
+  Map<DateTime, List> _events;
+  static Map<DateTime, List> _holidays;
+  static String _farid;
+  CalendarBuilder(holidays, events, data) {
+    this.data = data;
+    _data = this.data;
+    _events = events;
+    _holidays = holidays;
+
+    // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
+    //     .eventsForWholeYear;
+
+    // _events = MandaEventssBuilder(_data.selected.date.year).wholeYear;
+    // print("_holidays *********************");
+  }
+
   // List _mandaMonthDate;
   // List _gregMonthDate = [];
   // List _shamsiMonthDate = [];
   var _sizeRate;
 
   String _local;
-  var _data;
+  // var _data;
   var _setState;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     // throw UnimplementedError();
   }
 
-  gregCalendarTable(data, setState) {
-    print('CALLBACK: gregCalendarTable');
+  gregCalendarTable(setState) {
+    print('CALLBACK: _gregCalendarTable');
     List monthList = CalendarDateBuilder.greg(data);
     return buildTableCalendar('greg', monthList, data, setState);
   }
 
-  mandaCalendarTable(data, setState) {
-    print('CALLBACK: mandaCalendarTable');
+  mandaCalendarTable(setState) {
+    print('CALLBACK: _mandaCalendarTable');
     List monthList = CalendarDateBuilder.manda(data);
-
     return buildTableCalendar('manda', monthList, data, setState);
   }
 
-  shamsiCalendarTable(data, setState) {
-    print('CALLBACK: shamsiCalendarTable');
+  shamsiCalendarTable(setState) {
+    print('CALLBACK: _shamsiCalendarTable');
     List monthList = CalendarDateBuilder.shamsi(data);
-
     return buildTableCalendar('shamsi', monthList, data, setState);
   }
 
   @override
   Widget buildTableCalendar(kind, monthList, data, setState) {
     print('CALLBACK: _onCalendarCreated');
+    // print("_holidays " * 10);
+    // print(_holidays);
+    // print("_holidays " * 10);
     _setState = setState;
     _cellWidth = MyFontSize.cellWidth(data);
     _sizeRate = MyFontSize.s21(data);
@@ -106,24 +82,6 @@ class CalendarBuilder extends MyHomePage {
     // _today = _selectedDay;
     _local = data.lang.name;
     _data = data;
-
-    // List monthData;
-    // List monthList;
-    // print('_selectedDay: $_selectedDay');
-
-    // // String kind = data.manda.name;
-
-    // if (kind == "greg") {
-    //   monthList = CalendarDateBuilder.greg(_data);
-    // } else if (kind == "manda") {
-    //   monthList = CalendarDateBuilder.manda(_data);
-    // }
-
-    // print(monthList);
-    // print("monthList #############");
-    // today = DateTime.now();
-    // DateTime selectedDay = DateTime(today.year, today.month, today.day, 0, 0);
-    print(kind);
 
     return Column(children: <Widget>[
       // if (monthList.length > 6)
@@ -135,10 +93,10 @@ class CalendarBuilder extends MyHomePage {
         _buildDayNameHeader(monthList.getRange(0, 7).toList()),
       if (monthList.length > 6)
         _buildDateRow(monthList.getRange(0, 7).toList()),
-      if (monthList.length > 6)
-        // _buildEventsRow(monthList.getRange(0, 7).toList(), local),
-        if (monthList.length > 13)
-          _buildDateRow(monthList.getRange(7, 14).toList()),
+      // if (monthList.length > 6)
+      // _buildEventsRow(monthList.getRange(0, 7).toList(), _local),
+      if (monthList.length > 13)
+        _buildDateRow(monthList.getRange(7, 14).toList()),
       if (monthList.length > 20)
         _buildDateRow(monthList.getRange(14, 21).toList()),
       if (monthList.length > 27)
@@ -169,7 +127,7 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(Icons.chevron_left, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              onVisibleMonthLeft(_data);
+              MyHomePage.onVisibleMonthLeft(_data);
             });
           },
         ),
@@ -184,7 +142,8 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              onVisibleMonthRight(_data);
+              // onVisibleMonthRight(_data);
+              MyHomePage.onVisibleMonthRight(_data);
             });
           },
         ),
@@ -207,7 +166,7 @@ class CalendarBuilder extends MyHomePage {
           ),
           onPressed: () {
             _setState(() {
-              onVisibleMandaMonthLeft(_data);
+              MyHomePage.onVisibleMandaMonthLeft(_data);
             });
           },
         ),
@@ -222,7 +181,7 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(Icons.chevron_right, size: (25.0 * _sizeRate)),
           onPressed: () {
             _setState(() {
-              onVisibleMandaMonthRight(_data);
+              MyHomePage.onVisibleMandaMonthRight(_data);
             });
           },
         ),
@@ -279,8 +238,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildDateRow(List rowText) {
-    // print(rowText);
-    // rowText.sort();
     List rowTextSort = rowText;
     if (_local != "en_US") {
       rowTextSort = rowText.reversed.toList();
@@ -290,9 +247,7 @@ class CalendarBuilder extends MyHomePage {
 
     return Row(
         children:
-            // rowText.map((cellText) => Text(cellText.toString())).toList());
             rowTextSort.map((cellText) => _buildDateCell(cellText)).toList());
-    // .toList());
   }
 
   _getYearMonthHeader(kind, data) {
@@ -309,6 +264,118 @@ class CalendarBuilder extends MyHomePage {
     }
 
     return day;
+  }
+
+  Widget _buildEventsRow(List rowText, String localLang) {
+    // rowText.sort();
+    List rowTextSort = rowText;
+    if (localLang != "en_US") {
+      rowTextSort = rowText.reversed.toList();
+    }
+
+    // print(rowTextSort);
+
+    return Row(
+        children:
+            // rowText.map((cellText) => Text(cellText.toString())).toList());
+            rowTextSort
+                .map((cellText) => _buildEventsCell(cellText, localLang))
+                .toList());
+    // .toList());
+  }
+
+  static findMyIcon(myEvent, _sizeRate) {
+    MyIcon myIcon = MyIcon(_sizeRate);
+
+    if ((myEvent.runtimeType.toString()).contains('List')) {
+      myEvent = myEvent[0];
+    }
+
+    var myIcone;
+    if (myEvent['en_US'].contains("Minor")) {
+      myIcone = myIcon.minor;
+    } else if (myEvent['en_US'].contains("Major")) {
+      myIcone = myIcon.major;
+    } else if (myEvent['en_US'].contains("Mandaic")) {
+      myIcone = myIcon.firstMonth;
+    } else {
+      myIcone = myIcon.relig;
+    }
+    return myIcone;
+  }
+
+  Widget _buildEventsCell(var cellText, String local) {
+    var child1;
+    var child2;
+    var child3;
+    // MyIcon myIcon = MyIcon(_sizeRate);
+
+    List myEvents = [];
+
+    if (_holidays[cellText[0]] != null && cellText[1] != "") {
+      myEvents.addAll(_holidays[cellText[0]]);
+    }
+    if (_events[cellText[0]] != null && cellText[1] != "") {
+      myEvents.addAll(_events[cellText[0]]);
+    }
+    // print(cellText);
+    // print(myEvents);
+    // print(myEvents.length);
+
+    if (myEvents.length == 1) {
+      child1 = findMyIcon(myEvents[0], _sizeRate);
+    } else if (myEvents.length == 2) {
+      child1 = findMyIcon(myEvents[1], _sizeRate);
+      child2 = findMyIcon(myEvents[0], _sizeRate);
+    } else if (myEvents.length == 3) {
+      child1 = findMyIcon(myEvents[0], _sizeRate);
+      child2 = findMyIcon(myEvents[2], _sizeRate);
+      child3 = findMyIcon(myEvents[1], _sizeRate);
+    }
+
+    return Container(
+      // margin: const EdgeInsets.all(daysMargin),
+      // alignment: Alignment.center,
+      decoration: _dayDecorationBuilder(cellText),
+      width: _cellWidth,
+      constraints: BoxConstraints(
+        // minHeight: 35.0 * _sizeRate,
+        minHeight: 15.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          if (child1 != null) child1,
+          if (child2 != null) child2,
+          if (child3 != null) child3,
+          // myIcon.relig,
+          // myIcon.minor,
+          // firstMonthEvent(1),
+          // Expanded(
+          //     child: GestureDetector(
+          //   onLongPress: () {
+          //     setState(() {
+          //       _onDayLogPressed(cellText);
+          //     });
+          //   },
+          //   onTap: () {
+          //     setState(() {
+          //       _onDayTap(cellText);
+          //     });
+          //   },
+          //   child: Text(
+          //     DateFormat.d(local).format(cellText).toString(),
+          //     textAlign: TextAlign.center,
+          //     style: _builderTextStyle(cellText),
+          //   ),
+          // )),
+          // Expanded(
+          //   child: firstMonthEvent(1),
+          // ),
+        ],
+      ),
+    );
   }
 
   static gregHeaderBuilder(var data) {
@@ -402,44 +469,49 @@ class CalendarBuilder extends MyHomePage {
     // print(cellText);
     DateTime dateCellText = cellText[0];
     String labelCellText = cellText[1];
+
     return Container(
       // margin: const EdgeInsets.all(daysMargin),
       // alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
       decoration: _dayDecorationBuilder(cellText),
       width: _cellWidth,
       constraints: BoxConstraints(
         // minHeight: 35.0 * _sizeRate,
-        minHeight: 35.0,
+        minHeight: 75.0,
       ),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-              child: GestureDetector(
-            onLongPress: () {
-              _setState(() {
-                onDayLogPressed(dateCellText);
-              });
-            },
-            onTap: () {
-              _setState(() {
-                onDayTap(cellText, _data);
-              });
-            },
-            child: Text(
-              // "t",
-              // DateFormat.d(local).format(dateCellText).toString(),
-              LocalNum.convertEntoFaAr(cellText[1], _data.lang.name),
-              textAlign: TextAlign.center,
-              style: _builderTextStyle(dateCellText),
-            ),
-          )),
-          // Expanded(
-          //   child: firstMonthEvent(1),
-          // ),
-        ],
-      ),
+      child: Column(children: [
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+                child: GestureDetector(
+              onLongPress: () {
+                _setState(() {
+                  onDayLogPressed(dateCellText);
+                });
+              },
+              onTap: () {
+                _setState(() {
+                  onDayTap(cellText, _data);
+                });
+              },
+              child: Text(
+                // "t",
+                // DateFormat.d(local).format(dateCellText).toString(),
+                LocalNum.convertEntoFaAr(cellText[1], _data.lang.name),
+                textAlign: TextAlign.center,
+                style: _builderTextStyle(dateCellText),
+              ),
+            )),
+            // Expanded(
+            //   child: firstMonthEvent(1),
+            // ),
+          ],
+        ),
+        _buildEventsCell(cellText, _data.lang.name)
+      ]),
     );
   }
 
@@ -485,7 +557,7 @@ class CalendarBuilder extends MyHomePage {
       dayColor = Colors.black;
     }
     // return TextStyle(color: dayColor, fontSize: _daysFontSize);
-    return TextStyle(color: dayColor);
+    return TextStyle(color: dayColor, fontSize: 40);
   }
 
   static onDayTap(cellText, data) {
@@ -499,79 +571,118 @@ class CalendarBuilder extends MyHomePage {
   }
 
   static onDayLogPressed(cellText) {
-    print('_onDayLogPressed $cellText');
-  }
-
-  static onVisibleMonthLeft(data) {
-    print('CALLBACK: _onVisibleDaysChanged');
-    DateTime selectedDay = data.selected.date;
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    }
-  }
-
-  static onVisibleMonthRight(data) {
-    print('CALLBACK: _onVisibleDaysChanged');
-    DateTime selectedDay = data.selected.date;
-
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    }
-  }
-
-  static onVisibleMandaMonthLeft(data) {
-    print('CALLBACK: _onVisibleDaysChanged');
-    // DateTime selectedDay = data.selected.date;
-    DateTime first = data.mandaMonth.info["first"];
-    DateTime last = data.mandaMonth.info["last"];
-    var month = data.mandaMonth.info["month"];
-    // print('first $first');
-    // print('last $last');
-    // print('month $month');
-    var duration = 30;
-    if (month == 1) {
-      duration = 5;
-    }
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    } else {
-      data.selected.date =
-          DateTime(first.year, first.month, first.day - duration, 0, 0);
-    }
-  }
-
-  static onVisibleMandaMonthRight(data) {
-    print('CALLBACK: _onVisibleDaysChanged');
-    // DateTime selectedDay = data.selected.date;
-    DateTime first = data.mandaMonth.info["first"];
-    DateTime last = data.mandaMonth.info["last"];
-    var month = data.mandaMonth.info["month"];
-    // print('first $first');
-    // print('last $last');
-    // print('month $month');
-    var duration = 30;
-    if (month == 1) {
-      duration = 5;
-    }
-
-    if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-      data.selected.date =
-          DateTime(first.year, first.month, first.day - duration, 0, 0);
-    } else {
-      data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    }
+    print('CALLBACK: _onDayLogPressed');
+    // print('_onDayLogPressed $cellText');
   }
 }
+// static onVisibleMonthLeft(data) {
+//   print('CALLBACK: _onVisibleDaysChanged');
+//   DateTime selectedDay = data.selected.date;
+//   _holidays =
+//       MandaFirstDayOfMonthBuilder(selectedDay.year).eventsForWholeYear;
+//   print(_holidays);
+
+//   if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+//     data.selected.date =
+//         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+//   } else {
+//     data.selected.date =
+//         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+//   }
+// }
+
+// static onVisibleMonthRight(data) {
+//   print('CALLBACK: _onVisibleDaysChanged');
+//   DateTime selectedDay = data.selected.date;
+
+//   if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+//     data.selected.date =
+//         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+//   } else {
+//     data.selected.date =
+//         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+//   }
+// }
+
+//   static onVisibleMandaMonthLeft(data) {
+//     print('CALLBACK: _onVisibleDaysChanged');
+//     // DateTime selectedDay = data.selected.date;
+//     DateTime first = data.mandaMonth.info["first"];
+//     DateTime last = data.mandaMonth.info["last"];
+//     var month = data.mandaMonth.info["month"];
+//     // print('first $first');
+//     // print('last $last');
+//     // print('month $month');
+//     var duration = 30;
+//     if (month == 1) {
+//       duration = 5;
+//     }
+//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+//       data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+//     } else {
+//       data.selected.date =
+//           DateTime(first.year, first.month, first.day - duration, 0, 0);
+//     }
+//   }
+
+//   static onVisibleMandaMonthRight(data) {
+//     print('CALLBACK: _onVisibleDaysChanged');
+//     // DateTime selectedDay = data.selected.date;
+//     DateTime first = data.mandaMonth.info["first"];
+//     DateTime last = data.mandaMonth.info["last"];
+//     var month = data.mandaMonth.info["month"];
+//     // print('first $first');
+//     // print('last $last');
+//     // print('month $month');
+//     var duration = 30;
+//     if (month == 1) {
+//       duration = 5;
+//     }
+
+//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+//       data.selected.date =
+//           DateTime(first.year, first.month, first.day - duration, 0, 0);
+//     } else {
+//       data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
+//     }
+//   }
+// }
 
 ////// ###################################
+// class OnVisibleMonth {
+//   var data;
+//   var _data;
+//   OnVisibleMonth(data) {
+//     this.data = data;
+//     _data = data;
+//   }
+//   static left(data) {
+//     print('CALLBACK: _onVisibleDaysChanged');
+//     DateTime selectedDay = data.selected.date;
+
+//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
+//       data.selected.date =
+//           DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
+//     } else {
+//       data.selected.date =
+//           DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
+//     }
+//   }
+
+//   static _runHolidaysEvents(selectedDay) {
+//     Map<DateTime, List> _holidays;
+//     Map<DateTime, List> _events;
+
+//     if (_holidays.keys.toList()[0].year != selectedDay.year) {
+//       // _runHolidaysEvents(selectedDay);
+//     }
+//     _holidays =
+//         MandaFirstDayOfMonthBuilder(selectedDay.year).eventsForWholeYear;
+
+//     _events = MandaEventssBuilder(selectedDay.year).wholeYear;
+//     return [_holidays, _events];
+//   }
+// }
 // class SelectedCell {
 //   static onDayTap(cellText) {
 //     print('CALLBACK: _onDayTap');
