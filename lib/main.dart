@@ -35,9 +35,9 @@ DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
 DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
 double _cellWidth;
 
-Map<DateTime, List> _holidays;
-Map<DateTime, List> _events;
-List _todayHolidayEvents = [];
+// Map<DateTime, List> _holidays;
+// Map<DateTime, List> _events;
+// List _todayHolidayEvents = [];
 
 // double _divecWidth;
 
@@ -132,37 +132,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  void todayEven(DateTime date) {
-    _todayHolidayEvents = [];
-    _selectedDay = DateTime(date.year, date.month, date.day, 0, 0);
+  // void todayEven(DateTime date) {
+  //   _todayHolidayEvents = [];
+  //   _selectedDay = DateTime(date.year, date.month, date.day, 0, 0);
 
-    _holidays =
-        MandaFirstDayOfMonthBuilder(_selectedDay.year).eventsForWholeYear;
-    // print(_holidays);
+  //   _holidays =
+  //       MandaFirstDayOfMonthBuilder(_selectedDay.year).eventsForWholeYear;
+  //   // print(_holidays);
 
-    _events = MandaEventssBuilder(_selectedDay.year).wholeYear;
-    // print(_events);
+  //   _events = MandaEventssBuilder(_selectedDay.year).wholeYear;
+  //   // print(_events);
 
-    _listOfEventsForYear =
-        scrollingText.generateEventsforScroll(_events, _holidays);
-    // ***************************
+  //   _listOfEventsForYear =
+  //       scrollingText.generateEventsforScroll(_events, _holidays);
+  //   // ***************************
 
-    var todayHoliday = _holidays[_selectedDay] ?? [];
-    if (todayHoliday.isNotEmpty) {
-      _todayHolidayEvents.add(todayHoliday[0][_lang]);
-    }
+  //   var todayHoliday = _holidays[_selectedDay] ?? [];
+  //   if (todayHoliday.isNotEmpty) {
+  //     _todayHolidayEvents.add(todayHoliday[0][_lang]);
+  //   }
 
-    var todayEvents = _events[_selectedDay] ?? [];
-    if (todayEvents.isNotEmpty) {
-      todayEvents.forEach((event) {
-        if ((event.runtimeType.toString()).contains('List')) {
-          _todayHolidayEvents.add(event[0][_lang]);
-        } else {
-          _todayHolidayEvents.add(todayEvents[0][_lang]);
-        }
-      });
-    }
-  }
+  //   var todayEvents = _events[_selectedDay] ?? [];
+  //   if (todayEvents.isNotEmpty) {
+  //     todayEvents.forEach((event) {
+  //       if ((event.runtimeType.toString()).contains('List')) {
+  //         _todayHolidayEvents.add(event[0][_lang]);
+  //       } else {
+  //         _todayHolidayEvents.add(todayEvents[0][_lang]);
+  //       }
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -176,8 +176,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.mandaKind.active = true;
     _data.shamsiKind.active = true;
     MainSize _mainZise = new MainSize(_data);
-    todayEven(_selectedDay);
-    _selectedEvents = _todayHolidayEvents ?? [];
+    // todayEven(_selectedDay);
+    // _selectedEvents = _todayHolidayEvents ?? [];
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
