@@ -266,23 +266,23 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  Widget _buildEventsRow(List rowText, String localLang) {
-    // rowText.sort();
-    List rowTextSort = rowText;
-    if (localLang != "en_US") {
-      rowTextSort = rowText.reversed.toList();
-    }
+  // Widget _buildEventsRow(List rowText, String localLang) {
+  //   // rowText.sort();
+  //   List rowTextSort = rowText;
+  //   if (localLang != "en_US") {
+  //     rowTextSort = rowText.reversed.toList();
+  //   }
 
-    // print(rowTextSort);
+  //   // print(rowTextSort);
 
-    return Row(
-        children:
-            // rowText.map((cellText) => Text(cellText.toString())).toList());
-            rowTextSort
-                .map((cellText) => _buildEventsCell(cellText, localLang))
-                .toList());
-    // .toList());
-  }
+  //   return Row(
+  //       children:
+  //           // rowText.map((cellText) => Text(cellText.toString())).toList());
+  //           rowTextSort
+  //               .map((cellText) => _buildEventsCell(cellText, localLang))
+  //               .toList());
+  //   // .toList());
+  // }
 
   static findMyIcon(myEvent, _sizeRate) {
     MyIcon myIcon = MyIcon(_sizeRate);
@@ -334,45 +334,18 @@ class CalendarBuilder extends MyHomePage {
     }
 
     return Container(
-      // margin: const EdgeInsets.all(daysMargin),
-      // alignment: Alignment.center,
-      decoration: _dayDecorationBuilder(cellText),
+      // decoration: _dayDecorationBuilder(cellText),
       width: _cellWidth,
-      constraints: BoxConstraints(
-        // minHeight: 35.0 * _sizeRate,
-        minHeight: 15.0,
-      ),
+      // constraints: BoxConstraints(
+      //   // minHeight: 35.0 * _sizeRate,
+      //   minHeight: 15.0,
+      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           if (child1 != null) child1,
           if (child2 != null) child2,
           if (child3 != null) child3,
-          // myIcon.relig,
-          // myIcon.minor,
-          // firstMonthEvent(1),
-          // Expanded(
-          //     child: GestureDetector(
-          //   onLongPress: () {
-          //     setState(() {
-          //       _onDayLogPressed(cellText);
-          //     });
-          //   },
-          //   onTap: () {
-          //     setState(() {
-          //       _onDayTap(cellText);
-          //     });
-          //   },
-          //   child: Text(
-          //     DateFormat.d(local).format(cellText).toString(),
-          //     textAlign: TextAlign.center,
-          //     style: _builderTextStyle(cellText),
-          //   ),
-          // )),
-          // Expanded(
-          //   child: firstMonthEvent(1),
-          // ),
         ],
       ),
     );
