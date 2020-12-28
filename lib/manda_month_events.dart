@@ -11,22 +11,8 @@ class MandaGregShamsiInfo {
     List mandaDate = CalendarDateBuilder.manda(data);
     List shamsiDate = CalendarDateBuilder.shamsi(data);
 
-    List firstList = [
-      data.gregMonth.info['first'],
-      data.mandaMonth.info['first'],
-      data.shamsiMonth.info['first'],
-    ];
-
-    List lastList = [
-      data.gregMonth.info['last'],
-      data.mandaMonth.info['last'],
-      data.shamsiMonth.info['last'],
-    ];
-
-    firstList.sort();
-    var firstMin = firstList[0];
-    lastList.sort();
-    var lastMax = lastList[2];
+    var firstMin = getFirstMin(data);
+    var lastMax = getLastMax(data);
     print("firstMin $firstMin");
     print('lastMax $lastMax');
 
@@ -38,162 +24,25 @@ class MandaGregShamsiInfo {
     ];
   }
 
-  // static mandaMonthInfo(DateTime selectedDay) {
-  //   List beforeDateList = [];
-  //   List monthDateList = [];
-  //   List afterDateList = [];
-  //   List allDateList = [];
-  //   MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
-  //   var mandaDay = mandaDate.day;
-  //   var mandaDayInMonth = 30;
-  //   if (mandaDate.month == 13) {
-  //     mandaDayInMonth = 5;
-  //   }
+  static getFirstMin(data) {
+    List firstList = [
+      data.gregMonth.info['first'],
+      data.mandaMonth.info['first'],
+      data.shamsiMonth.info['first'],
+    ];
+    firstList.sort();
+    return firstList[0];
+  }
 
-  //   DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
-  //       selectedDay.day - mandaDay + 1, 0, 0);
-
-  //   DateTime endMonth = DateTime(startMonth.year, startMonth.month,
-  //       startMonth.day + mandaDayInMonth - 1, 0, 0);
-
-  //   Map data = {
-  //     'first': startMonth,
-  //     'last': endMonth,
-  //     'dayInMonth': mandaDayInMonth,
-  //     'month': mandaDate.month,
-  //     'yahya': mandaDate.yearYahya,
-  //     'adam': mandaDate.yearAdam,
-  //     'monthFaAr': mandaDate.monthFa,
-  //     'monthEn': mandaDate.monthEn,
-  //     'kind': 'manda'
-  //   };
-
-  //   var day = DateFormat.E("en_US").format(startMonth);
-  //   int beforeDayIndex = getNumDayOdWeek(day);
-  //   // print(day);
-  //   // print(beforeDayIndex);
-
-  //   beforeDateList = beforeLoop(startMonth, beforeDayIndex);
-  //   // print(beforeDateList);
-
-  //   monthDateList = monthLoop(startMonth, mandaDayInMonth);
-  //   // print(monthDateList);
-  //   // Map<DateTime, List> holidaysEvents =
-  //   //     MandaGregShamsiInfo.holidaysEventsMonthBuilder(data, monthDateList);
-  //   MandaGregShamsiInfo.dateEvents(data);
-
-  //   day = DateFormat.E("en_US").format(endMonth);
-  //   int afterDayIndex = 6 - getNumDayOdWeek(day);
-  //   // print(day);
-  //   // print(afterDayIndex);
-
-  //   afterDateList = afterLoop(endMonth, afterDayIndex);
-  //   // print(afterDateList);
-
-  //   allDateList.addAll(beforeDateList);
-  //   allDateList.addAll(monthDateList);
-  //   allDateList.addAll(afterDateList);
-  //   // print(allDateList);
-  //   // print(allDateLebelList);
-  //   return allDateList;
-  //   return data;
-  // }
-
-  // static gregMonthInfo(DateTime selectedDay) {
-  //   DateTime startMonth =
-  //       DateTime(selectedDay.year, selectedDay.month, 1, 0, 0);
-  //   DateTime endMonth =
-  //       DateTime(selectedDay.year, selectedDay.month + 1, 0, 0, 0);
-
-  //   Map data = {'first': startMonth, 'last': endMonth, 'kind': 'greg'};
-  //   return data;
-  // }
-
-  // static shamsiMonthInfo(DateTime selectedDay) {
-  //   var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay);
-  //   var shamsiDay = jalaliDay.day;
-  //   var shamsiDayInMonth = jalaliDay.monthLength;
-
-  //   DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
-  //       selectedDay.day - shamsiDay + 1, 0, 0);
-
-  //   DateTime endMonth = DateTime(startMonth.year, startMonth.month,
-  //       startMonth.day + shamsiDayInMonth - 1, 0, 0);
-
-  //   Map data = {
-  //     'first': startMonth,
-  //     'last': endMonth,
-  //     'jalaliDay': jalaliDay,
-  //     'dayInMonth': shamsiDayInMonth,
-  //     'month': jalaliDay.month,
-  //     'year': jalaliDay.year,
-  //     'monthFaAr': jalaliDay.formatter.mN,
-  //     'monthEn': MandaEqu.jalaliMonth(jalaliDay.month),
-  //     'kind': 'shamsi'
-  //   };
-  //   return data;
-  // }
-
-  // static getNumDayOdWeek(String day) {
-  //   Map daysWeek = {
-  //     "Sun": 0,
-  //     "Mon": 1,
-  //     "Tue": 2,
-  //     "Wed": 3,
-  //     "Thu": 4,
-  //     "Fri": 5,
-  //     "Sat": 6,
-  //   };
-  //   return daysWeek[day];
-  // }
-
-  // static beforeLoop(DateTime startMonth, int endOfLoop) {
-  //   List dateList = [];
-  //   // List allDateLebelList = [];
-  //   for (var i = 0; i < endOfLoop; i++) {
-  //     dateList.add([
-  //       DateTime(startMonth.year, startMonth.month,
-  //           startMonth.day - endOfLoop + i, 0, 0),
-  //       ""
-  //     ]);
-  //     // allDateLebelList.add("");
-  //   }
-  //   return dateList;
-  // }
-
-  // static monthLoop(DateTime startMonth, int endOfLoop) {
-  //   List dateList = [];
-  //   int dayIndex = 1;
-  //   // List allDateLebelList = [];
-  //   for (var i = 0; i <= endOfLoop - 1; i++) {
-  //     dateList.add([
-  //       DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
-  //       dayIndex.toString()
-  //     ]);
-  //     // allDateLebelList.add(dayIndex.toString());
-  //     dayIndex += 1;
-  //   }
-  //   return dateList;
-  // }
-
-  // static afterLoop(DateTime endMonth, int endOfLoop) {
-  //   List dateList = [];
-  //   //  List allDateLebelList = [];
-  //   for (var i = 1; i <= endOfLoop; i++) {
-  //     dateList.add([
-  //       DateTime(endMonth.year, endMonth.month, endMonth.day + i, 0, 0),
-  //       ""
-  //     ]);
-  //     // allDateLebelList.add(" ");
-  //   }
-  //   return dateList;
-  // }
-
-  // static holidaysEventsMonthBuilder(data, monthDateList) {
-  //   int monthEvent = data.mandaMonth.info["month"];
-  //   var test = mandaEventsDateBase(monthEvent);
-  //   // print(test);
-  // }
+  static getLastMax(data) {
+    List lastList = [
+      data.gregMonth.info['last'],
+      data.mandaMonth.info['last'],
+      data.shamsiMonth.info['last'],
+    ];
+    lastList.sort();
+    return lastList[2];
+  }
 
   static Map mandaEventsDateBase(monthEvent) {
     final List firstMonthEventName = MandaEqu.mandaFirstMonth();
