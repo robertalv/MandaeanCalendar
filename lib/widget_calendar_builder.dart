@@ -471,7 +471,7 @@ class CalendarBuilder extends MyHomePage {
                 child: GestureDetector(
               onLongPress: () {
                 _setState(() {
-                  onDayLogPressed(dateCellText);
+                  onDayLogPressed(cellText[0]);
                 });
               },
               onTap: () {
@@ -484,7 +484,7 @@ class CalendarBuilder extends MyHomePage {
                 // DateFormat.d(local).format(dateCellText).toString(),
                 LocalNum.convertEntoFaAr(cellText[1], _data.lang.name),
                 textAlign: TextAlign.center,
-                style: _builderTextStyle(dateCellText),
+                style: _builderTextStyle(cellText[0]),
               ),
             )),
             // Expanded(
@@ -502,8 +502,18 @@ class CalendarBuilder extends MyHomePage {
 
     if (_local == 'fa_IR') {
       var dayFa = DateFormat.EEEE(_local).format(date);
+      print("dayFa $dayFa");
+      var test = MandaEqu.daysWeekFa(dayFa);
+      print("test $test");
 
       day = MandaEqu.changeDayFormate(dayFa);
+      day = test;
+    } else if (_local == 'ar') {
+      day = DateFormat.E(_local).format(date);
+      // print("day $day");
+      day = MandaEqu.daysWeekAr(day);
+      // print("test $test");
+      // day = test;
     } else {
       day = DateFormat.E(_local).format(date);
     }
