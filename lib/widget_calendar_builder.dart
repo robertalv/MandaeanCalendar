@@ -8,6 +8,7 @@ import 'main.dart';
 import 'manda_equivalent.dart';
 import 'manda_events.dart';
 import 'manda_holidays.dart';
+import 'manda_month_events.dart';
 import 'my_font_size.dart';
 import 'my_icon_events.dart';
 
@@ -21,6 +22,13 @@ class CalendarBuilder extends MyHomePage {
   static TableSize _tableSize;
   static Map<DateTime, List> _events;
   static Map<DateTime, List> _holidays;
+  static List _mandaMonthDate;
+  static List _gregMonthDate;
+  static List _shamsiMonthDate;
+  static Map _mandaMonthData;
+  static Map _gregMonthData;
+  static Map _shamsiMonthData;
+  static List _firstLast = [];
 
   CalendarBuilder(holidays, events, data) {
     this.data = data;
@@ -28,17 +36,8 @@ class CalendarBuilder extends MyHomePage {
     _events = events;
     _holidays = holidays;
     _tableSize = new TableSize(_data);
-
-    // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
-    //     .eventsForWholeYear;
-
-    // _events = MandaEventssBuilder(_data.selected.date.year).wholeYear;
-    // print("_holidays *********************");
   }
 
-  // List _mandaMonthDate;
-  // List _gregMonthDate = [];
-  // List _shamsiMonthDate = [];
   var _sizeRate;
 
   String _local;
@@ -51,22 +50,53 @@ class CalendarBuilder extends MyHomePage {
     // throw UnimplementedError();
   }
 
+  static getMonthDate(data) {
+    print(_firstLast);
+    print(data.selected.date);
+    print("*" * 30 + "Date builder load" + "*" * 30);
+    List monthDate = MandaGregShamsiInfo.dateEvents(data);
+    _mandaMonthDate = monthDate[0];
+    _gregMonthDate = monthDate[1];
+    _shamsiMonthDate = monthDate[2];
+
+    _firstLast = monthDate[3];
+  }
+
+  getCorrentMonthDate(data) {
+    // print(_firstLast);
+    // print(data.selected.date);
+    if (_firstLast.isEmpty ||
+        data.selected.date.isBefore(_firstLast[0]) ||
+        data.selected.date.isAfter(_firstLast[1])) {
+      getMonthDate(data);
+    }
+  }
+
   gregCalendarTable(setState) {
     print('CALLBACK: _gregCalendarTable');
-    List monthList = CalendarDateBuilder.greg(data);
-    return buildTableCalendar('greg', monthList, data, setState);
+    // List monthList = CalendarDateBuilder.greg(data);
+    // return buildTableCalendar('greg', monthList[0], data, setState);
+    getCorrentMonthDate(data);
+    // data.gregMonth.info = _gregMonthData;
+    return buildTableCalendar('greg', _gregMonthDate, data, setState);
   }
 
   mandaCalendarTable(setState) {
     print('CALLBACK: _mandaCalendarTable');
-    List monthList = CalendarDateBuilder.manda(data);
-    return buildTableCalendar('manda', monthList, data, setState);
+    // List monthList = CalendarDateBuilder.manda(data);
+    // return buildTableCalendar('manda', monthList[0], data, setState);
+    getCorrentMonthDate(data);
+    // data.mandaMonth.info = _mandaMonthData;
+    return buildTableCalendar('manda', _mandaMonthDate, data, setState);
   }
 
   shamsiCalendarTable(setState) {
     print('CALLBACK: _shamsiCalendarTable');
-    List monthList = CalendarDateBuilder.shamsi(data);
-    return buildTableCalendar('shamsi', monthList, data, setState);
+    // List monthList = CalendarDateBuilder.shamsi(data);
+    // return buildTableCalendar('shamsi', monthList[0], data, setState);
+    getCorrentMonthDate(data);
+    // data.shamsiMonth.info = _shamsiMonthData;
+    return buildTableCalendar('shamsi', _shamsiMonthDate, data, setState);
   }
 
   @override

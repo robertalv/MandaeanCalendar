@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'manda_events.dart';
 import 'manda_footer.dart';
 import 'manda_holidays.dart';
+import 'manda_month_events.dart';
 import 'my_font_size.dart';
 import 'setter_getter.dart';
 import 'manda_equivalent.dart';
@@ -102,6 +103,7 @@ class MyHomePage extends StatefulWidget {
   static void runHolidaysEvents(int selectedYear) {
     _holidays = MandaFirstDayOfMonthBuilder(selectedYear).eventsForWholeYear;
     _events = MandaEventssBuilder(selectedYear).wholeYear;
+    MandaGregShamsiInfo.dateEvents(_data);
     print("_holidays builded ****" * 5);
     print(_holidays);
   }
@@ -125,7 +127,7 @@ class MyHomePage extends StatefulWidget {
         monthChangeYear = 1;
       }
     }
-
+    CalendarBuilder.getMonthDate(data);
     selectedDay = data.selected.date;
     // print(selectedDay);
     if (selectedDay.month == monthChangeYear) {

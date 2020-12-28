@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 import 'manda_date.dart';
 import 'manda_equivalent.dart';
+import 'manda_month_events.dart';
 
 class CalendarDateBuilder {
   // DateTime selectedDay;
@@ -37,20 +38,13 @@ class CalendarDateBuilder {
     List monthDateList = [];
     List afterDateList = [];
     List allDateList = [];
-    // List allDateLebelList = [];
-    // DateTime today = selectedDay;
-
-    // // 11 Sartana(10) == 24 Dec(12)
-    // today = DateTime(2021, 7, 1, 0, 0);
-    // print("selectedDay $selectedDay");
-    // var mandaDay = 11;
-    // var mandaDayInMonth = 30;
 
     var mandaDay = mandaDate.day;
     var mandaDayInMonth = 30;
     if (mandaDate.month == 13) {
       mandaDayInMonth = 5;
     }
+
     DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
         selectedDay.day - mandaDay + 1, 0, 0);
 
@@ -84,6 +78,9 @@ class CalendarDateBuilder {
 
     monthDateList = monthLoop(startMonth, mandaDayInMonth);
     // print(monthDateList);
+    // Map<DateTime, List> holidaysEvents =
+    //     MandaGregShamsiInfo.holidaysEventsMonthBuilder(data, monthDateList);
+    // MandaGregShamsiInfo.dateEvents(data);
 
     day = DateFormat.E("en_US").format(endMonth);
     int afterDayIndex = 6 - getNumDayOdWeek(day);
@@ -212,6 +209,7 @@ class CalendarDateBuilder {
     // print(allDateList);
     // print(allDateLebelList);
     return allDateList;
+    ;
   }
 
   static beforeLoop(DateTime startMonth, int endOfLoop) {
