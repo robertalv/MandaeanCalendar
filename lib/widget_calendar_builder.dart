@@ -54,7 +54,7 @@ class CalendarBuilder extends MyHomePage {
     print(_firstLast);
     print(data.selected.date);
     print("*" * 30 + "Date builder load" + "*" * 30);
-    List monthDate = MandaGregShamsiInfo.dateEvents(data);
+    List monthDate = MandaGregShamsiInfo.dateBuilder(data);
     _mandaMonthDate = monthDate[0];
     _gregMonthDate = monthDate[1];
     _shamsiMonthDate = monthDate[2];
@@ -65,19 +65,36 @@ class CalendarBuilder extends MyHomePage {
   getCorrentMonthDate(data) {
     // print(_firstLast);
     // print(data.selected.date);
+    DateTime selectedDay = data.selected.date;
+    var gregInfo = data.gregMonth.info;
+    var mandaInfo = data.mandaMonth.info;
+    var shamsiIno = data.shamsiMonth.info;
+
     if (_firstLast.isEmpty ||
-        data.selected.date.isBefore(_firstLast[0]) ||
-        data.selected.date.isAfter(_firstLast[1])) {
+        notInRange(selectedDay, gregInfo) ||
+        notInRange(selectedDay, mandaInfo) ||
+        notInRange(selectedDay, shamsiIno)) {
       getMonthDate(data);
     }
+  }
+
+  notInRange(selectedDay, monthInfo) {
+    var notRange = false;
+
+    if (selectedDay.isBefore(monthInfo['first']) ||
+        selectedDay.isAfter(monthInfo['last'])) {
+      notRange = true;
+    }
+    // print("range $notRange");
+    return notRange;
   }
 
   gregCalendarTable(setState) {
     print('CALLBACK: _gregCalendarTable');
     // List monthList = CalendarDateBuilder.greg(data);
     // return buildTableCalendar('greg', monthList[0], data, setState);
+
     getCorrentMonthDate(data);
-    // data.gregMonth.info = _gregMonthData;
     return buildTableCalendar('greg', _gregMonthDate, data, setState);
   }
 
@@ -86,7 +103,6 @@ class CalendarBuilder extends MyHomePage {
     // List monthList = CalendarDateBuilder.manda(data);
     // return buildTableCalendar('manda', monthList[0], data, setState);
     getCorrentMonthDate(data);
-    // data.mandaMonth.info = _mandaMonthData;
     return buildTableCalendar('manda', _mandaMonthDate, data, setState);
   }
 
@@ -95,7 +111,6 @@ class CalendarBuilder extends MyHomePage {
     // List monthList = CalendarDateBuilder.shamsi(data);
     // return buildTableCalendar('shamsi', monthList[0], data, setState);
     getCorrentMonthDate(data);
-    // data.shamsiMonth.info = _shamsiMonthData;
     return buildTableCalendar('shamsi', _shamsiMonthDate, data, setState);
   }
 
@@ -583,6 +598,13 @@ class CalendarBuilder extends MyHomePage {
 
   static onDayTap(cellText, data) {
     print('CALLBACK: _onDayTap');
+    print('cellText[0].year: ${cellText[0].year}');
+    print('cellText[0].year: ${data.selected.date.year}');
+
+    if (cellText[1] != "" && cellText[0].year != data.selected.date.year) {
+      print('CALLBACK: get new runHolidaysEvents');
+      MyHomePage.runHolidaysEvents(cellText[0].year);
+    }
 
     if (cellText[1] != "") {
       data.selected.date = cellText[0];

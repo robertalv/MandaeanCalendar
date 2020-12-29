@@ -1,5 +1,6 @@
 // import 'package:intl/intl.dart';
 import 'manda_base.dart';
+import 'manda_date.dart';
 import 'manda_holidays.dart';
 
 class MandaEventssBuilder {
@@ -68,5 +69,35 @@ class MandaEventssBuilder {
       }
     }
     return manda1stMonthWithGDate;
+  }
+
+  static forGivenMonth(int selectedMonth, int selectedYear) {
+    // print("*" * 10 + "Start given month" + "*" * 10);
+    // print("selectedMonth $selectedMonth");
+    // print("selectedYear $selectedYear");
+    Map<DateTime, List> monthEventsList = {};
+    var eventsBaseDate = MandaBaseDate.mandaEventsDateBase();
+
+    int daysInMonth = DateTime(selectedYear, selectedMonth + 1, 0, 0, 0).day;
+
+    // print("firstMonth $firstMonth");
+    // print("daysInMonth $daysInMonth");
+    for (var i = 0; i < daysInMonth; i++) {
+      DateTime selectedDay = DateTime(selectedYear, selectedMonth, 1 + i, 0, 0);
+      MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
+      int mandaDay = mandaDate.day;
+      int mandaMonth = mandaDate.month;
+      Map monthEvents = eventsBaseDate[mandaMonth];
+      if (monthEvents.isNotEmpty) {
+        if (monthEvents[mandaDay] != null) {
+          // print("key $mandaDay");
+          // print("selectedDay $selectedDay");
+          monthEventsList[selectedDay] = monthEvents[mandaDay];
+          // monthEventsList.add([selectedDay, monthEvents[mandaDay]]);
+        }
+      }
+    }
+    // print('Final monthEventsList -------------> $monthEventsList');
+    return monthEventsList;
   }
 }

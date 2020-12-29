@@ -103,9 +103,26 @@ class MyHomePage extends StatefulWidget {
   static void runHolidaysEvents(int selectedYear) {
     _holidays = MandaFirstDayOfMonthBuilder(selectedYear).eventsForWholeYear;
     _events = MandaEventssBuilder(selectedYear).wholeYear;
-    MandaGregShamsiInfo.dateEvents(_data);
+    final List eventName = MandaEqu.mandaFirstMonth();
+    var decBefor =
+        MandaFirstDayOfMonthBuilder.forMonthInYear(12, selectedYear - 1);
+    var janAfter =
+        MandaFirstDayOfMonthBuilder.forMonthInYear(1, selectedYear + 1);
+    _holidays[decBefor[0]] = eventName;
+    _holidays[janAfter[0]] = eventName;
+    Map<DateTime, List> decEventBefor =
+        MandaEventssBuilder.forGivenMonth(12, selectedYear - 1);
+    Map<DateTime, List> janEventAfter =
+        MandaEventssBuilder.forGivenMonth(1, selectedYear + 1);
+    _events.addAll(decEventBefor);
+    _events.addAll(janEventAfter);
+
+    MandaGregShamsiInfo.dateBuilder(_data);
+    print('selectedYear $selectedYear');
+    print('_holidays ${_holidays.length}');
+    print('_events ${_events.length}');
     print("_holidays builded ****" * 5);
-    print(_holidays);
+    // print(_holidays);
   }
 
   static void _onVisibleMonth(
@@ -286,8 +303,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    print("one time run main ################");
     UserSetting.getLanguage(setState, _lang);
+    CalendarBuilder.getMonthDate(_data);
+    print("one time run main ################");
+// Test test ******************
+    // MandaEventssBuilder.givenMonth(2019, 12);
     MyHomePage.runHolidaysEvents(_data.selected.date.year);
     // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
     //     .eventsForWholeYear;

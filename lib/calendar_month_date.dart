@@ -5,30 +5,6 @@ import 'manda_equivalent.dart';
 import 'manda_month_events.dart';
 
 class CalendarDateBuilder {
-  // DateTime selectedDay;
-  // DateTime today;
-  // List mandaMonthDate;
-  // List gregMonthDate;
-  // DateTime endOfMonth;
-  // DateTime startOfMonth;
-
-  // CalendarDateBuilder(selectedDay) {
-
-  //   this.selectedDay = selectedDay;
-  //   this.today = getToday();
-  //   this.gregMonthDate = greg(selectedDay);
-  //   this.endOfMonth =  _start.date;
-  //   this.startOfMonth = startOfMonth;
-
-  // }
-
-  // static getToday() {
-  //   DateTime todayNow = DateTime.now();
-  //   DateTime today =
-  //       DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
-  //   return today;
-  // }
-
   static manda(var data) {
     print('CALLBACK: _MandaDateBuilder');
     DateTime selectedDay = data.selected.date;

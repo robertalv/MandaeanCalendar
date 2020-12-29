@@ -5,8 +5,10 @@ import 'manda_date.dart';
 import 'manda_equivalent.dart';
 
 class MandaGregShamsiInfo {
-  static dateEvents(var data) {
+  static var _data;
+  static dateBuilder(var data) {
     print('CALLBACK: _MandaDateBuilder');
+    _data = data;
     List gregDate = CalendarDateBuilder.greg(data);
     List mandaDate = CalendarDateBuilder.manda(data);
     List shamsiDate = CalendarDateBuilder.shamsi(data);
@@ -16,13 +18,55 @@ class MandaGregShamsiInfo {
     print("firstMin $firstMin");
     print('lastMax $lastMax');
 
+    // var beforeEvent = mandaOtherEvents(firstMin, data.mandaMonth.info['first']);
+    // List monthEvent = mandaMonthEvents(
+    //     data.mandaMonth.info['first'], data.mandaMonth.info['last'], mandaDate);
+    // var afterEvent = mandaOtherEvents(data.mandaMonth.info['last'], lastMax);
+
+    // List holidaysEvents = [];
+    // holidaysEvents.addAll(monthEvent);
+
+    // print("holidaysEvents $holidaysEvents");
+
     return [
       mandaDate,
       gregDate,
       shamsiDate,
-      [firstMin, lastMax]
+      [firstMin, lastMax],
+      // holidaysEvents
     ];
   }
+
+  // static mandaMonthEvents(DateTime first, DateTime last, mandaDate) {
+  //   print("first $first  -------- last $last");
+  //   int monthNum = _data.mandaMonth.info['month'];
+  //   Map mandaEvents = mandaEventsDateBase(monthNum);
+  //   // print("monthEvents $monthEvents");
+  //   // print("monthEvents ${mandaEvents.length}");
+  //   return monthLoop(mandaEvents, mandaDate);
+  // }
+
+  // static mandaOtherEvents(DateTime first, DateTime last) {
+  //   // print("first $first  -------- last $last");
+  // }
+
+  // static monthLoop(Map monthEvents, mandaDate) {
+  //   List eventsList = [];
+  //   List matchDateList;
+
+  //   monthEvents.forEach((key, value) {
+  //     // print("key $key");
+  //     // print("value $value");
+  //     var matchDate =
+  //         mandaDate.where((element) => element[1] == key.toString());
+  //     matchDateList = matchDate.toList();
+  //     if (matchDateList.isNotEmpty) {
+  //       eventsList.addAll([matchDateList[0][0], value]);
+  //     }
+  //   });
+
+  //   return eventsList;
+  // }
 
   static getFirstMin(data) {
     List firstList = [
