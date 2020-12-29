@@ -334,6 +334,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.gregKind.active = false;
     _data.mandaKind.active = true;
     _data.shamsiKind.active = false;
+    List runingWidget;
+    runingWidget = ['manda', 'shamsi', 'greg'];
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
     // _selectedEvents = _todayHolidayEvents ?? [];
@@ -388,28 +390,37 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
                 child: ListView(children: [
               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-                if (_data.gregKind.active == true)
+                // if (_data.gregKind.active == true)
+                if (runingWidget.length >= 1)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .gregCalendarTable(setState),
                     child: CalendarBuilder(_holidays, _events, _data)
-                        .gregCalendarTable(setState),
+                        .buildCalendarTable(setState, runingWidget[0]),
                   ),
 
-                if (_data.mandaKind.active == true)
+                // if (_data.mandaKind.active == true)
+                if (runingWidget.length >= 2)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .mandaCalendarTable(setState),
                     child: CalendarBuilder(_holidays, _events, _data)
-                        .mandaCalendarTable(setState),
+                        .buildCalendarTable(setState, runingWidget[1]),
                   ),
 
-                if (_data.shamsiKind.active == true)
+                // if (_data.shamsiKind.active == true)
+                if (runingWidget.length == 3)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .shamsiCalendarTable(setState),
                     child: CalendarBuilder(_holidays, _events, _data)
-                        .shamsiCalendarTable(setState),
+                        .buildCalendarTable(setState, runingWidget[2]),
                   ),
 
                 Container(

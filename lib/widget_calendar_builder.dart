@@ -89,6 +89,21 @@ class CalendarBuilder extends MyHomePage {
     return notRange;
   }
 
+  buildCalendarTable(setState, kind) {
+    getCorrentMonthDate(data);
+
+    if (kind == 'manda') {
+      print('CALLBACK: _mandaCalendarTable');
+      return buildTableCalendar('manda', _mandaMonthDate, data, setState);
+    } else if (kind == 'shamsi') {
+      print('CALLBACK: _shamsiCalendarTable');
+      return buildTableCalendar('shamsi', _shamsiMonthDate, data, setState);
+    } else {
+      print('CALLBACK: _gregCalendarTable');
+      return buildTableCalendar('greg', _gregMonthDate, data, setState);
+    }
+  }
+
   gregCalendarTable(setState) {
     print('CALLBACK: _gregCalendarTable');
     // List monthList = CalendarDateBuilder.greg(data);
