@@ -202,22 +202,10 @@ class MyHomePage extends StatefulWidget {
     // print('last $last');
     // print('month $month');
     var duration = 30;
-    if (month == 1) {
-      duration = 5;
+    if (month == 2) {
+      duration = 35;
     }
 
-    // if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-    //   data.selected.date =
-    //       DateTime(first.year, first.month, first.day - duration, 0, 0);
-    // } else {
-    //   data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    // }
-
-    // DateTime selectedDay = data.selected.date;
-    // // print(selectedDay);
-    // if (selectedDay.month == 1) {
-    //   runHolidaysEvents(selectedDay.year);
-    // }
     _onVisibleMonth(
         data,
         DateTime(first.year, first.month, first.day - duration, 0, 0),
