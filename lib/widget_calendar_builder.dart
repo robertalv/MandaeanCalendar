@@ -51,9 +51,9 @@ class CalendarBuilder extends MyHomePage {
   }
 
   static getMonthDate(data) {
-    print(_firstLast);
-    print(data.selected.date);
-    print("*" * 30 + "Date builder load" + "*" * 30);
+    // print(_firstLast);
+    // print(data.selected.date);
+
     List monthDate = MandaGregShamsiInfo.dateBuilder(data);
     _mandaMonthDate = monthDate[0];
     _gregMonthDate = monthDate[1];

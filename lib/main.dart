@@ -118,10 +118,10 @@ class MyHomePage extends StatefulWidget {
     _events.addAll(janEventAfter);
 
     MandaGregShamsiInfo.dateBuilder(_data);
-    print('selectedYear $selectedYear');
-    print('_holidays ${_holidays.length}');
-    print('_events ${_events.length}');
-    print("_holidays builded ****" * 5);
+    // print('selectedYear $selectedYear');
+    // print('_holidays ${_holidays.length}');
+    // print('_events ${_events.length}');
+    // print("_holidays builded ****" * 5);
     // print(_holidays);
   }
 
@@ -156,19 +156,6 @@ class MyHomePage extends StatefulWidget {
     print('CALLBACK: _onVisibleMonthLeft');
     DateTime selectedDay = data.selected.date;
 
-    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
-    //   data.selected.date =
-    //       DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    // } else {
-    //   data.selected.date =
-    //       DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    // }
-
-    // selectedDay = data.selected.date;
-    // // print(selectedDay);
-    // if (selectedDay.month == 12) {
-    //   runHolidaysEvents(selectedDay.year);
-    // }
     _onVisibleMonth(
         data,
         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
@@ -180,19 +167,6 @@ class MyHomePage extends StatefulWidget {
     print('CALLBACK: _onVisibleMonthRight');
     DateTime selectedDay = data.selected.date;
 
-    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
-    //   data.selected.date =
-    //       DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-    // } else {
-    //   data.selected.date =
-    //       DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-    // }
-
-    // selectedDay = data.selected.date;
-    // // print(selectedDay);
-    // if (selectedDay.month == 1) {
-    //   runHolidaysEvents(selectedDay.year);
-    // }
     _onVisibleMonth(
         data,
         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
@@ -210,21 +184,9 @@ class MyHomePage extends StatefulWidget {
     // print('last $last');
     // print('month $month');
     var duration = 30;
-    if (month == 1) {
-      duration = 5;
+    if (month == 2) {
+      duration = 35;
     }
-    // if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
-    //   data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-    // } else {
-    //   data.selected.date =
-    //       DateTime(first.year, first.month, first.day - duration, 0, 0);
-    // }
-
-    // DateTime selectedDay = data.selected.date;
-    // // print(selectedDay);
-    // if (selectedDay.month == 12) {
-    //   runHolidaysEvents(selectedDay.year);
-    // }
 
     _onVisibleMonth(data, DateTime(last.year, last.month, last.day + 1, 0, 0),
         DateTime(first.year, first.month, first.day - duration, 0, 0), 'left');
@@ -305,10 +267,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     UserSetting.getLanguage(setState, _lang);
     CalendarBuilder.getMonthDate(_data);
+    MyHomePage.runHolidaysEvents(_data.selected.date.year);
     print("one time run main ################");
 // Test test ******************
     // MandaEventssBuilder.givenMonth(2019, 12);
-    MyHomePage.runHolidaysEvents(_data.selected.date.year);
+
     // _holidays = MandaFirstDayOfMonthBuilder(_data.selected.date.year)
     //     .eventsForWholeYear;
     // _events = MandaEventssBuilder(_data.selected.date.year).wholeYear;
