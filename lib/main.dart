@@ -380,9 +380,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // ###############################################################
     // ###############################################################
 
-    _data.gregKind.active = true;
+    _data.gregKind.active = false;
     _data.mandaKind.active = true;
-    _data.shamsiKind.active = true;
+    _data.shamsiKind.active = false;
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
     // _selectedEvents = _todayHolidayEvents ?? [];

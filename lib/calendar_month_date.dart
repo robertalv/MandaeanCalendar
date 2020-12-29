@@ -16,9 +16,15 @@ class CalendarDateBuilder {
     List allDateList = [];
 
     var mandaDay = mandaDate.day;
+    var mandaMonth = mandaDate.month;
     var mandaDayInMonth = 30;
-    if (mandaDate.month == 13) {
-      mandaDayInMonth = 5;
+
+    if (mandaMonth == 13) {
+      mandaDayInMonth = 35;
+      mandaDate = MandaDateBuilder(selectedDay.add(Duration(days: 6)));
+    } else if (mandaMonth == 1) {
+      mandaDayInMonth = 35;
+      mandaDay = mandaDay + 5;
     }
 
     DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
@@ -42,7 +48,8 @@ class CalendarDateBuilder {
     };
 
     // print("startDate $startMonth");
-    // print("endDate $endMonth");
+    print("data.mandaMonth.info ${data.mandaMonth.info}");
+    print("data.mandaMonth.info ${data.mandaMonth.info['month']}");
 
     var day = DateFormat.E("en_US").format(startMonth);
     int beforeDayIndex = getNumDayOdWeek(day);
@@ -51,8 +58,12 @@ class CalendarDateBuilder {
 
     beforeDateList = beforeLoop(startMonth, beforeDayIndex);
     // print(beforeDateList);
+    if (mandaDayInMonth == 30) {
+      monthDateList = monthLoop(startMonth, mandaDayInMonth);
+    } else {
+      monthDateList = monthPanjaLoop(startMonth, mandaDayInMonth);
+    }
 
-    monthDateList = monthLoop(startMonth, mandaDayInMonth);
     // print(monthDateList);
     // Map<DateTime, List> holidaysEvents =
     //     MandaGregShamsiInfo.holidaysEventsMonthBuilder(data, monthDateList);
@@ -198,6 +209,28 @@ class CalendarDateBuilder {
         ""
       ]);
       // allDateLebelList.add("");
+    }
+    return dateList;
+  }
+
+  static monthPanjaLoop(DateTime startMonth, int endOfLoop) {
+    List dateList = [];
+    int dayIndex = 1;
+    String displayDay;
+    // List allDateLebelList = [];
+    for (var i = 0; i <= endOfLoop - 1; i++) {
+      displayDay = dayIndex.toString();
+      if (i < 5) {
+        displayDay = "Panja";
+      } else {
+        dayIndex += 1;
+      }
+      dateList.add([
+        DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
+        displayDay
+      ]);
+      // allDateLebelList.add(dayIndex.toString());
+
     }
     return dateList;
   }

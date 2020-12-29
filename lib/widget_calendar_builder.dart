@@ -598,8 +598,8 @@ class CalendarBuilder extends MyHomePage {
 
   static onDayTap(cellText, data) {
     print('CALLBACK: _onDayTap');
-    print('cellText[0].year: ${cellText[0].year}');
-    print('cellText[0].year: ${data.selected.date.year}');
+    // print('cellText[0].year: ${cellText[0].year}');
+    // print('cellText[0].year: ${data.selected.date.year}');
 
     if (cellText[1] != "" && cellText[0].year != data.selected.date.year) {
       print('CALLBACK: get new runHolidaysEvents');
@@ -610,7 +610,7 @@ class CalendarBuilder extends MyHomePage {
       data.selected.date = cellText[0];
     }
     // data.selected.date = cellText[0];
-    print('_onDayTap $cellText');
+    print('_onDayTap ------------------------------>> $cellText');
   }
 
   static onDayLogPressed(cellText) {
