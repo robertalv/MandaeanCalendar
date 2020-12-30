@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'calendar_month_date.dart';
 import 'local_number.dart';
 import 'main.dart';
+import 'manda_date.dart';
 import 'manda_equivalent.dart';
 import 'manda_events.dart';
 import 'manda_holidays.dart';
@@ -136,8 +137,10 @@ class CalendarBuilder extends MyHomePage {
   @override
   Widget buildTableCalendar(kind, monthList, data, setState) {
     print('CALLBACK: _onCalendarCreated');
+
     myTextAlignment = MyAlignment.textAlig(_data.lang.name);
     myAlignment = MyAlignment.countryLanguage(_data.lang.name);
+
     // print("_holidays " * 10);
     // print(_holidays);
     // print("_holidays " * 10);
@@ -638,12 +641,12 @@ class CalendarBuilder extends MyHomePage {
 
     if (_local == 'fa_IR') {
       var dayFa = DateFormat.EEEE(_local).format(date);
-      print("dayFa $dayFa");
-      var test = MandaEqu.daysWeekFa(dayFa);
-      print("test $test");
+      // print("dayFa $dayFa");
+      // var test = MandaEqu.daysWeekFa(dayFa);
+      // print("test $test");
 
       day = MandaEqu.changeDayFormate(dayFa);
-      day = test;
+      // day = test;
     } else if (_local == 'ar') {
       day = DateFormat.E(_local).format(date);
       // print("day $day");
@@ -687,7 +690,7 @@ class CalendarBuilder extends MyHomePage {
     return TextStyle(color: dayColor, fontSize: _tableSize.dayNum);
   }
 
-  static onDayTap(cellText, data) {
+  static onDayTap(cellText, data) async {
     print('CALLBACK: _onDayTap');
     // print('cellText[0].year: ${cellText[0].year}');
     // print('cellText[0].year: ${data.selected.date.year}');
@@ -700,11 +703,9 @@ class CalendarBuilder extends MyHomePage {
     if (cellText[1] != "") {
       data.selected.date = cellText[0];
     }
-    // data.selected.date = cellText[0];
-    var test = cellText;
-    // test = _mandaMonthDate.where((element) => element[0] == cellText[0]);
-    MyHomePage.onDaySelected(test);
-    print('_onDayTap ------------------------------>> $cellText');
+    print('_onDayTap cellText ------------------------------>> $cellText');
+    // await Future.delayed(Duration(seconds: 1));
+    MyHomePage.onDaySelected(cellText);
   }
 
   static onDayLogPressed(cellText) {
@@ -712,7 +713,132 @@ class CalendarBuilder extends MyHomePage {
     // print('_onDayLogPressed $cellText');
   }
 
-  Widget dateEquivalent(mandeanDay) {
+  static getDateEqu(var selectedDay, var data) {
+    var dayEgu1;
+    var dayEgu2;
+    var monthEgu1;
+    var monthEgu2;
+    String day;
+    //
+    MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay[0]);
+    var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay[0]);
+    if (selectedDay[2] == 'm') {
+      dayEgu1 = [selectedDay[0], selectedDay[0].day, 'g'];
+      // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
+      // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
+      // print(monthName);
+      // print(MandaEqu.changeMonthFormate(monthName));
+      monthEgu1 = [
+        DateFormat.MMM('en_US').format(selectedDay[0]),
+        DateFormat.MMM('fa_IR').format(selectedDay[0]),
+        MandaEqu.changeMonthFormate(
+            DateFormat.MMMM('en_US').format(selectedDay[0]))
+      ];
+
+      dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
+      // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
+      monthEgu2 = [
+        data.shamsiMonth.info['monthEn'],
+        data.shamsiMonth.info['monthFaAr'],
+        data.shamsiMonth.info['monthFaAr']
+      ];
+
+      print('m>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
+      print('m>>>>> _gregMonthDate     >> $_gregMonthDate');
+      print('m>>>>> dayEgu1 $dayEgu1');
+      print('m>>>>> dayEgu2 $dayEgu2');
+    } else if (selectedDay[2] == 's') {
+      dayEgu2 = [selectedDay[0], selectedDay[0].day, 'g'];
+      // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
+      // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
+      // print(monthName);
+      // print(MandaEqu.changeMonthFormate(monthName));
+      monthEgu2 = [
+        DateFormat.MMM('en_US').format(selectedDay[0]),
+        DateFormat.MMM('fa_IR').format(selectedDay[0]),
+        MandaEqu.changeMonthFormate(
+            DateFormat.MMMM('en_US').format(selectedDay[0]))
+      ];
+
+      dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
+      // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
+      monthEgu1 = [
+        data.mandaMonth.info['monthEn'],
+        data.mandaMonth.info['monthFaAr'],
+        data.mandaMonth.info['monthFaAr']
+      ];
+      print('s>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
+      print('s>>>>> _mandaMonthDate     >> $_mandaMonthDate');
+      print('s>>>>> dayEgu1 $dayEgu1');
+      print('s>>>>> dayEgu2 $dayEgu2');
+    } else {
+      dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
+      // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
+      monthEgu1 = [
+        data.mandaMonth.info['monthEn'],
+        data.mandaMonth.info['monthFaAr'],
+        data.mandaMonth.info['monthFaAr']
+      ];
+      dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
+      // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
+      monthEgu2 = [
+        data.shamsiMonth.info['monthEn'],
+        data.shamsiMonth.info['monthFaAr'],
+        data.shamsiMonth.info['monthFaAr']
+      ];
+      print('g>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
+      print('gm>>>>> _mandaMonthDate     >> $_mandaMonthDate');
+      print('g>>>>> dayEgu1 $dayEgu1');
+      print('g>>>>> dayEgu2 $dayEgu2');
+    }
+
+    // dayEgu1 = dayEgu1.toList();
+    // dayEgu2 = dayEgu2.toList();
+
+    if (data.lang.name == 'fa_IR') {
+      day = '  ' +
+          monthEgu1[1] +
+          '  ' +
+          dayEgu1[1].toString() +
+          '  =  ' +
+          monthEgu2[1] +
+          '  ' +
+          dayEgu2[1].toString() +
+          '  ';
+
+      day = LocalNum.convertEntoFaAr(day, data.lang.name);
+    } else if (data.lang.name == 'ar') {
+      day = '  ' +
+          monthEgu1[2] +
+          ' ' +
+          dayEgu1[1].toString() +
+          '  =  ' +
+          monthEgu2[2] +
+          ' ' +
+          dayEgu2[1].toString() +
+          '  ';
+
+      // day = "${dayEgu1[1].toString()} = ${dayEgu2[1].toString()}";
+      day = LocalNum.convertEntoFaAr(day, data.lang.name);
+    } else {
+      day = "${dayEgu1[1]} ${monthEgu1[0]} = ${dayEgu2[1]} ${monthEgu2[0]}";
+    }
+
+    return day;
+  }
+
+  Widget dateEquivalent(selectedDay) {
+    myTextAlignment = MyAlignment.textAlig(_data.lang.name);
+    myAlignment = MyAlignment.countryLanguage(_data.lang.name);
+
+    // print(_mandaMonthDate);
+    // print('mandeanDay $mandeanDay');
+    // print(mandeanDay[0]);
+    // var test =
+    //     _mandaMonthDate.where((element) => element.contains(mandeanDay[0]));
+    // print(selectedDay);
+
+    var dayEqu = getDateEqu(selectedDay, _data);
     var beforeDateIcon;
     var afterDateIcon;
     var myDateIcon = Icon(
@@ -749,14 +875,14 @@ class CalendarBuilder extends MyHomePage {
             child: Container(
               alignment: myAlignment,
               child: Text(
-                mandeanDay.toString(),
+                dayEqu.toString(),
                 textAlign: myTextAlignment,
                 style:
                     TextStyle(fontSize: _tableSize.f5025, color: Colors.black),
               ),
             ),
           ),
-          Text(" "),
+          Text("   "),
           afterDateIcon
         ],
       )),
@@ -778,9 +904,9 @@ class CalendarBuilder extends MyHomePage {
     }
 
     // _mandaAndJalaiYear = _getYearHeader(kind, data);
-    print(_yearEquivalent[2]);
-    print(kind);
-    print(_mandaAndJalaiYear);
+    // print(_yearEquivalent[2]);
+    // print(kind);
+    // print(_mandaAndJalaiYear);
     Map _myColorSelection = MyColor.selection();
     return Container(
       constraints: BoxConstraints(
@@ -798,7 +924,7 @@ class CalendarBuilder extends MyHomePage {
         child: Text(
           _mandaAndJalaiYear.toString(),
           style: TextStyle(
-            fontSize: _tableSize.f5025,
+            fontSize: _tableSize.f4020,
             color: Colors.black,
             // fontWeight: FontWeight.bold
           ),

@@ -44,12 +44,13 @@ class CalendarDateBuilder {
       'adam': mandaDate.yearAdam,
       'monthFaAr': mandaDate.monthFa,
       'monthEn': mandaDate.monthEn,
+      'selectedDay': [selectedDay, mandaDate.day, 'm'],
       'kind': 'manda'
     };
 
     // print("startDate $startMonth");
-    print("data.mandaMonth.info ${data.mandaMonth.info}");
-    print("data.mandaMonth.info ${data.mandaMonth.info['month']}");
+    // print("data.mandaMonth.info ${data.mandaMonth.info}");
+    // print("data.mandaMonth.info ${data.mandaMonth.info['month']}");
 
     var day = DateFormat.E("en_US").format(startMonth);
     int beforeDayIndex = getNumDayOdWeek(day);
@@ -103,6 +104,7 @@ class CalendarDateBuilder {
     data.gregMonth.info = {
       'first': startMonth,
       'last': endMonth,
+      'selectedDay': [selectedDay, selectedDay.day, 'g'],
       'kind': 'greg'
     };
     var day = DateFormat.E("en_US").format(startMonth);
@@ -165,6 +167,7 @@ class CalendarDateBuilder {
       'year': jalaliDay.year,
       'monthFaAr': jalaliDay.formatter.mN,
       'monthEn': MandaEqu.jalaliMonth(jalaliDay.month),
+      'selectedDay': [selectedDay, jalaliDay.day, 's'],
       'kind': 'shamsi'
     };
 

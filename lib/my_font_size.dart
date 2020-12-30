@@ -141,6 +141,7 @@ class TableSize {
   double dayNum;
   double f8040;
   double f5025;
+  double f4020;
   double marginH;
   TableSize(data) {
     divecWidth = data.divecSize.width;
@@ -156,6 +157,7 @@ class TableSize {
       dayNum = 40.0;
       f8040 = 80;
       f5025 = 50;
+      f4020 = 40;
       marginH = (divecWidth - 700) / 2;
     } else {
       cellWidth = divecWidth / 7;
@@ -168,6 +170,7 @@ class TableSize {
       marginDayRow = 2.0;
       dayNum = 22.0;
       f5025 = 25;
+      f4020 = 20;
       marginH = 0;
     }
     // this.divecWidth = divecWidth;
