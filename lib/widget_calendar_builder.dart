@@ -31,12 +31,12 @@ class CalendarBuilder extends MyHomePage {
   // static List _mandaMonthDate;
   // static List _gregMonthDate;
   // static List _shamsiMonthDate;
-  static Map _mandaMonthData;
-  static Map _gregMonthData;
-  static Map _shamsiMonthData;
   static List _firstLast = [];
   var myTextAlignment;
   var myAlignment;
+  var _sizeRate;
+  String _local;
+  var _setState;
 
   CalendarBuilder(holidays, events, data) {
     this.data = data;
@@ -45,12 +45,6 @@ class CalendarBuilder extends MyHomePage {
     _holidays = holidays;
     _tableSize = new TableSize(_data);
   }
-
-  var _sizeRate;
-
-  String _local;
-  // var _data;
-  var _setState;
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +58,10 @@ class CalendarBuilder extends MyHomePage {
     _gregMonthDate = monthDate[1];
     _shamsiMonthDate = monthDate[2];
 
-    // _mandaMonthDate = _mandaMonthDateMap.values.toList();
-    // _gregMonthDate = _gregMonthDateMap.values.toList();
-    // _shamsiMonthDate = _shamsiMonthDateMap.values.toList();
-
     _firstLast = monthDate[3];
   }
 
   getCorrentMonthDate(data) {
-    // print(_firstLast);
-    // print(data.selected.date);
     DateTime selectedDay = data.selected.date;
     var gregInfo = data.gregMonth.info;
     var mandaInfo = data.mandaMonth.info;
@@ -102,21 +90,16 @@ class CalendarBuilder extends MyHomePage {
     getCorrentMonthDate(data);
 
     if (kind == 'manda') {
-      print('CALLBACK: _mandaCalendarTable');
       return buildTableCalendar('manda', _mandaMonthDate, data, setState);
     } else if (kind == 'shamsi') {
-      print('CALLBACK: _shamsiCalendarTable');
       return buildTableCalendar('shamsi', _shamsiMonthDate, data, setState);
     } else {
-      print('CALLBACK: _gregCalendarTable');
       return buildTableCalendar('greg', _gregMonthDate, data, setState);
     }
   }
 
   gregCalendarTable(setState) {
     print('CALLBACK: _gregCalendarTable');
-    // List monthList = CalendarDateBuilder.greg(data);
-    // return buildTableCalendar('greg', monthList[0], data, setState);
 
     getCorrentMonthDate(data);
     return buildTableCalendar('greg', _gregMonthDate, data, setState);
@@ -124,16 +107,14 @@ class CalendarBuilder extends MyHomePage {
 
   mandaCalendarTable(setState) {
     print('CALLBACK: _mandaCalendarTable');
-    // List monthList = CalendarDateBuilder.manda(data);
-    // return buildTableCalendar('manda', monthList[0], data, setState);
+
     getCorrentMonthDate(data);
     return buildTableCalendar('manda', _mandaMonthDate, data, setState);
   }
 
   shamsiCalendarTable(setState) {
     print('CALLBACK: _shamsiCalendarTable');
-    // List monthList = CalendarDateBuilder.shamsi(data);
-    // return buildTableCalendar('shamsi', monthList[0], data, setState);
+
     getCorrentMonthDate(data);
     return buildTableCalendar('shamsi', _shamsiMonthDate, data, setState);
   }
@@ -146,28 +127,23 @@ class CalendarBuilder extends MyHomePage {
     myTextAlignment = MyAlignment.textAlig(_data.lang.name);
     myAlignment = MyAlignment.countryLanguage(_data.lang.name);
 
-    // print("_holidays " * 10);
-    // print(_holidays);
-    // print("_holidays " * 10);
     _setState = setState;
-    _cellWidth = MyFontSize.cellWidth(data);
-    _sizeRate = MyFontSize.s21(data);
-    _divecWidth = data.divecSize.width;
-    _displayWidth = MyFontSize.displayWidth(data);
+    _cellWidth = _tableSize.cellWidth;
+    _sizeRate = _tableSize.sizeRate;
+    _divecWidth = _tableSize.divecWidth;
+    _displayWidth = _tableSize.displayWidth;
     _selectedDay = data.selected.date;
-    // _today = _selectedDay;
     _local = data.lang.name;
     _data = data;
 
     return Column(children: <Widget>[
       Padding(padding: EdgeInsets.only(top: 4)),
       if (monthList.length > 6) _buildYearMonthHeader(kind),
+      Padding(padding: EdgeInsets.only(top: 4)),
       if (monthList.length > 6)
         _buildDayNameHeader(monthList.getRange(0, 7).toList()),
       if (monthList.length > 6)
         _buildDateRow(monthList.getRange(0, 7).toList()),
-      // if (monthList.length > 6)
-      // _buildEventsRow(monthList.getRange(0, 7).toList(), _local),
       if (monthList.length > 13)
         _buildDateRow(monthList.getRange(7, 14).toList()),
       if (monthList.length > 20)
@@ -192,7 +168,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildYearMonthHeaderGreg(kind) {
-    // var _sizeRate = MyFontSize.s21(data);
     return GestureDetector(
         child: Center(
             child: Row(
@@ -228,7 +203,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildYearMonthHeaderManda(kind) {
-    // var _sizeRate = MyFontSize.s21(data);
     return GestureDetector(
         child: Center(
             child: Row(
@@ -238,7 +212,7 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(
             Icons.chevron_left,
             size: (_tableSize.f5025),
-            color: Colors.green,
+            color: Colors.black,
           ),
           onPressed: () {
             _setState(() {
@@ -277,7 +251,7 @@ class CalendarBuilder extends MyHomePage {
           icon: Icon(
             Icons.chevron_left,
             size: (_tableSize.f5025),
-            color: Colors.red,
+            color: Colors.black,
           ),
           onPressed: () {
             _setState(() {
@@ -312,8 +286,6 @@ class CalendarBuilder extends MyHomePage {
       rowTextSort = rowText.reversed.toList();
     }
 
-    // print(rowTextSort);
-
     return Row(
         children: rowTextSort
             .map((cellText) => _buildDayNameCell(cellText, _data))
@@ -325,7 +297,7 @@ class CalendarBuilder extends MyHomePage {
     if (_local != "en_US") {
       rowTextSort = rowText.reversed.toList();
     }
-    // print(rowTextSort);
+
     return Row(
         children:
             rowTextSort.map((cellText) => _buildDateCell(cellText)).toList());
@@ -335,11 +307,11 @@ class CalendarBuilder extends MyHomePage {
     var day;
 
     if (kind == 'greg') {
-      day = gregHeaderBuilder(data);
+      day = gregYMHeader(data);
     } else if (kind == 'manda') {
-      day = mandaHeaderBuilder(data);
+      day = mandaYMHeader(data);
     } else if (kind == 'shamsi') {
-      day = shamsiHeaderBuilder(data);
+      day = shamsiYMHeader(data);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
     }
@@ -347,15 +319,15 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  _getYearHeader(kind, data) {
+  _getYearEqu(kind, data) {
     var day;
 
     if (kind == 'greg') {
-      day = gregYearHeaderBuilder(data);
+      day = gregYearHeader(data);
     } else if (kind == 'manda') {
-      day = mandaYearHeaderBuilder(data);
+      day = mandaYearHeader(data);
     } else if (kind == 'shamsi') {
-      day = shamsiYearHeaderBuilder(data);
+      day = shamsiYearHeader(data);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
     }
@@ -363,26 +335,8 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  // Widget _buildEventsRow(List rowText, String localLang) {
-  //   // rowText.sort();
-  //   List rowTextSort = rowText;
-  //   if (localLang != "en_US") {
-  //     rowTextSort = rowText.reversed.toList();
-  //   }
-
-  //   // print(rowTextSort);
-
-  //   return Row(
-  //       children:
-  //           // rowText.map((cellText) => Text(cellText.toString())).toList());
-  //           rowTextSort
-  //               .map((cellText) => _buildEventsCell(cellText, localLang))
-  //               .toList());
-  //   // .toList());
-  // }
-
   static findMyIcon(myEvent) {
-    MyIcon myIcon = MyIcon(_tableSize.sizeRate);
+    MyIcon myIcon = MyIcon(_tableSize.iconRate);
 
     if ((myEvent.runtimeType.toString()).contains('List')) {
       myEvent = myEvent[0];
@@ -405,7 +359,6 @@ class CalendarBuilder extends MyHomePage {
     var child1;
     var child2;
     var child3;
-    // MyIcon myIcon = MyIcon(_sizeRate);
 
     List myEvents = [];
 
@@ -415,9 +368,6 @@ class CalendarBuilder extends MyHomePage {
     if (_events[cellText[0]] != null && cellText[1] != "") {
       myEvents.addAll(_events[cellText[0]]);
     }
-    // print(cellText);
-    // print(myEvents);
-    // print(myEvents.length);
 
     if (myEvents.length == 1) {
       child1 = findMyIcon(myEvents[0]);
@@ -431,11 +381,10 @@ class CalendarBuilder extends MyHomePage {
     }
 
     return Container(
-      // decoration: _dayDecorationBuilder(cellText),
       width: _cellWidth,
       // constraints: BoxConstraints(
       //   // minHeight: 35.0 * _sizeRate,
-      //   minHeight: 15.0,
+      //   minHeight: 10.0,
       // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -448,7 +397,7 @@ class CalendarBuilder extends MyHomePage {
     );
   }
 
-  static gregHeaderBuilder(var data) {
+  static gregYMHeader(var data) {
     var day;
     String local = data.lang.name;
     DateTime date = data.gregMonth.info['first'];
@@ -463,19 +412,19 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  static mandaHeaderBuilder(var data) {
+  static mandaYMHeader(var data) {
     var day;
     String local = data.lang.name;
     if (local == 'en_US') {
       day =
-          "${data.mandaMonth.info['monthEn']}\n${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
+          "${data.mandaMonth.info['monthEn']}  ${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
     } else if (local == 'ar') {
       day =
-          "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['adam']} / ${data.mandaMonth.info['yahya']}";
+          "${data.mandaMonth.info['monthFaAr']}  ${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
       day = LocalNum.convertEntoFaAr(day, local);
     } else if (local == 'fa_IR') {
       day =
-          "${data.mandaMonth.info['monthFaAr']}\n${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
+          "${data.mandaMonth.info['monthFaAr']}  ${data.mandaMonth.info['yahya']} / ${data.mandaMonth.info['adam']}";
       day = LocalNum.convertEntoFaAr(day, local);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
@@ -483,15 +432,15 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  static shamsiHeaderBuilder(var data) {
+  static shamsiYMHeader(var data) {
     var day;
     String local = data.lang.name;
     if (local == 'en_US') {
       day =
-          "${data.shamsiMonth.info['monthEn']} ${data.shamsiMonth.info['year']}";
+          "${data.shamsiMonth.info['monthEn']}  ${data.shamsiMonth.info['year']}";
     } else if (local == 'ar' || local == 'fa_IR') {
       day =
-          "${data.shamsiMonth.info['monthFaAr']} ${data.shamsiMonth.info['year']}";
+          "${data.shamsiMonth.info['monthFaAr']}  ${data.shamsiMonth.info['year']}";
       day = LocalNum.convertEntoFaAr(day, local);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
@@ -499,7 +448,7 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  static gregYearHeaderBuilder(var data) {
+  static gregYearHeader(var data) {
     var day;
     String local = data.lang.name;
     DateTime date = data.gregMonth.info['first'];
@@ -513,7 +462,7 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  static mandaYearHeaderBuilder(var data) {
+  static mandaYearHeader(var data) {
     var day;
     String local = data.lang.name;
     var yearLabel = MandaEqu.yearLabel(local);
@@ -534,7 +483,7 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
-  static shamsiYearHeaderBuilder(var data) {
+  static shamsiYearHeader(var data) {
     var day;
     String local = data.lang.name;
     var yearLabel = MandaEqu.yearLabel(local);
@@ -555,13 +504,12 @@ class CalendarBuilder extends MyHomePage {
 
   Widget _buildDayNameCell(var cellText, var data) {
     // print(cellText);
-    String local = _local;
+    // String local = _local;
     DateTime dateCellText = cellText[0];
     return Container(
       width: _cellWidth,
       constraints: BoxConstraints(
-        // minHeight: 35.0 * _sizeRate,
-        minHeight: 35.0,
+        minHeight: _tableSize.minHeightCell,
       ),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -569,20 +517,12 @@ class CalendarBuilder extends MyHomePage {
         children: <Widget>[
           Expanded(
               child: GestureDetector(
-            // onLongPress: () {
-            //   setState(() {
-            //     _onDayLogPressed(cellText);
-            //   });
-            // },
-            // onTap: () {
-            //   setState(() {
-            //     _onDayTap(cellText);
-            //   });
-            // },
             child: Text(
               _getDayHeader(dateCellText),
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: _tableSize.headerDayWeek),
+              style: TextStyle(
+                  fontSize: _tableSize.headerDayWeek,
+                  fontWeight: FontWeight.bold),
             ),
           ))
         ],
@@ -591,10 +531,6 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget _buildDateCell(var cellText) {
-    // print(cellText);
-    DateTime dateCellText = cellText[0];
-    String labelCellText = cellText[1];
-
     return Container(
       // margin: const EdgeInsets.all(daysMargin),
       // alignment: Alignment.center,
@@ -604,7 +540,6 @@ class CalendarBuilder extends MyHomePage {
       width: _tableSize.cellWidth,
       constraints: BoxConstraints(
         minHeight: _tableSize.minHeightCell,
-        // minHeight: 75.0,
       ),
       child: Column(children: [
         Row(
@@ -646,30 +581,20 @@ class CalendarBuilder extends MyHomePage {
 
     if (_local == 'fa_IR') {
       var dayFa = DateFormat.EEEE(_local).format(date);
-      // print("dayFa $dayFa");
-      // var test = MandaEqu.daysWeekFa(dayFa);
-      // print("test $test");
 
       day = MandaEqu.changeDayFormate(dayFa);
-      // day = test;
     } else if (_local == 'ar') {
       day = DateFormat.E(_local).format(date);
       // print("day $day");
       day = MandaEqu.daysWeekAr(day);
-      // print("test $test");
-      // day = test;
     } else {
       day = DateFormat.E(_local).format(date);
     }
-    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-
     return day;
   }
 
   _dayDecorationBuilder(cellText) {
     var dayColor;
-    // print("_today ${_data.today}");
-    // print("cellText $cellText");
     if (_selectedDay == cellText[0]) {
       dayColor = Colors.black54;
     } else if (_data.today == cellText[0] && cellText[1] != "") {
@@ -691,7 +616,6 @@ class CalendarBuilder extends MyHomePage {
     } else {
       dayColor = Colors.black;
     }
-    // return TextStyle(color: dayColor, fontSize: _daysFontSize);
     return TextStyle(color: dayColor, fontSize: _tableSize.dayNum);
   }
 
@@ -701,7 +625,6 @@ class CalendarBuilder extends MyHomePage {
     // print('cellText[0].year: ${data.selected.date.year}');
 
     if (cellText[1] != "" && cellText[0].year != data.selected.date.year) {
-      print('CALLBACK: get new runHolidaysEvents');
       MyHomePage.runHolidaysEvents(cellText[0].year);
     }
 
@@ -724,19 +647,12 @@ class CalendarBuilder extends MyHomePage {
     var monthEgu1;
     var monthEgu2;
     String day;
-    //
-    print('selectedDay $selectedDay');
-    print('selectedDay ${selectedDay[0]}');
-    MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay[0]);
-    var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay[0]);
+
+    // print('selectedDay $selectedDay');
+    // print('selectedDay ${selectedDay[0]}');
+
     if (selectedDay[2] == 'm') {
-      dayEgu1 = [selectedDay[0], selectedDay[0].day, 'g'];
       dayEgu1 = _gregMonthDate[selectedDay[0]];
-      print(dayEgu1);
-      // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
-      // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
-      // print(monthName);
-      // print(MandaEqu.changeMonthFormate(monthName));
       monthEgu1 = [
         DateFormat.MMM('en_US').format(selectedDay[0]),
         DateFormat.MMM('fa_IR').format(selectedDay[0]),
@@ -744,26 +660,14 @@ class CalendarBuilder extends MyHomePage {
             DateFormat.MMMM('en_US').format(selectedDay[0]))
       ];
 
-      dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
       dayEgu2 = _shamsiMonthDate[selectedDay[0]];
-      // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu2 = [
         data.shamsiMonth.info['monthEn'],
         data.shamsiMonth.info['monthFaAr'],
         data.shamsiMonth.info['monthFaAr']
       ];
-
-      print('m>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
-      print('m>>>>> _gregMonthDate     >> $_gregMonthDate');
-      print('m>>>>> dayEgu1 $dayEgu1');
-      print('m>>>>> dayEgu2 $dayEgu2');
     } else if (selectedDay[2] == 's') {
-      dayEgu2 = [selectedDay[0], selectedDay[0].day, 'g'];
       dayEgu2 = _gregMonthDate[selectedDay[0]];
-      // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
-      // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
-      // print(monthName);
-      // print(MandaEqu.changeMonthFormate(monthName));
       monthEgu2 = [
         DateFormat.MMM('en_US').format(selectedDay[0]),
         DateFormat.MMM('fa_IR').format(selectedDay[0]),
@@ -771,43 +675,27 @@ class CalendarBuilder extends MyHomePage {
             DateFormat.MMMM('en_US').format(selectedDay[0]))
       ];
 
-      dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
       dayEgu1 = _mandaMonthDate[selectedDay[0]];
-      // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu1 = [
         data.mandaMonth.info['monthEn'],
         data.mandaMonth.info['monthFaAr'],
         data.mandaMonth.info['monthFaAr']
       ];
-      print('s>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
-      print('s>>>>> _mandaMonthDate     >> $_mandaMonthDate');
-      print('s>>>>> dayEgu1 $dayEgu1');
-      print('s>>>>> dayEgu2 $dayEgu2');
     } else {
-      dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
       dayEgu1 = _mandaMonthDate[selectedDay[0]];
-      // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu1 = [
         data.mandaMonth.info['monthEn'],
         data.mandaMonth.info['monthFaAr'],
         data.mandaMonth.info['monthFaAr']
       ];
-      dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
+
       dayEgu2 = _shamsiMonthDate[selectedDay[0]];
-      // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu2 = [
         data.shamsiMonth.info['monthEn'],
         data.shamsiMonth.info['monthFaAr'],
         data.shamsiMonth.info['monthFaAr']
       ];
-      print('g>>>>> _shamsiMonthDate    >> $_shamsiMonthDate');
-      print('gm>>>>> _mandaMonthDate     >> $_mandaMonthDate');
-      print('g>>>>> dayEgu1 $dayEgu1');
-      print('g>>>>> dayEgu2 $dayEgu2');
     }
-
-    // dayEgu1 = dayEgu1.toList();
-    // dayEgu2 = dayEgu2.toList();
 
     if (data.lang.name == 'fa_IR') {
       day = '  ' +
@@ -832,7 +720,6 @@ class CalendarBuilder extends MyHomePage {
           dayEgu2[1].toString() +
           '  ';
 
-      // day = "${dayEgu1[1].toString()} = ${dayEgu2[1].toString()}";
       day = LocalNum.convertEntoFaAr(day, data.lang.name);
     } else {
       day = "${monthEgu1[0]} ${dayEgu1[1]} = ${monthEgu2[0]} ${dayEgu2[1]}";
@@ -846,11 +733,6 @@ class CalendarBuilder extends MyHomePage {
     myAlignment = MyAlignment.countryLanguage(_data.lang.name);
 
     // print(_mandaMonthDate);
-    // print('mandeanDay $mandeanDay');
-    // print(mandeanDay[0]);
-    // var test =
-    //     _mandaMonthDate.where((element) => element.contains(mandeanDay[0]));
-    // print(selectedDay);
 
     var dayEqu = getDateEqu(selectedDay, _data);
     var beforeDateIcon;
@@ -861,7 +743,6 @@ class CalendarBuilder extends MyHomePage {
     );
 
     if (_data.lang.name != "en_US") {
-      // _listFontSize = 20;
       beforeDateIcon = Text("");
       afterDateIcon = myDateIcon;
     } else {
@@ -892,7 +773,7 @@ class CalendarBuilder extends MyHomePage {
                 dayEqu.toString(),
                 textAlign: myTextAlignment,
                 style:
-                    TextStyle(fontSize: _tableSize.f5025, color: Colors.black),
+                    TextStyle(fontSize: _tableSize.f4020, color: Colors.black),
               ),
             ),
           ),
@@ -904,17 +785,16 @@ class CalendarBuilder extends MyHomePage {
   }
 
   Widget yearEquivalent(_yearEquivalent) {
-    String kind;
     var _mandaAndJalaiYear;
     if (_yearEquivalent[2] == 'm') {
-      _mandaAndJalaiYear = _getYearHeader('greg', data);
-      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearHeader('shamsi', data);
+      _mandaAndJalaiYear = _getYearEqu('greg', data);
+      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearEqu('shamsi', data);
     } else if (_yearEquivalent[2] == 'g') {
-      _mandaAndJalaiYear = _getYearHeader('manda', data);
-      _mandaAndJalaiYear = _getYearHeader('shamsi', data) + _mandaAndJalaiYear;
+      _mandaAndJalaiYear = _getYearEqu('manda', data);
+      _mandaAndJalaiYear = _getYearEqu('shamsi', data) + _mandaAndJalaiYear;
     } else {
-      _mandaAndJalaiYear = _getYearHeader('greg', data);
-      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearHeader('manda', data);
+      _mandaAndJalaiYear = _getYearEqu('greg', data);
+      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearEqu('manda', data);
     }
 
     // _mandaAndJalaiYear = _getYearHeader(kind, data);
@@ -947,134 +827,3 @@ class CalendarBuilder extends MyHomePage {
     );
   }
 }
-// static onVisibleMonthLeft(data) {
-//   print('CALLBACK: _onVisibleDaysChanged');
-//   DateTime selectedDay = data.selected.date;
-//   _holidays =
-//       MandaFirstDayOfMonthBuilder(selectedDay.year).eventsForWholeYear;
-//   print(_holidays);
-
-//   if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-//     data.selected.date =
-//         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-//   } else {
-//     data.selected.date =
-//         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-//   }
-// }
-
-// static onVisibleMonthRight(data) {
-//   print('CALLBACK: _onVisibleDaysChanged');
-//   DateTime selectedDay = data.selected.date;
-
-//   if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-//     data.selected.date =
-//         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-//   } else {
-//     data.selected.date =
-//         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-//   }
-// }
-
-//   static onVisibleMandaMonthLeft(data) {
-//     print('CALLBACK: _onVisibleDaysChanged');
-//     // DateTime selectedDay = data.selected.date;
-//     DateTime first = data.mandaMonth.info["first"];
-//     DateTime last = data.mandaMonth.info["last"];
-//     var month = data.mandaMonth.info["month"];
-//     // print('first $first');
-//     // print('last $last');
-//     // print('month $month');
-//     var duration = 30;
-//     if (month == 1) {
-//       duration = 5;
-//     }
-//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-//       data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-//     } else {
-//       data.selected.date =
-//           DateTime(first.year, first.month, first.day - duration, 0, 0);
-//     }
-//   }
-
-//   static onVisibleMandaMonthRight(data) {
-//     print('CALLBACK: _onVisibleDaysChanged');
-//     // DateTime selectedDay = data.selected.date;
-//     DateTime first = data.mandaMonth.info["first"];
-//     DateTime last = data.mandaMonth.info["last"];
-//     var month = data.mandaMonth.info["month"];
-//     // print('first $first');
-//     // print('last $last');
-//     // print('month $month');
-//     var duration = 30;
-//     if (month == 1) {
-//       duration = 5;
-//     }
-
-//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-//       data.selected.date =
-//           DateTime(first.year, first.month, first.day - duration, 0, 0);
-//     } else {
-//       data.selected.date = DateTime(last.year, last.month, last.day + 1, 0, 0);
-//     }
-//   }
-// }
-
-////// ###################################
-// class OnVisibleMonth {
-//   var data;
-//   var _data;
-//   OnVisibleMonth(data) {
-//     this.data = data;
-//     _data = data;
-//   }
-//   static left(data) {
-//     print('CALLBACK: _onVisibleDaysChanged');
-//     DateTime selectedDay = data.selected.date;
-
-//     if (data.lang.name == "fa_IR" || data.lang.name == "fa_IR") {
-//       data.selected.date =
-//           DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-//     } else {
-//       data.selected.date =
-//           DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-//     }
-//   }
-
-//   static _runHolidaysEvents(selectedDay) {
-//     Map<DateTime, List> _holidays;
-//     Map<DateTime, List> _events;
-
-//     if (_holidays.keys.toList()[0].year != selectedDay.year) {
-//       // _runHolidaysEvents(selectedDay);
-//     }
-//     _holidays =
-//         MandaFirstDayOfMonthBuilder(selectedDay.year).eventsForWholeYear;
-
-//     _events = MandaEventssBuilder(selectedDay.year).wholeYear;
-//     return [_holidays, _events];
-//   }
-// }
-// class SelectedCell {
-//   static onDayTap(cellText) {
-//     print('CALLBACK: _onDayTap');
-//     _selectedDay = cellText;
-//     // print('_onDayTap $cellText');
-//   }
-
-//   static onDayLogPressed(cellText) {
-//     print('_onDayLogPressed $cellText');
-//   }
-
-//   static onVisibleMonthLeft(selectedDay) {
-//     print('CALLBACK: _onVisibleDaysChanged');
-//     // print('_onVisibleMonthLeft $selectedDay');
-//     _selectedDay = DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0);
-//   }
-
-//   static onVisibleMonthRight(selectedDay) {
-//     print('CALLBACK: _onVisibleDaysChanged');
-//     // print('_onVisibleMonthRight $selectedDay');
-//     _selectedDay = DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0);
-//   }
-// }
