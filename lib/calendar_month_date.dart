@@ -2,18 +2,17 @@ import 'package:intl/intl.dart';
 
 import 'manda_date.dart';
 import 'manda_equivalent.dart';
-import 'manda_month_events.dart';
 
 class CalendarDateBuilder {
   static manda(var data) {
-    print('CALLBACK: _MandaDateBuilder');
+    // print('CALLBACK: _MandaDateBuilder');
     DateTime selectedDay = data.selected.date;
     MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
 
-    List beforeDateList = [];
-    List monthDateList = [];
-    List afterDateList = [];
-    List allDateList = [];
+    Map beforeDateList = {};
+    Map monthDateList = {};
+    Map afterDateList = {};
+    Map allDateList = {};
 
     var mandaDay = mandaDate.day;
     var mandaMonth = mandaDate.month;
@@ -33,8 +32,6 @@ class CalendarDateBuilder {
     DateTime endMonth = DateTime(startMonth.year, startMonth.month,
         startMonth.day + mandaDayInMonth - 1, 0, 0);
 
-    // data.first.date = startMonth;
-    // data.last.date = endMonth;
     data.mandaMonth.info = {
       'first': startMonth,
       'last': endMonth,
@@ -65,11 +62,6 @@ class CalendarDateBuilder {
       monthDateList = monthPanjaLoop(startMonth, mandaDayInMonth);
     }
 
-    // print(monthDateList);
-    // Map<DateTime, List> holidaysEvents =
-    //     MandaGregShamsiInfo.holidaysEventsMonthBuilder(data, monthDateList);
-    // MandaGregShamsiInfo.dateEvents(data);
-
     day = DateFormat.E("en_US").format(endMonth);
     int afterDayIndex = 6 - getNumDayOdWeek(day);
     // print(day);
@@ -87,20 +79,18 @@ class CalendarDateBuilder {
   }
 
   static greg(var data) {
-    print('CALLBACK: _GregDateBuilder');
+    // print('CALLBACK: _GregDateBuilder');
     DateTime selectedDay = data.selected.date;
-    List beforeDateList = [];
-    List monthDateList = [];
-    List afterDateList = [];
-    List allDateList = [];
-    // DateTime today = selectedDay;
-    // today = DateTime(2021, 7, 1, 0, 0);
+    Map beforeDateList = {};
+    Map monthDateList = {};
+    Map afterDateList = {};
+    Map allDateList = {};
+
     DateTime startMonth =
         DateTime(selectedDay.year, selectedDay.month, 1, 0, 0);
     DateTime endMonth =
         DateTime(selectedDay.year, selectedDay.month + 1, 0, 0, 0);
-    // data.first.date = startMonth;
-    // data.last.date = endMonth;
+
     data.gregMonth.info = {
       'first': startMonth,
       'last': endMonth,
@@ -133,31 +123,25 @@ class CalendarDateBuilder {
   }
 
   static shamsi(var data) {
-    print('CALLBACK: _MandaDateBuilder');
+    // print('CALLBACK: _MandaDateBuilder');
     DateTime selectedDay = data.selected.date;
     var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay);
-    // MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay);
 
-    List beforeDateList = [];
-    List monthDateList = [];
-    List afterDateList = [];
-    List allDateList = [];
+    Map beforeDateList = {};
+    Map monthDateList = {};
+    Map afterDateList = {};
+    Map allDateList = {};
 
     var shamsiDay = jalaliDay.day;
     // print('shamsiDay: $shamsiDay');
     var shamsiDayInMonth = jalaliDay.monthLength;
-    // print('shamsiDayInMonth: $shamsiDayInMonth');
-    // if (mandaDate.month > 11) {
-    //   mandaDayInMonth = 35;
-    // }
+
     DateTime startMonth = DateTime(selectedDay.year, selectedDay.month,
         selectedDay.day - shamsiDay + 1, 0, 0);
 
     DateTime endMonth = DateTime(startMonth.year, startMonth.month,
         startMonth.day + shamsiDayInMonth - 1, 0, 0);
 
-    // data.first.date = startMonth;
-    // data.last.date = endMonth;
     data.shamsiMonth.info = {
       'first': startMonth,
       'last': endMonth,
@@ -203,23 +187,31 @@ class CalendarDateBuilder {
   }
 
   static beforeLoop(DateTime startMonth, int endOfLoop) {
-    List dateList = [];
+    // List dateList = [];
+    Map dateMap = {};
     // List allDateLebelList = [];
     for (var i = 0; i < endOfLoop; i++) {
-      dateList.add([
-        DateTime(startMonth.year, startMonth.month,
-            startMonth.day - endOfLoop + i, 0, 0),
-        ""
-      ]);
-      // allDateLebelList.add("");
+      // ###### new
+      DateTime selectedDate = DateTime(startMonth.year, startMonth.month,
+          startMonth.day - endOfLoop + i, 0, 0);
+      dateMap[selectedDate] = [selectedDate, ''];
+      // ###### new
+      // dateList.add([
+      //   DateTime(startMonth.year, startMonth.month,
+      //       startMonth.day - endOfLoop + i, 0, 0),
+      //   ""
+      // ]);
+
     }
-    return dateList;
+
+    return dateMap;
   }
 
   static monthPanjaLoop(DateTime startMonth, int endOfLoop) {
-    List dateList = [];
+    // List dateList = [];
     int dayIndex = 1;
     String displayDay;
+    Map dateMap = {};
     // List allDateLebelList = [];
     for (var i = 0; i <= endOfLoop - 1; i++) {
       displayDay = dayIndex.toString();
@@ -228,43 +220,60 @@ class CalendarDateBuilder {
       } else {
         dayIndex += 1;
       }
-      dateList.add([
-        DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
-        displayDay
-      ]);
-      // allDateLebelList.add(dayIndex.toString());
+      // ###### new
+      DateTime selectedDate =
+          DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0);
+      dateMap[selectedDate] = [selectedDate, displayDay, 'm'];
+      // ###### new
+
+      // dateList.add([
+      //   DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
+      //   displayDay
+      // ]);
 
     }
-    return dateList;
+    return dateMap;
   }
 
   static monthLoop(DateTime startMonth, int endOfLoop, String kind) {
-    List dateList = [];
+    // List dateList = [];
     int dayIndex = 1;
+    Map dateMap = {};
     // List allDateLebelList = [];
     for (var i = 0; i <= endOfLoop - 1; i++) {
-      dateList.add([
-        DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
-        dayIndex.toString(),
-        kind
-      ]);
-      // allDateLebelList.add(dayIndex.toString());
+// ###### new
+      DateTime selectedDate =
+          DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0);
+      dateMap[selectedDate] = [selectedDate, dayIndex.toString(), kind];
+      // ###### new
+
+      // dateList.add([
+      //   DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
+      //   dayIndex.toString(),
+      //   kind
+      // ]);
       dayIndex += 1;
     }
-    return dateList;
+    return dateMap;
   }
 
   static afterLoop(DateTime endMonth, int endOfLoop) {
-    List dateList = [];
+    // List dateList = [];
+    Map dateMap = {};
     //  List allDateLebelList = [];
     for (var i = 1; i <= endOfLoop; i++) {
-      dateList.add([
-        DateTime(endMonth.year, endMonth.month, endMonth.day + i, 0, 0),
-        ""
-      ]);
-      // allDateLebelList.add(" ");
+      // ###### new
+      DateTime selectedDate =
+          DateTime(endMonth.year, endMonth.month, endMonth.day + i, 0, 0);
+      dateMap[selectedDate] = [selectedDate, ''];
+      // ###### new
+
+      // dateList.add([
+      //   DateTime(endMonth.year, endMonth.month, endMonth.day + i, 0, 0),
+      //   ""
+      // ]);
     }
-    return dateList;
+    return dateMap;
   }
 
   static getNumDayOdWeek(String day) {

@@ -128,7 +128,7 @@ class MyHomePage extends StatefulWidget {
   }
 
   static void _onVisibleMonth(
-      data, DateTime dateFaAr, DateTime date, String leftRight) {
+      data, DateTime dateFaAr, DateTime date, String leftRight, kind) {
     print('CALLBACK: _onVisibleMonth');
     DateTime selectedDay = data.selected.date;
     int monthChangeYear;
@@ -148,6 +148,7 @@ class MyHomePage extends StatefulWidget {
     }
     CalendarBuilder.getMonthDate(data);
     selectedDay = data.selected.date;
+    _dateEquivalent = [selectedDay, '', kind];
     // print(selectedDay);
     if (selectedDay.month == monthChangeYear) {
       runHolidaysEvents(selectedDay.year);
@@ -162,7 +163,8 @@ class MyHomePage extends StatefulWidget {
         data,
         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
-        'left');
+        'left',
+        'g');
   }
 
   static onVisibleGregRight(data) {
@@ -173,7 +175,8 @@ class MyHomePage extends StatefulWidget {
         data,
         DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
         DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
-        'right');
+        'right',
+        'g');
   }
 
   static onVisibleMandaLeft(data) {
@@ -190,8 +193,12 @@ class MyHomePage extends StatefulWidget {
       duration = 35;
     }
 
-    _onVisibleMonth(data, DateTime(last.year, last.month, last.day + 1, 0, 0),
-        DateTime(first.year, first.month, first.day - duration, 0, 0), 'left');
+    _onVisibleMonth(
+        data,
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        'left',
+        'm');
   }
 
   static onVisibleMandaRight(data) {
@@ -212,7 +219,8 @@ class MyHomePage extends StatefulWidget {
         data,
         DateTime(first.year, first.month, first.day - duration, 0, 0),
         DateTime(last.year, last.month, last.day + 1, 0, 0),
-        'right');
+        'right',
+        'm');
   }
 
   static onVisibleShamsiLeft(data) {
@@ -226,8 +234,12 @@ class MyHomePage extends StatefulWidget {
     var duration = jalaliDay.monthLength;
     // print('duration $duration');
 
-    _onVisibleMonth(data, DateTime(last.year, last.month, last.day + 1, 0, 0),
-        DateTime(first.year, first.month, first.day - duration, 0, 0), 'left');
+    _onVisibleMonth(
+        data,
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        'left',
+        's');
   }
 
   static onVisibleShamsiRight(data) {
@@ -244,7 +256,8 @@ class MyHomePage extends StatefulWidget {
         data,
         DateTime(first.year, first.month, first.day - duration, 0, 0),
         DateTime(last.year, last.month, last.day + 1, 0, 0),
-        'right');
+        'right',
+        's');
   }
 
   static void onDaySelected(selectedDay) {
@@ -347,9 +360,10 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.mandaKind.active = true;
     _data.shamsiKind.active = false;
     List runingWidget;
-    runingWidget = ['manda', 'greg', 'shamsi'];
-    runingWidget = ['greg'];
+
     runingWidget = ['greg', 'manda'];
+    runingWidget = ['greg'];
+    runingWidget = ['manda', 'greg', 'shamsi'];
 
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);

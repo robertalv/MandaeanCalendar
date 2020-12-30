@@ -1,18 +1,12 @@
-// import 'package:intl/intl.dart';
-
 import 'calendar_month_date.dart';
-// import 'manda_date.dart';
-// import 'manda_equivalent.dart';
 
 class MandaGregShamsiInfo {
-  // static var _data;
   static dateBuilder(var data) {
     print('CALLBACK: _MandaDateBuilder');
     print("*" * 30 + "Date builder load" + "*" * 30);
-    // _data = data;
-    List gregDate = CalendarDateBuilder.greg(data);
-    List mandaDate = CalendarDateBuilder.manda(data);
-    List shamsiDate = CalendarDateBuilder.shamsi(data);
+    Map gregDate = CalendarDateBuilder.greg(data);
+    Map mandaDate = CalendarDateBuilder.manda(data);
+    Map shamsiDate = CalendarDateBuilder.shamsi(data);
 
     var firstMin = getFirstMin(data);
     var lastMax = getLastMax(data);
@@ -24,7 +18,6 @@ class MandaGregShamsiInfo {
       gregDate,
       shamsiDate,
       [firstMin, lastMax],
-      // holidaysEvents
     ];
   }
 

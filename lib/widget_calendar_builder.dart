@@ -25,9 +25,12 @@ class CalendarBuilder extends MyHomePage {
   static TableSize _tableSize;
   static Map<DateTime, List> _events;
   static Map<DateTime, List> _holidays;
-  static List _mandaMonthDate;
-  static List _gregMonthDate;
-  static List _shamsiMonthDate;
+  static Map _mandaMonthDate;
+  static Map _gregMonthDate;
+  static Map _shamsiMonthDate;
+  // static List _mandaMonthDate;
+  // static List _gregMonthDate;
+  // static List _shamsiMonthDate;
   static Map _mandaMonthData;
   static Map _gregMonthData;
   static Map _shamsiMonthData;
@@ -56,13 +59,14 @@ class CalendarBuilder extends MyHomePage {
   }
 
   static getMonthDate(data) {
-    // print(_firstLast);
-    // print(data.selected.date);
-
     List monthDate = MandaGregShamsiInfo.dateBuilder(data);
     _mandaMonthDate = monthDate[0];
     _gregMonthDate = monthDate[1];
     _shamsiMonthDate = monthDate[2];
+
+    // _mandaMonthDate = _mandaMonthDateMap.values.toList();
+    // _gregMonthDate = _gregMonthDateMap.values.toList();
+    // _shamsiMonthDate = _shamsiMonthDateMap.values.toList();
 
     _firstLast = monthDate[3];
   }
@@ -135,8 +139,9 @@ class CalendarBuilder extends MyHomePage {
   }
 
   @override
-  Widget buildTableCalendar(kind, monthList, data, setState) {
+  Widget buildTableCalendar(kind, monthMap, data, setState) {
     print('CALLBACK: _onCalendarCreated');
+    List monthList = monthMap.values.toList();
 
     myTextAlignment = MyAlignment.textAlig(_data.lang.name);
     myAlignment = MyAlignment.countryLanguage(_data.lang.name);
@@ -720,10 +725,14 @@ class CalendarBuilder extends MyHomePage {
     var monthEgu2;
     String day;
     //
+    print('selectedDay $selectedDay');
+    print('selectedDay ${selectedDay[0]}');
     MandaDateBuilder mandaDate = MandaDateBuilder(selectedDay[0]);
     var jalaliDay = MandaDateBuilder.jalaliDayForSelectedDay(selectedDay[0]);
     if (selectedDay[2] == 'm') {
       dayEgu1 = [selectedDay[0], selectedDay[0].day, 'g'];
+      dayEgu1 = _gregMonthDate[selectedDay[0]];
+      print(dayEgu1);
       // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
       // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
       // print(monthName);
@@ -736,6 +745,7 @@ class CalendarBuilder extends MyHomePage {
       ];
 
       dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
+      dayEgu2 = _shamsiMonthDate[selectedDay[0]];
       // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu2 = [
         data.shamsiMonth.info['monthEn'],
@@ -749,6 +759,7 @@ class CalendarBuilder extends MyHomePage {
       print('m>>>>> dayEgu2 $dayEgu2');
     } else if (selectedDay[2] == 's') {
       dayEgu2 = [selectedDay[0], selectedDay[0].day, 'g'];
+      dayEgu2 = _gregMonthDate[selectedDay[0]];
       // _gregMonthDate.where((element) => element.contains(selectedDay[0]));
       // var monthName = DateFormat.MMMM('en_US').format(selectedDay[0]);
       // print(monthName);
@@ -761,6 +772,7 @@ class CalendarBuilder extends MyHomePage {
       ];
 
       dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
+      dayEgu1 = _mandaMonthDate[selectedDay[0]];
       // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu1 = [
         data.mandaMonth.info['monthEn'],
@@ -773,6 +785,7 @@ class CalendarBuilder extends MyHomePage {
       print('s>>>>> dayEgu2 $dayEgu2');
     } else {
       dayEgu1 = [selectedDay[0], mandaDate.day, 'm'];
+      dayEgu1 = _mandaMonthDate[selectedDay[0]];
       // _mandaMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu1 = [
         data.mandaMonth.info['monthEn'],
@@ -780,6 +793,7 @@ class CalendarBuilder extends MyHomePage {
         data.mandaMonth.info['monthFaAr']
       ];
       dayEgu2 = [selectedDay[0], jalaliDay.day, 's'];
+      dayEgu2 = _shamsiMonthDate[selectedDay[0]];
       // _shamsiMonthDate.where((element) => element.contains(selectedDay[0]));
       monthEgu2 = [
         data.shamsiMonth.info['monthEn'],
@@ -821,7 +835,7 @@ class CalendarBuilder extends MyHomePage {
       // day = "${dayEgu1[1].toString()} = ${dayEgu2[1].toString()}";
       day = LocalNum.convertEntoFaAr(day, data.lang.name);
     } else {
-      day = "${dayEgu1[1]} ${monthEgu1[0]} = ${dayEgu2[1]} ${monthEgu2[0]}";
+      day = "${monthEgu1[0]} ${dayEgu1[1]} = ${monthEgu2[0]} ${dayEgu2[1]}";
     }
 
     return day;
