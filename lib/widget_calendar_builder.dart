@@ -77,6 +77,7 @@ class CalendarBuilder extends MyHomePage {
 
   notInRange(selectedDay, monthInfo) {
     var notRange = false;
+    // print(monthInfo['first']);
 
     if (selectedDay.isBefore(monthInfo['first']) ||
         selectedDay.isAfter(monthInfo['last'])) {

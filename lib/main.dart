@@ -13,6 +13,7 @@ import 'setter_getter.dart';
 import 'manda_equivalent.dart';
 import 'widget_calendar_builder.dart';
 import 'widget_drawer.dart';
+import 'widget_events_list.dart';
 import 'widget_top_icon.dart';
 import 'my_color.dart';
 import 'user_set.dart';
@@ -34,12 +35,13 @@ Data _data = new Data();
 Map _myColorSelection = MyColor.selection();
 DateTime todayNow = DateTime.now();
 DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
-DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
+DateTime selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
 double _cellWidth;
 Map<DateTime, List> _events;
 Map<DateTime, List> _holidays;
 var _dateEquivalent;
 var _yearEquivalent;
+List _selectedEvents = [];
 
 // Map<DateTime, List> _holidays;
 // Map<DateTime, List> _events;
@@ -83,8 +85,8 @@ class MandaeanCalendar extends StatelessWidget {
     _greg.active = true;
     _manda.active = false;
     _shamsi.active = false;
-    _selected.date = _selectedDay;
-    _data.today = _selectedDay;
+    _selected.date = selectedDay;
+    _data.today = selectedDay;
 
     return MaterialApp(
       title: 'Mandaean Calendar',
@@ -123,7 +125,7 @@ class MyHomePage extends StatefulWidget {
     // print('selectedYear $selectedYear');
     // print('_holidays ${_holidays.length}');
     // print('_events ${_events.length}');
-    // print("_holidays builded ****" * 5);
+    print("*" * 30 + "_holidays load" + "*" * 30);
     // print(_holidays);
   }
 
@@ -261,15 +263,44 @@ class MyHomePage extends StatefulWidget {
   }
 
   static void onDaySelected(selectedDay) {
-    print("_onDaySelected --------------------=========>");
+    // print("_onDaySelected --------------------=========>");
     _yearEquivalent = selectedDay;
     _dateEquivalent = selectedDay;
+    _selectedEvents = todayEven(selectedDay[0]);
+  }
+
+  static todayEven(DateTime selectedDay) {
+    List todayHolidayEvents = [];
+    // String localLang = _data.lang.name;
+    // selectedDay = DateTime(2020, 12, 14, 0, 0);
+
+    var todayHoliday = _holidays[selectedDay] ?? [];
+
+    if (todayHoliday.isNotEmpty) {
+      // todayHolidayEvents.add(todayHoliday[0][localLang]);
+      todayHolidayEvents.add(todayHoliday[0]);
+    }
+
+    var todayEvents = _events[selectedDay] ?? [];
+    if (todayEvents.isNotEmpty) {
+      todayEvents.forEach((event) {
+        if ((event.runtimeType.toString()).contains('List')) {
+          // todayHolidayEvents.add(event[0][localLang]);
+          todayHolidayEvents.add(event[0]);
+        } else {
+          // todayHolidayEvents.add(todayEvents[0][localLang]);
+          todayHolidayEvents.add(todayEvents[0]);
+        }
+      });
+    }
+    // print(todayHolidayEvents);
+    return todayHolidayEvents;
   }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   var _listOfEventsForYear;
-  List _selectedEvents;
+  // List _selectedEvents =[];
 
   @override
   void initState() {
@@ -280,6 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _dateEquivalent = _data.gregMonth.info["selectedDay"];
 
     _yearEquivalent = _data.gregMonth.info["selectedDay"];
+    _selectedEvents = MyHomePage.todayEven(_data.selected.date);
     print("one time run main ################");
 
 // Test test ******************
@@ -312,38 +344,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  // void todayEven(DateTime date) {
-  //   _todayHolidayEvents = [];
-  //   _selectedDay = DateTime(date.year, date.month, date.day, 0, 0);
-
-  //   _holidays =
-  //       MandaFirstDayOfMonthBuilder(_selectedDay.year).eventsForWholeYear;
-  //   // print(_holidays);
-
-  //   _events = MandaEventssBuilder(_selectedDay.year).wholeYear;
-  //   // print(_events);
-
-  //   _listOfEventsForYear =
-  //       scrollingText.generateEventsforScroll(_events, _holidays);
-  //   // ***************************
-
-  //   var todayHoliday = _holidays[_selectedDay] ?? [];
-  //   if (todayHoliday.isNotEmpty) {
-  //     _todayHolidayEvents.add(todayHoliday[0][_lang]);
-  //   }
-
-  //   var todayEvents = _events[_selectedDay] ?? [];
-  //   if (todayEvents.isNotEmpty) {
-  //     todayEvents.forEach((event) {
-  //       if ((event.runtimeType.toString()).contains('List')) {
-  //         _todayHolidayEvents.add(event[0][_lang]);
-  //       } else {
-  //         _todayHolidayEvents.add(todayEvents[0][_lang]);
-  //       }
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -459,6 +459,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (runingWidget.length > 0)
                   CalendarBuilder(_holidays, _events, _data)
                       .dateEquivalent(_dateEquivalent),
+
+                // ################   _buildEventList  #################
+
+                _selectedEvents.isNotEmpty
+                    ? BuildEvents().eventList(context, _selectedEvents, _data)
+                    : Text(
+                        "",
+                        style: TextStyle(fontSize: 1.0, color: Colors.black),
+                      ),
                 // ################   footerLine  #################
                 Container(
                   margin: EdgeInsets.symmetric(

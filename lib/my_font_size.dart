@@ -143,7 +143,7 @@ class TableSize {
       displayWidth = divecWidth;
       minHeightCell = 40.0;
       sizeRate = 1;
-      iconRate = 1.5;
+      iconRate = 1;
       headerMonthYear = 18.0;
       headerMonthYearWidth = cellWidth * 4.5;
       headerDayWeek = 16.0;
@@ -166,20 +166,26 @@ class TableSize {
 class MainSize {
   double f8040;
   double f5025;
+  double f4020; //// used for list builder
   double marginH;
   double cellWidth;
+  double iconRate;
   MainSize(data) {
     double divecWidth = data.divecSize.width;
     if (divecWidth > 700) {
       f8040 = 80;
       f5025 = 50;
+      f4020 = 40;
       marginH = (divecWidth - 700) / 2;
       cellWidth = 100.0;
+      iconRate = 1.5;
     } else {
       f8040 = 40;
       f5025 = 25;
+      f4020 = 20;
       marginH = 0;
       cellWidth = divecWidth / 7;
+      iconRate = 1;
     }
     this.f8040 = f8040;
     this.f5025 = f5025;
