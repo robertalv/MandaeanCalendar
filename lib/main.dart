@@ -38,6 +38,8 @@ DateTime _selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
 double _cellWidth;
 Map<DateTime, List> _events;
 Map<DateTime, List> _holidays;
+var _dateEquivalent;
+var _yearEquivalent;
 
 // Map<DateTime, List> _holidays;
 // Map<DateTime, List> _events;
@@ -244,6 +246,13 @@ class MyHomePage extends StatefulWidget {
         DateTime(last.year, last.month, last.day + 1, 0, 0),
         'right');
   }
+
+  static void onDaySelected(var selectedDay) {
+    print("_onDaySelected --------------------=========>");
+    _yearEquivalent = selectedDay;
+    _dateEquivalent =
+        "${_data.mandaMonth.info["monthEn"]} " + selectedDay.toString();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -256,7 +265,12 @@ class _MyHomePageState extends State<MyHomePage> {
     UserSetting.getLanguage(setState, _lang);
     CalendarBuilder.getMonthDate(_data);
     MyHomePage.runHolidaysEvents(_data.selected.date.year);
+    _dateEquivalent =
+        "${_data.mandaMonth.info["monthEn"]} ${_data.mandaMonth.info["day"]}";
+
+    _yearEquivalent = "${_data.mandaMonth.info["adam"]} ";
     print("one time run main ################");
+
 // Test test ******************
     // MandaEventssBuilder.givenMonth(2019, 12);
 
@@ -335,7 +349,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.mandaKind.active = true;
     _data.shamsiKind.active = false;
     List runingWidget;
-    runingWidget = ['manda', 'shamsi', 'greg'];
+    runingWidget = ['manda', 'greg', 'shamsi'];
+    runingWidget = ['greg'];
+    runingWidget = ['greg', 'manda'];
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
     // _selectedEvents = _todayHolidayEvents ?? [];
@@ -422,7 +438,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: CalendarBuilder(_holidays, _events, _data)
                         .buildCalendarTable(setState, runingWidget[2]),
                   ),
-
+                // #################   dateEquivalent
+                if (runingWidget.length == 2)
+                  CalendarBuilder(_holidays, _events, _data)
+                      .yearEquivalent(_yearEquivalent),
+                // #################   dateEquivalent
+                if (runingWidget.length == 2)
+                  CalendarBuilder(_holidays, _events, _data)
+                      .dateEquivalent(_dateEquivalent),
+                // ################   footerLine
                 Container(
                   margin: EdgeInsets.symmetric(
                       horizontal: _mainZise.marginH, vertical: 0),

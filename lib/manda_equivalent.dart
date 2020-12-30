@@ -1048,6 +1048,15 @@ class MandaEqu {
     return data[dayFa];
   }
 
+  static yearLabel(index) {
+    Map data = {
+      'en_US': ['Adam', 'Yahyaiee', 'Gregorian', 'Shamsi'],
+      'fa_IR': ['ح یحیی', 'ح آدم', 'میلادی', 'شمسی'],
+      'ar': ['ن یحیی', 'ن آدم', 'الجورجية', 'شمسية']
+    };
+    return data[index];
+  }
+
   // static daysWeekAr22(index) {
   //   String dayFa = index;
   //   Map data = {

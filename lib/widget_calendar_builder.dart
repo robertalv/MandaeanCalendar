@@ -9,6 +9,8 @@ import 'manda_equivalent.dart';
 import 'manda_events.dart';
 import 'manda_holidays.dart';
 import 'manda_month_events.dart';
+import 'my_alignment.dart';
+import 'my_color.dart';
 import 'my_font_size.dart';
 import 'my_icon_events.dart';
 
@@ -29,6 +31,8 @@ class CalendarBuilder extends MyHomePage {
   static Map _gregMonthData;
   static Map _shamsiMonthData;
   static List _firstLast = [];
+  var myTextAlignment;
+  var myAlignment;
 
   CalendarBuilder(holidays, events, data) {
     this.data = data;
@@ -132,6 +136,8 @@ class CalendarBuilder extends MyHomePage {
   @override
   Widget buildTableCalendar(kind, monthList, data, setState) {
     print('CALLBACK: _onCalendarCreated');
+    myTextAlignment = MyAlignment.textAlig(_data.lang.name);
+    myAlignment = MyAlignment.countryLanguage(_data.lang.name);
     // print("_holidays " * 10);
     // print(_holidays);
     // print("_holidays " * 10);
@@ -333,6 +339,22 @@ class CalendarBuilder extends MyHomePage {
     return day;
   }
 
+  _getYearHeader(kind, data) {
+    var day;
+
+    if (kind == 'greg') {
+      day = gregYearHeaderBuilder(data);
+    } else if (kind == 'manda') {
+      day = mandaYearHeaderBuilder(data);
+    } else if (kind == 'shamsi') {
+      day = shamsiYearHeaderBuilder(data);
+    } else {
+      day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
+    }
+
+    return day;
+  }
+
   // Widget _buildEventsRow(List rowText, String localLang) {
   //   // rowText.sort();
   //   List rowTextSort = rowText;
@@ -465,6 +487,60 @@ class CalendarBuilder extends MyHomePage {
       day = LocalNum.convertEntoFaAr(day, local);
     } else {
       day = DateFormat.yMMMM(data.lang.name).format(data.selected.date);
+    }
+    return day;
+  }
+
+  static gregYearHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    DateTime date = data.gregMonth.info['first'];
+    var yearLabel = MandaEqu.yearLabel(local)[2];
+    day = DateFormat.y(local).format(date);
+    if (local == 'ar') {
+      day = '($yearLabel $day)';
+    } else {
+      day = '($day $yearLabel)';
+    }
+    return day;
+  }
+
+  static mandaYearHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    var yearLabel = MandaEqu.yearLabel(local);
+    if (local == 'en_US') {
+      day =
+          "(${data.mandaMonth.info['yahya']} ${yearLabel[1]})(${data.mandaMonth.info['adam']} ${yearLabel[0]})";
+    } else if (local == 'ar') {
+      day =
+          "(${yearLabel[1]} ${data.mandaMonth.info['adam']})(${yearLabel[0]} ${data.mandaMonth.info['yahya']})";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else if (local == 'fa_IR') {
+      day =
+          "(${yearLabel[1]} ${data.mandaMonth.info['adam']})(${yearLabel[0]} ${data.mandaMonth.info['yahya']})";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else {
+      day = DateFormat.y(data.lang.name).format(data.selected.date);
+    }
+    return day;
+  }
+
+  static shamsiYearHeaderBuilder(var data) {
+    var day;
+    String local = data.lang.name;
+    var yearLabel = MandaEqu.yearLabel(local);
+
+    if (local == 'en_US') {
+      day = "(${data.shamsiMonth.info['year']} ${yearLabel[3]})";
+    } else if (local == 'ar') {
+      day = "(${yearLabel[3]} ${data.shamsiMonth.info['year']})";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else if (local == 'fa_IR') {
+      day = "(${yearLabel[3]} ${data.shamsiMonth.info['year']})";
+      day = LocalNum.convertEntoFaAr(day, local);
+    } else {
+      day = DateFormat.y(data.lang.name).format(data.selected.date);
     }
     return day;
   }
@@ -625,12 +701,110 @@ class CalendarBuilder extends MyHomePage {
       data.selected.date = cellText[0];
     }
     // data.selected.date = cellText[0];
+    var test = cellText;
+    // test = _mandaMonthDate.where((element) => element[0] == cellText[0]);
+    MyHomePage.onDaySelected(test);
     print('_onDayTap ------------------------------>> $cellText');
   }
 
   static onDayLogPressed(cellText) {
     print('CALLBACK: _onDayLogPressed');
     // print('_onDayLogPressed $cellText');
+  }
+
+  Widget dateEquivalent(mandeanDay) {
+    var beforeDateIcon;
+    var afterDateIcon;
+    var myDateIcon = Icon(
+      Icons.date_range,
+      size: _tableSize.f5025,
+    );
+
+    if (_data.lang.name != "en_US") {
+      // _listFontSize = 20;
+      beforeDateIcon = Text("");
+      afterDateIcon = myDateIcon;
+    } else {
+      beforeDateIcon = myDateIcon;
+      afterDateIcon = Text("");
+    }
+    return Container(
+      // height: 30.0 * _sizeRate,
+      constraints: BoxConstraints(
+        minHeight: 0,
+      ),
+      alignment: myAlignment,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(width: 0),
+        color: Colors.white,
+      ),
+      margin: EdgeInsets.symmetric(horizontal: _tableSize.marginH, vertical: 4),
+      child: SizedBox(
+          // fit: BoxFit.scaleDown,
+          child: Row(
+        children: [
+          beforeDateIcon,
+          Flexible(
+            child: Container(
+              alignment: myAlignment,
+              child: Text(
+                mandeanDay.toString(),
+                textAlign: myTextAlignment,
+                style:
+                    TextStyle(fontSize: _tableSize.f5025, color: Colors.black),
+              ),
+            ),
+          ),
+          Text(" "),
+          afterDateIcon
+        ],
+      )),
+    );
+  }
+
+  Widget yearEquivalent(_yearEquivalent) {
+    String kind;
+    var _mandaAndJalaiYear;
+    if (_yearEquivalent[2] == 'm') {
+      _mandaAndJalaiYear = _getYearHeader('greg', data);
+      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearHeader('shamsi', data);
+    } else if (_yearEquivalent[2] == 'g') {
+      _mandaAndJalaiYear = _getYearHeader('manda', data);
+      _mandaAndJalaiYear = _getYearHeader('shamsi', data) + _mandaAndJalaiYear;
+    } else {
+      _mandaAndJalaiYear = _getYearHeader('greg', data);
+      _mandaAndJalaiYear = _mandaAndJalaiYear + _getYearHeader('manda', data);
+    }
+
+    // _mandaAndJalaiYear = _getYearHeader(kind, data);
+    print(_yearEquivalent[2]);
+    print(kind);
+    print(_mandaAndJalaiYear);
+    Map _myColorSelection = MyColor.selection();
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: _tableSize.f5025,
+      ),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: _myColorSelection['header2'],
+      ),
+      // margin: EdgeInsets.only(left: _marginHor, right: _marginHor, bottom: 8),
+      margin: EdgeInsets.symmetric(horizontal: _tableSize.marginH, vertical: 8),
+      child: FittedBox(
+        // fit: BoxFit.scaleDown,
+        child: Text(
+          _mandaAndJalaiYear.toString(),
+          style: TextStyle(
+            fontSize: _tableSize.f5025,
+            color: Colors.black,
+            // fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
+    );
   }
 }
 // static onVisibleMonthLeft(data) {

@@ -59,7 +59,7 @@ class CalendarDateBuilder {
     beforeDateList = beforeLoop(startMonth, beforeDayIndex);
     // print(beforeDateList);
     if (mandaDayInMonth == 30) {
-      monthDateList = monthLoop(startMonth, mandaDayInMonth);
+      monthDateList = monthLoop(startMonth, mandaDayInMonth, 'm');
     } else {
       monthDateList = monthPanjaLoop(startMonth, mandaDayInMonth);
     }
@@ -111,7 +111,7 @@ class CalendarDateBuilder {
     beforeDateList = beforeLoop(startMonth, beforeDayIndex);
 
     int dayInMonth = endMonth.day;
-    monthDateList = monthLoop(startMonth, dayInMonth);
+    monthDateList = monthLoop(startMonth, dayInMonth, 'g');
     // print(monthDateList);
 
     day = DateFormat.E("en_US").format(endMonth);
@@ -179,7 +179,7 @@ class CalendarDateBuilder {
     beforeDateList = beforeLoop(startMonth, beforeDayIndex);
     // print(beforeDateList);
 
-    monthDateList = monthLoop(startMonth, shamsiDayInMonth);
+    monthDateList = monthLoop(startMonth, shamsiDayInMonth, 's');
     // print(monthDateList);
 
     day = DateFormat.E("en_US").format(endMonth);
@@ -235,14 +235,15 @@ class CalendarDateBuilder {
     return dateList;
   }
 
-  static monthLoop(DateTime startMonth, int endOfLoop) {
+  static monthLoop(DateTime startMonth, int endOfLoop, String kind) {
     List dateList = [];
     int dayIndex = 1;
     // List allDateLebelList = [];
     for (var i = 0; i <= endOfLoop - 1; i++) {
       dateList.add([
         DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
-        dayIndex.toString()
+        dayIndex.toString(),
+        kind
       ]);
       // allDateLebelList.add(dayIndex.toString());
       dayIndex += 1;
