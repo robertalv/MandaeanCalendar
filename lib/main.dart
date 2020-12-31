@@ -360,6 +360,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // runingWidget = ['greg', 'manda'];
     runingWidget = ['greg'];
+    // runingWidget = ['manda'];
+    // runingWidget = ['shamsi'];
     // runingWidget = ['manda', 'greg', 'shamsi'];
 
     MainSize _mainZise = new MainSize(_data);
