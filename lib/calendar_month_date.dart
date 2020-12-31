@@ -210,13 +210,15 @@ class CalendarDateBuilder {
   static monthPanjaLoop(DateTime startMonth, int endOfLoop) {
     // List dateList = [];
     int dayIndex = 1;
+    int dayIndexP = 1;
     String displayDay;
     Map dateMap = {};
     // List allDateLebelList = [];
     for (var i = 0; i <= endOfLoop - 1; i++) {
       displayDay = dayIndex.toString();
       if (i < 5) {
-        displayDay = "Panja";
+        displayDay = dayIndexP.toString();
+        dayIndexP += 1;
       } else {
         dayIndex += 1;
       }

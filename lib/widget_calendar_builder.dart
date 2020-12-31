@@ -740,7 +740,7 @@ class CalendarBuilder extends MyHomePage {
     var afterDateIcon;
     var myDateIcon = Icon(
       Icons.date_range,
-      size: _tableSize.f5025,
+      size: 24.0 * _tableSize.iconRate,
     );
 
     if (_data.lang.name != "en_US") {

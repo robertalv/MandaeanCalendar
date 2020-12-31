@@ -170,6 +170,7 @@ class MainSize {
   double marginH;
   double cellWidth;
   double iconRate;
+  double iconRateList;
   MainSize(data) {
     double divecWidth = data.divecSize.width;
     if (divecWidth > 700) {
@@ -179,6 +180,7 @@ class MainSize {
       marginH = (divecWidth - 700) / 2;
       cellWidth = 100.0;
       iconRate = 1.5;
+      iconRateList = 2;
     } else {
       f8040 = 40;
       f5025 = 25;
@@ -186,6 +188,7 @@ class MainSize {
       marginH = 0;
       cellWidth = divecWidth / 7;
       iconRate = 1;
+      iconRateList = 1;
     }
     this.f8040 = f8040;
     this.f5025 = f5025;

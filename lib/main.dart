@@ -150,6 +150,7 @@ class MyHomePage extends StatefulWidget {
     }
     CalendarBuilder.getMonthDate(data);
     selectedDay = data.selected.date;
+    _selectedEvents = MyHomePage.todayEven(selectedDay);
     _dateEquivalent = [selectedDay, '', kind];
     // print(selectedDay);
     if (selectedDay.month == monthChangeYear) {
@@ -271,13 +272,10 @@ class MyHomePage extends StatefulWidget {
 
   static todayEven(DateTime selectedDay) {
     List todayHolidayEvents = [];
-    // String localLang = _data.lang.name;
-    // selectedDay = DateTime(2020, 12, 14, 0, 0);
 
     var todayHoliday = _holidays[selectedDay] ?? [];
 
     if (todayHoliday.isNotEmpty) {
-      // todayHolidayEvents.add(todayHoliday[0][localLang]);
       todayHolidayEvents.add(todayHoliday[0]);
     }
 
@@ -285,10 +283,8 @@ class MyHomePage extends StatefulWidget {
     if (todayEvents.isNotEmpty) {
       todayEvents.forEach((event) {
         if ((event.runtimeType.toString()).contains('List')) {
-          // todayHolidayEvents.add(event[0][localLang]);
           todayHolidayEvents.add(event[0]);
         } else {
-          // todayHolidayEvents.add(todayEvents[0][localLang]);
           todayHolidayEvents.add(todayEvents[0]);
         }
       });
@@ -305,6 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
     UserSetting.getLanguage(setState, _lang);
     CalendarBuilder.getMonthDate(_data);
     MyHomePage.runHolidaysEvents(_data.selected.date.year);
@@ -361,9 +358,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _data.shamsiKind.active = false;
     List runingWidget;
 
-    runingWidget = ['greg', 'manda'];
+    // runingWidget = ['greg', 'manda'];
     runingWidget = ['greg'];
-    runingWidget = ['manda', 'greg', 'shamsi'];
+    // runingWidget = ['manda', 'greg', 'shamsi'];
 
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
@@ -481,9 +478,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 //
                 //   child: Text("test111"),
                 // ),
-                Text("test111")
+                // Text("test111")
               ]),
-              Text("test")
+              // Text("test")
             ])),
           )),
     );
