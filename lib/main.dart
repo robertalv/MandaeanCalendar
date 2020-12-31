@@ -439,10 +439,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 // ################   myScrollingText  #################
               ]),
-              _listOfEventsForYear['en_US'] == ''
-                  ? Text("")
-                  : myScrollingText(
-                      context, _listOfEventsForYear[_lang.name], _sizeRate),
+              if (_listOfEventsForYear['en_US'] != '')
+                myScrollingText(
+                    context, _listOfEventsForYear[_lang.name], _sizeRate),
             ])),
           )),
     );
