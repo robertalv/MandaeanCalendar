@@ -42,6 +42,7 @@ Map<DateTime, List> _holidays;
 var _dateEquivalent;
 var _yearEquivalent;
 List _selectedEvents = [];
+var _listOfEventsForYear;
 
 // Map<DateTime, List> _holidays;
 // Map<DateTime, List> _events;
@@ -127,6 +128,11 @@ class MyHomePage extends StatefulWidget {
     // print('_events ${_events.length}');
     print("*" * 30 + "_holidays load" + "*" * 30);
     // print(_holidays);
+
+    _listOfEventsForYear =
+        scrollingText.generateEventsforScroll(_events, _holidays);
+    print(_listOfEventsForYear);
+    print("_listOfEventsForYear");
   }
 
   static void _onVisibleMonth(
@@ -295,7 +301,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _listOfEventsForYear;
   // List _selectedEvents =[];
 
   @override
@@ -482,7 +487,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 // ),
                 // Text("test111")
               ]),
-              // Text("test")
+              _listOfEventsForYear['en_US'] == ''
+                  ? Text("")
+                  : myScrollingText(
+                      context, _listOfEventsForYear[_lang.name], _sizeRate),
             ])),
           )),
     );
