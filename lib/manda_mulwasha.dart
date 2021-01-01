@@ -26,7 +26,7 @@ class MulwashaLabel {
   List birthTimeSelector;
   List childTalea;
   var maleMulwasha;
-  var menuDrop;
+  // var menuDrop;
   // var mandaYearEvents;
   var mandaYearEventsLable;
   var mandaFeastName;
@@ -61,7 +61,7 @@ class MulwashaLabel {
     this.birthTimeSelector = birthTimeSelectorName(localLang);
     this.childTalea = childTaleaName(localLang);
     this.maleMulwasha = maleMulwashaName(localLang);
-    this.menuDrop = menuDropList(localLang);
+    // this.menuDrop = menuDropList(localLang);
     // this.mandaYearEvents = MandaEqu.mandaYearEvents(localLang);
     this.mandaYearEventsLable = MandaEqu.mandaYearEventsLable(localLang);
     // this.myAlignment = MandaEqu.myAlignment(localLang);

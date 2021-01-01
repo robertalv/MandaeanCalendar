@@ -91,7 +91,6 @@ class MandaEqu {
   }
 
   static mandaYearEvents(index) {
-    String exSpeace = " " * 10;
     Map data = {
       'en_US': [
         '  Select an occasion',
@@ -818,18 +817,21 @@ class MandaEqu {
         // "-",
         'Melvashe',
         'Religious Occasions',
+        'Choose Calendar',
         'Help',
       ],
       [
         // "-",
         '              ملواشه',
         'مناسبت های دینی',
+        '       انتخاب تقویم',
         '                راهنما',
       ],
       [
         // "-",
         '        ملواشه',
         'مناسبات دینیه',
+        '   اختر التقويم',
         '        مساعدة',
       ],
     ];
@@ -1053,6 +1055,33 @@ class MandaEqu {
       'en_US': ['Adam', 'Yahyaiee', 'Gregorian', 'Shamsi'],
       'fa_IR': ['ح یحیی', 'ح آدم', 'میلادی', 'شمسی'],
       'ar': ['ن یحیی', 'ن آدم', 'الجورجية', 'شمسية']
+    };
+    return data[index];
+  }
+
+  static selectCalendar(index) {
+    Map data = {
+      'en_US': [
+        '  Select a Calendar to display',
+        '  Gregorian',
+        '  Mandaean',
+        '  Shamsi',
+        '  ---------'
+      ],
+      'fa_IR': [
+        '  تقویمی را برای نمایش انتخاب کنید      ',
+        '  میلادی      ',
+        '  مندایی     ',
+        '  شمسی     ',
+        '  ---------'
+      ],
+      'ar': [
+        '  حدد التقويم لعرضه  ',
+        '  الجورجية  ',
+        '   المندایی  ',
+        '  شمسية  ',
+        '  --------'
+      ],
     };
     return data[index];
   }

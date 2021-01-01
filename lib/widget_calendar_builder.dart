@@ -626,7 +626,7 @@ class CalendarBuilder extends MyHomePage {
     // print('cellText[0].year: ${data.selected.date.year}');
 
     if (cellText[1] != "" && cellText[0].year != data.selected.date.year) {
-      MyHomePage.runHolidaysEvents(cellText[0].year);
+      MyHomePage.runHolidaysEvents(cellText[0].year, data);
     }
 
     if (cellText[1] != "") {

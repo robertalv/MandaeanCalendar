@@ -10,6 +10,18 @@ class LocalLang {
   }
 }
 
+class CalenderKind {
+  List kind;
+
+  List get display {
+    return kind;
+  }
+
+  set display(List display) {
+    this.kind = display;
+  }
+}
+
 // class CalendarActiveKind {
 //   String value;
 
@@ -142,12 +154,26 @@ class DivecSize {
   }
 }
 
+class Event {
+  int value;
+
+  int get year {
+    return value;
+  }
+
+  set year(int year) {
+    this.value = year;
+  }
+}
+
 class Data {
   var lang;
   var divecSize;
-  var mandaKind;
-  var gregKind;
-  var shamsiKind;
+  // var mandaKind;
+  // var gregKind;
+  // var shamsiKind;
+  var event;
+  var calendarKind;
   var selected;
   DateTime today;
   var last;
@@ -156,17 +182,19 @@ class Data {
   var gregMonth;
   var shamsiMonth;
 
-  Data(
-      {this.lang,
-      this.today,
-      this.last,
-      this.first,
-      this.mandaMonth,
-      this.gregMonth,
-      this.shamsiMonth,
-      this.divecSize,
-      this.selected,
-      this.mandaKind,
-      this.gregKind,
-      this.shamsiKind});
+  Data({
+    this.lang,
+    this.today,
+    this.last,
+    this.first,
+    this.mandaMonth,
+    this.gregMonth,
+    this.shamsiMonth,
+    this.divecSize,
+    this.selected,
+    this.calendarKind,
+    this.event,
+    // this.gregKind,
+    // this.shamsiKind
+  });
 }

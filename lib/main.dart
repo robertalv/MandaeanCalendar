@@ -22,9 +22,11 @@ import 'user_set.dart';
 import 'manda_scrolling_text.dart';
 
 LocalLang _lang = new LocalLang();
+CalenderKind _calenderKind = new CalenderKind();
 MandaCalendarActive _manda = new MandaCalendarActive();
 GregCalendarActive _greg = new GregCalendarActive();
 ShamsiCalendarActive _shamsi = new ShamsiCalendarActive();
+Event _event = new Event();
 Selected _selected = new Selected();
 StartOfMonth _first = new StartOfMonth();
 EndOfMonth _last = new EndOfMonth();
@@ -47,6 +49,8 @@ List _selectedEvents = [];
 var _listOfEventsForYear;
 
 void main() {
+  _calenderKind.display = null ?? ['greg'];
+  _data.calendarKind = _calenderKind.display;
   initializeDateFormatting().then((_) => runApp(MandaeanCalendar()));
 }
 
@@ -56,9 +60,11 @@ class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _data.lang = _lang;
-    _data.gregKind = _greg;
-    _data.mandaKind = _manda;
-    _data.shamsiKind = _shamsi;
+    _data.event = _event;
+    _data.calendarKind = _calenderKind;
+    // _data.calendarKind.display = null ?? ['greg'];
+
+    print(_data.calendarKind.display);
     _data.selected = _selected;
     _data.first = _first;
     _data.last = _last;
@@ -92,7 +98,8 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 
-  static void runHolidaysEvents(int selectedYear) {
+  static void runHolidaysEvents(int selectedYear, var data) {
+    data.event.year = selectedYear;
     _holidays = MandaFirstDayOfMonthBuilder(selectedYear).eventsForWholeYear;
     _events = MandaEventssBuilder(selectedYear).wholeYear;
     final List eventName = MandaEqu.mandaFirstMonth();
@@ -124,19 +131,19 @@ class MyHomePage extends StatefulWidget {
       data, DateTime dateFaAr, DateTime date, String leftRight, kind) {
     print('CALLBACK: _onVisibleMonth');
     DateTime selectedDay = data.selected.date;
-    int monthChangeYear;
+    // int monthChangeYear;
 
     if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
       data.selected.date = dateFaAr;
-      monthChangeYear = 1;
+      // monthChangeYear = 1;
       if (leftRight == 'right') {
-        monthChangeYear = 12;
+        // monthChangeYear = 12;
       }
     } else {
       data.selected.date = date;
-      monthChangeYear = 12;
+      // monthChangeYear = 12;
       if (leftRight == 'right') {
-        monthChangeYear = 1;
+        // monthChangeYear = 1;
       }
     }
     CalendarBuilder.getMonthDate(data);
@@ -145,8 +152,10 @@ class MyHomePage extends StatefulWidget {
     _dateEquivalent = [selectedDay, '', kind];
     _listOfEventsForYear['en_US'] = '';
     // print(selectedDay);
-    if (selectedDay.month == monthChangeYear) {
-      runHolidaysEvents(selectedDay.year);
+
+    // if (selectedDay.month == monthChangeYear) {
+    if (data.event.year != selectedDay.year) {
+      runHolidaysEvents(selectedDay.year, data);
     }
   }
 
@@ -295,7 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     UserSetting.getLanguage(setState, _lang);
     CalendarBuilder.getMonthDate(_data);
-    MyHomePage.runHolidaysEvents(_data.selected.date.year);
+    MyHomePage.runHolidaysEvents(_data.selected.date.year, _data);
     _dateEquivalent = _data.gregMonth.info["selectedDay"];
 
     _yearEquivalent = _data.gregMonth.info["selectedDay"];
@@ -316,16 +325,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // ###############################################################
     // ###############################################################
 
-    _data.gregKind.active = false;
-    _data.mandaKind.active = true;
-    _data.shamsiKind.active = false;
-    List runingWidget;
+    // _data.gregKind.active = false;
+    // _data.mandaKind.active = true;
+    // _data.shamsiKind.active = false;
+    var runingWidget;
 
     // runingWidget = ['greg', 'manda'];
-    runingWidget = ['greg'];
+    // runingWidget = ['greg'];
     // runingWidget = ['manda'];
     // runingWidget = ['shamsi'];
     // runingWidget = ['manda', 'greg', 'shamsi'];
+    runingWidget = _data.calendarKind.display;
+    print(runingWidget);
 
     MainSize _mainZise = new MainSize(_data);
     // todayEven(_selectedDay);
@@ -357,7 +368,7 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Container(
         width: 250.0 * _sizeRate,
         color: Colors.white,
-        child: topIconDrawer(context, _lang.name),
+        child: topIconDrawer(context, _lang.name, setState, _data),
       ),
       body: GestureDetector(
           onHorizontalDragEnd: (dragEndDetails) {
