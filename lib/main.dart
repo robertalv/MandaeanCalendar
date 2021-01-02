@@ -11,6 +11,7 @@ import 'manda_footer.dart';
 import 'manda_holidays.dart';
 import 'manda_month_events.dart';
 import 'my_font_size.dart';
+import 'my_functions.dart';
 import 'setter_getter.dart';
 import 'manda_equivalent.dart';
 import 'widget_calendar_builder.dart';
@@ -44,6 +45,7 @@ var _dateEquivalent;
 var _yearEquivalent;
 List _selectedEvents = [];
 var _listOfEventsForYear;
+var _context;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -125,7 +127,7 @@ class MyHomePage extends StatefulWidget {
     }
     CalendarBuilder.getMonthDate(data);
     selectedDay = data.selected.date;
-    _selectedEvents = MyHomePage.todayEven(selectedDay);
+    _selectedEvents = MyHomePage.todayHolidayEvents(selectedDay);
     _dateEquivalent = [selectedDay, '', kind];
     _listOfEventsForYear['en_US'] = '';
     // print(selectedDay);
@@ -244,30 +246,63 @@ class MyHomePage extends StatefulWidget {
     // print("_onDaySelected --------------------=========>");
     _yearEquivalent = selectedDay;
     _dateEquivalent = selectedDay;
-    _selectedEvents = todayEven(selectedDay[0]);
+    _selectedEvents = todayHolidayEvents(selectedDay[0]);
+    // print(_selectedEvents);
   }
 
-  static todayEven(DateTime selectedDay) {
+  static todayHolidayEvents(DateTime selectedDay) {
     List todayHolidayEvents = [];
 
-    var todayHoliday = _holidays[selectedDay] ?? [];
+    var todayHoliday = _todayHoliday(selectedDay);
 
     if (todayHoliday.isNotEmpty) {
-      todayHolidayEvents.add(todayHoliday[0]);
+      todayHolidayEvents.addAll(todayHoliday);
     }
+
+    var todayEvents = _todayEvents(selectedDay);
+
+    if (todayEvents.isNotEmpty) {
+      todayHolidayEvents.addAll(todayEvents);
+    }
+    // print(todayHolidayEvents);
+    return todayHolidayEvents;
+  }
+
+  static _todayHoliday(DateTime selectedDay) {
+    var todayHoliday = _holidays[selectedDay] ?? [];
+
+    // print(todayHoliday);
+    return todayHoliday;
+  }
+
+  static _todayEvents(DateTime selectedDay) {
+    List todayEventsList = [];
 
     var todayEvents = _events[selectedDay] ?? [];
     if (todayEvents.isNotEmpty) {
       todayEvents.forEach((event) {
         if ((event.runtimeType.toString()).contains('List')) {
-          todayHolidayEvents.add(event[0]);
+          todayEventsList.add(event[0]);
         } else {
-          todayHolidayEvents.add(todayEvents[0]);
+          todayEventsList.add(todayEvents[0]);
         }
       });
     }
-    // print(todayHolidayEvents);
-    return todayHolidayEvents;
+    // print(todayEventsList);
+    return todayEventsList;
+  }
+
+  static onDayLongPressed(selectedDay) {
+    print('CALLBACK: _onDayLogPressed');
+    print('_onDayLogPressed $selectedDay');
+    var selectedEvents = _todayEvents(selectedDay);
+    print('selectedEvents: $selectedEvents');
+    if (selectedEvents.isNotEmpty) {
+      String doc = Functions.eventsDoc(selectedEvents, _lang.name);
+      if (doc != null) {
+        Functions.showMyDialog(_context, _lang.name, "Coming Soon...", doc, 1);
+      }
+    }
   }
 }
 
@@ -282,7 +317,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _dateEquivalent = _data.gregMonth.info["selectedDay"];
 
     _yearEquivalent = _data.gregMonth.info["selectedDay"];
-    _selectedEvents = MyHomePage.todayEven(_data.selected.date);
+    _selectedEvents = MyHomePage.todayHolidayEvents(_data.selected.date);
     // print("one time run main ################");
   }
 
@@ -290,6 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     double divecWidth = MediaQuery.of(context).size.width;
     _data.divecSize = _divec;
     _divec.width = divecWidth;

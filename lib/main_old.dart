@@ -18,10 +18,10 @@
 // import 'manda_scrolling_text.dart';
 // // import 'manda_top_icon_mulwasha.dart';
 // import 'manda_top_icon_refresh.dart';
-// import 'widget_drawer.dart';
+// import 'manda_top_icon.dart';
 // import 'my_alignment.dart';
 // import 'my_color.dart';
-// // import 'my_functions.dart';
+// import 'my_functions.dart';
 // import 'my_icon_events.dart';
 
 // var _localLang = 'en_US';
@@ -86,7 +86,7 @@
 //   double _longFontSize = 16.0;
 
 //   var _listOfEventsForYear;
-//   Map _myColorSelection = MyColor.selection();
+//   Map _myColorSelection = Mycolor.selection();
 
 //   // ######################
 //   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -177,6 +177,16 @@
 //     super.dispose();
 //   }
 
+//   void _onDayLongPressed(DateTime selectedDay, List events, List holidays) {
+//     print('CALLBACK: _onDayLongPressed');
+//     if (events.isNotEmpty) {
+//       String doc = Functions.eventsDoc(events, _localLang);
+//       if (doc != null) {
+//         Functions.showMyDialog(context, _localLang, "Coming Soon...", doc, 1);
+//       }
+//     }
+//   }
+
 //   void _onDaySelected(DateTime selectedDay, List events, List holidays,
 //       {bool clearMandaDate = false}) {
 //     print('CALLBACK: _onDaySelected');
@@ -235,34 +245,35 @@
 //     // _calendarController.setCalendarFormat(CalendarFormat.month);
 
 //     // if (!(_panjaDate.lastDayOfPanja.year == first.year)) {
-//     // if (_holidays.keys.toList()[0].year != first.year) {
-//     //   _holidays = MandaFirstDayOfMonthBuilder(first.year).eventsForWholeYear;
+//     if (_holidays.keys.toList()[0].year != first.year) {
+//       _holidays = MandaFirstDayOfMonthBuilder(first.year).eventsForWholeYear;
 
-//     //   _events = MandaEventssBuilder(first.year).wholeYear;
-//     // }
+//       _events = MandaEventssBuilder(first.year).wholeYear;
+//     }
 
-//     // var myDay;
-//     // if (first.month == DateTime.now().month &&
-//     //     first.year == DateTime.now().year) {
-//     //   myDay = DateTime(
-//     //       DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
-//     // } else {
-//     //   myDay = DateTime(first.year, first.month, first.day, 0, 0);
-//     // }
+//     var myDay;
+//     if (first.month == DateTime.now().month &&
+//         first.year == DateTime.now().year) {
+//       myDay = DateTime(
+//           DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
+//     } else {
+//       myDay = DateTime(first.year, first.month, first.day, 0, 0);
+//     }
 
-//     // var mySelectedEvents = _events[myDay] ?? [];
-//     // var mySelectedHoliday = _holidays[myDay] ?? [];
-//     // _calendarController.setSelectedDay(myDay);
-//     // _onDaySelected(myDay, mySelectedEvents, mySelectedHoliday,
-//     //     clearMandaDate: false);
+//     var mySelectedEvents = _events[myDay] ?? [];
+//     var mySelectedHoliday = _holidays[myDay] ?? [];
+//     _calendarController.setSelectedDay(myDay);
+//     _onDaySelected(myDay, mySelectedEvents, mySelectedHoliday,
+//         clearMandaDate: false);
 //   }
 
 //   void _onCalendarCreated(
 //       DateTime first, DateTime last, CalendarFormat format) {
 //     getLanguage();
-
 //     print('CALLBACK: _onCalendarCreated');
 //   }
+
+//   TextBuilder(DateTime date, dynamic locale) {}
 
 //   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 //   @override
@@ -274,6 +285,7 @@
 //     // const double daysMargin = 5.0;
 //     // double centerIcon = 21;
 //     // int sizeRate = 1;
+
 //     mandaDate = new MandaFormatedDateBuilder(_selectedDay, _localLang);
 //     _mandaAndJalaiYear = mandaDate.fullYearEnFa;
 //     _mandeanDay = mandaDate.fullDay;
@@ -335,7 +347,7 @@
 //       afterDateIcon = Text("");
 //     }
 
-//     String _myTitle = MandaEqu.calendarTitle()[_localLang];
+//     String _myTitle = MandaEqu.calendarTitle(_localLang);
 //     todayEven(_selectedDay);
 //     _selectedEvents = _todayHolidayEvents ?? [];
 
@@ -376,6 +388,7 @@
 //         ),
 //         // ***************** Just the whole page can be scroll
 //         body: Center(
+//           //  textDirection: TextDirection.rtl,
 //           child: ListView(
 //             children: [
 //               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
@@ -443,25 +456,6 @@
 //                     ],
 //                   )),
 //                 ),
-// // ######## New
-//                 // Container(
-//                 //   // height: 30.0 * _sizeRate,
-//                 //   constraints: BoxConstraints(
-//                 //     minHeight: 0,
-//                 //   ),
-//                 //   alignment: myAlignment,
-//                 //   decoration: BoxDecoration(
-//                 //     borderRadius: BorderRadius.circular(8.0),
-//                 //     border: Border.all(width: 0),
-//                 //     color: Colors.white,
-//                 //   ),
-//                 //   margin:
-//                 //       EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
-//                 //   child: SizedBox(
-//                 //       // fit: BoxFit.scaleDown,
-//                 //       child: mandaDayFa(context, _selectedDay, _localLang)),
-//                 // ),
-
 //                 _selectedEvents.isNotEmpty
 //                     ? _buildEventList()
 //                     : Text(
@@ -470,9 +464,7 @@
 //                       ),
 
 //                 // myFooter ??=
-//                 // footerLine(context, _localLang, _sizeRate, _marginHor),
-//                 //  myFooter ??=
-//                 footerLine(context, _localLang, _sizeRate),
+//                 footerLine(context, _localLang, _sizeRate, _marginHor),
 
 //                 // const SizedBox(height: 4.0),
 
@@ -512,8 +504,7 @@
 
 //     return TableCalendar(
 //       // locale: 'fa_IR',
-//       // locale: 'en_US',
-
+//       // locale: 'en_US', Direction
 //       locale: _localLang,
 //       calendarController: _calendarController,
 //       events: _events,
@@ -521,6 +512,7 @@
 //       startingDayOfWeek: StartingDayOfWeek.sunday,
 //       headerVisible: true,
 //       formatAnimation: FormatAnimation.scale,
+//       startDay: DateTime(2020 - 12 - 2),
 
 //       // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
 //       calendarStyle: CalendarStyle(
@@ -530,7 +522,7 @@
 //           selectedColor: Colors.red[400],
 //           todayColor: Colors.deepOrange[400],
 //           markersColor: Colors.green[700],
-//           outsideDaysVisible: true,
+//           outsideDaysVisible: false,
 //           holidayStyle: TextStyle().copyWith(
 //               color: Colors.blue[800],
 //               fontSize: 20.0,
@@ -580,8 +572,6 @@
 //       //   // ),
 //       // ),
 
-//       // unavailableDayBuilder
-
 //       ////// /// ######## Name of Day Header
 //       daysOfWeekStyle: DaysOfWeekStyle(
 //         // weekendStyle: TextStyle(
@@ -601,14 +591,10 @@
 //         // markersBuilder: (context, date, events, holidays) {
 //         //   _markersBuilder(context, date, events, holidays);
 //         // },
-
 //         markersBuilder: (context, date, events, holidays) {
 //           final children = <Widget>[];
-//           // date = _changeDateOrder(date);
-//           // print(date);
-//           // print("******************");
-//           List myEvents = [];
 
+//           List myEvents = [];
 //           if (holidays.isNotEmpty) {
 //             myEvents.addAll(holidays);
 //           }
@@ -669,8 +655,6 @@
 //         //// dayBuilder: (context, date, events) {
 //         ////   _myDayBuilder(context, date, events, _localLang);
 //         //// },
-//         ///
-//         ///
 
 //         /// ###### Day builder day number size, color
 //         dayBuilder: (context, date, events) => Container(
@@ -679,30 +663,13 @@
 //           child: SizedBox(
 //               // fit: BoxFit.scaleDown,
 //               child: Text(
-//             // DateFormat.d(_localLang).format(date),
-//             _getDayNum(date, _localLang),
+//             DateFormat.d(_localLang).format(date),
 //             style: TextStyle(
 //               color: Colors.black,
 //               fontSize: _daysFontSize,
 //             ),
 //           )),
 //         ),
-
-//         // outsideDayBuilder: (context, date, data) {
-//         //   print(date);
-//         //   _getDayNum(date, _localLang);
-//         //   return Container();
-//         // },
-
-//         // outsideHolidayDayBuilder: (context, date, list) {
-//         //   print(date);
-//         //   return Container();
-//         // },
-//         // outsideWeekendDayBuilder: (context, date, list) {
-//         //   print(date);
-//         //   _getDayNum(date, _localLang);
-//         //   return Container();
-//         // },
 
 //         /// selected Day Builder the color of today and the marker
 //         selectedDayBuilder: (context, date, events) => Container(
@@ -717,8 +684,7 @@
 //           child: SizedBox(
 //               // fit: BoxFit.scaleDown,
 //               child: Text(
-//             // DateFormat.d(_localLang).format(date),
-//             _getDayNum(date, _localLang),
+//             DateFormat.d(_localLang).format(date),
 //             style: TextStyle(color: Colors.white, fontSize: _daysFontSize),
 //           )),
 //         ),
@@ -734,34 +700,17 @@
 //           child: SizedBox(
 //               // fit: BoxFit.scaleDown,
 //               child: Text(
-//             // DateFormat.d(_localLang).format(date),
-//             _getDayNum(date, _localLang),
+//             DateFormat.d(_localLang).format(date),
 //             style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
 //           )),
 //         ),
-
-//         ////// ###### Days outside of `startDay` - `endDay` builder day number size, color
-
-//         // outsideDayBuilder: (context, date, events) => Container(
-//         //   margin: const EdgeInsets.all(daysMargin),
-//         //   alignment: Alignment.center,
-//         //   child: SizedBox(
-//         //       // fit: BoxFit.scaleDown,
-//         //       child: Text(
-//         //     // DateFormat.d(_localLang).format(date),
-//         //     _getDayNum22(date, _localLang),
-//         //     style: TextStyle(
-//         //       color: Colors.blue,
-//         //       fontSize: _daysFontSize,
-//         //     ),
-//         //   )),
-//         // ),
 //       ),
 
 //       onDaySelected: _onDaySelected,
 //       onVisibleDaysChanged: _onVisibleDaysChanged,
 //       onCalendarCreated: _onCalendarCreated,
-//       // onDayLongPressed: _onDayLongPressed,
+
+//       onDayLongPressed: _onDayLongPressed,
 //     );
 //   }
 
@@ -923,26 +872,15 @@
 //             )));
 //   }
 
-//   _getDayNum(DateTime date, locale) {
-//     var day;
-//     if (locale != 'en_US') {
-//       date = _changeDateOrder(date);
-//     }
-
-//     // print(date);
-//     day = DateFormat.d(locale).format(date);
-//     // if (date.month == 11 || date.month == 1) {
-//     //   day = "";
-//     // }
-//     return day;
-//   }
+//   // _getDayNum(DateTime date, locale) {
+//   //   var day;
+//   //   day = DateFormat.d(locale).format(date);
+//   //   return day;
+//   // }
 
 //   _getDayHeader(DateTime date, locale) {
 //     var day;
-//     if (locale != 'en_US') {
-//       date = _changeDateOrder(date);
-//     }
-
+//     print(date);
 //     if (locale == 'fa_IR') {
 //       var dayFa = DateFormat.EEEE(locale).format(date);
 //       day = MandaEqu.changeDayFormate(dayFa);
@@ -955,7 +893,7 @@
 
 //   _getMonthHeader(date, locale) {
 //     var day;
-
+//     // print(date);
 //     if (locale == 'ar') {
 //       var monthEn = DateFormat.MMMM('en_US').format(date);
 //       var yearAr = DateFormat.y(locale).format(date);
@@ -966,42 +904,5 @@
 //     }
 //     // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
 //     return day;
-//   }
-
-//   // changeHeaderOrderRTL(DateTime date) {
-//   //   var day = DateFormat.E("en_US").format(date);
-//   //   var numDayOdWeek = _getNumDayOdWeek(day);
-
-//   //   date = DateTime(date.year, date.month, date.day + numDayOdWeek, 0, 0);
-//   //   return date;
-//   // }
-
-//   // changeDayOrderRTL(DateTime date) {
-//   //   var day = DateFormat.E("en_US").format(date);
-//   //   var numDayOdWeek = _getNumDayOdWeek(day);
-
-//   //   date = DateTime(date.year, date.month, date.day + numDayOdWeek, 0, 0);
-//   //   return date;
-//   // }
-
-//   _changeDateOrder(DateTime date) {
-//     var day = DateFormat.E("en_US").format(date);
-//     var numDayOdWeek = _getNumDayOdWeek(day);
-
-//     date = DateTime(date.year, date.month, date.day + numDayOdWeek, 0, 0);
-//     return date;
-//   }
-
-//   _getNumDayOdWeek(day) {
-//     Map daysWeek = {
-//       "Sun": 6,
-//       "Mon": 4,
-//       "Tue": 2,
-//       "Wed": 0,
-//       "Thu": -2,
-//       "Fri": -4,
-//       "Sat": -6,
-//     };
-//     return daysWeek[day];
 //   }
 // }

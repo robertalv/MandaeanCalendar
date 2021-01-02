@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'manda_equivalent.dart';
+import 'manda_events_doc.dart';
 import 'my_alignment.dart';
 
 class Functions {
@@ -47,5 +48,31 @@ class Functions {
         );
       },
     );
+  }
+
+  static eventsDoc(List events, String localLang) {
+    // print(events);
+
+    String doc = '';
+
+    events.forEach((event) {
+      print(event);
+      if ((event.runtimeType.toString()).contains('List')) {
+        event = event[0];
+      }
+
+      doc = doc +
+          MandaEventsDoc.findEevent(event["en_US"].trim(), localLang) +
+          "\n\n";
+
+      // if (localLang == "fa_IR") {
+      //   doc = doc + MandaEventsDoc.eventsFa(event["en_US"].trim());
+      //   // print("****************            ##############");
+      // }
+      // print(event["en_US"]);
+      // print(doc);
+      print("****************");
+    });
+    return doc;
   }
 }

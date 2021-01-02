@@ -551,7 +551,7 @@ class CalendarBuilder extends MyHomePage {
                 child: GestureDetector(
               onLongPress: () {
                 _setState(() {
-                  onDayLogPressed(cellText[0]);
+                  MyHomePage.onDayLongPressed(cellText[0]);
                 });
               },
               onTap: () {
@@ -634,11 +634,6 @@ class CalendarBuilder extends MyHomePage {
     print('_onDayTap cellText ------------------------------>> $cellText');
     // await Future.delayed(Duration(seconds: 1));
     MyHomePage.onDaySelected(cellText);
-  }
-
-  static onDayLogPressed(cellText) {
-    print('CALLBACK: _onDayLogPressed');
-    // print('_onDayLogPressed $cellText');
   }
 
   static getDateEqu(var selectedDay, var data) {
