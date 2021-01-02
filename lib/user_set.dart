@@ -54,4 +54,21 @@ class UserSetting {
 
     return prefs.setString(_kLanguageCode, value);
   }
+
+  /// ----------------------------------------------------------
+  /// Method that saves/ gets the user calendar choose
+  /// ----------------------------------------------------------
+
+  static final String _kCalendarChoose = "greg";
+
+  static Future<void> getCalendar(calenderKind) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    calenderKind.display = prefs.getStringList(_kCalendarChoose) ?? ["greg"];
+  }
+
+  static Future<bool> setCalendar(List value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List newValue = value;
+    return prefs.setStringList(_kCalendarChoose, newValue);
+  }
 }

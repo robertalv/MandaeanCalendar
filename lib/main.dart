@@ -49,20 +49,18 @@ List _selectedEvents = [];
 var _listOfEventsForYear;
 
 void main() {
-  _calenderKind.display = null ?? ['greg'];
+  WidgetsFlutterBinding.ensureInitialized();
+  UserSetting.getCalendar(_calenderKind);
   _data.calendarKind = _calenderKind.display;
   initializeDateFormatting().then((_) => runApp(MandaeanCalendar()));
 }
 
 class MandaeanCalendar extends StatelessWidget {
-  // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
     _data.lang = _lang;
     _data.event = _event;
     _data.calendarKind = _calenderKind;
-    // _data.calendarKind.display = null ?? ['greg'];
 
     print(_data.calendarKind.display);
     _data.selected = _selected;
@@ -71,14 +69,13 @@ class MandaeanCalendar extends StatelessWidget {
     _data.gregMonth = _gregMonth;
     _data.mandaMonth = _mandaMonth;
     _data.shamsiMonth = _shamsiMonth;
-    // _data.calendarActive = _calendarActive;
     _data.gregMonth.info = {};
     _data.mandaMonth.info = {};
     _data.shamsiMonth.info = {};
     _lang.name = "en_US";
-    _greg.active = true;
-    _manda.active = false;
-    _shamsi.active = false;
+    // _greg.active = true;
+    // _manda.active = false;
+    // _shamsi.active = false;
     _selected.date = selectedDay;
     _data.today = selectedDay;
 
@@ -393,7 +390,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(children: [
               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
                 // if (_data.gregKind.active == true)
-                if (runingWidget.length >= 1)
+                if (runingWidget != null && runingWidget.length >= 1)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
@@ -404,7 +401,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                 // if (_data.mandaKind.active == true)
-                if (runingWidget.length >= 2)
+                if (runingWidget != null && runingWidget.length >= 2)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
@@ -415,7 +412,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                 // if (_data.shamsiKind.active == true)
-                if (runingWidget.length == 3)
+                if (runingWidget != null && runingWidget.length == 3)
                   Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: _mainZise.marginH, vertical: 0),
@@ -425,11 +422,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         .buildCalendarTable(setState, runingWidget[2]),
                   ),
                 // #################   yearEquivalent #################
-                if (runingWidget.length > 0)
+                if (runingWidget != null && runingWidget.length > 0)
                   CalendarBuilder(_holidays, _events, _data)
                       .yearEquivalent(_yearEquivalent),
                 // #################   dateEquivalent  #################
-                if (runingWidget.length > 0)
+                if (runingWidget != null && runingWidget.length > 0)
                   CalendarBuilder(_holidays, _events, _data)
                       .dateEquivalent(_dateEquivalent),
 

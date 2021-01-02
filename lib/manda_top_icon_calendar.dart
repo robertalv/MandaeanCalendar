@@ -7,6 +7,7 @@ import 'manda_mulwasha.dart';
 import 'my_alignment.dart';
 import 'my_color.dart';
 import 'my_font_size.dart';
+import 'user_set.dart';
 
 class ChooseCalendar extends StatelessWidget {
   var data;
@@ -73,7 +74,7 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
     List<String> dropdownList3 = dropdownList1;
     String hintText = dropdownList1[0];
 
-    List displayList = [];
+    List<String> displayList = [];
     if (_dropdownListNum1 != null && _dropdownListNum1 != '') {
       displayList.add(_dropdownListNum1);
     }
@@ -95,6 +96,7 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
     }
 
     data.calendarKind.display = displayList;
+    UserSetting.setCalendar(displayList);
 
     // print(data.calendarKind.display);
 
