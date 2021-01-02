@@ -1066,22 +1066,49 @@ class MandaEqu {
         '  Gregorian',
         '  Mandaean',
         '  Shamsi',
-        '  ---------'
+        '  None'
       ],
       'fa_IR': [
         '  تقویمی را برای نمایش انتخاب کنید      ',
         '  میلادی      ',
         '  مندایی     ',
         '  شمسی     ',
-        '  ---------'
+        '  هیچکدام    '
       ],
       'ar': [
         '  حدد التقويم لعرضه  ',
         '  الجورجية  ',
         '   المندایی  ',
         '  شمسية  ',
-        '  --------'
+        '  لا اختار'
       ],
+    };
+    return data[index];
+  }
+
+  static calendarDisplay(index) {
+    Map data = {
+      'en_US': [
+        'Calendar Selection',
+        'Please select the calendar in the order you wish to be displayed',
+        'First display: ',
+        'Second display:',
+        'ُThird display: '
+      ],
+      'fa_IR': [
+        'انتخاب تقویم',
+        'لطفاً تقویم را به ترتیبی که می خواهید نمایش داده شود ، انتخاب کنید',
+        ': نمایش اول',
+        ': نمایش دوم',
+        ': نمایش سوم'
+      ],
+      'ar': [
+        'اختيار التقويم',
+        'يرجى تحديد التقويم بالترتيب الذي ترغب في عرضه',
+        ': العرض الاول',
+        ': العرض الثاني',
+        ': العرض الثالث'
+      ]
     };
     return data[index];
   }

@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'main.dart';
 import 'manda_equivalent.dart';
 import 'manda_mulwasha.dart';
+import 'my_alignment.dart';
 import 'my_color.dart';
+import 'my_font_size.dart';
 
 class ChooseCalendar extends StatelessWidget {
   var data;
@@ -41,8 +43,8 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
   var _myAlignment;
   var data;
   var _data;
-  double _iconDropSize = 50;
-  double _fontSize = 18.0;
+  double _iconDropSize;
+  double _fontSize;
   String _dropdownListNum1;
   String _dropdownListNum2;
   String _dropdownListNum3;
@@ -54,31 +56,22 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    // _setState = setState;
-    print(data);
-    print(data.lang);
-    print(data.lang.name);
     localLang = data.lang.name;
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
     Map _myColorSelection = MyColor.selection();
-    _myAlignment = MandaEqu.myAlignment(localLang);
+    _myAlignment = MyAlignment.countryLanguage(localLang);
+    var _myTextAlignment = MyAlignment.textAlig(localLang);
+    List _calendarDisplay = MandaEqu.calendarDisplay(localLang);
+    MainSize _mainZise = new MainSize(_data);
 
-    int _sizeRate = 1;
-    double _cardFontSize = 20.0;
-    double _divecWidth = MediaQuery.of(context).size.width;
-    if (_divecWidth > 700) {
-      _sizeRate = 2;
-      _cardFontSize = 30.0;
-    }
+    double _sizeRate = _mainZise.rate21;
+    double _cardFontSize = _mainZise.f4020;
+    _iconDropSize = _mainZise.f5025;
+    _fontSize = _mainZise.f2814;
+
     List<String> dropdownList1 = MandaEqu.selectCalendar(localLang);
     List<String> dropdownList2 = dropdownList1;
     List<String> dropdownList3 = dropdownList1;
-    String hintText1 = dropdownList1[0];
-    String hintText2 = dropdownList1[0];
-    String hintText3 = dropdownList1[0];
-    print(_dropdownListNum1);
-    print(_dropdownListNum2);
-    print(_dropdownListNum3);
+    String hintText = dropdownList1[0];
 
     List displayList = [];
     if (_dropdownListNum1 != null && _dropdownListNum1 != '') {
@@ -94,33 +87,96 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
       displayList = ['greg'];
     }
 
+    double marginLeft = 0;
+    double marginRight = 20;
+    if (localLang == 'en_US') {
+      marginLeft = 20;
+      marginRight = 0;
+    }
+
     data.calendarKind.display = displayList;
 
-    print(data.calendarKind.display);
+    // print(data.calendarKind.display);
 
     return Scaffold(
         appBar: AppBar(
             leading: backToMainPage(context),
             backgroundColor: _myColorSelection['header'],
             title: Center(
-              child: Text(MandaEqu.helpTitle(localLang),
+              child: Text(_calendarDisplay[0],
                   style: TextStyle(
                       color: Colors.black, fontSize: 18.0 * _sizeRate)),
             )),
         body: Center(
             child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+                margin: EdgeInsets.symmetric(
+                    horizontal: _mainZise.marginH, vertical: 0),
                 child: Center(
                     child: ListView(children: [
                   Column(children: [
-                    Text("data"),
-                    displayDrop1(context, dropdownList1, hintText1),
-                    Text("data2"),
-                    displayDrop2(context, dropdownList2, hintText2),
-                    Text("data2"),
-                    displayDrop3(context, dropdownList3, hintText3),
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Text(
+                      _calendarDisplay[1],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: _cardFontSize),
+                      // )
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Container(
+                      alignment: _myAlignment,
+                      child: Text(
+                        _calendarDisplay[2],
+                        textAlign: _myTextAlignment,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: _cardFontSize),
+                        // )
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(left: marginLeft, right: marginRight),
+                      child: displayDrop1(context, dropdownList1, hintText),
+                    ),
+
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Container(
+                      alignment: _myAlignment,
+                      child: Text(
+                        _calendarDisplay[3],
+                        textAlign: _myTextAlignment,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: _cardFontSize),
+                        // )
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(left: marginLeft, right: marginRight),
+                      child: displayDrop2(context, dropdownList2, hintText),
+                    ),
+
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Container(
+                      alignment: _myAlignment,
+                      child: Text(
+                        _calendarDisplay[4],
+                        textAlign: _myTextAlignment,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: _cardFontSize),
+                        // )
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(
+                            left: marginLeft, right: marginRight),
+                        child: displayDrop3(context, dropdownList3, hintText)),
+                    // displayDrop3(context, dropdownList3, hintText),
                   ]),
-                  Text("data"),
+                  // Text("data"),
+                  Padding(padding: EdgeInsets.only(top: 50)),
+
+                  //// ################ alertOk ################
                   RaisedButton(
                     color: Colors.brown[100],
                     shape: RoundedRectangleBorder(
@@ -132,33 +188,11 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
                           MaterialPageRoute(
                               builder: (context) => MandaeanCalendar()));
                     },
-                    child: Text(mulwashaLabel.backBtn,
+                    child: Text(MandaEqu.alertOk(localLang),
                         style: TextStyle(
                             color: Colors.black, fontSize: _cardFontSize)),
                   ),
-                ]))
-
-                //         Text("\n"),
-                //       ],
-                //     ),
-                //     RaisedButton(
-                //       color: Colors.brown[100],
-                //       shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(4.0),
-                //           side: BorderSide(color: Colors.black)),
-                //       onPressed: () {
-                //         Navigator.push(
-                //             context,
-                //             MaterialPageRoute(
-                //                 builder: (context) => MandaeanCalendar()));
-                //       },
-                //       child: Text(mulwashaLabel.backBtn,
-                //           style: TextStyle(
-                //               color: Colors.black, fontSize: _cardFontSize)),
-                //     ),
-                //   ],
-                // ),
-                )));
+                ])))));
   }
 
   String selectedEvent;
@@ -167,10 +201,6 @@ class _MyChooseCalendarState extends State<MyChooseCalendar> {
       BuildContext context, List<String> dropdownList1, String hintText) {
     List<String> dropdownList = dropdownList1.getRange(1, 4).toList();
     // dropdownList.removeRange(0, 1);
-    // dropdownList.removeRange(3, 4);
-    // var myAlignment = mulwashaLabel.myAlignment;
-
-    // FormState form = _formKey.currentState;
 
     return DropdownButtonHideUnderline(
         child: SizedBox(
