@@ -14,7 +14,7 @@ class BuildEvents extends MyHomePage {
   Map _myColorSelection;
   MainSize _mainSize;
   String _localLang;
-  double _listFontSize;
+  // double _listFontSize;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -75,11 +75,9 @@ class BuildEvents extends MyHomePage {
     if (_localLang == "en_US") {
       beforeEvent = eventIcon;
       afterEvent = myIcon.noon;
-      _listFontSize = 20;
     } else {
       beforeEvent = myIcon.noon;
       afterEvent = eventIcon;
-      _listFontSize = 22;
     }
 
     return Row(

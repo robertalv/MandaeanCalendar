@@ -581,13 +581,12 @@ class CalendarBuilder extends MyHomePage {
     var day;
 
     if (_local == 'fa_IR') {
-      var dayFa = DateFormat.EEEE(_local).format(date);
-
-      day = MandaEqu.changeDayFormate(dayFa);
+      day = DateFormat.EEEE(_local).format(date);
+      // day = MandaEqu.daysWeekFa(day);
     } else if (_local == 'ar') {
       day = DateFormat.E(_local).format(date);
       // print("day $day");
-      day = MandaEqu.daysWeekAr(day);
+      // day = MandaEqu.daysWeekAr(day);
     } else {
       day = DateFormat.E(_local).format(date);
     }

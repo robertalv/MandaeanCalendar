@@ -218,43 +218,6 @@ class MandaEqu {
     return month[index - 1];
   }
 
-  static changeDayFormate(String dayFa) {
-    String newFormateDay = dayFa;
-    switch (dayFa) {
-      case 'یکشنبه':
-        {
-          newFormateDay = 'یک شنبه';
-        }
-        break;
-
-      case 'دوشنبه':
-        {
-          newFormateDay = 'دو شنبه';
-        }
-        break;
-
-      case 'سه‌شنبه':
-        {
-          newFormateDay = 'سه‌ شنبه';
-        }
-        break;
-
-      case 'چهارشنبه':
-        {
-          newFormateDay = 'چهار شنبه';
-        }
-        break;
-
-      case 'پنجشنبه':
-        {
-          newFormateDay = 'پنج شنبه';
-        }
-        break;
-    }
-
-    return newFormateDay;
-  }
-
   static changeMonthFormate(String month) {
     Map monthAr = {
       'January': ' كانون الثاني',
@@ -271,62 +234,6 @@ class MandaEqu {
       'December': 'كانون الأول ',
     };
     return monthAr[month];
-  }
-
-  static changeDayFormate22(String dayFa) {
-    String newFormateDay = dayFa;
-    String fixDay = "شنبه";
-    switch (dayFa) {
-      case 'یکشنبه':
-        {
-          newFormateDay = '۱' + fixDay;
-          // newFormateDay = newFormateDay.split('').reversed.join('');
-          // newFormateDay = fixDay;
-        }
-        break;
-
-      case 'دوشنبه':
-        {
-          newFormateDay = "($fixDay)2";
-          // newFormateDay = '۲' + fixDay;
-        }
-        break;
-
-      case 'سه‌شنبه':
-        {
-          newFormateDay = ' سه ‌شنبه';
-          // newFormateDay = 'سه‌ شنبه';
-        }
-        break;
-
-      case 'چهارشنبه':
-        {
-          newFormateDay = 'چهار شنبه';
-          // newFormateDay = 'چهار شنبه';
-        }
-        break;
-
-      case 'پنجشنبه':
-        {
-          newFormateDay = 'پنج شنبه';
-          // newFormateDay = 'پنج شنبه';
-        }
-        break;
-
-      case 'جمعه':
-        {
-          newFormateDay = 'جمعه';
-        }
-        break;
-
-      case 'شنبه':
-        {
-          newFormateDay = 'شنبه';
-        }
-        break;
-    }
-
-    return newFormateDay;
   }
 
   static backBtn(index) {
@@ -483,8 +390,8 @@ class MandaEqu {
   static chooseYear(index) {
     String dateF1 = " تاریخ" + "\n" + "شمسی";
     String dateF2 = " تاریخ" + "\n" + "میلادی";
-    String dateA1 = " التاریخ" + "\n" + "شمسية";
-    String dateA2 = " التاریخ" + "\n" + "الجورجية";
+    String dateA1 = " التاریخ" + "\n" + "الشمسية";
+    String dateA2 = " التاریخ" + "\n" + "المیلادی";
 
     Map mulwashal = {
       'en_US': ['Gregorian\nDate', 'Solar\nDate'],
@@ -498,7 +405,7 @@ class MandaEqu {
     Map data = {
       'en_US': [' Mandaean Date: ', 'Gregorian Date: ', 'Solar Date: '],
       'fa_IR': ['تاریخ مندایی: ', 'تاریخ میلادی: ', ' تاریخ شمسی:'],
-      'ar': ['تاریخ مندایی: ', 'تاریخ الجورجية:', 'تاریخ شمسية:']
+      'ar': ['التاريخ المندایی: ', 'التاريخ المیلادی:', 'التاريخ الشمسية:']
     };
     return data[index];
   }
@@ -1054,7 +961,7 @@ class MandaEqu {
     Map data = {
       'en_US': ['Adam', 'Yahyaiee', 'Gregorian', 'Shamsi'],
       'fa_IR': ['ح یحیی', 'ح آدم', 'میلادی', 'شمسی'],
-      'ar': ['ن یحیی', 'ن آدم', 'الجورجية', 'شمسية']
+      'ar': ['ن یحیی', 'ن آدم', 'المیلادی', 'الشمسية']
     };
     return data[index];
   }
@@ -1077,9 +984,9 @@ class MandaEqu {
       ],
       'ar': [
         '  حدد التقويم لعرضه  ',
-        '  الجورجية  ',
+        '  المیلادی  ',
         '   المندایی  ',
-        '  شمسية  ',
+        '  الشمسية  ',
         '  لا اختار'
       ],
     };
@@ -1112,39 +1019,4 @@ class MandaEqu {
     };
     return data[index];
   }
-
-  // static daysWeekAr22(index) {
-  //   String dayFa = index;
-  //   Map data = {
-  //     "الأحد": "الأحد",
-  //     "الاثنين": "الا ثنين",
-  //     "الثلاثاء": "الثلاثاء",
-  //     "الأربعاء": "الأ ربعاء",
-  //     "الخميس": "الخميس",
-  //     "الجمعة": "الجمعة",
-  //     "السبت": "السبت",
-  //   };
-  //   return data[dayFa];
-  // }
 }
-
-// [
-//       'Sun',
-//       'Mon',
-//       'Tue',
-//       'Wed',
-//       'Thu',
-//       'Fri',
-//       'Sat',
-//     ];
-//
-
-//     [
-//       'الأحد',
-//       'الاثنين',
-//       'الثلاثاء',
-//       'الأربعاء',
-//       'الخميس',
-//       'الجمعة',
-//       'السبت',
-//     ];

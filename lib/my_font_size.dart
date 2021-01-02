@@ -131,7 +131,7 @@ class TableSize {
       iconRate = 1.5;
       headerMonthYear = 35.0;
       headerMonthYearWidth = 470;
-      headerDayWeek = 28.0;
+      headerDayWeek = 20.0;
       marginDayRow = 20.0;
       dayNum = 40.0;
       f8040 = 80;
@@ -148,10 +148,17 @@ class TableSize {
       headerMonthYearWidth = cellWidth * 4.5;
       headerDayWeek = 16.0;
       marginDayRow = 2.0;
-      dayNum = 22.0;
+      dayNum = 24.0;
       f5025 = 25;
       f4020 = 20;
       marginH = 0;
+      if (data.lang.name == 'en_US') {
+        dayNum = 20.0;
+      }
+    }
+
+    if (divecWidth <= 320) {
+      headerDayWeek = 11.0;
     }
     // this.divecWidth = divecWidth;
     // this.cellWidth = cellWidth;
@@ -193,7 +200,7 @@ class MainSize {
       marginH = 0;
       cellWidth = divecWidth / 7;
       iconRate = 1;
-      iconRateList = 1;
+      iconRateList = 1.5;
       f2814 = 14;
     }
     this.f8040 = f8040;

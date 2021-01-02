@@ -23,9 +23,6 @@ import 'manda_scrolling_text.dart';
 
 LocalLang _lang = new LocalLang();
 CalenderKind _calenderKind = new CalenderKind();
-MandaCalendarActive _manda = new MandaCalendarActive();
-GregCalendarActive _greg = new GregCalendarActive();
-ShamsiCalendarActive _shamsi = new ShamsiCalendarActive();
 Event _event = new Event();
 Selected _selected = new Selected();
 StartOfMonth _first = new StartOfMonth();
@@ -61,8 +58,6 @@ class MandaeanCalendar extends StatelessWidget {
     _data.lang = _lang;
     _data.event = _event;
     _data.calendarKind = _calenderKind;
-
-    print(_data.calendarKind.display);
     _data.selected = _selected;
     _data.first = _first;
     _data.last = _last;
@@ -73,9 +68,6 @@ class MandaeanCalendar extends StatelessWidget {
     _data.mandaMonth.info = {};
     _data.shamsiMonth.info = {};
     _lang.name = "en_US";
-    // _greg.active = true;
-    // _manda.active = false;
-    // _shamsi.active = false;
     _selected.date = selectedDay;
     _data.today = selectedDay;
 
@@ -114,11 +106,6 @@ class MyHomePage extends StatefulWidget {
     _events.addAll(janEventAfter);
 
     MandaGregShamsiInfo.dateBuilder(_data);
-    // print('selectedYear $selectedYear');
-    // print('_holidays ${_holidays.length}');
-    // print('_events ${_events.length}');
-    // print("*" * 30 + "_holidays load" + "*" * 30);
-    // print(_holidays);
 
     _listOfEventsForYear =
         scrollingText.generateEventsforScroll(_events, _holidays);
@@ -128,20 +115,13 @@ class MyHomePage extends StatefulWidget {
       data, DateTime dateFaAr, DateTime date, String leftRight, kind) {
     print('CALLBACK: _onVisibleMonth');
     DateTime selectedDay = data.selected.date;
-    // int monthChangeYear;
 
     if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
       data.selected.date = dateFaAr;
-      // monthChangeYear = 1;
-      if (leftRight == 'right') {
-        // monthChangeYear = 12;
-      }
+      if (leftRight == 'right') {}
     } else {
       data.selected.date = date;
-      // monthChangeYear = 12;
-      if (leftRight == 'right') {
-        // monthChangeYear = 1;
-      }
+      if (leftRight == 'right') {}
     }
     CalendarBuilder.getMonthDate(data);
     selectedDay = data.selected.date;
@@ -150,7 +130,6 @@ class MyHomePage extends StatefulWidget {
     _listOfEventsForYear['en_US'] = '';
     // print(selectedDay);
 
-    // if (selectedDay.month == monthChangeYear) {
     if (data.event.year != selectedDay.year) {
       runHolidaysEvents(selectedDay.year, data);
     }
@@ -293,8 +272,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // List _selectedEvents =[];
-
   @override
   void initState() {
     super.initState();
@@ -321,23 +298,17 @@ class _MyHomePageState extends State<MyHomePage> {
     String _myTitle = MandaEqu.calendarTitle()[_lang.name];
     // ###############################################################
     // ###############################################################
-
-    // _data.gregKind.active = false;
-    // _data.mandaKind.active = true;
-    // _data.shamsiKind.active = false;
     var runingWidget;
-
+    runingWidget = _data.calendarKind.display;
     // runingWidget = ['greg', 'manda'];
     // runingWidget = ['greg'];
     // runingWidget = ['manda'];
     // runingWidget = ['shamsi'];
     // runingWidget = ['manda', 'greg', 'shamsi'];
-    runingWidget = _data.calendarKind.display;
-    print(runingWidget);
+    // print(runingWidget);
 
     MainSize _mainZise = new MainSize(_data);
-    // todayEven(_selectedDay);
-    // _selectedEvents = _todayHolidayEvents ?? [];
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
@@ -400,7 +371,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         .buildCalendarTable(setState, runingWidget[0]),
                   ),
 
-                // if (_data.mandaKind.active == true)
                 if (runingWidget != null && runingWidget.length >= 2)
                   Container(
                     margin: EdgeInsets.symmetric(
@@ -411,7 +381,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         .buildCalendarTable(setState, runingWidget[1]),
                   ),
 
-                // if (_data.shamsiKind.active == true)
                 if (runingWidget != null && runingWidget.length == 3)
                   Container(
                     margin: EdgeInsets.symmetric(

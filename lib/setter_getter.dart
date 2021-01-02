@@ -34,41 +34,41 @@ class CalenderKind {
 //   }
 // }
 
-class MandaCalendarActive {
-  bool kind;
+// class MandaCalendarActive {
+//   bool kind;
 
-  bool get active {
-    return kind;
-  }
+//   bool get active {
+//     return kind;
+//   }
 
-  set active(bool active) {
-    this.kind = active;
-  }
-}
+//   set active(bool active) {
+//     this.kind = active;
+//   }
+// }
 
-class GregCalendarActive {
-  bool kind;
+// class GregCalendarActive {
+//   bool kind;
 
-  bool get active {
-    return kind;
-  }
+//   bool get active {
+//     return kind;
+//   }
 
-  set active(bool active) {
-    this.kind = active;
-  }
-}
+//   set active(bool active) {
+//     this.kind = active;
+//   }
+// }
 
-class ShamsiCalendarActive {
-  bool kind;
+// class ShamsiCalendarActive {
+//   bool kind;
 
-  bool get active {
-    return kind;
-  }
+//   bool get active {
+//     return kind;
+//   }
 
-  set active(bool active) {
-    this.kind = active;
-  }
-}
+//   set active(bool active) {
+//     this.kind = active;
+//   }
+// }
 
 class MandaMonthInfo {
   Map value;
