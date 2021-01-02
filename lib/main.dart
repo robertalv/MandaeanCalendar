@@ -44,10 +44,13 @@ var _dateEquivalent;
 var _yearEquivalent;
 List _selectedEvents = [];
 var _listOfEventsForYear;
+// test ##############
+// SaveMy _saveMy = new SaveMy();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   UserSetting.getCalendar(_calenderKind);
+  UserSetting.getDefaultLanguage(_lang);
   _data.calendarKind = _calenderKind.display;
   initializeDateFormatting().then((_) => runApp(MandaeanCalendar()));
 }
@@ -361,6 +364,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(children: [
               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
                 // if (_data.gregKind.active == true)
+                // Text(
+                //   _saveMy.display.toString() + "Farid",
+                //   style: TextStyle(fontSize: 40),
+                // ),
                 if (runingWidget != null && runingWidget.length >= 1)
                   Container(
                     margin: EdgeInsets.symmetric(
