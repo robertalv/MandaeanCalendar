@@ -166,7 +166,7 @@ class MandaEventsDoc {
     // امبطلات سبک
     String text = """
       
-      ${MandaEqu.mandaLightMbattal()[0]["fa_IR"].trim()} *****
+      ***** ${MandaEqu.mandaLightMbattal()[0]["fa_IR"].trim()} *****
 
       کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
 
@@ -189,6 +189,7 @@ class MandaEventsDoc {
       اگر شخصی در زمان فوت لباس مشکی در تن داشت، قماشی در اولین بنجه یکسال بعد از زمان فوت قابل انجام است 
       اگر شخصی در زمان فوت لباس مشکی در تن نداشت، قماشی در اولین بنجه ۴۵ روز بعداز زمان فوت قابل انجام است
 
+
     """;
 
     return text;
@@ -196,7 +197,8 @@ class MandaEventsDoc {
 
   static minorAr() {
     String text = """
-      ${MandaEqu.mandaLightMbattal()[0]["ar"].trim()}
+
+      ***** ${MandaEqu.mandaLightMbattal()[0]["ar"].trim()} *****
 
       لا يتم تنفيذ جميع الاحتفالات الدينية ، بما في ذلك المعمودية والزواج والذبح
 
@@ -220,6 +222,7 @@ class MandaEventsDoc {
       إذا كان الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه بعد عام واحد من وقت الوفاة
       إذا لم يكن الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه ٤٥ يومًا بعد وقت الوفاة
 
+
      """;
 
     return text;
@@ -227,7 +230,8 @@ class MandaEventsDoc {
 
   static minorEn() {
     String text = """
-      ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()}
+
+     ***** ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()} *****
 
 All religious ceremonies are Not performed, including baptism, marriage, and slaughter
 
@@ -258,8 +262,10 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   }
 
   static majorFa() {
+    //  *****   امبطلات سنگین *****
     String text = """
-      امبطلات سنگین
+  
+  ***** ${MandaEqu.mandaHeavyMbattal()[0]["fa_IR"].trim()} *****
 
 کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
 
@@ -290,7 +296,8 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static majorAr() {
     String text = """
-      ${MandaEqu.mandaHeavyMbattal()[0]["ar"].trim()}
+
+      ***** ${MandaEqu.mandaHeavyMbattal()[0]["ar"].trim()} *****
 
       لا يتم تنفيذ جميع الاحتفالات الدينية ، بما في ذلك المعمودية والزواج والذبح
 
@@ -313,6 +320,7 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
       إذا كان الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه بعد عام واحد من وقت الوفاة
       إذا لم يكن الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه ٤٥ يومًا بعد وقت الوفاة
 
+
      """;
 
     return text;
@@ -320,7 +328,8 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static majorEn() {
     String text = """
-      ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()}
+
+     ***** ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()} *****
 
 All religious ceremonies are Not performed, including baptism, marriage, and slaughter
 
@@ -343,6 +352,7 @@ If a person dies on this day, Ghomashe and Maseghta must be made for the dead bo
 If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
 If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
 
+
      """;
 
     return text;
@@ -350,7 +360,8 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static banjaFa() {
     String text = """
-    پنجه (پروانایا)
+
+پروانایا (پنجه)
 
 قداست روز و شب آن یکسان میباشد
 
@@ -360,13 +371,14 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
 ذبح حلال حتی در شب مجاز میباشد
 
-از خوردن گوشت نازل در این ایام جددا خودداری شود
+از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
 
 خوردن غذا نظیف بسیار تاکید شده است
 
 تعمید بسیار تاکید شده است
 
-بدلیل قداست این ایام همبستری و یا تشکیل نطفه مجاز نمی باشد
+بدلیل قداست این ایام همبستری و یا یا بارداری مجاز نمی باشد
+
 
     """;
 
@@ -375,7 +387,25 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static banjaAr() {
     String text = """
-    پنجه (پروانایا)
+
+بروانایا (البنجه)
+
+حرمة النهار والليل واحدة
+
+بالإضافة إلى صيام الفم ، يتم التركيز على اللسان والعينين واليدين والقدمين
+
+بالنسبة للصلوات الثلاث اليومية ، يتم تقديم صلاة الفجر فقط
+
+الذبح جائز حتى في الليل
+
+تجنب تناول اللحوم نازل(اللحوم التي لم تذبح على الطريقة المندائية) فيها هذه الأيام
+
+يتم التأكيد بشدة على تناول الطعام النظيف
+
+تم التأكيد بشدة على الصباغه
+
+وحرمة هذه الأيام يمنع الجماع أو الحمل
+
 
     """;
 
@@ -384,7 +414,25 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static banjaEn() {
     String text = """
-    پنجه (پروانایا)
+
+Parwanaiia (Panja) 
+
+The sanctity of day and night is the same
+
+In addition to oral fasting, the tongue, eyes, hands, and feet are emphasized
+
+For the three daily prayers, only the morning prayer is offered
+
+Slaughter is permissible even at night
+
+Avoid eating meat that not slaughtered in the Mandaean way in these days
+
+Eating food that prepares in Mandaean way (Nazif) is highly emphasized
+
+Baptism is highly emphasized
+
+Due to the sanctity of these days, intercourse or pregnancy is not allowed
+
 
     """;
 
@@ -393,12 +441,17 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static yahyaFa() {
     String text = """
+
     ${MandaEqu.mandaFeast()['yahya']["fa_IR"].trim()}
-      دهوا اد دیما - میلاد حضرت یحیی
 
       بر‌ تعمید نوزادان تاکید شده است
 
-      از خوردن گوشت نازل در این ایام جددا خودداری شود
+      از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
+
+      خوردن غذا نظیف بسیار تاکید شده است
+
+
+
     """;
 
     return text;
@@ -406,8 +459,15 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static yahyaAr() {
     String text = """
+
     ${MandaEqu.mandaFeast()['yahya']["ar"].trim()}
-      دهوا اد دیما - میلاد حضرت یحیی
+
+    يتم التركيز على الصباغه الأطفال
+
+    تجنب تناول اللحوم نازل(اللحوم التي لم تذبح على الطريقة المندائية) فيها هذه الأيام
+
+    يتم التأكيد بشدة على تناول الطعام النظيف
+
 
     """;
 
@@ -416,8 +476,15 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static yahyaEn() {
     String text = """
+
     ${MandaEqu.mandaFeast()['yahya']["en_US"].trim()}
-      دهوا اد دیما - میلاد حضرت یحیی
+
+    Emphasis is placed on infant baptism
+
+    Avoid eating meat that not slaughtered in the Mandaean way in these days
+
+    Eating food that prepares in Mandaean way (Nazif) is highly emphasized
+
 
     """;
 
@@ -426,34 +493,37 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kenshiFa() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
-      کنشو زهلی
+
       روز آخر سال
 
     بر پاکسازی خانه تاکید شده است
 
-    بر تعمید و یا غسل (طماشه) قبل از اعتکاف  تاکید شده است
-
     تاکید به کمک و بازید از افراد کم بضاعت شده است
 
-    اعتکاف بمدت دو شب و یک روز که سی و شش ساعت از عصر همین روز شروع می شود
+  كراصا (ماندن در خانه) بمدت دو شب و یک روز (سی و شش ساعت) از عصر این روز شروع می شود
+
+    بر تعمید و یا غسل (طماشه) قبل از كراصا تاکید شده است
 
     تاکید بر محافظت از جسم
 
-    تاکید بر عدم دست زدن به یردنا شده است‌
+    تاکید بر عدم دست زدن به یردنا(رودخانه) شده است‌
 
     تاکید بر عدم دست زدن به گیاهان و حیوانات شده است‌
 
-    اگر در مدت ۳۶ ساعت اعتکاف، خون از بدن خارج شود و یا به حیوانات و گیاهان تماس داشته باشید
+    اگر در مدت ۳۶ ساعت كراصا، خون از بدن خارج شود و یا به حیوانات و گیاهان تماس داشته باشید
     میبایست خود را از بقیه خانواده جدا کرده و هیچگونه تماسی با بقیه افراد نداشته باشید
     لذا توصیه شده از منزل خارج نشوید و آذوقه و آب برای مدت ۳۶ ساعت تهیه نمایید
 
-    اشخاصی که در مدت ۳۶ ساعت نازل می شوند میبایست با رسته نو در روز کنشوزهلی تعمید شوند
-    مگر آنکه روزه کامل بگیرند و بعد از اعتکاف غسل (طماشه) نمایند
+    در طول این 36 ساعت ، افرادی که خونریزی می کنند یا با حیوانات و
+    گیاهان تماس می گیرند میبایست با رسته نو در روز کنشوزهلی تعمید شوند
+    مگر آنکه روزه کامل بگیرند و بعد از كراصا غسل (طماشه) نمایند
 
     دعا و نیایش و تفکر در خصوص سالی که گذشت تاکید شده است
 
-    بر غسل (طماشه) بعد از اعتکاف  تاکید شده است
+    بر غسل (طماشه) بعد از كراصا تاکید شده است
+
 
     """;
 
@@ -462,8 +532,37 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kenshiAr() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
-      کنشو زهلی
+
+    اليوم الأخير من السنة
+
+    يتم التركيز على تنظيف المنزل
+
+  وقد تم التركيز على مساعدة المحتاجين وزيارتهم
+
+  كراصا (البقاء في بيت) ليلتين ويوم واحد (ست وثلاثون ساعة) ، يبدأ مساء هذا اليوم
+
+  يتم التركيز على الصباغه أو الغسل (الطماشة) قبل الكراصا
+
+  التركيز على حماية الجسم
+
+  تم التركيز على عدم لمس الیردنا(النهر)
+
+  تم التركيز على عدم لمس النباتات والحيوانات
+
+  خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
+  يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
+  لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
+
+  خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
+  يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
+  ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
+
+  يتم التأكيد على الصلاة والتفكير في العام الماضي
+
+  يتم التأكيد على الغسل (الطماشة) بعد الكراصا
+
 
     """;
 
@@ -472,8 +571,37 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kenshiEn() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
-      کنشو زهلی
+
+    The last day of the year
+
+    Emphasis is placed on cleaning the house
+
+    Emphasis has been placed on helping and visiting the needy people
+
+    Kersa(Staying in a home) for two nights and one day(thirty-six hours), which starts  in the evening of this day
+
+    Emphasis is placed on baptism or Ghasil (Tamasha) before Kersa
+
+    Emphasis on body protection
+
+    Emphasis has been placed on not touching the Yrdna (the river)
+
+    Emphasis has been placed on not touching plants and animals
+
+    During the Kersa (36 hours), if blood comes out of the body or comes in contact with animals and plants
+    You should separate yourself from the rest of the family and have no contact with other people
+    Therefore, it is recommended not to leave the house and prepare food and water for 36 hours
+
+    During these 36 hours, People who are blooding or come in contact with animals and plants
+    They must be baptized with a new Rasteh on the day of Kenshi-u-Zehli
+    Unless they fast completely and perform Ghusl (Tamasha) after Kersa
+
+    Emphasis is placed on prayer and reflection in the past year
+
+    Emphasis is placed on Ghusl (Tamasha) after Kersa
+
 
     """;
 
@@ -482,12 +610,12 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static eidBigFa() {
     String text = """
+
     ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
-      دهوا ربا - عید بزرگ
 
      اولین روز سال
 
-     (ادامه اعتکاف - تمام روز (کلا بمدت دو شب و یک روز که سی و شش ساعت است‌ 
+     (ادامه كراصا (ماندن در خانه) - تمام روز (کلا بمدت دو شب و یک روز که سی و شش ساعت است‌ 
 
     تاکید بر محافظت از جسم
 
@@ -495,8 +623,8 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
     تاکید بر عدم دست زدن به گیاهان و حیوانات شده است‌
 
-    اگر در مدت ۳۶ ساعت اعتکاف، خون از بدن خارج شود و یا به حیوانات و گیاهان تماس داشته باشید
-    میبایست خود را از بقیه خانواده جدا کرده و هیچگونه تماسی با بقیه افراد نداشته باشید.
+    اگر در مدت ۳۶ ساعت كراصا، خون از بدن خارج شود و یا به حیوانات و گیاهان تماس داشته باشید
+    میبایست خود را از بقیه خانواده جدا کرده و هیچگونه تماسی با بقیه افراد نداشته باشید
     لذا توصیه شده از منزل خارج نشوید و آذوقه و آب برای مدت ۳۶ ساعت تهیه نمایید
 
     اشخاصی که در مدت ۳۶ ساعت نازل می شوند میبایست با رسته نو در روز کنشوزهلی تعمید شوند
@@ -504,7 +632,7 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
     دعا و نیایش و تفکر در خصوص سالی که گذشت تاکید شده است
 
-    بر غسل (طماشه) بعد از اعتکاف  تاکید شده است
+    بر غسل (طماشه) بعد از كراصا تاکید شده است
     """;
 
     return text;
@@ -512,8 +640,31 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static eidBigAr() {
     String text = """
+
     ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
-      دهوا ربا - عید بزرگ
+
+    اليوم الأول من السنة
+
+    الاستمرار في الكراصا (البقاء في المنزل) - طوال اليوم (لمدة ليلتين ويوم واحد ، وهو ستة وثلاثون ساعة)
+
+    لتركيز على حماية الجسم
+
+    تم التركيز على عدم لمس الیردنا(النهر)
+
+    تم التركيز على عدم لمس النباتات والحيوانات
+
+  خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
+  يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
+  لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
+
+  خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
+  يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
+  ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
+
+  يتم التأكيد على الصلاة والتفكير في العام الماضي
+
+  يتم التأكيد على الغسل (الطماشة) بعد الكراصا
+
 
     """;
 
@@ -522,8 +673,31 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static eidBigEn() {
     String text = """
+
     ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
-      دهوا ربا - عید بزرگ
+
+    The first day of the year
+
+    Continue to Kersa (stay at home) - all day (for two nights and one day, which is thirty-six hours)
+
+    Emphasis on body protection
+
+    Emphasis has been placed on not touching the Yrdna (the river)
+
+    Emphasis has been placed on not touching plants and animals
+
+    During the Kersa (36 hours), if blood comes out of the body or comes in contact with animals and plants
+    You should separate yourself from the rest of the family and have no contact with other people
+    Therefore, it is recommended not to leave the house and prepare food and water for 36 hours
+
+    During these 36 hours, People who are blooding or come in contact with animals and plants
+    They must be baptized with a new Rasteh on the day of Kenshi-u-Zehli
+    Unless they fast completely and perform Ghusl (Tamasha) after Kersa
+
+    Emphasis is placed on prayer and reflection in the past year
+
+    Emphasis is placed on Ghusl (Tamasha) after Kersa
+
 
     """;
 
@@ -532,12 +706,12 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kersaFa() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kersa']["fa_IR"].trim()}
-    دهوا ربا - پایان کراصا
 
-    پایان اعتکاف
+    پایان كراصا
 
-    بر غسل (طماشه) بعد از اعتکاف  تاکید شده است
+    بر غسل (طماشه) بعد از كراصا  تاکید شده است
 
     تاکید به کمک و بازید از افراد کم بضاعت شده است
 
@@ -550,8 +724,15 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kersaAr() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kersa']["fa_IR"].trim()}
-      دهوا ربا - پایان کراصا
+
+    نهاية الكراصا
+
+    يتم التأكيد على الغسل (الطماشة) بعد الكراصا
+
+    وقد تم التركيز على مساعدة المحتاجين وزيارتهم
+
 
     """;
 
@@ -560,8 +741,15 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static kersaEn() {
     String text = """
+
     ${MandaEqu.mandaFeast()['kersa']["fa_IR"].trim()}
-      دهوا ربا - پایان کراصا
+
+    End of Kersa
+
+    Emphasis is placed on Ghusl (Tamasha) after Kersa
+
+    Emphasis has been placed on helping and visiting the needy people
+
 
     """;
 
@@ -570,7 +758,20 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static shoshianFa() {
     String text = """
+
       ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+
+      عید شیشیان یا دهوا زوطا 
+
+      رجال دین (گنزبرا و ترمیدا ) شاخه هایی را از درخت بید جمع آوری میکنند  
+      و بعد از طماشه کردن آنها بر هر کدام از آن شاخه های  بوثه هایی را قرائت میکنند
+      و آنها را همانند اکلیلا می بافند و آنها را کلیلا اد هلافا  (اکلیلای بید ) می نامند
+
+     بر منداییان واجب است که اکلیلای هلافا را بر درب منزلشان آویزان کنند  
+     اکلیلایی رمز بهجت و سرور و محبت است
+
+    از روز قبل کلیله ها بر سر در یا داخل خانه نصب کنید
+
 
     """;
 
@@ -579,7 +780,19 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static shoshianAr() {
     String text = """
-      ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+
+    عید شیشیان یا دهوا زوطا 
+
+    شخصيات دينية (گنزبرا وترمیدا) تجمع الفروع من شجرة الصفصاف
+    نسجوا أكليلا منهم
+
+    يجب على المندائيين تعليق أكليلا الحلافة على باب منزلهم
+    أكليلا سر السعادة والحب
+
+    قم بتثبيت أكليلا على الباب أو داخل المنزل من اليوم السابق
+
 
     """;
 
@@ -588,7 +801,17 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
 
   static shoshianEn() {
     String text = """
-      ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+
+    Religious figures (Ganzbra and Thermida) collect branches from the willow tree
+    They weave a AkLila from them.
+
+    It is obligatory on the Mandaeans to hang the AkLila on the door of their house
+    AkLila is the secret of happiness and love
+
+    Hang the AkLila on the door or inside the house from the day before
+
 
     """;
 
@@ -630,7 +853,11 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   static eidSmallFa() {
     String text = """
       ${MandaEqu.mandaFeast()['eidSmall']["fa_IR"].trim()}
+      
+      زمین در این روز برای زندگی بشر مهیا گردید
 
+      مندائیان طبق رسمی که دارند از نان برنجی وکنجد وخرما 
+      غذائی بنام هوخصا (مریس) درست کرده همراه با برنج وماست می خورند
     """;
 
     return text;
