@@ -630,10 +630,10 @@ class CalendarBuilder extends MyHomePage {
 
     if (cellText[1] != "") {
       data.selected.date = cellText[0];
+      MyHomePage.onDaySelected(cellText);
     }
     print('_onDayTap cellText ------------------------------>> $cellText');
     // await Future.delayed(Duration(seconds: 1));
-    MyHomePage.onDaySelected(cellText);
   }
 
   static getDateEqu(var selectedDay, var data) {
