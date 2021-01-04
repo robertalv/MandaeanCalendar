@@ -632,7 +632,7 @@ class CalendarBuilder extends MyHomePage {
       data.selected.date = cellText[0];
       MyHomePage.onDaySelected(cellText);
     }
-    print('_onDayTap cellText ------------------------------>> $cellText');
+    // print('_onDayTap cellText ------------------------------>> $cellText');
     // await Future.delayed(Duration(seconds: 1));
   }
 
@@ -643,17 +643,23 @@ class CalendarBuilder extends MyHomePage {
     var monthEgu2;
     String day;
 
-    // print('selectedDay $selectedDay');
+    print('selectedDay $selectedDay');
     // print('selectedDay ${selectedDay[0]}');
 
-    if (selectedDay[2] == 'm') {
-      dayEgu1 = _gregMonthDate[selectedDay[0]];
-      monthEgu1 = [
-        DateFormat.MMM('en_US').format(selectedDay[0]),
-        DateFormat.MMM('fa_IR').format(selectedDay[0]),
-        MandaEqu.changeMonthFormate(
-            DateFormat.MMMM('en_US').format(selectedDay[0]))
-      ];
+    if (selectedDay[2] == 'g') {
+      dayEgu1 = _mandaMonthDate[selectedDay[0]];
+      print(dayEgu1);
+      if (dayEgu1[2] == 'm') {
+        monthEgu1 = [
+          data.mandaMonth.info['monthEn'],
+          data.mandaMonth.info['monthFaAr'],
+          data.mandaMonth.info['monthFaAr']
+        ];
+      } else {
+        monthEgu1 = ['Panja', 'پنجه', 'بنجه'];
+      }
+
+      print(monthEgu1);
 
       dayEgu2 = _shamsiMonthDate[selectedDay[0]];
       monthEgu2 = [
@@ -677,11 +683,12 @@ class CalendarBuilder extends MyHomePage {
         data.mandaMonth.info['monthFaAr']
       ];
     } else {
-      dayEgu1 = _mandaMonthDate[selectedDay[0]];
+      dayEgu1 = _gregMonthDate[selectedDay[0]];
       monthEgu1 = [
-        data.mandaMonth.info['monthEn'],
-        data.mandaMonth.info['monthFaAr'],
-        data.mandaMonth.info['monthFaAr']
+        DateFormat.MMM('en_US').format(selectedDay[0]),
+        DateFormat.MMM('fa_IR').format(selectedDay[0]),
+        MandaEqu.changeMonthFormate(
+            DateFormat.MMMM('en_US').format(selectedDay[0]))
       ];
 
       dayEgu2 = _shamsiMonthDate[selectedDay[0]];

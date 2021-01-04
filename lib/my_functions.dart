@@ -56,7 +56,7 @@ class Functions {
     String doc = '';
 
     events.forEach((event) {
-      print(event);
+      // print(event);
       if ((event.runtimeType.toString()).contains('List')) {
         event = event[0];
       }
@@ -71,7 +71,7 @@ class Functions {
       // }
       // print(event["en_US"]);
       // print(doc);
-      print("****************");
+      // print("****************");
     });
     return doc;
   }

@@ -4,7 +4,7 @@ class MandaEventsDoc {
   // String _malwasha = "Melvashe";
 
   static findEevent(index, localLang) {
-    print(index);
+    // print(index);
     String minor = MandaEqu.mandaLightMbattal()[0]["en_US"].trim();
     String major = MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim();
     String banja1 = MandaEqu.mandaFeast()['banja'][0]["en_US"].trim();
@@ -41,7 +41,7 @@ class MandaEventsDoc {
         eidSmall: eidSmallFa(),
         ashoreh: ashorehFa(),
       };
-      print(doc[index]);
+      // print(doc[index]);
     } else if (localLang == "ar") {
       doc = {
         minor: minorAr(),
@@ -61,7 +61,7 @@ class MandaEventsDoc {
         eidSmall: eidSmallAr(),
         ashoreh: ashorehAr(),
       };
-      print(doc[index]);
+      // print(doc[index]);
     } else {
       doc = {
         minor: minorEn(),
@@ -81,7 +81,7 @@ class MandaEventsDoc {
         eidSmall: eidSmallEn(),
         ashoreh: ashorehEn(),
       };
-      print(doc[index]);
+      // print(doc[index]);
     }
     return doc[index];
   }
@@ -188,8 +188,6 @@ class MandaEventsDoc {
       اگر شخصی در این روز فوت کند میبایست برای میت قماشی و مسقتا درست کرد
       اگر شخصی در زمان فوت لباس مشکی در تن داشت، قماشی در اولین بنجه یکسال بعد از زمان فوت قابل انجام است 
       اگر شخصی در زمان فوت لباس مشکی در تن نداشت، قماشی در اولین بنجه ۴۵ روز بعداز زمان فوت قابل انجام است
-
-
     """;
 
     return text;
@@ -221,8 +219,6 @@ class MandaEventsDoc {
       إذا مات شخص في هذا اليوم ، يجب القماشی و المسقتا للجثة
       إذا كان الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه بعد عام واحد من وقت الوفاة
       إذا لم يكن الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه ٤٥ يومًا بعد وقت الوفاة
-
-
      """;
 
     return text;
@@ -254,8 +250,6 @@ class MandaEventsDoc {
     If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
     If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
     If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
-
-
      """;
 
     return text;
@@ -287,8 +281,6 @@ class MandaEventsDoc {
     اگر شخصی در این روز فوت کند میبایست برای میت قماشی و مسقتا درست کرد
     اگر شخصی در زمان فوت لباس مشکی در تن داشت، قماشی در اولین بنجه یکسال بعد از زمان فوت قابل انجام است 
     اگر شخصی در زمان فوت لباس مشکی در تن نداشت، قماشی در اولین بنجه ۴۵ روز بعداز زمان فوت قابل انجام است    
-
-
 """;
 
     return text;
@@ -319,8 +311,6 @@ class MandaEventsDoc {
       إذا مات شخص في هذا اليوم ، يجب القماشی و المسقتا للجثة
       إذا كان الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه بعد عام واحد من وقت الوفاة
       إذا لم يكن الشخص يرتدي اللون الأسود وقت الوفاة ، فيمكن عمل القماشی في أول البنجه ٤٥ يومًا بعد وقت الوفاة
-
-
      """;
 
     return text;
@@ -351,8 +341,6 @@ class MandaEventsDoc {
     If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
     If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
     If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
-
-
      """;
 
     return text;
@@ -378,8 +366,6 @@ class MandaEventsDoc {
     تعمید بسیار تاکید شده است
 
     بدلیل قداست این ایام همبستری و یا یا بارداری مجاز نمی باشد
-
-
     """;
 
     return text;
@@ -405,8 +391,6 @@ class MandaEventsDoc {
     تم التأكيد بشدة على الصباغه
 
     وحرمة هذه الأيام يمنع الجماع أو الحمل
-
-
     """;
 
     return text;
@@ -432,8 +416,6 @@ class MandaEventsDoc {
     Baptism is highly emphasized
 
     Due to the sanctity of these days, intercourse or pregnancy is not allowed
-
-
     """;
 
     return text;
@@ -449,9 +431,6 @@ class MandaEventsDoc {
     از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
 
     خوردن غذا نظیف بسیار تاکید شده است
-
-
-
     """;
 
     return text;
@@ -467,8 +446,6 @@ class MandaEventsDoc {
     تجنب تناول اللحوم نازل(اللحوم التي لم تذبح على الطريقة المندائية) فيها هذه الأيام
 
     يتم التأكيد بشدة على تناول الطعام النظيف
-
-
     """;
 
     return text;
@@ -484,8 +461,6 @@ class MandaEventsDoc {
     Avoid eating meat that not slaughtered in the Mandaean way in these days
 
     Eating food that prepares in Mandaean way (Nazif) is highly emphasized
-
-
     """;
 
     return text;
@@ -523,8 +498,6 @@ class MandaEventsDoc {
     دعا و نیایش و تفکر در خصوص سالی که گذشت تاکید شده است
 
     بر غسل (طماشه) بعد از كراصا تاکید شده است
-
-
     """;
 
     return text;
@@ -562,8 +535,6 @@ class MandaEventsDoc {
     يتم التأكيد على الصلاة والتفكير في العام الماضي
 
     يتم التأكيد على الغسل (الطماشة) بعد الكراصا
-
-
     """;
 
     return text;
@@ -601,8 +572,6 @@ class MandaEventsDoc {
     Emphasis is placed on prayer and reflection in the past year
 
     Emphasis is placed on Ghusl (Tamasha) after Kersa
-
-
     """;
 
     return text;
@@ -633,8 +602,6 @@ class MandaEventsDoc {
     دعا و نیایش و تفکر در خصوص سالی که گذشت تاکید شده است
 
     بر غسل (طماشه) بعد از كراصا تاکید شده است
-
-
     """;
 
     return text;
@@ -666,8 +633,6 @@ class MandaEventsDoc {
     يتم التأكيد على الصلاة والتفكير في العام الماضي
 
     يتم التأكيد على الغسل (الطماشة) بعد الكراصا
-
-
     """;
 
     return text;
@@ -699,8 +664,6 @@ class MandaEventsDoc {
     Emphasis is placed on prayer and reflection in the past year
 
     Emphasis is placed on Ghusl (Tamasha) after Kersa
-
-
     """;
 
     return text;
@@ -718,7 +681,6 @@ class MandaEventsDoc {
     تاکید به کمک و بازید از افراد کم بضاعت شده است
 
     تاکید به دید و بازید شده است
-
     """;
 
     return text;
@@ -734,8 +696,6 @@ class MandaEventsDoc {
     يتم التأكيد على الغسل (الطماشة) بعد الكراصا
 
     وقد تم التركيز على مساعدة المحتاجين وزيارتهم
-
-
     """;
 
     return text;
@@ -751,8 +711,6 @@ class MandaEventsDoc {
     Emphasis is placed on Ghusl (Tamasha) after Kersa
 
     Emphasis has been placed on helping and visiting the needy people
-
-
     """;
 
     return text;
@@ -772,8 +730,6 @@ class MandaEventsDoc {
     اکلیلایی رمز بهجت و سرور و محبت است
 
     از روز قبل کلیله ها بر سر در یا داخل خانه نصب کنید
-
-
     """;
 
     return text;
@@ -793,8 +749,6 @@ class MandaEventsDoc {
     أكليلا سر السعادة والحب
 
     قم بتثبيت أكليلا على الباب أو داخل المنزل من اليوم السابق
-
-
     """;
 
     return text;
@@ -813,8 +767,6 @@ class MandaEventsDoc {
     AkLila is the secret of happiness and love
 
     Hang the AkLila on the door or inside the house from the day before
-
-
     """;
 
     return text;
@@ -831,8 +783,6 @@ class MandaEventsDoc {
 
 
     یک ظرف مخصوص حلوا تهیه می کنیم به نام "فل" که از مخلوط خرما با کنجد درست می شود و به شکل کروی در می آید
-
-
     """;
 
     return text;
@@ -847,8 +797,6 @@ class MandaEventsDoc {
 
 
     نقوم بتحضير طبق خاص من الحلاوة الطحينية يسمى "فل" والذي يصنع بخلط التمر مع السمسم وتشكيله بشكل كروي
-
-
     """;
 
     return text;
@@ -862,8 +810,6 @@ class MandaEventsDoc {
     The preparation of the earth for the life of humanity and the control of the wicked began from this day
 
     We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped it into spherical
-
-
     """;
 
     return text;
@@ -877,9 +823,7 @@ class MandaEventsDoc {
     زمین در این روز برای زندگی بشر مهیا گردید
 
     مندائیان طبق رسمی که دارند از نان برنجی وکنجد وخرما
-    غذائی بنام هوخصا (مریس) درست کرده همراه با برنج وماست می خورند
-
-      
+    غذائی بنام هوخصا (مریس) درست کرده همراه با برنج وماست می خورند   
     """;
 
     return text;
@@ -894,8 +838,6 @@ class MandaEventsDoc {
 
     وفقًا لعاداتهم الرسمية ، يصنع المندائيون طعامًا يسمى
     هوخصا (مريس) من خبز الأرز والسمسم والتمر ويأكلونه مع الأرز واللبن
-
-
     """;
 
     return text;
@@ -910,8 +852,6 @@ class MandaEventsDoc {
 
     According to the Mandaean custom, they make a food called Hokhsa (Mris) 
     from rice bread, sesame and dates and eat it with rice and yogurt.
-
-
     """;
 
     return text;
@@ -926,8 +866,6 @@ class MandaEventsDoc {
     مندائیان واقعه کشتی نوح، بخاطر ادامهٔ  تعاليم دینی و حفظ مراسم نیاکان خود،
     برای روانهايى كه در طوفان غرق شدند، طلب آمرزش نمودند
     و از حبوباتى كه در كشتى بود، غذا(حلیم) پختند و مراسم لوفانى انجام دادند 
-
-
     """;
 
     return text;
@@ -941,8 +879,6 @@ class MandaEventsDoc {
     إنها مناسبة دينية تاريخية لإحياء ذكرى طوفان نوح
 
     طهوا طعام (حليم) تخليدًا لذكرى الغرقى وأداء المناسك(لوفاني)
-
-
     """;
 
     return text;
@@ -956,8 +892,6 @@ class MandaEventsDoc {
     It is a historical religious occasion to commemorate the Flood of Noah
 
     They cooked food (Halim) in memory of the drowned and performed rituals (Lufani)
-
-
     """;
 
     return text;

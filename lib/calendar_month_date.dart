@@ -56,6 +56,7 @@ class CalendarDateBuilder {
 
     beforeDateList = beforeLoop(startMonth, beforeDayIndex);
     // print(beforeDateList);
+
     if (mandaDayInMonth == 30) {
       monthDateList = monthLoop(startMonth, mandaDayInMonth, 'm');
     } else {
@@ -213,25 +214,23 @@ class CalendarDateBuilder {
     int dayIndexP = 1;
     String displayDay;
     Map dateMap = {};
+    String kind = 'm';
     // List allDateLebelList = [];
     for (var i = 0; i <= endOfLoop - 1; i++) {
       displayDay = dayIndex.toString();
       if (i < 5) {
         displayDay = dayIndexP.toString();
         dayIndexP += 1;
+        kind = 'mp';
       } else {
         dayIndex += 1;
+        kind = 'm';
       }
       // ###### new
       DateTime selectedDate =
           DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0);
-      dateMap[selectedDate] = [selectedDate, displayDay, 'm'];
+      dateMap[selectedDate] = [selectedDate, displayDay, kind];
       // ###### new
-
-      // dateList.add([
-      //   DateTime(startMonth.year, startMonth.month, startMonth.day + i, 0, 0),
-      //   displayDay
-      // ]);
 
     }
     return dateMap;

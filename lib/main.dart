@@ -295,13 +295,13 @@ class MyHomePage extends StatefulWidget {
 
   static onDayLongPressed(selectedDay) {
     print('CALLBACK: _onDayLogPressed');
-    print('_onDayLogPressed $selectedDay');
+    // print('_onDayLogPressed $selectedDay');
     var selectedEvents = _todayEvents(selectedDay);
-    print('selectedEvents: $selectedEvents');
+    // print('selectedEvents: $selectedEvents');
     if (selectedEvents.isNotEmpty) {
       String doc = Functions.eventsDoc(selectedEvents, _lang.name);
       if (doc != null) {
-        Functions.showMyDialog(_context, _lang.name, "Coming Soon...", doc, 1);
+        Functions.showMyDialog(_context, _lang.name, "", doc, 1);
       }
     }
   }
