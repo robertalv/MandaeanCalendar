@@ -1,41 +1,15 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSetting {
-  // // ######################
-  // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  // static final String _kLanguageCode = "language";
-
-  // /// ------------------------------------------------------------
-  // /// Method that returns the user language code, 'en' if not set
-  // /// ------------------------------------------------------------
-  // // Future<void> getLanguage(setState, long) async {
-  // static Future<void> getLanguage(long) async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   long.name = prefs.getString(_kLanguageCode) ?? 'en_US';
-  //   print(long.name);
-  //   return long.name;
-  //   // setState(() {
-  //   //   long.name = prefs.getString(_kLanguageCode) ?? 'en_US';
-  //   //   // print(_localLang);
-  //   // });
-  // }
-
-  // /// ----------------------------------------------------------
-  // /// Method that saves the user language code
-  // /// ----------------------------------------------------------
-  // static Future<bool> setLanguage(String value) async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //   return prefs.setString(_kLanguageCode, value);
-  // }
+  static String _systemLocale = Platform.localeName.split("_")[0];
 
   // ######################
   // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   static final String _kLanguageCode = "language";
 
-  /// ------------------------------------------------------------
-  /// Method that returns the user language code, 'en' if not set
-  /// ------------------------------------------------------------
   static Future<void> getLanguage(setState, lang) async {
     // final SharedPreferences prefs = await SharedPreferences.getInstance();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -44,6 +18,29 @@ class UserSetting {
       // print(_localLang);
     });
     // _localLang = prefs.getString(_kLanguageCode) ?? 'en_US';
+  }
+
+  /// ------------------------------------------------------------
+  /// Method that returns the user language code, 'en' if not set
+  /// ------------------------------------------------------------
+  static Future<void> getDefaultLanguage(lang) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String defaultLang;
+    // final List<Locale> systemLocales = window.locales;
+    // print(_systemLocale);
+    if (_systemLocale == 'fa') {
+      defaultLang = 'fa_IR';
+    } else if (_systemLocale == 'ar') {
+      defaultLang = 'ar';
+    } else {
+      defaultLang = 'en_US';
+    }
+    if (prefs.getString(_kLanguageCode) == null) {
+      lang.name = defaultLang;
+    } else {
+      lang.name = prefs.getString(_kLanguageCode);
+    }
   }
 
   /// ----------------------------------------------------------
@@ -63,7 +60,19 @@ class UserSetting {
 
   static Future<void> getCalendar(calenderKind) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    calenderKind.display = prefs.getStringList(_kCalendarChoose) ?? ["greg"];
+    List defaultCalendar = ["manda", "greg"];
+    // print(_systemLocale);
+    if (_systemLocale == 'fa') {
+      defaultCalendar = ["manda", "shamsi"];
+    }
+    var calendarChoose = prefs.getStringList(_kCalendarChoose);
+    if (calendarChoose == null) {
+      calenderKind.display = defaultCalendar;
+    } else {
+      calenderKind.display = calendarChoose;
+    }
+
+    // calenderKind.display = prefs.getStringList(_kCalendarChoose) ?? ["greg"];
   }
 
   static Future<bool> setCalendar(List value) async {
