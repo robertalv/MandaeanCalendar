@@ -759,9 +759,8 @@ class MandaEventsDoc {
   }
 
   static shoshianFa() {
+    //  ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
     String text = """
-
-    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
 
     عید شیشیان یا دهوا زوطا 
 
@@ -781,9 +780,9 @@ class MandaEventsDoc {
   }
 
   static shoshianAr() {
-    String text = """
+    // ${MandaEqu.mandaFeast()['shoshian'][0]["ar"].trim()}
 
-    ${MandaEqu.mandaFeast()['shoshian'][0]["ar"].trim()}
+    String text = """
 
     عید شیشیان یا دهوا زوطا 
 
@@ -802,9 +801,10 @@ class MandaEventsDoc {
   }
 
   static shoshianEn() {
+    // ${MandaEqu.mandaFeast()['shoshian'][0]["en_US"].trim()}
     String text = """
-
-    ${MandaEqu.mandaFeast()['shoshian'][0]["en_US"].trim()}
+    
+    Dehva Sheshian feast
 
     Religious figures (Ganzbra and Thermida) collect branches from the willow tree
     They weave a AkLila from them.
@@ -827,9 +827,10 @@ class MandaEventsDoc {
 
     مصادف با روز اول ماه تورا
 
-    ما یک ظرف مخصوص حلوا تهیه می کنیم به نام "فل" که از مخلوط خرما با کنجد درست می شود و به شکل کروی در می آید
-
     مهیا کردن زمین برای زندگی بشریت و مهار اشرار از این روز آغاز گردید
+
+
+    یک ظرف مخصوص حلوا تهیه می کنیم به نام "فل" که از مخلوط خرما با کنجد درست می شود و به شکل کروی در می آید
 
 
     """;
@@ -842,9 +843,10 @@ class MandaEventsDoc {
 
     ${MandaEqu.mandaFeast()['alfil']["ar"].trim()}
 
-    نقوم بتحضير طبق خاص من الحلاوة الطحينية يسمى "فل" والذي يصنع بخلط التمر مع السمسم وتشكيله بشكل كروي
-
     بدأ إعداد الأرض لحياة البشرية وسيطرة الأشرار من هذا اليوم
+
+
+    نقوم بتحضير طبق خاص من الحلاوة الطحينية يسمى "فل" والذي يصنع بخلط التمر مع السمسم وتشكيله بشكل كروي
 
 
     """;
@@ -857,9 +859,9 @@ class MandaEventsDoc {
 
     ${MandaEqu.mandaFeast()['alfil']["en_US"].trim()}
 
-    We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped it into spherical
-
     The preparation of the earth for the life of humanity and the control of the wicked began from this day
+
+    We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped it into spherical
 
 
     """;
