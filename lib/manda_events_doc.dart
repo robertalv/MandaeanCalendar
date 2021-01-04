@@ -231,29 +231,29 @@ class MandaEventsDoc {
   static minorEn() {
     String text = """
 
-     ***** ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()} *****
+    ***** ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()} *****
 
-All religious ceremonies are Not performed, including baptism, marriage, and slaughter
+    All religious ceremonies are Not performed, including baptism, marriage, and slaughter
 
-Slaughter of animals is not allowed
+    Slaughter of animals is not allowed
 
-Dokhranie are not allowed for the deceased who have passed 45 days after their death
+    Dokhranie are not allowed for the deceased who have passed 45 days after their death
 
-We are allowed to eat meat (provided it has already been slaughtered and not passed
-by a Major Mbattal day), fish, eggs, and "all bird eggs".
+    We are allowed to eat meat (provided it has already been slaughtered and not passed
+    by a Major Mbattal day), fish, eggs, and "all bird eggs".
 
-It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
-Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
-Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
+    It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
+    Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
+    Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
 
-Fastening of the Hmyana is allowed
+    Fastening of the Hmyana is allowed
 
-The prayer ceremony (Rashameh and Borakheh) is performed
+    The prayer ceremony (Rashameh and Borakheh) is performed
 
-Funeral services are allowed, Ghomashe and Maseghta must be made for the dead later
-If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
-If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
-If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
+    Funeral services are allowed, Ghomashe and Maseghta must be made for the dead later
+    If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
+    If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
+    If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
 
 
      """;
@@ -265,28 +265,28 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
     //  *****   امبطلات سنگین *****
     String text = """
   
-  ***** ${MandaEqu.mandaHeavyMbattal()[0]["fa_IR"].trim()} *****
+    ***** ${MandaEqu.mandaHeavyMbattal()[0]["fa_IR"].trim()} *****
 
-کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
+    کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
 
-ذبح حیوانات مجاز نمی باشد
+    ذبح حیوانات مجاز نمی باشد
 
-انجام مراسم دخرانی برای متوفیانی که ۴۵ روز از وفات آنها گذشته باشد، مجاز نمی باشد
+    انجام مراسم دخرانی برای متوفیانی که ۴۵ روز از وفات آنها گذشته باشد، مجاز نمی باشد
 
-‌بستن همیانه مجاز نمی باشد
+    ‌بستن همیانه مجاز نمی باشد
 
- اجازه خوردن گوشت، ماهى و تخم مرغ و تخم پرندگان و تمام خوراكى هايى كه در تهیه آنها از اين مواد استفاده شده را نداريم
+    اجازه خوردن گوشت، ماهى و تخم مرغ و تخم پرندگان و تمام خوراكى هايى كه در تهیه آنها از اين مواد استفاده شده را نداريم
 
- انجام دادن لوفانی دخرانی برای ۴۵ روز اول وفات(از روز اول دفن کردن به مدت ۴۵ روز) در امبطلات سنگین مجاز می باشد
-با این شرطی که همیانه بسته می شود و از گوشت ،ماهی و یا تخم پرندگان (تخم مرغ کلا در دخرانی مجاز نمی باشد) استفاده نکرد
+    انجام دادن لوفانی دخرانی برای ۴۵ روز اول وفات(از روز اول دفن کردن به مدت ۴۵ روز) در امبطلات سنگین مجاز می باشد
+    با این شرطی که همیانه بسته می شود و از گوشت ،ماهی و یا تخم پرندگان (تخم مرغ کلا در دخرانی مجاز نمی باشد) استفاده نکرد
 
- مراسم براخه فقط در امبطلات سنگین انجام نمی شود و به دعای مختصر پسند خواهد شد
+    مراسم براخه فقط در امبطلات سنگین انجام نمی شود و به دعای مختصر پسند خواهد شد
 
 
-مراسم تدفین مجاز میباشد ولی بعدا میبایست برای میت قماشی و مسقتا درست کرد
-اگر شخصی در این روز فوت کند میبایست برای میت قماشی و مسقتا درست کرد
-اگر شخصی در زمان فوت لباس مشکی در تن داشت، قماشی در اولین بنجه یکسال بعد از زمان فوت قابل انجام است 
-اگر شخصی در زمان فوت لباس مشکی در تن نداشت، قماشی در اولین بنجه ۴۵ روز بعداز زمان فوت قابل انجام است    
+    مراسم تدفین مجاز میباشد ولی بعدا میبایست برای میت قماشی و مسقتا درست کرد
+    اگر شخصی در این روز فوت کند میبایست برای میت قماشی و مسقتا درست کرد
+    اگر شخصی در زمان فوت لباس مشکی در تن داشت، قماشی در اولین بنجه یکسال بعد از زمان فوت قابل انجام است 
+    اگر شخصی در زمان فوت لباس مشکی در تن نداشت، قماشی در اولین بنجه ۴۵ روز بعداز زمان فوت قابل انجام است    
 
 
 """;
@@ -329,28 +329,28 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   static majorEn() {
     String text = """
 
-     ***** ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()} *****
+    ***** ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()} *****
 
-All religious ceremonies are Not performed, including baptism, marriage, and slaughter
+    All religious ceremonies are Not performed, including baptism, marriage, and slaughter
 
-Slaughter of animals is not allowed
+    Slaughter of animals is not allowed
 
-Dokhranie are not allowed for the deceased who have passed 45 days after their death
+    Dokhranie are not allowed for the deceased who have passed 45 days after their death
 
-We are NOT allowed to eat meat, fish, eggs, bird eggs, and all foods that have been prepared using these ingredients
+    We are NOT allowed to eat meat, fish, eggs, bird eggs, and all foods that have been prepared using these ingredients
 
-It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
-Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
-Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
+    It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
+    Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
+    Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
 
-Fastening of the Hmyana is NOT allowed
+    Fastening of the Hmyana is NOT allowed
 
-The prayer ceremony (Rashameh and Borakheh) is performed
+    The prayer ceremony (Rashameh and Borakheh) is performed
 
-Funeral services are allowed, Ghomashe and Maseghta must be made for the dead later
-If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
-If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
-If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
+    Funeral services are allowed, Ghomashe and Maseghta must be made for the dead later
+    If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
+    If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
+    If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
 
 
      """;
@@ -361,23 +361,23 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   static banjaFa() {
     String text = """
 
-پروانایا (پنجه)
+    پروانایا (پنجه)
 
-قداست روز و شب آن یکسان میباشد
+    قداست روز و شب آن یکسان میباشد
 
-علاوه بر روزه دهان بر روزه زبان، چشم، دست و پا تاکید شده است
+    علاوه بر روزه دهان بر روزه زبان، چشم، دست و پا تاکید شده است
 
-برای سه وعده نماز روز فقط بوثه های نماز صبح خوانده میشود
+    برای سه وعده نماز روز فقط بوثه های نماز صبح خوانده میشود
 
-ذبح حلال حتی در شب مجاز میباشد
+    ذبح حلال حتی در شب مجاز میباشد
 
-از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
+    از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
 
-خوردن غذا نظیف بسیار تاکید شده است
+    خوردن غذا نظیف بسیار تاکید شده است
 
-تعمید بسیار تاکید شده است
+    تعمید بسیار تاکید شده است
 
-بدلیل قداست این ایام همبستری و یا یا بارداری مجاز نمی باشد
+    بدلیل قداست این ایام همبستری و یا یا بارداری مجاز نمی باشد
 
 
     """;
@@ -388,23 +388,23 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   static banjaAr() {
     String text = """
 
-بروانایا (البنجه)
+    بروانایا (البنجه)
 
-حرمة النهار والليل واحدة
+    حرمة النهار والليل واحدة
 
-بالإضافة إلى صيام الفم ، يتم التركيز على اللسان والعينين واليدين والقدمين
+    بالإضافة إلى صيام الفم ، يتم التركيز على اللسان والعينين واليدين والقدمين
 
-بالنسبة للصلوات الثلاث اليومية ، يتم تقديم صلاة الفجر فقط
+    بالنسبة للصلوات الثلاث اليومية ، يتم تقديم صلاة الفجر فقط
 
-الذبح جائز حتى في الليل
+    الذبح جائز حتى في الليل
 
-تجنب تناول اللحوم نازل(اللحوم التي لم تذبح على الطريقة المندائية) فيها هذه الأيام
+    تجنب تناول اللحوم نازل(اللحوم التي لم تذبح على الطريقة المندائية) فيها هذه الأيام
 
-يتم التأكيد بشدة على تناول الطعام النظيف
+    يتم التأكيد بشدة على تناول الطعام النظيف
 
-تم التأكيد بشدة على الصباغه
+    تم التأكيد بشدة على الصباغه
 
-وحرمة هذه الأيام يمنع الجماع أو الحمل
+    وحرمة هذه الأيام يمنع الجماع أو الحمل
 
 
     """;
@@ -415,23 +415,23 @@ If a person was not wearing black at the time of death, the Ghomashe can be done
   static banjaEn() {
     String text = """
 
-Parwanaiia (Panja) 
+    Parwanaiia (Panja) 
 
-The sanctity of day and night is the same
+    The sanctity of day and night is the same
 
-In addition to oral fasting, the tongue, eyes, hands, and feet are emphasized
+    In addition to oral fasting, the tongue, eyes, hands, and feet are emphasized
 
-For the three daily prayers, only the morning prayer is offered
+    For the three daily prayers, only the morning prayer is offered
 
-Slaughter is permissible even at night
+    Slaughter is permissible even at night
 
-Avoid eating meat that not slaughtered in the Mandaean way in these days
+    Avoid eating meat that not slaughtered in the Mandaean way in these days
 
-Eating food that prepares in Mandaean way (Nazif) is highly emphasized
+    Eating food that prepares in Mandaean way (Nazif) is highly emphasized
 
-Baptism is highly emphasized
+    Baptism is highly emphasized
 
-Due to the sanctity of these days, intercourse or pregnancy is not allowed
+    Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
 
     """;
@@ -444,11 +444,11 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
     ${MandaEqu.mandaFeast()['yahya']["fa_IR"].trim()}
 
-      بر‌ تعمید نوزادان تاکید شده است
+    بر‌ تعمید نوزادان تاکید شده است
 
-      از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
+    از خوردن گوشت نازل(گوشتی که مطابق ایین مندایی ذبح نشده باشد) در این ایام جددا خودداری شود
 
-      خوردن غذا نظیف بسیار تاکید شده است
+    خوردن غذا نظیف بسیار تاکید شده است
 
 
 
@@ -496,13 +496,13 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
     ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
 
-      روز آخر سال
+    روز آخر سال
 
     بر پاکسازی خانه تاکید شده است
 
     تاکید به کمک و بازید از افراد کم بضاعت شده است
 
-  كراصا (ماندن در خانه) بمدت دو شب و یک روز (سی و شش ساعت) از عصر این روز شروع می شود
+    كراصا (ماندن در خانه) بمدت دو شب و یک روز (سی و شش ساعت) از عصر این روز شروع می شود
 
     بر تعمید و یا غسل (طماشه) قبل از كراصا تاکید شده است
 
@@ -533,35 +533,35 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static kenshiAr() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['kenshi']["ar"].trim()}
 
     اليوم الأخير من السنة
 
     يتم التركيز على تنظيف المنزل
 
-  وقد تم التركيز على مساعدة المحتاجين وزيارتهم
+    وقد تم التركيز على مساعدة المحتاجين وزيارتهم
 
-  كراصا (البقاء في بيت) ليلتين ويوم واحد (ست وثلاثون ساعة) ، يبدأ مساء هذا اليوم
+    كراصا (البقاء في بيت) ليلتين ويوم واحد (ست وثلاثون ساعة) ، يبدأ مساء هذا اليوم
 
-  يتم التركيز على الصباغه أو الغسل (الطماشة) قبل الكراصا
+    يتم التركيز على الصباغه أو الغسل (الطماشة) قبل الكراصا
 
-  التركيز على حماية الجسم
+    التركيز على حماية الجسم
 
-  تم التركيز على عدم لمس الیردنا(النهر)
+    تم التركيز على عدم لمس الیردنا(النهر)
 
-  تم التركيز على عدم لمس النباتات والحيوانات
+    تم التركيز على عدم لمس النباتات والحيوانات
 
-  خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
-  يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
-  لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
+    خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
+    يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
+    لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
 
-  خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
-  يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
-  ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
+    خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
+    يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
+    ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
 
-  يتم التأكيد على الصلاة والتفكير في العام الماضي
+    يتم التأكيد على الصلاة والتفكير في العام الماضي
 
-  يتم التأكيد على الغسل (الطماشة) بعد الكراصا
+    يتم التأكيد على الغسل (الطماشة) بعد الكراصا
 
 
     """;
@@ -572,7 +572,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static kenshiEn() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['kenshi']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['kenshi']["en_US"].trim()}
 
     The last day of the year
 
@@ -613,9 +613,9 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
     ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
 
-     اولین روز سال
+    اولین روز سال
 
-     (ادامه كراصا (ماندن در خانه) - تمام روز (کلا بمدت دو شب و یک روز که سی و شش ساعت است‌ 
+    (ادامه كراصا (ماندن در خانه) - تمام روز (کلا بمدت دو شب و یک روز که سی و شش ساعت است‌ 
 
     تاکید بر محافظت از جسم
 
@@ -633,6 +633,8 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
     دعا و نیایش و تفکر در خصوص سالی که گذشت تاکید شده است
 
     بر غسل (طماشه) بعد از كراصا تاکید شده است
+
+
     """;
 
     return text;
@@ -641,7 +643,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static eidBigAr() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['eidBig']["ar"].trim()}
 
     اليوم الأول من السنة
 
@@ -653,17 +655,17 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
     تم التركيز على عدم لمس النباتات والحيوانات
 
-  خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
-  يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
-  لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
+    خلال الكراصا (٣٦ ساعة)، إذا خرج الدم من الجسم أو لامس الحيوانات والنباتات
+    يجب أن تفصل بينك وبين بقية أفراد الأسرة وعدم الاتصال بأشخاص آخرين
+    لذلك يوصى بعدم مغادرة المنزل وتحضير الطعام والماء لمدة ٣٦ ساعة
 
-  خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
-  يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
-  ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
+    خلال هذه ٣٦ الساعات ، الأشخاص الذين يسيلون الدم أو يتعاملون مع الحيوانات والنباتات
+    يجب أن يعتمدوا مع راسته جديد في يوم کنشوزهلی
+    ما لم يصوموا بشكل كامل ويؤدون الغسل (الطماشة) بعد الكراصا
 
-  يتم التأكيد على الصلاة والتفكير في العام الماضي
+    يتم التأكيد على الصلاة والتفكير في العام الماضي
 
-  يتم التأكيد على الغسل (الطماشة) بعد الكراصا
+    يتم التأكيد على الغسل (الطماشة) بعد الكراصا
 
 
     """;
@@ -674,7 +676,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static eidBigEn() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['eidBig']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['eidBig']["en_US"].trim()}
 
     The first day of the year
 
@@ -725,7 +727,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static kersaAr() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['kersa']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['kersa']["ar"].trim()}
 
     نهاية الكراصا
 
@@ -742,7 +744,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static kersaEn() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['kersa']["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['kersa']["en_US"].trim()}
 
     End of Kersa
 
@@ -759,16 +761,16 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static shoshianFa() {
     String text = """
 
-      ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
 
-      عید شیشیان یا دهوا زوطا 
+    عید شیشیان یا دهوا زوطا 
 
-      رجال دین (گنزبرا و ترمیدا ) شاخه هایی را از درخت بید جمع آوری میکنند  
-      و بعد از طماشه کردن آنها بر هر کدام از آن شاخه های  بوثه هایی را قرائت میکنند
-      و آنها را همانند اکلیلا می بافند و آنها را کلیلا اد هلافا  (اکلیلای بید ) می نامند
+    رجال دین (گنزبرا و ترمیدا ) شاخه هایی را از درخت بید جمع آوری میکنند  
+    و بعد از طماشه کردن آنها بر هر کدام از آن شاخه های  بوثه هایی را قرائت میکنند
+    و آنها را همانند اکلیلا می بافند و آنها را کلیلا اد هلافا  (اکلیلای بید ) می نامند
 
-     بر منداییان واجب است که اکلیلای هلافا را بر درب منزلشان آویزان کنند  
-     اکلیلایی رمز بهجت و سرور و محبت است
+    بر منداییان واجب است که اکلیلای هلافا را بر درب منزلشان آویزان کنند  
+    اکلیلایی رمز بهجت و سرور و محبت است
 
     از روز قبل کلیله ها بر سر در یا داخل خانه نصب کنید
 
@@ -781,7 +783,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static shoshianAr() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['shoshian'][0]["ar"].trim()}
 
     عید شیشیان یا دهوا زوطا 
 
@@ -802,7 +804,7 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
   static shoshianEn() {
     String text = """
 
-    ${MandaEqu.mandaFeast()['shoshian'][0]["fa_IR"].trim()}
+    ${MandaEqu.mandaFeast()['shoshian'][0]["en_US"].trim()}
 
     Religious figures (Ganzbra and Thermida) collect branches from the willow tree
     They weave a AkLila from them.
@@ -820,12 +822,15 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static alfilFa() {
     String text = """
-      ${MandaEqu.mandaFeast()['alfil']["fa_IR"].trim()}
-      مصادف با روز اول ماه تورا
 
-      غذای مخصوصی  بنام” فل “ آماده می‌کنیم که ازمخلوط کردن خرما با کُنجد که بصورت حلوای کروی شکل آنرا میسازند
+    ${MandaEqu.mandaFeast()['alfil']["fa_IR"].trim()}
 
-      مهیا کردن زمین برای زندگی بشریت و مهار اشرار از این روز آغاز گردید
+    مصادف با روز اول ماه تورا
+
+    ما یک ظرف مخصوص حلوا تهیه می کنیم به نام "فل" که از مخلوط خرما با کنجد درست می شود و به شکل کروی در می آید
+
+    مهیا کردن زمین برای زندگی بشریت و مهار اشرار از این روز آغاز گردید
+
 
     """;
 
@@ -834,7 +839,13 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static alfilAr() {
     String text = """
-      ${MandaEqu.mandaFeast()['alfil']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['alfil']["ar"].trim()}
+
+    نقوم بتحضير طبق خاص من الحلاوة الطحينية يسمى "فل" والذي يصنع بخلط التمر مع السمسم وتشكيله بشكل كروي
+
+    بدأ إعداد الأرض لحياة البشرية وسيطرة الأشرار من هذا اليوم
+
 
     """;
 
@@ -843,7 +854,13 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static alfilEn() {
     String text = """
-      ${MandaEqu.mandaFeast()['alfil']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['alfil']["en_US"].trim()}
+
+    We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped it into spherical
+
+    The preparation of the earth for the life of humanity and the control of the wicked began from this day
+
 
     """;
 
@@ -852,12 +869,15 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static eidSmallFa() {
     String text = """
-      ${MandaEqu.mandaFeast()['eidSmall']["fa_IR"].trim()}
-      
-      زمین در این روز برای زندگی بشر مهیا گردید
 
-      مندائیان طبق رسمی که دارند از نان برنجی وکنجد وخرما 
-      غذائی بنام هوخصا (مریس) درست کرده همراه با برنج وماست می خورند
+    ${MandaEqu.mandaFeast()['eidSmall']["fa_IR"].trim()}
+
+    زمین در این روز برای زندگی بشر مهیا گردید
+
+    مندائیان طبق رسمی که دارند از نان برنجی وکنجد وخرما
+    غذائی بنام هوخصا (مریس) درست کرده همراه با برنج وماست می خورند
+
+      
     """;
 
     return text;
@@ -865,7 +885,14 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static eidSmallAr() {
     String text = """
-      ${MandaEqu.mandaFeast()['eidSmall']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['eidSmall']["ar"].trim()}
+
+    كانت الأرض مهيأة للحياة البشرية في هذا اليوم
+
+    وفقًا لعاداتهم الرسمية ، يصنع المندائيون طعامًا يسمى
+    هوخصا (مريس) من خبز الأرز والسمسم والتمر ويأكلونه مع الأرز واللبن
+
 
     """;
 
@@ -874,7 +901,14 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static eidSmallEn() {
     String text = """
-      ${MandaEqu.mandaFeast()['eidSmall']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['eidSmall']["en_US"].trim()}
+
+    The earth was prepared for human life on this day
+
+    According to the Mandaean custom, they make a food called Hokhsa (Mris) 
+    from rice bread, sesame and dates and eat it with rice and yogurt.
+
 
     """;
 
@@ -883,11 +917,14 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static ashorehFa() {
     String text = """
-      ${MandaEqu.mandaFeast()['ashoreh']["fa_IR"].trim()}
-      يك مناسبت تاريخى دینی  براى يادبود طوفان نوح است
+
+    ${MandaEqu.mandaFeast()['ashoreh']["fa_IR"].trim()}
+
+    يك مناسبت تاريخى دینی  براى يادبود طوفان نوح است
     مندائیان واقعه کشتی نوح، بخاطر ادامهٔ  تعاليم دینی و حفظ مراسم نیاکان خود،
     برای روانهايى كه در طوفان غرق شدند، طلب آمرزش نمودند
-    و از حبوباتى كه در كشتى بود، غذا پختند و مراسم لوفانى انجام دادند 
+    و از حبوباتى كه در كشتى بود، غذا(حلیم) پختند و مراسم لوفانى انجام دادند 
+
 
     """;
 
@@ -896,7 +933,13 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static ashorehAr() {
     String text = """
-      ${MandaEqu.mandaFeast()['ashoreh']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['ashoreh']["ar"].trim()}
+
+    إنها مناسبة دينية تاريخية لإحياء ذكرى طوفان نوح
+
+    طهوا طعام (حليم) تخليدًا لذكرى الغرقى وأداء المناسك(لوفاني)
+
 
     """;
 
@@ -905,7 +948,13 @@ Due to the sanctity of these days, intercourse or pregnancy is not allowed
 
   static ashorehEn() {
     String text = """
-      ${MandaEqu.mandaFeast()['ashoreh']["fa_IR"].trim()}
+
+    ${MandaEqu.mandaFeast()['ashoreh']["en_US"].trim()}
+
+    It is a historical religious occasion to commemorate the Flood of Noah
+
+    They cooked food (Halim) in memory of the drowned and performed rituals (Lufani)
+
 
     """;
 

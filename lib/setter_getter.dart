@@ -176,8 +176,8 @@ class Data {
   var calendarKind;
   var selected;
   DateTime today;
-  var last;
-  var first;
+  // var last;
+  // var first;
   var mandaMonth;
   var gregMonth;
   var shamsiMonth;
@@ -185,8 +185,8 @@ class Data {
   Data({
     this.lang,
     this.today,
-    this.last,
-    this.first,
+    // this.last,
+    // this.first,
     this.mandaMonth,
     this.gregMonth,
     this.shamsiMonth,
