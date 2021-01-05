@@ -643,7 +643,7 @@ class CalendarBuilder extends MyHomePage {
     var monthEgu2;
     String day;
 
-    print('selectedDay $selectedDay');
+    // print('selectedDay $selectedDay');
     // print('selectedDay ${selectedDay[0]}');
 
     if (selectedDay[2] == 'g') {
@@ -677,11 +677,16 @@ class CalendarBuilder extends MyHomePage {
       ];
 
       dayEgu1 = _mandaMonthDate[selectedDay[0]];
-      monthEgu1 = [
-        data.mandaMonth.info['monthEn'],
-        data.mandaMonth.info['monthFaAr'],
-        data.mandaMonth.info['monthFaAr']
-      ];
+
+      if (dayEgu1[2] == 'm') {
+        monthEgu1 = [
+          data.mandaMonth.info['monthEn'],
+          data.mandaMonth.info['monthFaAr'],
+          data.mandaMonth.info['monthFaAr']
+        ];
+      } else {
+        monthEgu1 = ['Panja', 'پنجه', 'بنجه'];
+      }
     } else {
       dayEgu1 = _gregMonthDate[selectedDay[0]];
       monthEgu1 = [
