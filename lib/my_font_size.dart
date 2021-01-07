@@ -158,7 +158,7 @@ class TableSize {
     }
 
     if (divecWidth <= 320) {
-      headerDayWeek = 11.0;
+      headerDayWeek = 10.6;
     }
     // this.divecWidth = divecWidth;
     // this.cellWidth = cellWidth;

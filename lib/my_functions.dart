@@ -63,7 +63,9 @@ class Functions {
 
       doc = doc +
           MandaEventsDoc.findEevent(event["en_US"].trim(), localLang) +
-          "\n\n";
+          "\n\n" +
+          '*' * 15 +
+          "\n";
 
       // if (localLang == "fa_IR") {
       //   doc = doc + MandaEventsDoc.eventsFa(event["en_US"].trim());

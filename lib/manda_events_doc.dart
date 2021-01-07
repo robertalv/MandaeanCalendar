@@ -166,7 +166,7 @@ class MandaEventsDoc {
     // امبطلات سبک
     String text = """
       
-      ***** ${MandaEqu.mandaLightMbattal()[0]["fa_IR"].trim()} *****
+    ${MandaEqu.mandaLightMbattal()[0]["fa_IR"].trim()}
 
       کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
 
@@ -196,7 +196,7 @@ class MandaEventsDoc {
   static minorAr() {
     String text = """
 
-      ***** ${MandaEqu.mandaLightMbattal()[0]["ar"].trim()} *****
+      ${MandaEqu.mandaLightMbattal()[0]["ar"].trim()}
 
       لا يتم تنفيذ جميع الاحتفالات الدينية ، بما في ذلك المعمودية والزواج والذبح
 
@@ -227,29 +227,29 @@ class MandaEventsDoc {
   static minorEn() {
     String text = """
 
-    ***** ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()} *****
+    ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()}
 
-    All religious ceremonies are Not performed, including baptism, marriage, and slaughter
+    All religious ceremonies are not performed, including baptism, marriage, and slaughter
 
     Slaughter of animals is not allowed
 
-    Dokhranie are not allowed for the deceased who have passed 45 days after their death
+    Dokhranie are not allowed for those who have been deceased for more than 45 days
 
     We are allowed to eat meat (provided it has already been slaughtered and not passed
-    by a Major Mbattal day), fish, eggs, and "all bird eggs".
+    by a Major Mbattal day), fish, eggs, and all bird eggs.
 
-    It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
+    It is permissible to perform a Dokhranie if within the first 45 days of death (45 days from the first day of burial)
     Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
-    Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
+    Meat is permitted as long as it has already been slaughtered and has not passed a Major Mbattal day
 
     Fastening of the Hmyana is allowed
 
     The prayer ceremony (Rashameh and Borakheh) is performed
 
-    Funeral services are allowed, Ghomashe and Maseghta must be made for the dead later
+    Funeral services are allowed, Ghomashe and Maseghta must be made for the dead at a later time
     If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
     If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
-    If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death.
+    If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death
      """;
 
     return text;
@@ -259,7 +259,7 @@ class MandaEventsDoc {
     //  *****   امبطلات سنگین *****
     String text = """
   
-    ***** ${MandaEqu.mandaHeavyMbattal()[0]["fa_IR"].trim()} *****
+    ${MandaEqu.mandaHeavyMbattal()[0]["fa_IR"].trim()}
 
     کلیه مراسم دینی انجام نمی شوند اعم از تعمید، عقد و ازدواج و ذبح
 
@@ -289,7 +289,7 @@ class MandaEventsDoc {
   static majorAr() {
     String text = """
 
-      ***** ${MandaEqu.mandaHeavyMbattal()[0]["ar"].trim()} *****
+      ${MandaEqu.mandaHeavyMbattal()[0]["ar"].trim()}
 
       لا يتم تنفيذ جميع الاحتفالات الدينية ، بما في ذلك المعمودية والزواج والذبح
 
@@ -319,7 +319,7 @@ class MandaEventsDoc {
   static majorEn() {
     String text = """
 
-    ***** ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()} *****
+    ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()}
 
     All religious ceremonies are Not performed, including baptism, marriage, and slaughter
 
@@ -781,7 +781,6 @@ class MandaEventsDoc {
 
     مهیا کردن زمین برای زندگی بشریت و مهار اشرار از این روز آغاز گردید
 
-
     یک ظرف مخصوص حلوا تهیه می کنیم به نام "فل" که از مخلوط خرما با کنجد درست می شود و به شکل کروی در می آید
     """;
 
@@ -794,7 +793,6 @@ class MandaEventsDoc {
     ${MandaEqu.mandaFeast()['alfil']["ar"].trim()}
 
     بدأ إعداد الأرض لحياة البشرية وسيطرة الأشرار من هذا اليوم
-
 
     نقوم بتحضير طبق خاص من الحلاوة الطحينية يسمى "فل" والذي يصنع بخلط التمر مع السمسم وتشكيله بشكل كروي
     """;
