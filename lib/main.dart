@@ -432,11 +432,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         .buildCalendarTable(setState, runingWidget[2]),
                   ),
                 // #################   yearEquivalent #################
-                if (runingWidget != null && runingWidget.length > 0)
+                if (runingWidget != null && runingWidget.length == 1)
                   CalendarBuilder(_holidays, _events, _data)
                       .yearEquivalent(_yearEquivalent),
                 // #################   dateEquivalent  #################
-                if (runingWidget != null && runingWidget.length > 0)
+                if (runingWidget != null && runingWidget.length == 1)
                   CalendarBuilder(_holidays, _events, _data)
                       .dateEquivalent(_dateEquivalent),
 
