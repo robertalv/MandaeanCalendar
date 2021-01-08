@@ -229,11 +229,11 @@ class MandaEventsDoc {
 
     ${MandaEqu.mandaLightMbattal()[0]["en_US"].trim()}
 
-    All religious ceremonies are not performed, including baptism, marriage, and slaughter
+    All religious ceremonies are not performed, including baptism, marriage, and slaughtering of animals
 
-    Slaughter of animals is not allowed
+    Slaughtering of animals is not allowed
 
-    Dokhranie are not allowed for those who have been deceased for more than 45 days
+    Dokhranie is not allowed for those who have been deceased for more than 45 days
 
     We are allowed to eat meat (provided it has already been slaughtered and not passed
     by a Major Mbattal day), fish, eggs, and all bird eggs.
@@ -248,7 +248,7 @@ class MandaEventsDoc {
 
     Funeral services are allowed, Ghomashe and Maseghta must be made for the dead at a later time
     If a person dies on this day, Ghomashe and Maseghta must be made for the dead body
-    If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja one year after the time of death
+    If a person was wearing black at the time of death, the Ghomashe can be done in the first Panja, one year after the time of death
     If a person was not wearing black at the time of death, the Ghomashe can be done in the first Panja 45 days after the time of death
      """;
 
@@ -321,15 +321,15 @@ class MandaEventsDoc {
 
     ${MandaEqu.mandaHeavyMbattal()[0]["en_US"].trim()}
 
-    All religious ceremonies are Not performed, including baptism, marriage, and slaughter
+    All religious ceremonies are Not performed, including baptism, marriage, and slaughtering of animals
 
-    Slaughter of animals is not allowed
+    Slaughtering of animals is not allowed
 
-    Dokhranie are not allowed for the deceased who have passed 45 days after their death
+    Dokhranie is not allowed for those who have been deceased for more than 45 days
 
     We are NOT allowed to eat meat, fish, eggs, bird eggs, and all foods that have been prepared using these ingredients
 
-    It is permissible to perform a Dokhranie for the first 45 days of death (for 45 days from the first day of burial)
+    It is permissible to perform a Dokhranie within the first 45 days of death (for 45 days from the first day of burial)
     Provided that the fish or bird eggs are to be used (chicken eggs are not allowed in Dukhrani at all)
     Meat is permitted as long as it has already been slaughtered and has not passed by a Major Mbattal day
 
@@ -409,9 +409,9 @@ class MandaEventsDoc {
 
     Slaughter is permissible even at night
 
-    Avoid eating meat that not slaughtered in the Mandaean way in these days
+    Avoid eating meat that was not slaughtered in the Mandaean way during these days
 
-    Eating food that prepares in Mandaean way (Nazif) is highly emphasized
+    Eating food that is prepared in the Mandaean way (Nazif) is highly emphasized
 
     Baptism is highly emphasized
 
@@ -458,9 +458,9 @@ class MandaEventsDoc {
 
     Emphasis is placed on infant baptism
 
-    Avoid eating meat that not slaughtered in the Mandaean way in these days
+    Avoid eating meat that was not slaughtered in the Mandaean way during  these days
 
-    Eating food that prepares in Mandaean way (Nazif) is highly emphasized
+    Eating food that is prepared in the Mandaean way (Nazif) is highly emphasized
     """;
 
     return text;
@@ -549,9 +549,9 @@ class MandaEventsDoc {
 
     Emphasis is placed on cleaning the house
 
-    Emphasis has been placed on helping and visiting the needy people
+    Emphasis has been placed on helping and visiting people in need
 
-    Kersa(Staying in a home) for two nights and one day(thirty-six hours), which starts  in the evening of this day
+    Kersa (Staying in a home) for two nights and one day(thirty-six hours), which starts  in the evening of this day
 
     Emphasis is placed on baptism or Ghasil (Tamasha) before Kersa
 
@@ -563,9 +563,9 @@ class MandaEventsDoc {
 
     During the Kersa (36 hours), if blood comes out of the body or comes in contact with animals and plants
     You should separate yourself from the rest of the family and have no contact with other people
-    Therefore, it is recommended not to leave the house and prepare food and water for 36 hours
+    Therefore, it is recommended to not leave the house and prepare food and water for 36 hours
 
-    During these 36 hours, People who are blooding or come in contact with animals and plants
+    During these 36 hours, people who are bleeding or come in contact with animals and plants
     They must be baptized with a new Rasteh on the day of Kenshi-u-Zehli
     Unless they fast completely and perform Ghusl (Tamasha) after Kersa
 
@@ -655,9 +655,9 @@ class MandaEventsDoc {
 
     During the Kersa (36 hours), if blood comes out of the body or comes in contact with animals and plants
     You should separate yourself from the rest of the family and have no contact with other people
-    Therefore, it is recommended not to leave the house and prepare food and water for 36 hours
+    Therefore, it is recommended to not leave the house and prepare food and water for 36 hours
 
-    During these 36 hours, People who are blooding or come in contact with animals and plants
+    During these 36 hours, people who are bleeding or come in contact with animals and plants
     They must be baptized with a new Rasteh on the day of Kenshi-u-Zehli
     Unless they fast completely and perform Ghusl (Tamasha) after Kersa
 
@@ -710,7 +710,7 @@ class MandaEventsDoc {
 
     Emphasis is placed on Ghusl (Tamasha) after Kersa
 
-    Emphasis has been placed on helping and visiting the needy people
+    Emphasis has been placed on helping and visiting people in need
     """;
 
     return text;
@@ -763,10 +763,10 @@ class MandaEventsDoc {
     Religious figures (Ganzbra and Thermida) collect branches from the willow tree
     They weave a AkLila from them.
 
-    It is obligatory on the Mandaeans to hang the AkLila on the door of their house
+    It is obligatory on the Mandaeans to hang the AkLila on the door of their houses
     AkLila is the secret of happiness and love
 
-    Hang the AkLila on the door or inside the house from the day before
+    Hang the AkLila that was received the previous day on the door or inside the house
     """;
 
     return text;
@@ -807,7 +807,7 @@ class MandaEventsDoc {
 
     The preparation of the earth for the life of humanity and the control of the wicked began from this day
 
-    We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped it into spherical
+    We prepare a special halva dish called "Fel" which is made by mixing dates with sesame and shaped into a sphere
     """;
 
     return text;
@@ -849,7 +849,7 @@ class MandaEventsDoc {
     The earth was prepared for human life on this day
 
     According to the Mandaean custom, they make a food called Hokhsa (Mris) 
-    from rice bread, sesame and dates and eat it with rice and yogurt.
+    from rice bread, sesame, and dates and eat it with rice and yogurt.
     """;
 
     return text;
