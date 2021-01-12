@@ -2,10 +2,6 @@
 //// Mandean Calender
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
-import 'package:shamsi_date/shamsi_date.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'manda_events.dart';
 import 'manda_footer.dart';
 import 'manda_holidays.dart';

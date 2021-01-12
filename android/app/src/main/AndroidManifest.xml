@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.FaridKhafajiZadeh.MandaeanCalendar">
+    package="com.mandaean.calendar">
    <application
         android:label="Mandaean Calendar"
         android:icon="@mipmap/ic_launcher">

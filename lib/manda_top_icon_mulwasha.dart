@@ -450,7 +450,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                   Card(
                     color: Colors.grey[200],
                     child: Text(
-                      textBeforeMsg,
+                      "  " + textBeforeMsg + "  ",
                       style: TextStyle(
                           color: Colors.black, fontSize: _dropFontSize),
                     ),
@@ -627,7 +627,7 @@ class _MyMulwashalPageState extends State<MyMulwashalPage> {
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text("  " + value + "  "),
                     );
                   }).toList(),
                 ))));

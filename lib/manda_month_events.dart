@@ -3,7 +3,7 @@ import 'calendar_month_date.dart';
 class MandaGregShamsiInfo {
   static dateBuilder(var data) {
     print('CALLBACK: _MandaDateBuilder');
-    print("*" * 30 + "Date builder load" + "*" * 30);
+    // print("*" * 30 + "Date builder load" + "*" * 30);
     Map gregDate = CalendarDateBuilder.greg(data);
     Map mandaDate = CalendarDateBuilder.manda(data);
     Map shamsiDate = CalendarDateBuilder.shamsi(data);
