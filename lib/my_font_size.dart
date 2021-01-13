@@ -123,7 +123,7 @@ class TableSize {
   double marginH;
   TableSize(data) {
     divecWidth = data.divecSize.width;
-    print("divecWidth $divecWidth");
+    // print("divecWidth $divecWidth");
     if (divecWidth > 700) {
       cellWidth = 100.0;
       displayWidth = 700.0;
@@ -164,7 +164,7 @@ class TableSize {
     // } else if (divecWidth <= 390) {
     //   headerDayWeek = 12.0;
     // }
-    print("headerDayWeek $headerDayWeek");
+    // print("headerDayWeek $headerDayWeek");
   }
 }
 
