@@ -123,6 +123,7 @@ class TableSize {
   double marginH;
   TableSize(data) {
     divecWidth = data.divecSize.width;
+    print("divecWidth $divecWidth");
     if (divecWidth > 700) {
       cellWidth = 100.0;
       displayWidth = 700.0;
@@ -146,7 +147,8 @@ class TableSize {
       iconRate = 1;
       headerMonthYear = 18.0;
       headerMonthYearWidth = cellWidth * 4.5;
-      headerDayWeek = 16.0;
+      // headerDayWeek = 14.0;
+      headerDayWeek = cellWidth * 10.5 / 45.7;
       marginDayRow = 2.0;
       dayNum = 24.0;
       f5025 = 25;
@@ -157,16 +159,12 @@ class TableSize {
       }
     }
 
-    if (divecWidth <= 320) {
-      headerDayWeek = 10.6;
-    }
-    // this.divecWidth = divecWidth;
-    // this.cellWidth = cellWidth;
-    // this.displayWidth = displayWidth;
-    // this.sizeRate = sizeRate;
-    // this.f8040 = f8040;
-    // this.f5025 = f5025;
-    // this.marginH = marginH;
+    // if (divecWidth <= 320) {
+    //   headerDayWeek = 10.6;
+    // } else if (divecWidth <= 390) {
+    //   headerDayWeek = 12.0;
+    // }
+    print("headerDayWeek $headerDayWeek");
   }
 }
 
