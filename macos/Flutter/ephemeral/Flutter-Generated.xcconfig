@@ -1,0 +1,13 @@
+// This is a generated file; do not edit or check into version control.
+FLUTTER_ROOT=/Users/farid.khafaji.zadeh/projects/docker/flutter
+FLUTTER_APPLICATION_PATH=/Users/farid.khafaji.zadeh/projects/my_app_cal/mandaean_calendar
+FLUTTER_TARGET=/Users/farid.khafaji.zadeh/projects/my_app_cal/mandaean_calendar/lib/main.dart
+FLUTTER_BUILD_DIR=build
+FLUTTER_FRAMEWORK_DIR=/Users/farid.khafaji.zadeh/projects/docker/flutter/bin/cache/artifacts/engine/darwin-x64
+FLUTTER_BUILD_NAME=2.2.0
+FLUTTER_BUILD_NUMBER=6
+DART_DEFINES=flutter.inspector.structuredErrors%3Dtrue
+DART_OBFUSCATION=false
+TRACK_WIDGET_CREATION=true
+TREE_SHAKE_ICONS=false
+PACKAGE_CONFIG=/Users/farid.khafaji.zadeh/projects/my_app_cal/mandaean_calendar/.dart_tool/package_config.json
