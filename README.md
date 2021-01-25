@@ -1,5 +1,18 @@
 # mandaean_calendar
 
+- To run the project on your local:
+    flutter run -d chrome
+  
+- To build web:
+    flutter build web
+    
+- More info can be found on flutter doc:
+    1. https://flutter.dev/web
+    
+    2. https://flutter.dev/docs/get-started/web
+    
+  
+
 A new Flutter project.
 
 ## Getting Started
