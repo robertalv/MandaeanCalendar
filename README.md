@@ -1,16 +1,17 @@
-# manda_calendar
+# mandaean_calendar
 
-Reading Source:
-1.https://flutter.dev/web
-2. https://flutter.dev/docs/get-started/web
-
-- To Run:: flutter run -d chrome
-        1. http://localhost:60859/#/
-        
-- To Build:: for existing project run “flutter create .” Than
-
-    1. flutter build web
-
+- To run the project on your local:
+    flutter run -d chrome
+  
+- To build web:
+    flutter build web
+    
+- More info can be found on flutter doc:
+    1. https://flutter.dev/web
+    
+    2. https://flutter.dev/docs/get-started/web
+    
+  
 
 A new Flutter project.
 

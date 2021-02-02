@@ -43,18 +43,18 @@ class MandaEqu {
 
   static mandaFirstMonth() {
     Map firstMonth = {
-      'en_US': ' First of Mandaic Month    ',
-      'fa_IR': '     اول ماه مندایی  ',
-      'ar': '      رأس الشهر '
+      'en_US': ' First day of Mandaic Month ',
+      'fa_IR': ' اول ماه مندایی  ',
+      'ar': ' رأس الشهر '
     };
     return [firstMonth];
   }
 
   static mandaLightMbattal() {
     Map lightMbattal = {
-      'en_US': ' Minor Mbattal Day      ',
-      'fa_IR': '    روز أمبطل سبک  ',
-      'ar': '    یوم مبطل خفیف  '
+      'en_US': ' Minor Mbattal Day ',
+      'fa_IR': ' روز أمبطل سبک ',
+      'ar': ' یوم مبطل خفیف '
     };
 
     return [lightMbattal];
@@ -62,18 +62,18 @@ class MandaEqu {
 
   static mandaHeavyMbattal() {
     Map heavytMbattal = {
-      'en_US': ' Major Mbattal Day     ',
-      'fa_IR': '   روز أمبطل سنگین  ',
-      'ar': '     یوم مبطل ثقیل '
+      'en_US': ' Major Mbattal Day ',
+      'fa_IR': ' روز أمبطل سنگین   ',
+      'ar': ' یوم مبطل ثقیل '
     };
     return [heavytMbattal];
   }
 
   static mandaFeastName() {
     Map heavytMbattal = {
-      'en_US': ' Religious Occasion           ',
-      'fa_IR': '        مناسبت دینی  ',
-      'ar': '   مناسبه دینیه '
+      'en_US': ' Religious Occasion ',
+      'fa_IR': ' مناسبت دینی ',
+      'ar': ' مناسبه دینیه '
     };
     return [heavytMbattal];
   }
@@ -82,26 +82,25 @@ class MandaEqu {
     Map data = {
       'en_US': [
         'Religious Occasion',
-        ' Display of religious occasions of the year '
+        ' Display the religious occasions of the year '
       ],
-      'fa_IR': ['مناسبت های دینی', '  نمایش مناسبت های دینی سال  '],
+      'fa_IR': ['مناسبت های دینی', '  نمایش  مناسبت های دینی سال       '],
       'ar': ['للمناسبات دینیه', 'عرض للمناسبات الدينية العام ']
     };
     return data[index];
   }
 
   static mandaYearEvents(index) {
-    String exSpeace = " " * 10;
     Map data = {
       'en_US': [
         '  Select an occasion',
         '  Religious Holy Days',
-        '  First of Mandaic Month',
+        '  First day of Mandaic Month',
         '  Minor Mbattal Day',
         '  Major Mbattal Day',
       ],
       'fa_IR': [
-        '  یک مناسبت دینی انتخاب کنید   ',
+        '  یک مناسبت دینی انتخاب کنید      ',
         '  اعیاد و مناسبت های مذهبی      ',
         '  اول ماه مندایی  ',
         '  روز أمبطل سبک  ',
@@ -122,48 +121,48 @@ class MandaEqu {
     final Map mandaFeast = {
       'banja': [
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 1',
-          'fa_IR': ' پنجه (پروانایا) روز اول ',
-          'ar': 'البنجه (بروانایا) یوم اول '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 1',
+          'fa_IR': ' پروانایا (پنجه) روز اول ',
+          'ar': 'بروانایا (البنجه) یوم اول '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 2',
-          'fa_IR': ' پنجه (پروانایا) روز دوم ',
-          'ar': 'البنجه (بروانایا) یوم ثانی '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 2',
+          'fa_IR': ' پروانایا (پنجه) روز دوم ',
+          'ar': 'بروانایا (البنجه) یوم ثانی '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 3',
-          'fa_IR': ' پنجه (پروانایا) روز سوم ',
-          'ar': 'البنجه (بروانایا) یوم ثالث '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 3',
+          'fa_IR': ' پروانایا (پنجه) روز سوم ',
+          'ar': 'بروانایا (البنجه) یوم ثالث '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 4',
-          'fa_IR': ' پنجه (پروانایا) روز چهارم ',
-          'ar': 'البنجه (بروانایا) یوم الرابع '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 4',
+          'fa_IR': ' پروانایا (پنجه) روز چهارم ',
+          'ar': 'بروانایا (البنجه) یوم الرابع '
         },
         {
-          'en_US': 'Panja (Parwanaiia) Feast - Day 5',
-          'fa_IR': ' پنجه (پروانایا) روز پنجم ',
-          'ar': 'البنجه (بروانایا) یوم الخامس '
+          'en_US': 'Parwanaiia (Panja) Feast - Day 5',
+          'fa_IR': ' پروانایا (پنجه) روز پنجم ',
+          'ar': 'بروانایا (البنجه) یوم الخامس '
         },
       ],
       'yahya': {
-        'en_US': 'Dehva ed Daima feast - Birth of John the Baptist',
-        'fa_IR': ' دهوا اد دیما - میلاد حضرت یحیی  ',
-        'ar': ' دهوا اد دیما - میلاد نبی یحیی  '
+        'en_US': 'Dehva ed Daima feast (Birth of John the Baptist)',
+        'fa_IR': ' (دهوا اد دیما (میلاد حضرت یحیی  ',
+        'ar': ' (دهوا اد دیما (میلاد نبی یحیی  ',
       },
       'kenshi': {
-        'en_US': 'Kenshi-u-Zehli feast',
-        'fa_IR': 'کنشو زهلی  ',
-        'ar': 'کنشو زهلی  '
+        'en_US': 'Kenshi-u-Zehli feast - Beginning of Kersa',
+        'fa_IR': ' کنشو زهلی - شروع كراصا  ',
+        'ar': ' کنشو زهلی - بداية كراصا  '
       },
       'eidBig': {
-        'en_US': 'Dehva Raba feast',
-        'fa_IR': 'دهوا ربا - عید بزرگ ',
-        'ar': 'دهوا ربا - عید الکبیر '
+        'en_US': 'Dehva Raba feast (The Great feast) - Second day of Kersa',
+        'fa_IR': ' دهوا ربا (عید بزرگ) - روز دوم كراصا   ',
+        'ar': 'دهوا ربا (عید الکبیر) -  كراصا یوم ثانی '
       },
       'kersa': {
-        'en_US': 'End of Kersa',
+        'en_US': 'Dehva Raba feast - End of Kersa',
         'fa_IR': ' دهوا ربا - پایان کراصا ',
         'ar': 'دهوا ربا - یوم الطلعه '
       },
@@ -182,15 +181,15 @@ class MandaEqu {
         }
       ],
       'alfil': {
-        'en_US': 'The Fel featival',
+        'en_US': 'The Fel festival',
         'fa_IR': 'جشن فل  ',
         'ar': 'احتفال فل  '
       },
       // 'alfil': {'en_US': 'The Fel feast', 'fa_IR': 'عید فل', 'ar': 'العید فل'},
       'eidSmall': {
-        'en_US': 'The Dehva Honina feast',
-        'fa_IR': 'دهوا حنینا - عید کوچک ',
-        'ar': ' دهوا حنینا - العید الصغیر '
+        'en_US': 'The Dehva Honina feast (The small feast) ',
+        'fa_IR': '(عید کوچک ) دهوا حنینا ',
+        'ar': ' (العید الصغیر ) دهوا حنینا '
       },
       'ashoreh': {
         'en_US': 'The Ashorieh day (AbulHeris)',
@@ -219,43 +218,6 @@ class MandaEqu {
     return month[index - 1];
   }
 
-  static changeDayFormate(String dayFa) {
-    String newFormateDay = dayFa;
-    switch (dayFa) {
-      case 'یکشنبه':
-        {
-          newFormateDay = 'یک شنبه';
-        }
-        break;
-
-      case 'دوشنبه':
-        {
-          newFormateDay = 'دو شنبه';
-        }
-        break;
-
-      case 'سه‌شنبه':
-        {
-          newFormateDay = 'سه‌ شنبه';
-        }
-        break;
-
-      case 'چهارشنبه':
-        {
-          newFormateDay = 'چهار شنبه';
-        }
-        break;
-
-      case 'پنجشنبه':
-        {
-          newFormateDay = 'پنج شنبه';
-        }
-        break;
-    }
-
-    return newFormateDay;
-  }
-
   static changeMonthFormate(String month) {
     Map monthAr = {
       'January': ' كانون الثاني',
@@ -274,62 +236,6 @@ class MandaEqu {
     return monthAr[month];
   }
 
-  static changeDayFormate22(String dayFa) {
-    String newFormateDay = dayFa;
-    String fixDay = "شنبه";
-    switch (dayFa) {
-      case 'یکشنبه':
-        {
-          newFormateDay = '۱' + fixDay;
-          // newFormateDay = newFormateDay.split('').reversed.join('');
-          // newFormateDay = fixDay;
-        }
-        break;
-
-      case 'دوشنبه':
-        {
-          newFormateDay = "($fixDay)2";
-          // newFormateDay = '۲' + fixDay;
-        }
-        break;
-
-      case 'سه‌شنبه':
-        {
-          newFormateDay = ' سه ‌شنبه';
-          // newFormateDay = 'سه‌ شنبه';
-        }
-        break;
-
-      case 'چهارشنبه':
-        {
-          newFormateDay = 'چهار شنبه';
-          // newFormateDay = 'چهار شنبه';
-        }
-        break;
-
-      case 'پنجشنبه':
-        {
-          newFormateDay = 'پنج شنبه';
-          // newFormateDay = 'پنج شنبه';
-        }
-        break;
-
-      case 'جمعه':
-        {
-          newFormateDay = 'جمعه';
-        }
-        break;
-
-      case 'شنبه':
-        {
-          newFormateDay = 'شنبه';
-        }
-        break;
-    }
-
-    return newFormateDay;
-  }
-
   static backBtn(index) {
     Map mulwashal = {
       'en_US': '<< Back to Calendar',
@@ -339,13 +245,13 @@ class MandaEqu {
     return mulwashal[index];
   }
 
-  static calendarTitle(index) {
+  static calendarTitle() {
     Map mulwashal = {
       'en_US': '  Mandaean Calendar',
       'fa_IR': '  تقویم  مندایی',
       'ar': ' التقويم المندائي '
     };
-    return mulwashal[index];
+    return mulwashal;
   }
 
   static mulwashaTitle(index) {
@@ -359,27 +265,27 @@ class MandaEqu {
 
   static birthLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Month:   ',
-      'fa_IR': '      ماه تولد:',
-      'ar': '   شهر المیلاد: '
+      'en_US': ' Birth Month ',
+      'fa_IR': '    ماه تولد ',
+      'ar': 'شهر المیلاد '
     };
     return mulwashal[index];
   }
 
   static motherLabel(index) {
     Map mulwashal = {
-      'en_US': " Mother's \n Melvashe:       ",
-      'fa_IR': ' ملواشه مادر: ',
-      'ar': '    ملواشة الام: '
+      'en_US': " Mother's Melvashe ",
+      'fa_IR': 'ملواشه مادر  ',
+      'ar': '  ملواشة الام  '
     };
     return mulwashal[index];
   }
 
   static timeLabel(index) {
     Map mulwashal = {
-      'en_US': ' Birth Time:     ',
-      'fa_IR': '   ساعت تولد: ',
-      'ar': 'الساعة المیلاد:'
+      'en_US': ' Birth Time ',
+      'fa_IR': '  ساعت تولد  ',
+      'ar': 'الساعة المیلاد'
     };
     return mulwashal[index];
   }
@@ -469,14 +375,6 @@ class MandaEqu {
       }
     };
 
-    // Map mulwashal = {
-    //   'en_US':
-    //       "Year format YYYY between 1920 to 2120.\n\nMonth formate MM between 1 to 12.\n\nDay formate DD between 1 to 31.",
-    //   'fa_IR':
-    //       ' سال بین ۱۲۹۹ تا ۱۴۹۹ انتخاب کنید \n\n ماه بین ۱ تا ۱۲ انتخاب کنید\n\n روز بین ۱ تا ۳۱ انتخاب کنید',
-    //   'ar':
-    //       'اختر السنة بين ۱۲۹۹ و ۱۴۹۹ \n\اختر الشهر بين ۱ و ۱۲ \n\n اختر اليوم بين ۱ و ۳۱'
-    // };
     return mulwashal[index];
   }
 
@@ -490,10 +388,15 @@ class MandaEqu {
   }
 
   static chooseYear(index) {
+    String dateF1 = " تاریخ" + "\n" + "شمسی";
+    String dateF2 = " تاریخ" + "\n" + "میلادی";
+    String dateA1 = " التاریخ" + "\n" + "الشمسية";
+    String dateA2 = " التاریخ" + "\n" + "المیلادی";
+
     Map mulwashal = {
-      'en_US': ['Gregorian Year', 'Solar year'],
-      'fa_IR': ['سال میلادی', 'سال شمسی'],
-      'ar': ['السنة الجورجية', 'سنة شمسية']
+      'en_US': ['Gregorian\nDate', 'Solar\nDate'],
+      'fa_IR': [dateF2, dateF1],
+      'ar': [dateA2, dateA1]
     };
     return mulwashal[index];
   }
@@ -502,7 +405,7 @@ class MandaEqu {
     Map data = {
       'en_US': [' Mandaean Date: ', 'Gregorian Date: ', 'Solar Date: '],
       'fa_IR': ['تاریخ مندایی: ', 'تاریخ میلادی: ', ' تاریخ شمسی:'],
-      'ar': ['تاریخ مندایی: ', 'تاریخ الجورجية:', 'تاریخ شمسية:']
+      'ar': ['التاريخ المندایی: ', 'التاريخ المیلادی:', 'التاريخ الشمسية:']
     };
     return data[index];
   }
@@ -520,15 +423,15 @@ class MandaEqu {
     Map mulwashal = {
       'en_US': [
         'Convert to Mandaean Date',
-        'If you do not know your birth month in Mandaean please convert your birth date here.'
+        ' If you do not know your birth month in Mandaean  \n please convert your birth date here.'
       ],
       'fa_IR': [
-        'تبدیل به تاریخ مندایی',
+        ' تبدیل به تاریخ مندایی',
         '  اگر ماه تولد خود را در مندایی نمی دانید\n لطفا تاریخ تولد خود را اینجا تبدیل کنید  '
       ],
       'ar': [
-        'تحويل إلى التاريخ مندائي',
-        '  إذا كنت لا تعرف شهر ميلادك في المندائية\n فيرجى تغيير تاريخ ميلادك هنا  '
+        ' تحويل إلى التاريخ مندائي   ',
+        '  إذا كنت لا تعرف شهر ميلادك في المندائية  \n فيرجى تغيير تاريخ ميلادك هنا  '
       ]
     };
     return mulwashal[index];
@@ -537,7 +440,7 @@ class MandaEqu {
   static femaleMulwashaEn() {
     final List<String> mandaEnName = [
       // "----",
-      'Hawa',
+      'Hawa ',
       'Sharat',
       'Yasman',
       'Modl-lal',
@@ -557,19 +460,19 @@ class MandaEqu {
   static femaleMulwashaFa() {
     final List<String> mandaEnName = [
       // "----",
-      'هوا',
-      'شارت',
-      'یاسمن',
-      'مدلل',
-      'انهر',
-      'مهنش',
-      'سیمت',
-      'هوا سیمت',
-      'شارت سیمت',
-      'مامانی',
-      'هوا مامانی',
-      'ملیحه',
-      'نرگس',
+      '  هوا                     ',
+      '  شارت  ',
+      '  یاسمن  ',
+      '  مدلل  ',
+      '  انهر  ',
+      '  مهنش  ',
+      '  سیمت  ',
+      ' هوا سیمت ',
+      '  شارت سیمت  ',
+      '  مامانی  ',
+      ' هوا مامانی ',
+      '  ملیحه  ',
+      '  نرگس  ',
     ];
     return mandaEnName;
   }
@@ -653,9 +556,8 @@ class MandaEqu {
   static birthTimeSelectorEn() {
     final List data = [
       {
-        // 'atAfter': ['----', 'at', 'after'],
-        'atAfter': ['at', 'after'],
-        'before': '\n                           before            '
+        'atAfter': [' at', ' after '],
+        'before': ' before  '
       }
     ];
     return data;
@@ -664,9 +566,8 @@ class MandaEqu {
   static birthTimeSelectorFa() {
     final List data = [
       {
-        // 'atAfter': ['----', 'راس ساعت', 'بعداز ساعت'],
-        'atAfter': ['راس ساعت', 'بعداز ساعت'],
-        'before': '\n                        قبل از ساعت               '
+        'atAfter': ['راس ساعت   ', 'بعداز ساعت'],
+        'before': '  قبل از ساعت  '
       }
     ];
     return data;
@@ -675,94 +576,57 @@ class MandaEqu {
   static birthTimeSelectorAr() {
     final List data = [
       {
-        // 'atAfter': ['----', 'الساعة ', 'بعد الساعة '],
-        'atAfter': ['الساعة ', 'بعد الساعة '],
-        'before': '\n                         قبل الساعة                 '
+        'atAfter': ['الساعة', 'بعد الساعة'],
+        'before': '  قبل الساعة   '
       }
     ];
     return data;
   }
 
-  // static birthTime() {
-  //   final List data = [
-  //     [
-  //       '6:00',
-  //       '6:01 - 7:59',
-  //       '8:00',
-  //       '8:01 - 09:59',
-  //       '10:00',
-  //       '10:01 - 11:59',
-  //       '12:00',
-  //       '12:01 - 13:59',
-  //       '14:00',
-  //       '14:01 - 15:59',
-  //       '16:00',
-  //       '16:01 - 17:59',
-  //       '18:00',
-  //       '18:01 - 19:59',
-  //       '20:00',
-  //       '20:01 - 21:59',
-  //       '22:00',
-  //       '22:01 - 23:59',
-  //       '24:00',
-  //       '00:01 - 01:59',
-  //       '02:00',
-  //       '02:01 - 03:59',
-  //       '04:00',
-  //       '04:01 - 05:59'
-  //     ],
-  //     [
-  //       {
-  //         '6:00': 1,
-  //         '6:01 - 7:59': 1,
-  //         '8:00': 2,
-  //         '8:01 - 09:59': 2,
-  //         '10:00': 3,
-  //         '10:01 - 11:59': 3,
-  //         '12:00': 4,
-  //         '12:01 - 13:59': 4,
-  //         '14:00': 5,
-  //         '14:01 - 15:59': 5,
-  //         '16:00': 6,
-  //         '16:01 - 17:59': 6,
-  //         '18:00': 7,
-  //         '18:01 - 19:59': 7,
-  //         '20:00': 8,
-  //         '20:01 - 21:59': 8,
-  //         '22:00': 9,
-  //         '22:01 - 23:59': 9,
-  //         '24:00': 10,
-  //         '00:01 - 01:59': 10,
-  //         '02:00': 11,
-  //         '02:01 - 03:59': 11,
-  //         '04:00': 12,
-  //         '04:01 - 05:59': 12,
-  //       }
-  //     ]
-  //   ];
-  //   return data;
-  // }
-
   static birthMonthNameFa() {
     final List<String> data = [
       // "----",
-      'امبرا',
-      'تورا',
-      'صلمی',
-      'سرطانا',
-      'آریا',
-      'شمبلتا',
-      'پنجه ۱',
-      'پنجه ۲',
-      'پنجه ۳',
-      'پنجه ۴',
-      'پنجه ۵',
-      'قینا',
-      'ارقوا',
-      'هطیا',
-      'گدیا',
-      'دولا',
-      'نونا',
+      '  امبرا ',
+      '  تورا',
+      '  صلمی',
+      '  سرطانا',
+      '  آریا',
+      '  شمبلتا',
+      '  پنجه روز اول',
+      '  پنجه روز دوم',
+      '  پنجه روز سوم',
+      '  پنجه روز چهارم    ',
+      '  پنجه روز پنجم',
+      '  قینا',
+      '  ارقوا',
+      '  هطیا',
+      '  گدیا',
+      '  دولا',
+      '  نونا',
+    ];
+    return data;
+  }
+
+  static birthMonthNameAr() {
+    final List<String> data = [
+      // "----",
+      '  امبرا    ',
+      '  تورا',
+      '  صلمی',
+      '  سرطانا',
+      '  آریا',
+      '  شمبلتا',
+      '  پنجه اليوم الأول',
+      '  پنجه اليوم الثاني',
+      '  پنجه اليوم الثالث',
+      '  پنجه اليوم الرابع',
+      '  پنجه اليوم الخامس',
+      '  قینا',
+      '  ارقوا',
+      '  هطیا',
+      '  گدیا',
+      '  دولا',
+      '  نونا',
     ];
     return data;
   }
@@ -772,17 +636,17 @@ class MandaEqu {
       // "----",
       'Embra',
       'Taura',
-      'Silmia',
+      'Ṣelmi',
       'Sartana',
       'Aria',
       'Shombolta',
-      'Panja 1',
-      'Panja 2',
-      'Panja 3',
-      'Panja 4',
-      'Panja 5',
+      'Panja Day 1    ',
+      'Panja Day 2',
+      'Panja Day 3',
+      'Panja Day 4',
+      'Panja Day 5',
       'Qaina',
-      'Arqba',
+      'Arqawa',
       'Hatia',
       'Gadia',
       'Daula',
@@ -794,8 +658,8 @@ class MandaEqu {
   static findBut(index) {
     Map mulwashal = {
       'en_US': '  Find Melvashe  ',
-      'fa_IR': '  پیدا کردن ملواشه  ',
-      'ar': '  اكتشف ملواشه   '
+      'fa_IR': '   پیدا کردن ملواشه  ',
+      'ar': '   اكتشف ملواشه   '
     };
     return mulwashal[index];
   }
@@ -860,18 +724,21 @@ class MandaEqu {
         // "-",
         'Melvashe',
         'Religious Occasions',
+        'Choose Calendar',
         'Help',
       ],
       [
         // "-",
         '              ملواشه',
         'مناسبت های دینی',
+        '       انتخاب تقویم',
         '                راهنما',
       ],
       [
         // "-",
         '        ملواشه',
         'مناسبات دینیه',
+        '   اختر التقويم',
         '        مساعدة',
       ],
     ];
@@ -921,9 +788,9 @@ class MandaEqu {
   static donotUseMelvash(index) {
     Map mulwashal = {
       'en_US':
-          'If you are not familiar with the concepts of Melvashe, please do not use this section!',
+          ' If you are not familiar with the concepts of  \nMelvashe, please do not use this section!',
       'fa_IR':
-          '،اگر با مفاهیم ملواشه آشنا نمی باشید\n! لطفا از این قسمت استفاده نفرمایید',
+          '،اگر با مفاهیم ملواشه آشنا نمی باشید \n! لطفا از این قسمت استفاده نفرمایید',
       'ar':
           '،إذا لم تكن على دراية بمفاهيم الملوشة \n! فيرجى عدم استخدام هذا القسم '
     };
@@ -1039,7 +906,6 @@ class MandaEqu {
             "در غیر این صورت ، 'بعدازساعت' را انتخاب کنید که به شما بازده زمانی دو ساعت می دهد" +
             "\n" +
             " :برای مثال" +
-            "\n" +
             "\n\n اگر زمان تولد بعد از ساعت ۶:۰۰ اما قبل از ساعت ۸:۰۰ مانند ۶:۰۱ ، ۷:۰۰ ، ۷:۵۹ باشد" +
             "\n بعد از ساعت ۶:۰۰ را انتخاب کنید، برنامه قبل از ساعت ۸:۰۰ را نمایش خواهد داد" +
             "\n\n اگر زمان تولد بعد از ساعت ۸:۰۰ اما قبل از ساعت ۱۰:۰۰ مانند ۸:۰۱ ، ۹:۳۰ ، ۹:۵۹ باشد" +
@@ -1061,5 +927,96 @@ class MandaEqu {
       ]
     };
     return mulwashal[index];
+  }
+
+  static daysWeekFa(index) {
+    String dayFa = index;
+    Map data = {
+      "شنبه": "شنبه",
+      "جمعه": "جمعه",
+      "پنجشنبه": "پنج شنبه",
+      "چهارشنبه": "چهار شنبه",
+      "سه‌شنبه": "سه ‌شنبه",
+      "دوشنبه": "دو شنبه",
+      "یکشنبه": "یک شنبه",
+    };
+    return data[dayFa];
+  }
+
+  static daysWeekAr(index) {
+    String dayFa = index;
+    Map data = {
+      "الأحد": "أحد",
+      "الاثنين": "اثنين",
+      "الثلاثاء": "ثلاثاء",
+      "الأربعاء": "أربعاء",
+      "الخميس": "خميس",
+      "الجمعة": "جمعة",
+      "السبت": "سبت",
+    };
+    return data[dayFa];
+  }
+
+  static yearLabel(index) {
+    Map data = {
+      'en_US': ['Adam', 'Yahyaiee', 'Gregorian', 'Shamsi'],
+      'fa_IR': ['ح یحیی', 'ح آدم', 'میلادی', 'شمسی'],
+      'ar': ['ن یحیی', 'ن آدم', 'المیلادی', 'الشمسية']
+    };
+    return data[index];
+  }
+
+  static selectCalendar(index) {
+    Map data = {
+      'en_US': [
+        '  Select a Calendar to display',
+        '  Gregorian',
+        '  Mandaean',
+        '  Shamsi',
+        '  None'
+      ],
+      'fa_IR': [
+        '  تقویمی را برای نمایش انتخاب کنید      ',
+        '  میلادی      ',
+        '  مندایی     ',
+        '  شمسی     ',
+        '  هیچکدام    '
+      ],
+      'ar': [
+        '  حدد التقويم لعرضه  ',
+        '  المیلادی  ',
+        '   المندایی  ',
+        '  الشمسية  ',
+        '  لا اختار  '
+      ],
+    };
+    return data[index];
+  }
+
+  static calendarDisplay(index) {
+    Map data = {
+      'en_US': [
+        'Calendar Selection',
+        'Please select the calendar in the order you wish to be displayed',
+        'First display: ',
+        'Second display:',
+        'ُThird display: '
+      ],
+      'fa_IR': [
+        'انتخاب تقویم',
+        'لطفاً تقویم را به ترتیبی که می خواهید نمایش داده شود ، انتخاب کنید',
+        ': نمایش اول',
+        ': نمایش دوم',
+        ': نمایش سوم'
+      ],
+      'ar': [
+        'اختيار التقويم',
+        'يرجى تحديد التقويم بالترتيب الذي ترغب في عرضه',
+        ': العرض الاول',
+        ': العرض الثاني',
+        ': العرض الثالث'
+      ]
+    };
+    return data[index];
   }
 }

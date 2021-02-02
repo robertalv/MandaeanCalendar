@@ -30,6 +30,7 @@ class MandaDisplayHolyDays extends StatelessWidget {
     return MaterialApp(
       title: 'Religious Occasion',
       home: DisplayEventsPage(localLang: localLang),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -52,12 +53,20 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
   SingingYear _convert = SingingYear.geo;
   int _controllerYY;
   int _sizeRate = 1;
-  double _marginHor = 10.0;
+
   int _dropdownListNum;
+
+  double _cardFontSize = 18.0;
+  double _fontSize = 18.0;
+  double _paddingTop = 6.0;
+  double _iconDropSize = 50;
+  double _displaySize;
+  double _divecWidth;
+  String myYearValue = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var _listOfEventsForYear;
-  Map _myColorSelection = Mycolor.selection();
+  Map _myColorSelection = MyColor.selection();
 
   MandaHolyDaysDisplay(localLang) {
     this.localLang = localLang;
@@ -65,160 +74,142 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('CALLBACK: MandaHolyDaysDisplay');
     MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    double _divecWidth = MediaQuery.of(context).size.width;
+    _divecWidth = MediaQuery.of(context).size.width;
+    _displaySize = _divecWidth - 8;
     if (_divecWidth > 700) {
+      _fontSize = 30.0;
+      _cardFontSize = 25.0;
+      _displaySize = 700;
       _sizeRate = 2;
-      _marginHor = 12 + (_divecWidth - 700) / 2;
+
+      _paddingTop = 20.0;
+    } else {
+      _fontSize = 20.0;
+      _cardFontSize = 18.0;
+      _sizeRate = 1;
+
+      _paddingTop = 15.0;
     }
-
     return Scaffold(
-        appBar: AppBar(
-          leading: backToMainPage(context),
-          backgroundColor: _myColorSelection['header'],
-          title: Text(mulwashaLabel.mandaYearEventsLable[0],
-              style:
-                  TextStyle(color: Colors.black, fontSize: 18.0 * _sizeRate)),
+      appBar: AppBar(
+        leading: backToMainPage(context),
+        backgroundColor: _myColorSelection['header'],
+        title: Text(mulwashaLabel.mandaYearEventsLable[0],
+            style: TextStyle(color: Colors.black, fontSize: _cardFontSize)),
+      ),
+      body: Center(
+          child: Container(
+              // margin: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+              child: ListView(children: [
+        Text(
+          mulwashaLabel.mandaYearEventsLable[1],
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: _cardFontSize - 6),
         ),
-        body: Center(
-          child: ListView(
+        Container(
+          width: _displaySize,
+          child: Column(
             children: [
-              Container(
-                margin:
-                    EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 10,
-                    ),
-
-                    Text(
-                      mulwashaLabel.mandaYearEventsLable[1],
-                      style: TextStyle(
-                          fontSize: 14.0 * _sizeRate,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    // Container(height: 20),
-                    Column(children: [
-                      Form(
-                          key: _formKey,
-                          child: new Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Flexible(
-                                      child: new TextFormField(
-                                          keyboardType: TextInputType.number,
-                                          maxLength: 4,
-                                          inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
-                                          ],
-                                          validator: (value) => validateYY(
-                                              value, mulwashaLabel.yearMaxMin),
-                                          style: TextStyle(
-                                              fontSize: 16.0 * _sizeRate,
-                                              color: Colors.black),
-                                          decoration: InputDecoration(
-                                              labelText:
-                                                  mulwashaLabel.dateLabel[0],
-                                              labelStyle: TextStyle(
-                                                fontSize: 14.0 * _sizeRate,
-                                              ),
-                                              hintText:
-                                                  mulwashaLabel.dateLabel[0],
-                                              icon: Icon(
-                                                Icons.date_range,
-                                                size: 18.0 * _sizeRate,
-                                              )))),
-                                  // Padding(
-                                  //     padding:
-                                  //         EdgeInsets.only(left: _marginHor)),
-                                ],
-                              ),
-                              radioButDate(context),
-                              // RaisedButton(
-                              //     child: Text(
-                              //       mulwashaLabel.convertDate[0],
-                              //       style: TextStyle(fontSize: 20.0),
-                              //     ),
-                              //     onPressed: validateYear),
-                              yearEventsDrop(context),
-                              // _buildEventList(context, _listOfEventsForYear),
-                            ],
-                          )),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                      ),
-                      _buildEventList(context, _listOfEventsForYear),
-                      _listOfEventsForYear == null
-                          ? SizedBox(height: 138.0 * _sizeRate)
-                          : SizedBox(height: 38.0),
-                      RaisedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MandaeanCalendar()));
-                        },
-                        child: Text(mulwashaLabel.backBtn,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12.0 * _sizeRate)),
-                      ),
-                    ]),
-                  ],
-                ),
-              ),
+              SizedBox(
+                  width: _displaySize,
+                  child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 4,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        validator: (value) =>
+                            validateYY(value, mulwashaLabel.yearMaxMin),
+                        style:
+                            TextStyle(fontSize: _fontSize, color: Colors.black),
+                        decoration: InputDecoration(
+                            labelText: mulwashaLabel.dateLabel[0],
+                            labelStyle: TextStyle(
+                              fontSize: _fontSize,
+                            ),
+                            hintText: mulwashaLabel.dateLabel[0],
+                            icon: Icon(
+                              Icons.date_range,
+                              size: _fontSize,
+                            )),
+                      ))),
+              Padding(padding: EdgeInsets.only(top: _paddingTop)),
+              radioButDate(context),
+              Padding(padding: EdgeInsets.only(top: 25.0 * _sizeRate)),
+              yearEventsDrop(context),
             ],
           ),
-        ));
+        ),
+        Padding(padding: EdgeInsets.only(top: 30.0 * _sizeRate)),
+        _buildEventList(context, _listOfEventsForYear),
+        _listOfEventsForYear == null
+            ? SizedBox(height: 138.0 * _sizeRate)
+            : SizedBox(height: 38.0),
+        RaisedButton(
+          color: Colors.brown[100],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+              side: BorderSide(color: Colors.black)),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MandaeanCalendar()));
+          },
+          child: Text(mulwashaLabel.backBtn,
+              style: TextStyle(color: Colors.black, fontSize: _cardFontSize)),
+        ),
+      ]))),
+    );
   }
 
   Widget radioButDate(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
-    // var dropListData = mulwashaLabel.monthName;
-
-    return Row(children: <Widget>[
-      // Padding(padding: EdgeInsets.only(left: _marginHor)),
-      new Flexible(
-        child: RadioListTile<SingingYear>(
-            title: Text(
-              mulwashaLabel.chooseYear[0],
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14.0 * _sizeRate,
-              ),
+    var chooseYear = MandaEqu.chooseYear(localLang);
+    return Container(
+        width: _displaySize,
+        child: Stack(
+          children: [
+            Positioned(
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.geo,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[0],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
             ),
-            value: SingingYear.geo,
-            groupValue: _convert,
-            onChanged: (SingingYear value) {
-              setState(() {
-                _convert = value;
-              });
-            }),
-      ),
-      new Flexible(
-        child: RadioListTile<SingingYear>(
-            title: Text(
-              mulwashaLabel.chooseYear[1],
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14.0 * _sizeRate,
-              ),
+            Positioned(
+              right: 10,
+              child: Row(children: <Widget>[
+                Radio(
+                    value: SingingYear.sol,
+                    groupValue: _convert,
+                    onChanged: (SingingYear value) {
+                      setState(() {
+                        _convert = value;
+                      });
+                    }),
+                Text(
+                  chooseYear[1],
+                  style: TextStyle(color: Colors.black, fontSize: _fontSize),
+                ),
+              ]),
             ),
-            value: SingingYear.sol,
-            groupValue: _convert,
-            onChanged: (SingingYear value) {
-              setState(() {
-                _convert = value;
-              });
-            }),
-      ),
-      // Padding(padding: EdgeInsets.only(left: _marginHor)),
-    ]);
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Text(""),
+            // ),
+          ],
+        ));
   }
 
   static sortDate(List<DateTime> newProducts) {
@@ -231,66 +222,66 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
   String selectedEvent;
   @override
   Widget yearEventsDrop(BuildContext context) {
-    MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
+    // MulwashaLabel mulwashaLabel = MulwashaLabel(localLang);
 
-    List<String> dropdownList;
-    dropdownList = mulwashaLabel.mandaYearEvents;
+    // List<String> dropdownList;
+    // dropdownList = mulwashaLabel.mandaYearEvents;
+    List<String> dropdownList = MandaEqu.mandaYearEvents(localLang);
 
     String hintText = dropdownList[0];
     dropdownList.removeRange(0, 1);
-    var myAlignment = mulwashaLabel.myAlignment;
+    // var myAlignment = mulwashaLabel.myAlignment;
+    var myAlignment = MandaEqu.myAlignment(localLang);
     // FormState form = _formKey.currentState;
     validateYear();
     return DropdownButtonHideUnderline(
-        child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10)),
-            child: new DropdownButton<String>(
-              isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: 20.0 * _sizeRate,
-              // dropdownColor: Colors.green,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12.0 * _sizeRate,
-                fontWeight: FontWeight.bold,
-              ),
-              hint: Container(
-                alignment: myAlignment,
-                child: new Text(hintText,
-                    style: TextStyle(
-                        color: Colors.black45, fontSize: 12.0 * _sizeRate)),
-              ),
+        child: SizedBox(
+            width: _displaySize,
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)),
+                child: new DropdownButton<String>(
+                  isExpanded: true,
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: _iconDropSize,
+                  // dropdownColor: Colors.green,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: _fontSize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  hint: Container(
+                    alignment: myAlignment,
+                    child: new Text(hintText,
+                        style: TextStyle(
+                            color: Colors.black45, fontSize: _fontSize)),
+                  ),
 
-              value: selectedEvent == null ? null : selectedEvent,
-              items: dropdownList.map((String value) {
-                return new DropdownMenuItem<String>(
-                    value: value,
-                    child: Container(
-                      alignment: myAlignment,
-                      child: new Text(value,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: 12.0 * _sizeRate)),
-                    ));
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  List<dynamic> eventsList;
-                  selectedEvent = value;
-                  _dropdownListNum = dropdownList.indexOf(value);
-                });
-              },
-            )));
+                  value: selectedEvent == null ? null : selectedEvent,
+                  items: dropdownList.map((String value) {
+                    return new DropdownMenuItem<String>(
+                        value: value,
+                        child: Container(
+                          alignment: myAlignment,
+                          child: new Text(value,
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: _fontSize)),
+                        ));
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      selectedEvent = value;
+                      _dropdownListNum = dropdownList.indexOf(value);
+                    });
+                  },
+                ))));
   }
-
-  // Widget _validate(BuildContext context) {
-  //   validateYear();
-  //   return Text("No data return");
-  // }
 
   Widget _buildEventList(BuildContext context, var events) {
     var myAlignment = MyAlignment.countryLanguage(localLang);
+    var myTextAlignment = MyAlignment.textAlig(localLang);
     var selectedEvents = [];
     var myColor;
     MyIcon myIcon = MyIcon(_sizeRate);
@@ -309,9 +300,8 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
         beforeIcon = myEventIcon[_dropdownListNum];
         afterIcon = myIcon.noon;
       } else {
-        // spaceNotEn = ' ';
-        afterIcon = myEventIcon[_dropdownListNum];
         beforeIcon = myIcon.noon;
+        afterIcon = myEventIcon[_dropdownListNum];
       }
 
       if (events.length == 3) {
@@ -320,34 +310,48 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
         afterIcon = myIcon.error;
         beforeIcon = myIcon.error;
       } else {
-        // selectedEvents = events[_dropdownListNum][localLang];
-        // myColor = myColorList[_dropdownListNum];
         selectedEvents = events[_dropdownListNum];
-        // myColor = myColorList[_dropdownListNum];
       }
     }
-
+    // double widthBoxSize = 45;
+    // if (_divecWidth < 321) {
+    //   widthBoxSize = 70;
+    // }
     return Column(
       children: selectedEvents
           .map((event) => Container(
-                height: 30.0 * _sizeRate,
+                // height: widthBoxSize * _sizeRate,
+                constraints: BoxConstraints(
+                  minHeight: 30,
+                ),
+                width: _displaySize,
                 alignment: myAlignment,
                 decoration: BoxDecoration(
-                    border: Border.all(width: 0),
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: myColor),
+                  border: Border.all(width: 0),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: myColor,
+                ),
                 margin: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
-                child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Row(children: [
-                      beforeIcon,
-                      Text(
-                        LocalNum.convertEntoFa(event.toString(), localLang),
-                        style: TextStyle(
-                            fontSize: 18.0 * _sizeRate, color: Colors.black),
-                      ),
-                      afterIcon,
-                    ])),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        beforeIcon,
+                        Flexible(
+                            child: Container(
+                          alignment: myAlignment,
+                          child: Text(
+                            event.toString(),
+                            textAlign: myTextAlignment,
+                            style: TextStyle(
+                                fontSize: _fontSize, color: Colors.black),
+                          ),
+                        )),
+                        afterIcon
+                      ],
+                    ),
+                  ],
+                ),
               ))
           .toList(),
     );
@@ -358,7 +362,7 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
         icon: Icon(
           Icons.arrow_back_ios,
           color: Colors.white,
-          size: 20.0 * _sizeRate,
+          size: _cardFontSize,
         ),
         onPressed: () {
           Navigator.push(context,
@@ -374,7 +378,11 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       yearMax = 2121;
     }
     if (value.isNotEmpty) {
-      int newValue = int.parse(value);
+      myYearValue = value;
+    }
+
+    if (myYearValue.isNotEmpty) {
+      int newValue = int.parse(myYearValue);
 
       if ((newValue == null) || (newValue < yearMin) || (newValue > yearMax)) {
         return '$yearMin-$yearMax';
@@ -470,27 +478,27 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
     dateBeginOfMonth = sortDate(dateBeginOfMonth);
 
     dateBeginOfMonth.forEach((date) {
-      String formatted = findDateFormate(date, isSolr);
+      String formatted = findDateFormate(date, isSolr, localLang);
 
       Map selectedEvent = holidays[date][0];
       _firstMonthEvents.add(formatted + " " + selectedEvent[localLang]);
     });
 
     dateEvents.forEach((date) {
-      String formatted = findDateFormate(date, isSolr);
+      String formatted = findDateFormate(date, isSolr, localLang);
 
       List selectedEvents = events[date];
       selectedEvents.forEach((selectedEvent) {
-        // print(selectedEvent.runtimeType);
         if (selectedEvent.runtimeType.toString().contains("List")) {
           selectedEvent = selectedEvent[0];
         }
         if (selectedEvent['en_US'].contains("Major")) {
-          _majorEvents.add(formatted + " " + selectedEvent[localLang]);
+          _majorEvents.add(formatted + "  " + selectedEvent[localLang]);
         } else if (selectedEvent['en_US'].contains("Minor")) {
-          _minorEvents.add(formatted + " " + selectedEvent[localLang]);
+          _minorEvents.add(formatted + "  " + selectedEvent[localLang]);
         } else {
-          _religiousEvents.add(formatted + " " + selectedEvent[localLang]);
+          _religiousEvents
+              .add(formatted + "  " + selectedEvent[localLang].trim() + " ");
         }
       });
     });
@@ -502,8 +510,9 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
     return [_religiousEvents, _firstMonthEvents, _minorEvents, _majorEvents];
   }
 
-  static findDateFormate(date, isSolr) {
+  static findDateFormate(date, isSolr, localLang) {
     String formatted;
+
     if (isSolr) {
       Gregorian g = Gregorian(date.year, date.month, date.day);
       Jalali g2j = g.toJalali();
@@ -514,6 +523,8 @@ class MandaHolyDaysDisplay extends State<DisplayEventsPage> {
       final DateFormat formatter = DateFormat('yyyy/MM/dd');
       formatted = formatter.format(date);
     }
+    formatted = LocalNum.convertEntoFaAr(formatted, localLang);
+
     return formatted;
   }
 }

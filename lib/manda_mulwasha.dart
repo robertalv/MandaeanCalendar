@@ -14,7 +14,7 @@ class MulwashaLabel {
   Map alertMsg;
   String alertTtitle;
   List dateLabel;
-  List chooseYear;
+  // List chooseYear;
   List convertDate;
   String findBut;
   List yearMaxMin;
@@ -26,11 +26,11 @@ class MulwashaLabel {
   List birthTimeSelector;
   List childTalea;
   var maleMulwasha;
-  var menuDrop;
-  var mandaYearEvents;
+  // var menuDrop;
+  // var mandaYearEvents;
   var mandaYearEventsLable;
   var mandaFeastName;
-  var myAlignment;
+  // var myAlignment;
   // var birthTimeNew;
 
   MulwashaLabel(localLang) {
@@ -48,7 +48,7 @@ class MulwashaLabel {
     this.alertMsg = MandaEqu.alertConvertMsg(localLang);
     this.alertTtitle = MandaEqu.alertTtitle(localLang);
     this.dateLabel = MandaEqu.dateLabel(localLang);
-    this.chooseYear = MandaEqu.chooseYear(localLang);
+    // this.chooseYear = MandaEqu.chooseYear(localLang);
     this.convertDate = MandaEqu.convertDate(localLang);
     this.findBut = MandaEqu.findBut(localLang);
     this.yearMaxMin = MandaEqu.yearMaxMin(localLang);
@@ -61,10 +61,10 @@ class MulwashaLabel {
     this.birthTimeSelector = birthTimeSelectorName(localLang);
     this.childTalea = childTaleaName(localLang);
     this.maleMulwasha = maleMulwashaName(localLang);
-    this.menuDrop = menuDropList(localLang);
-    this.mandaYearEvents = MandaEqu.mandaYearEvents(localLang);
+    // this.menuDrop = menuDropList(localLang);
+    // this.mandaYearEvents = MandaEqu.mandaYearEvents(localLang);
     this.mandaYearEventsLable = MandaEqu.mandaYearEventsLable(localLang);
-    this.myAlignment = MandaEqu.myAlignment(localLang);
+    // this.myAlignment = MandaEqu.myAlignment(localLang);
   }
 
   static birthTimeName(String localLang) {
@@ -106,10 +106,10 @@ class MulwashaLabel {
     var dataList;
     if (localLang == 'en_US') {
       dataList = MandaEqu.birthMonthNameEn();
-      // dataList.add("----");
-    } else {
+    } else if (localLang == 'fa_IR') {
       dataList = MandaEqu.birthMonthNameFa();
-      // dataList.add("----");
+    } else {
+      dataList = MandaEqu.birthMonthNameAr();
     }
     return dataList;
   }

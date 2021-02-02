@@ -1,51 +1,79 @@
-//  Copyright (c) 2019 Aleksander Woźniak
-//  Licensed under Apache License v2.0
-import 'dart:core';
-
-/// Farid Khafji Zadeh 2020 Mandean Calender
-
+// //  Copyright (c) 2020 Farid Khafaji Zadeh - Farid Yuri Mahour Asad Anjeel
+//// Mandean Calender
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'manda_equivalent.dart';
 import 'manda_events.dart';
 import 'manda_footer.dart';
-import 'manda_formate.dart';
 import 'manda_holidays.dart';
-import 'manda_scrolling_text.dart';
-import 'manda_top_icon_refresh.dart';
-import 'manda_top_icon.dart';
-import 'my_alignment.dart';
+import 'manda_month_events.dart';
+import 'my_font_size.dart';
+import 'my_functions.dart';
+import 'setter_getter.dart';
+import 'manda_equivalent.dart';
+import 'widget_calendar_builder.dart';
+import 'widget_drawer.dart';
+import 'widget_events_list.dart';
+import 'widget_top_icon.dart';
 import 'my_color.dart';
-import 'my_icon_events.dart';
+import 'user_set.dart';
+import 'manda_scrolling_text.dart';
 
-var _localLang = 'en_US';
-var _preLocalLang = 'en_US';
-var mandaDay;
-var myFooter;
-DateTime _selectedDay;
+LocalLang _lang = new LocalLang();
+CalenderKind _calenderKind = new CalenderKind();
+Event _event = new Event();
+Selected _selected = new Selected();
+// StartOfMonth _first = new StartOfMonth();
+// EndOfMonth _last = new EndOfMonth();
+GregMonthInfo _gregMonth = new GregMonthInfo();
+MandaMonthInfo _mandaMonth = new MandaMonthInfo();
+ShamsiMonthInfo _shamsiMonth = new ShamsiMonthInfo();
+// CalendarActiveKind _calendarActive = new CalendarActiveKind();
+DivecSize _divec = new DivecSize();
+Data _data = new Data();
+Map _myColorSelection = MyColor.selection();
+DateTime todayNow = DateTime.now();
+DateTime _today = DateTime(todayNow.year, todayNow.month, todayNow.day, 0, 0);
+DateTime selectedDay = DateTime(_today.year, _today.month, _today.day, 0, 0);
+double _cellWidth;
+Map<DateTime, List> _events;
 Map<DateTime, List> _holidays;
-
-MandaFormatedDateBuilder mandaDate =
-    new MandaFormatedDateBuilder(DateTime.now(), _localLang);
-var _mandaAndJalaiYear = mandaDate.fullYearEnFa;
-var _mandeanDay = mandaDate.fullDay;
-
-List _selectedEvent;
-List _selectedHoliday;
+var _dateEquivalent;
+var _yearEquivalent;
+List _selectedEvents = [];
+var _listOfEventsForYear;
+var _context;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  UserSetting.getCalendar(_calenderKind);
+  UserSetting.getDefaultLanguage(_lang);
+  _data.calendarKind = _calenderKind.display;
   initializeDateFormatting().then((_) => runApp(MandaeanCalendar()));
 }
 
 class MandaeanCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _data.lang = _lang;
+    _data.event = _event;
+    _data.calendarKind = _calenderKind;
+    _data.selected = _selected;
+    // _data.first = _first;
+    // _data.last = _last;
+    _data.gregMonth = _gregMonth;
+    _data.mandaMonth = _mandaMonth;
+    _data.shamsiMonth = _shamsiMonth;
+    _data.gregMonth.info = {};
+    _data.mandaMonth.info = {};
+    _data.shamsiMonth.info = {};
+    _lang.name = "en_US";
+    _selected.date = selectedDay;
+    _data.today = selectedDay;
+
     return MaterialApp(
-      // title: 'Mandean Calendar',
-      title: MandaEqu.calendarTitle(_localLang),
-      home: MyHomePage(title: MandaEqu.calendarTitle(_localLang)),
+      title: 'Mandaean Calendar',
+      home: MyHomePage(title: ""),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -57,680 +85,379 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+  static void runHolidaysEvents(int selectedYear, var data) {
+    data.event.year = selectedYear;
+    _holidays = MandaFirstDayOfMonthBuilder(selectedYear).eventsForWholeYear;
+    _events = MandaEventssBuilder(selectedYear).wholeYear;
+    final List eventName = MandaEqu.mandaFirstMonth();
+    var decBefor =
+        MandaFirstDayOfMonthBuilder.forMonthInYear(12, selectedYear - 1);
+    var janAfter =
+        MandaFirstDayOfMonthBuilder.forMonthInYear(1, selectedYear + 1);
+    _holidays[decBefor[0]] = eventName;
+    _holidays[janAfter[0]] = eventName;
+    Map<DateTime, List> decEventBefor =
+        MandaEventssBuilder.forGivenMonth(12, selectedYear - 1);
+    Map<DateTime, List> janEventAfter =
+        MandaEventssBuilder.forGivenMonth(1, selectedYear + 1);
+    _events.addAll(decEventBefor);
+    _events.addAll(janEventAfter);
+
+    MandaGregShamsiInfo.dateBuilder(_data);
+
+    _listOfEventsForYear =
+        scrollingText.generateEventsforScroll(_events, _holidays);
+  }
+
+  static void _onVisibleMonth(
+      data, DateTime dateFaAr, DateTime date, String leftRight, kind) {
+    print('CALLBACK: _onVisibleMonth');
+    DateTime selectedDay = data.selected.date;
+
+    if (data.lang.name == "fa_IR" || data.lang.name == "ar") {
+      data.selected.date = dateFaAr;
+      if (leftRight == 'right') {}
+    } else {
+      data.selected.date = date;
+      if (leftRight == 'right') {}
+    }
+    CalendarBuilder.getMonthDate(data);
+    selectedDay = data.selected.date;
+    _selectedEvents = MyHomePage.todayHolidayEvents(selectedDay);
+    _dateEquivalent = [selectedDay, '', kind];
+    _listOfEventsForYear['en_US'] = '';
+    // print(selectedDay);
+
+    if (data.event.year != selectedDay.year) {
+      runHolidaysEvents(selectedDay.year, data);
+    }
+  }
+
+  static void onVisibleGregLeft(data) {
+    print('CALLBACK: _onVisibleMonthLeft');
+    DateTime selectedDay = data.selected.date;
+
+    _onVisibleMonth(
+        data,
+        DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
+        DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
+        'left',
+        'g');
+  }
+
+  static onVisibleGregRight(data) {
+    print('CALLBACK: _onVisibleMonthRight');
+    DateTime selectedDay = data.selected.date;
+
+    _onVisibleMonth(
+        data,
+        DateTime(selectedDay.year, selectedDay.month - 1, 1, 0, 0),
+        DateTime(selectedDay.year, selectedDay.month + 1, 1, 0, 0),
+        'right',
+        'g');
+  }
+
+  static onVisibleMandaLeft(data) {
+    print('CALLBACK: _onVisibleMandaMonthLeft');
+
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 2) {
+      duration = 35;
+    }
+
+    _onVisibleMonth(
+        data,
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        'left',
+        'm');
+  }
+
+  static onVisibleMandaRight(data) {
+    print('CALLBACK: _onVisibleMandaMonthRight');
+    // DateTime selectedDay = data.selected.date;
+    DateTime first = data.mandaMonth.info["first"];
+    DateTime last = data.mandaMonth.info["last"];
+    var month = data.mandaMonth.info["month"];
+    // print('first $first');
+    // print('last $last');
+    // print('month $month');
+    var duration = 30;
+    if (month == 2) {
+      duration = 35;
+    }
+
+    _onVisibleMonth(
+        data,
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        'right',
+        'm');
+  }
+
+  static onVisibleShamsiLeft(data) {
+    print('CALLBACK: _onVisibleShamsiMonthLeft');
+
+    DateTime first = data.shamsiMonth.info["first"];
+    DateTime last = data.shamsiMonth.info["last"];
+    var jalaliDay = data.shamsiMonth.info["jalaliDay"];
+    // print('old $jalaliDay');
+    jalaliDay = jalaliDay.addMonths(-1);
+    var duration = jalaliDay.monthLength;
+    // print('duration $duration');
+
+    _onVisibleMonth(
+        data,
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        'left',
+        's');
+  }
+
+  static onVisibleShamsiRight(data) {
+    print('CALLBACK: _onVisibleShamsiMonthRight');
+
+    DateTime first = data.shamsiMonth.info["first"];
+    DateTime last = data.shamsiMonth.info["last"];
+    var jalaliDay = data.shamsiMonth.info["jalaliDay"];
+    // print('old $jalaliDay');
+    jalaliDay = jalaliDay.addMonths(-1);
+    var duration = jalaliDay.monthLength;
+
+    _onVisibleMonth(
+        data,
+        DateTime(first.year, first.month, first.day - duration, 0, 0),
+        DateTime(last.year, last.month, last.day + 1, 0, 0),
+        'right',
+        's');
+  }
+
+  static void onDaySelected(selectedDay) {
+    // print("_onDaySelected --------------------=========>");
+    _yearEquivalent = selectedDay;
+    _dateEquivalent = selectedDay;
+    _selectedEvents = todayHolidayEvents(selectedDay[0]);
+    // print(_selectedEvents);
+  }
+
+  static todayHolidayEvents(DateTime selectedDay) {
+    List todayHolidayEvents = [];
+
+    var todayHoliday = _todayHoliday(selectedDay);
+
+    if (todayHoliday.isNotEmpty) {
+      todayHolidayEvents.addAll(todayHoliday);
+    }
+
+    var todayEvents = _todayEvents(selectedDay);
+
+    if (todayEvents.isNotEmpty) {
+      todayHolidayEvents.addAll(todayEvents);
+    }
+    // print(todayHolidayEvents);
+    return todayHolidayEvents;
+  }
+
+  static _todayHoliday(DateTime selectedDay) {
+    var todayHoliday = _holidays[selectedDay] ?? [];
+
+    // print(todayHoliday);
+    return todayHoliday;
+  }
+
+  static _todayEvents(DateTime selectedDay) {
+    List todayEventsList = [];
+
+    var todayEvents = _events[selectedDay] ?? [];
+    if (todayEvents.isNotEmpty) {
+      todayEvents.forEach((event) {
+        if ((event.runtimeType.toString()).contains('List')) {
+          todayEventsList.add(event[0]);
+        } else {
+          todayEventsList.add(todayEvents[0]);
+        }
+      });
+    }
+    // print(todayEventsList);
+    return todayEventsList;
+  }
+
+  static onDayLongPressed(selectedDay) {
+    print('CALLBACK: _onDayLogPressed');
+    // print('_onDayLogPressed $selectedDay');
+    var selectedEvents = _todayEvents(selectedDay);
+    // print('selectedEvents: $selectedEvents');
+    if (selectedEvents.isNotEmpty) {
+      String doc = Functions.eventsDoc(selectedEvents, _lang.name);
+      if (doc != null) {
+        Functions.showMyDialog(_context, _lang.name, "", doc, 1);
+      }
+    }
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  Map<DateTime, List> _events;
-  List _selectedEvents;
-  AnimationController _animationController;
-  CalendarController _calendarController;
-  double _daysOfWeekFontSize = 13.0;
-  double _headerFontSize = 20.0;
-  double _daysFontSize = 20.0;
-  // double _centerIcon = 19;
-  double _rightIcon = 0;
-  int _sizeRate = 1;
-  double _marginHor = 6.0;
-
-  var _listOfEventsForYear;
-  Map _myColorSelection = Mycolor.selection();
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
 
-    _selectedDay = DateTime.now();
+    UserSetting.getLanguage(setState, _lang);
+    CalendarBuilder.getMonthDate(_data);
+    MyHomePage.runHolidaysEvents(_data.selected.date.year, _data);
+    _dateEquivalent = _data.gregMonth.info["selectedDay"];
 
-    _holidays =
-        MandaFirstDayOfMonthBuilder(_selectedDay.year).eventsForWholeYear;
-
-    _events = MandaEventssBuilder(_selectedDay.year).wholeYear;
-
-    _listOfEventsForYear =
-        scrollingText.generateEventsforScroll(_events, _holidays);
-    // ***************************
-    List todayHolidayEvents = [];
-
-    var todayHoliday = _holidays[_selectedDay] ?? [];
-    if (todayHoliday.isNotEmpty) {
-      todayHolidayEvents.add(todayHoliday[0][_localLang]);
-    }
-
-    var todayEvents = _events[_selectedDay] ?? [];
-    if (todayEvents.isNotEmpty) {
-      todayEvents.forEach((event) {
-        if ((event.runtimeType.toString()).contains('List')) {
-          todayHolidayEvents.add(event[0][_localLang]);
-        } else {
-          todayHolidayEvents.add(todayEvents[0][_localLang]);
-        }
-      });
-    }
-
-    _selectedEvents = todayHolidayEvents ?? [];
-    // _selectedEvents = _events[_selectedDay] ?? [];
-    // ***************************
-
-    _calendarController = CalendarController();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-
-    _animationController.forward();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _calendarController.dispose();
-    super.dispose();
-  }
-
-  void _onDaySelected(DateTime selectedDay, List events, List holidays,
-      {bool clearMandaDate = false}) {
-    print('CALLBACK: _onDaySelected');
-    if (selectedDay == null) {
-      selectedDay = DateTime.now();
-      holidays = [];
-      events = [];
-    }
-
-    _selectedDay = selectedDay;
-    _selectedHoliday = holidays;
-    _selectedEvent = events;
-    List newEvents = [];
-
-    setState(() {
-      if (clearMandaDate == true) {
-        holidays = [];
-        events = [];
-      }
-
-      mandaDate = new MandaFormatedDateBuilder(selectedDay, _localLang);
-      _mandeanDay = mandaDate.fullDay;
-      _mandaAndJalaiYear = mandaDate.fullYearEnFa;
-
-      holidays = holidays ?? [];
-      if (holidays.isNotEmpty) {
-        holidays = [holidays[0][_localLang]];
-      }
-
-      events = events ?? [];
-      if (events.isNotEmpty) {
-        events.forEach((event) {
-          // print(event);
-          // print(event.runtimeType);
-          if ((event.runtimeType.toString()).contains('List')) {
-            newEvents.add(event[0][_localLang]);
-          } else {
-            newEvents.add(events[0][_localLang]);
-          }
-        });
-      }
-      _selectedEvents = holidays + newEvents;
-    });
-  }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onVisibleDaysChanged');
-    // _calendarController.setCalendarFormat(CalendarFormat.month);
-
-    // if (!(_panjaDate.lastDayOfPanja.year == first.year)) {
-    if (_holidays.keys.toList()[0].year != first.year) {
-      // _panjaDate = new MandaPanja(first.year);
-      // _holidays = MandaHolidays.holidays(first);
-      _holidays = MandaFirstDayOfMonthBuilder(first.year).eventsForWholeYear;
-      // _events2 = MandaEvents.mandaEventsForYear(_panjaDate);
-      _events = MandaEventssBuilder(first.year).wholeYear;
-    }
-
-    var myDay;
-    if (first.month == DateTime.now().month &&
-        first.year == DateTime.now().year) {
-      myDay = DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
-    } else {
-      myDay = DateTime(first.year, first.month, first.day, 0, 0);
-    }
-
-    var mySelectedEvents = _events[myDay] ?? [];
-    var mySelectedHoliday = _holidays[myDay] ?? [];
-    _calendarController.setSelectedDay(myDay);
-    _onDaySelected(myDay, mySelectedEvents, mySelectedHoliday,
-        clearMandaDate: false);
-  }
-
-  void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onCalendarCreated');
+    _yearEquivalent = _data.gregMonth.info["selectedDay"];
+    _selectedEvents = MyHomePage.todayHolidayEvents(_data.selected.date);
+    // print("one time run main ################");
   }
 
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    double _divecWidth = MediaQuery.of(context).size.width;
-    // _daysOfWeekFontSize = 13.0;
-    // double _headerFontZise = 20.0;
-    // double _daysFontZise = 20.0;
-    // const double daysMargin = 5.0;
-    // double centerIcon = 21;
-    // int sizeRate = 1;
+    _context = context;
+    double divecWidth = MediaQuery.of(context).size.width;
+    _data.divecSize = _divec;
+    _divec.width = divecWidth;
+    _cellWidth = MyFontSize.cellWidth(_data);
+    double _sizeRate = MyFontSize.s21(_data);
+    String _myTitle = MandaEqu.calendarTitle()[_lang.name];
+    // ###############################################################
+    // ###############################################################
+    var runingWidget;
+    runingWidget = _data.calendarKind.display;
+    // runingWidget = ['greg', 'manda'];
+    // runingWidget = ['greg'];
+    // runingWidget = ['manda'];
+    // runingWidget = ['shamsi'];
+    // runingWidget = ['manda', 'greg', 'shamsi'];
+    // print(runingWidget);
 
-    if (_divecWidth > 700) {
-      _daysOfWeekFontSize = 30.0;
-      _headerFontSize = 40.0;
-      _daysFontSize = 40.0;
-      // _centerIcon = 67;
-      _sizeRate = 2;
-      _marginHor = 6 + (_divecWidth - 700) / 2;
-    } else {
-      _daysOfWeekFontSize = 13.0;
-      _headerFontSize = 20.0;
-      _daysFontSize = 20.0;
-      _sizeRate = 1;
-      _marginHor = 6.0;
-    }
-    double eleSize = _divecWidth / 7;
-// eleSize > 49 &&
-    if (_sizeRate == 1) {
-      _rightIcon = (eleSize - 50) / 2;
-    } else if (_sizeRate == 2) {
-      _rightIcon = ((_divecWidth - _marginHor * 2) / 6 - 100) / 2;
-    }
-    if (_rightIcon < 0) {
-      _rightIcon = 0;
-    }
-
-    if (_preLocalLang != _localLang) {
-      _preLocalLang = _localLang;
-      myFooter = null;
-    }
-    String _myTitle = MandaEqu.calendarTitle(_localLang);
+    MainSize _mainZise = new MainSize(_data);
 
     return Scaffold(
-        key: _scaffoldKey,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40.0 * _sizeRate),
-          child: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.menu, size: (25.0 * _sizeRate)),
-              onPressed: () => _scaffoldKey.currentState.openDrawer(),
-            ),
-            titleSpacing: -10.0,
-            backgroundColor: _myColorSelection['header'],
-            actionsIconTheme:
-                IconThemeData(size: 50, color: Colors.green, opacity: 10),
-            title: FittedBox(
-              fit: BoxFit.scaleDown,
-              // child: Text(widget.title, style: TextStyle(color: Colors.black)),
-              child: Text(_myTitle,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: _headerFontSize)),
-            ),
-            // title: Text(widget.title),
-            actions: <Widget>[
-              // languageSwitch('English'),
-              topIconInfo(context, _localLang),
-            ],
+      key: _scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(_mainZise.f8040),
+        child: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.menu, size: (_mainZise.f5025)),
+            onPressed: () => _scaffoldKey.currentState.openDrawer(),
           ),
+          titleSpacing: -10.0,
+          backgroundColor: _myColorSelection['header'],
+          actionsIconTheme:
+              IconThemeData(size: 50, color: Colors.green, opacity: 10),
+          title: FittedBox(
+            // fit: BoxFit.scaleDown,
+            child: Text(_myTitle,
+                style: TextStyle(
+                    color: Colors.black, fontSize: MyFontSize.s4020(_data))),
+          ),
+          actions: <Widget>[
+            topIconInfo(context, _data, setState),
+          ],
         ),
-        drawer: Container(
-          width: 250.0 * _sizeRate,
-          color: Colors.white,
-          child: topIconDrawer(context, _localLang),
-        ),
-        // ***************** Just the whole page can be scroll
-        body: Center(
-          child: ListView(
-            children: [
+      ),
+      drawer: Container(
+        width: 250.0 * _sizeRate,
+        color: Colors.white,
+        child: topIconDrawer(context, _lang.name, setState, _data),
+      ),
+      body: GestureDetector(
+          onHorizontalDragEnd: (dragEndDetails) {
+            // print('Move page ');
+            // print(dragEndDetails.primaryVelocity);
+            if (dragEndDetails.primaryVelocity < 0) {
+              // print('Move page forwards');
+              setState(() {
+                // CalendarBuilder.onVisibleMonthRight(_data);
+                MyHomePage.onVisibleGregRight(_data);
+              });
+            } else if (dragEndDetails.primaryVelocity > 0) {
+              // print('Move page backwards');
+              setState(() {
+                // CalendarBuilder.onVisibleMonthLeft(_data);
+                MyHomePage.onVisibleGregLeft(_data);
+              });
+            }
+          },
+          child: Center(
+            child: Container(
+                child: ListView(children: [
               Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-                Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
-                  child: _buildTableCalendar(),
-                ),
-                // _buildTableCalendar(),
-                Container(
-                  height: 40.0 * _sizeRate,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: _myColorSelection['header2'],
+                // if (_data.gregKind.active == true)
+                // Text(
+                //   _saveMy.display.toString() + "Farid",
+                //   style: TextStyle(fontSize: 40),
+                // ),
+                if (runingWidget != null && runingWidget.length >= 1)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .gregCalendarTable(setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .buildCalendarTable(setState, runingWidget[0]),
                   ),
-                  margin:
-                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 0),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      _mandaAndJalaiYear,
-                      style: TextStyle(
-                          fontSize: 20.0 * _sizeRate, color: Colors.black),
-                    ),
+
+                if (runingWidget != null && runingWidget.length >= 2)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .mandaCalendarTable(setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .buildCalendarTable(setState, runingWidget[1]),
                   ),
-                ),
-                Container(
-                  height: 30.0 * _sizeRate,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(width: 0),
-                    color: Colors.white,
+
+                if (runingWidget != null && runingWidget.length == 3)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: _mainZise.marginH, vertical: 0),
+                    // child: CalendarBuilder(_holidays, _events, _data)
+                    //     .shamsiCalendarTable(setState),
+                    child: CalendarBuilder(_holidays, _events, _data)
+                        .buildCalendarTable(setState, runingWidget[2]),
                   ),
-                  margin:
-                      EdgeInsets.symmetric(horizontal: _marginHor, vertical: 8),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      _mandeanDay,
-                      style: TextStyle(
-                          fontSize: 20.0 * _sizeRate, color: Colors.black),
-                    ),
-                  ),
-                ),
-                // const SizedBox(height: 4.0),
-                // _buildEventList(),
+                // #################   yearEquivalent #################
+                if (runingWidget != null && runingWidget.length == 1)
+                  CalendarBuilder(_holidays, _events, _data)
+                      .yearEquivalent(_yearEquivalent),
+                // #################   dateEquivalent  #################
+                if (runingWidget != null && runingWidget.length == 1)
+                  CalendarBuilder(_holidays, _events, _data)
+                      .dateEquivalent(_dateEquivalent),
+
+                // ################   _buildEventList  #################
+
                 _selectedEvents.isNotEmpty
-                    ? _buildEventList()
+                    ? BuildEvents().eventList(context, _selectedEvents, _data)
                     : Text(
                         "",
                         style: TextStyle(fontSize: 1.0, color: Colors.black),
                       ),
-
-                myFooter ??=
-                    footerLine(context, _localLang, _sizeRate, _marginHor),
-
-                // const SizedBox(height: 4.0),
-
-                // Container(
-                //     color: Colors.white,
-                //     child: Row(children: <Widget>[
-                //       // Text(" Farid Khafaji Zadeh "),
-                //       Expanded(
-                //         child: Divider(color: Colors.black),
-                //       ),
-                //       Text(" Farid Khafaji Zadeh v2.1"),
-                //       Expanded(
-                //         child: Divider(color: Colors.black),
-                //       ),
-                //       // Text(" Farid Khafaji Zadeh "),
-                //     ])),
-                _listOfEventsForYear['en_US'] == ''
-                    ? Text("")
-                    : myScrollingText(
-                        context, _listOfEventsForYear[_localLang], _sizeRate),
-              ]
-                  // .map(_wrapWithStuff).toList(),
-                  )
-            ],
-          ),
-        ));
-  }
-
-  // Simple TableCalendar configuration (using Styles)
-  Widget _buildTableCalendar() {
-    MyIcon myIcon = MyIcon(_sizeRate);
-    const double daysMargin = 5.0;
-    return TableCalendar(
-      // locale: 'fa_IR',
-      // locale: 'en_US',
-
-      locale: _localLang,
-      calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      startingDayOfWeek: StartingDayOfWeek.sunday,
-      headerVisible: true,
-      formatAnimation: FormatAnimation.scale,
-
-      daysOfWeekStyle: DaysOfWeekStyle(
-        // weekendStyle: TextStyle(
-        //     color: Colors.deepOrange[600], fontSize: 13, letterSpacing: 1,),
-        weekdayStyle: TextStyle(fontSize: _daysOfWeekFontSize),
-        weekendStyle: TextStyle(
-            color: Colors.deepOrange[600], fontSize: _daysOfWeekFontSize),
-        dowTextBuilder: (date, locale) => _getDayHeader(date, locale),
-      ),
-
-      // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
-      calendarStyle: CalendarStyle(
-          selectedColor: Colors.red[400],
-          todayColor: Colors.deepOrange[400],
-          markersColor: Colors.green[700],
-          outsideDaysVisible: false,
-          holidayStyle: TextStyle().copyWith(
-              color: Colors.blue[800],
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold),
-          todayStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-          )),
-      availableCalendarFormats: {
-        CalendarFormat.month: 'Month',
-      },
-
-      headerStyle: HeaderStyle(
-        leftChevronIcon: Icon(
-          Icons.chevron_left,
-          size: _headerFontSize,
-        ),
-        rightChevronIcon: Icon(
-          Icons.chevron_right,
-          size: _headerFontSize,
-        ),
-        titleBuilder: (date) {
-          return Container(
-            alignment: Alignment.center,
-            child: Text(
-              _getMonthHeader(date, _localLang),
-              style: TextStyle(color: Colors.black, fontSize: _headerFontSize),
-            ),
-          );
-        },
-      ),
-
-      // headerStyle: HeaderStyle(
-      //   // titleTextBuilder: (date, locale) => DateFormat.yM(locale).format(date),
-      //   titleTextBuilder: (date, locale) => _getMonthHeader(date, _localLang),
-      //   // DateFormat.yMMMM(locale).format(date),
-      //   titleTextStyle: TextStyle(
-      //     fontSize: headerFontZise,
-
-      //   ),
-
-      //   formatButtonVisible: false,
-
-      //   // formatButtonShowsNext: false,
-      //   // formatButtonTextStyle:
-      //   //     TextStyle().copyWith(color: Colors.black, fontSize: 15.0),
-      //   // formatButtonDecoration: BoxDecoration(
-      //   //   color: _myColorSelection['header'],
-      //   //   borderRadius: BorderRadius.circular(16.0),
-      //   // ),
-      // ),
-
-      builders: CalendarBuilders(
-        // markersBuilder: (context, date, events, holidays) {
-        //   _markersBuilder(context, date, events, holidays);
-        // },
-        markersBuilder: (context, date, events, holidays) {
-          final children = <Widget>[];
-
-          if (holidays.isNotEmpty) {
-            holidays.forEach((holiday) {
-              if (holiday['en_US'].contains("First")) {
-                children.add(
-                  Positioned(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: myIcon.firstMonth,
-                    ),
-                  ),
-                );
-              }
-            });
-          }
-
-          if (events.isNotEmpty) {
-            events.forEach((event) {
-              // print(event);
-              // print(event.runtimeType.toString());
-              if (event.runtimeType == String) {
-                event = event;
-              } else if ((event.runtimeType.toString()).contains('List')) {
-                event = event[0]['en_US'];
-              } else {
-                event = event['en_US'];
-              }
-
-              if (event.contains("Minor")) {
-                children.add(
-                  Positioned(
-                    // left: lightPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    child: myIcon.minor,
-                  ),
-                );
-              } else if (event.contains("Major")) {
-                children.add(
-                  Positioned(
-                    // left: heavyPosition,
-                    left: _rightIcon,
-                    // bottom: 0,
-                    // child: _buildHeavyEventMarker(),
-                    child: myIcon.major,
-                  ),
-                );
-              } else {
-                children.add(
-                  Positioned(
-                    // left: othrsPosition,
-                    right: _rightIcon,
-                    // bottom: -3,
-                    child: myIcon.relig,
-                  ),
-                );
-              }
-            });
-          }
-          return children;
-        },
-        ////
-        //// dayBuilder: (context, date, events) {
-        ////   _myDayBuilder(context, date, events, _localLang);
-        //// },
-
-        dayBuilder: (context, date, events) => Container(
-          margin: const EdgeInsets.all(daysMargin),
-          alignment: Alignment.center,
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
-              )),
-        ),
-
-        /// selected Day Builder the color of today and the marker
-        selectedDayBuilder: (context, date, events) => Container(
-          margin: const EdgeInsets.all(daysMargin),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            // color: Theme.of(context).primaryColorDark,
-            color: Colors.black54,
-            //
-          ),
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.white, fontSize: _daysFontSize),
-              )),
-        ),
-
-        /// today Day Builder the color of today and the marker
-        todayDayBuilder: (context, date, events) => Container(
-          margin: const EdgeInsets.all(daysMargin),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: _myColorSelection['header2'],
-          ),
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                DateFormat.d(_localLang).format(date),
-                style: TextStyle(color: Colors.black, fontSize: _daysFontSize),
-              )),
-        ),
-      ),
-
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
-    );
-  }
-
-  Widget _buildEventList() {
-    // return ListView(
-    var myAlignment = MyAlignment.countryLanguage(_localLang);
-    return Column(
-      children: _selectedEvents
-          .map((event) => Container(
-                height: 30.0 * _sizeRate,
-                alignment: myAlignment,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 0),
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: _myColorSelection['minor']),
-                margin:
-                    EdgeInsets.symmetric(horizontal: _marginHor, vertical: 4),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  // alignment: myAlignment,
-                  child: _generateIconEvent(event),
+                // ################   footerLine  #################
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: _mainZise.marginH, vertical: 0),
+                  child: footerLine(context, _data.lang.name, _sizeRate),
                 ),
-              ))
-          .toList(),
+
+                // ################   myScrollingText  #################
+              ]),
+              if (_listOfEventsForYear['en_US'] != '')
+                myScrollingText(
+                    context, _listOfEventsForYear[_lang.name], _sizeRate),
+            ])),
+          )),
     );
-  }
-
-  Widget _generateIconEvent(event) {
-    MyIcon myIcon = MyIcon(_sizeRate);
-    var eventIcon;
-    var beforeEvent;
-    var afterEvent;
-
-    if (event.contains("Minor") ||
-        event.contains("سبک") ||
-        event.contains("خفیف")) {
-      eventIcon = myIcon.minor;
-    } else if (event.contains("Major") ||
-        event.contains("سنگین") ||
-        event.contains("ثقیل")) {
-      eventIcon = myIcon.major;
-    } else if (event.contains("First") ||
-        event.contains(" اول ماه") ||
-        event.contains("رأس")) {
-      eventIcon = myIcon.firstMonth;
-    } else if (event.contains("==")) {
-      eventIcon = myIcon.noon;
-    } else {
-      eventIcon = myIcon.relig;
-    }
-
-    if (_localLang == "en_US") {
-      beforeEvent = eventIcon;
-      afterEvent = myIcon.noon;
-    } else {
-      beforeEvent = myIcon.noon;
-      afterEvent = eventIcon;
-    }
-
-    return Row(
-      children: [
-        beforeEvent,
-        Text(
-          event.toString(),
-          style: TextStyle(fontSize: 16.0 * _sizeRate, color: Colors.black),
-        ),
-        Text(" "),
-        afterEvent
-      ],
-    );
-  }
-
-  Widget languageSwitch(String dropdownValue) {
-    return DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-      icon: Icon(
-        // padding: EdgeInsets.zero,
-        Icons.language,
-        color: Colors.white,
-        size: 30,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-          // print(newValue);
-          var langList = {
-            'العربية': 'ar',
-            'فارسی': 'fa_IR',
-            'English': 'en_US'
-          };
-          _localLang = langList[newValue];
-        });
-        // _onDaySelected(DateTime.now(), [], [], clearMandaDate: true);
-        _onDaySelected(_selectedDay, _selectedEvent, _selectedHoliday);
-      },
-      items: <String>['English', 'فارسی', 'العربية']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(
-            value,
-            style: TextStyle(fontSize: 12.0 * _sizeRate, color: Colors.black),
-          ),
-        );
-      }).toList(),
-    ));
-  }
-
-  Widget topIconInfo(BuildContext context, String localLang) {
-    return Container(
-        child: FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              child: Row(
-                children: [
-                  // mulwashal(context, localLang),
-                  FittedBox(
-                    child: Row(
-                      children: [
-                        languageSwitch('English'),
-                        refresh(context, localLang),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            )));
-  }
-
-  // _getDayNum(DateTime date, locale) {
-  //   var day;
-  //   day = DateFormat.d(locale).format(date);
-  //   return day;
-  // }
-
-  _getDayHeader(DateTime date, locale) {
-    var day;
-    if (locale == 'fa_IR') {
-      var dayFa = DateFormat.EEEE(locale).format(date);
-      day = MandaEqu.changeDayFormate(dayFa);
-    } else {
-      day = DateFormat.E(locale).format(date);
-    }
-    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-    return day;
-  }
-
-  _getMonthHeader(date, locale) {
-    var day;
-
-    if (locale == 'ar') {
-      var monthEn = DateFormat.MMMM('en_US').format(date);
-      var yearAr = DateFormat.y(locale).format(date);
-      var monthAr = MandaEqu.changeMonthFormate(monthEn);
-      day = '$monthAr $yearAr';
-    } else {
-      day = DateFormat.yMMMM(locale).format(date);
-    }
-    // var day = DateFormat.EEEE(locale).format(date).substring(0, 4);
-    return day;
   }
 }
